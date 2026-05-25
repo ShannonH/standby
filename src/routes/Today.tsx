@@ -12,7 +12,7 @@ export default function Today() {
         <h2 className="font-serif text-3xl font-semibold">
           Welcome to Standby
         </h2>
-        <p className="mt-3 text-stone-600 dark:text-stone-400">
+        <p className="mt-3 text-muted">
           A free, offline-first paperwork hub for theatre stage managers. Your
           shows live in your browser; nothing leaves this device unless you
           export it.
@@ -33,7 +33,7 @@ export default function Today() {
     return (
       <section className="mx-auto max-w-3xl">
         <h2 className="font-serif text-3xl font-semibold">Today</h2>
-        <p className="mt-3 text-stone-600 dark:text-stone-400">
+        <p className="mt-3 text-muted">
           No production is currently selected.
         </p>
         <p className="mt-2">
@@ -48,7 +48,7 @@ export default function Today() {
   return (
     <section className="mx-auto max-w-3xl">
       <h2 className="font-serif text-3xl font-semibold">{current.name}</h2>
-      <p className="text-sm text-stone-500">
+      <p className="text-sm text-muted">
         {current.type}
         {current.season ? ` · ${current.season}` : ''}
         {current.organization ? ` · ${current.organization}` : ''}
@@ -59,7 +59,7 @@ export default function Today() {
         <Card label="Production details" value="Edit" to="/production" />
       </div>
 
-      <div className="mt-12 space-y-3 border-t border-stone-200 pt-6 text-sm text-stone-600 dark:border-stone-800 dark:text-stone-400">
+      <div className="mt-12 space-y-3 border-t border-surface-border pt-6 text-sm text-stone-600 dark:text-stone-400">
         <p className="font-medium text-stone-800 dark:text-stone-200">
           Where to go next
         </p>
@@ -99,9 +99,9 @@ function Card({ label, value, to }: { label: string; value: string; to: string }
   return (
     <Link
       to={to}
-      className="block rounded border border-stone-200 p-4 transition hover:border-stone-900 dark:border-stone-700 dark:hover:border-stone-100"
+      className="block rounded border border-surface-border p-4 transition hover:border-stone-900 dark:hover:border-stone-100"
     >
-      <p className="text-xs uppercase tracking-wide text-stone-500">{label}</p>
+      <p className="text-xs uppercase tracking-wide text-muted">{label}</p>
       <p className="mt-1 font-serif text-2xl font-semibold">{value}</p>
     </Link>
   )

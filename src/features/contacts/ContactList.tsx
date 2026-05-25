@@ -74,7 +74,7 @@ export default function ContactList({ productionId }: Props) {
       </div>
 
       {isCreating && (
-        <div className="rounded border border-stone-300 p-4 dark:border-stone-700">
+        <div className="rounded border border-stone-300 p-4">
           <h3 className="mb-3 font-serif text-lg font-semibold">New contact</h3>
           <ContactForm
             productionId={productionId}
@@ -85,7 +85,7 @@ export default function ContactList({ productionId }: Props) {
       )}
 
       {contacts.length === 0 && !isCreating && (
-        <p className="rounded border border-dashed border-stone-300 p-6 text-center text-sm text-stone-500 dark:border-stone-700">
+        <p className="rounded border border-dashed border-stone-300 p-6 text-center text-sm text-muted">
           No contacts yet. Add cast, creative team, designers, and crew here —
           they'll appear on the contact sheet, in the rehearsal-report
           attendance picker, and in any distribution groups you build.
@@ -100,7 +100,7 @@ export default function ContactList({ productionId }: Props) {
             <h3 className="mb-2 font-serif text-lg font-semibold">
               {CATEGORY_LABELS[cat]}
             </h3>
-            <ul className="divide-y divide-stone-200 rounded border border-stone-200 dark:divide-stone-800 dark:border-stone-700">
+            <ul className="divide-y divide-stone-200 rounded border border-stone-200">
               {list.map((c) => (
                 <li key={c.id} className="p-3">
                   {editingId === c.id ? (
@@ -116,7 +116,7 @@ export default function ContactList({ productionId }: Props) {
                         <p className="font-medium">
                           {c.name}
                           {c.pronouns && (
-                            <span className="ml-2 text-xs font-normal text-stone-500">
+                            <span className="ml-2 text-xs font-normal text-muted">
                               ({c.pronouns})
                             </span>
                           )}
@@ -127,9 +127,9 @@ export default function ContactList({ productionId }: Props) {
                           )}
                         </p>
                         {c.role && (
-                          <p className="text-xs text-stone-500">{c.role}</p>
+                          <p className="text-xs text-muted">{c.role}</p>
                         )}
-                        <p className="mt-1 text-xs text-stone-600 dark:text-stone-400">
+                        <p className="mt-1 text-xs text-muted">
                           {c.email ?? '—'} · {c.phone ?? '—'}
                         </p>
                       </div>

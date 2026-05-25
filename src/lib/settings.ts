@@ -45,44 +45,59 @@ export interface ThemeMeta {
   swatch: string
   /** Tag line read by the SM — should sound like a stage cue. */
   tagline: string
+  /** Human-readable display + body fonts (for the picker label). */
+  displayFont: string
+  bodyFont: string
 }
 
 export const THEMES: Record<Theme, ThemeMeta> = {
   default: {
     label: 'Default',
-    description: 'Warm grays. Clean, minimal, conventional.',
+    description: 'Warm grays. Broadway-PSM packet aesthetic.',
     swatch: '#1c1917',
     tagline: 'Houselights up.',
+    displayFont: 'EB Garamond',
+    bodyFont: 'EB Garamond',
   },
   stage: {
     label: 'Stage',
-    description: 'Spotlight amber. Theatrical and warm.',
-    swatch: '#f59e0b',
+    description: 'Warm cream + spotlight amber. Display serif headings.',
+    swatch: '#d97706',
     tagline: 'Spot up on Hamlet.',
+    displayFont: 'Playfair Display',
+    bodyFont: 'EB Garamond',
   },
   midnight: {
     label: 'Midnight',
-    description: 'Cool blue. Late-night booth energy.',
-    swatch: '#2563eb',
+    description: 'Cool slate + cyan. Mono uppercase headings — booth console.',
+    swatch: '#0891b2',
     tagline: 'House to half.',
+    displayFont: 'JetBrains Mono',
+    bodyFont: 'Inter',
   },
   greenroom: {
     label: 'Greenroom',
-    description: 'Forest green. Between-scenes calm.',
-    swatch: '#047857',
+    description: 'Soft sage + emerald. Rounded sans, between-scenes calm.',
+    swatch: '#059669',
     tagline: 'Standby Act Two.',
+    displayFont: 'Outfit',
+    bodyFont: 'Outfit',
   },
   marquee: {
     label: 'Marquee',
-    description: 'Velvet red. Broadway marquee energy.',
-    swatch: '#b91c1c',
+    description: 'Cream + crimson + gilded borders. UPPERCASE Playfair.',
+    swatch: '#991b1b',
     tagline: 'Curtain up.',
+    displayFont: 'Playfair Display',
+    bodyFont: 'EB Garamond',
   },
   rosewood: {
     label: 'Rosewood',
-    description: 'Dusty rose. Vintage rep-house warmth.',
+    description: 'Dusty rose + burgundy. Italic Cormorant. Vintage parlor.',
     swatch: '#9f1239',
     tagline: 'Half hour, please.',
+    displayFont: 'Cormorant Garamond',
+    bodyFont: 'Cormorant Garamond',
   },
 }
 

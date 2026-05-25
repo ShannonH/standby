@@ -122,10 +122,10 @@ export default function PublishPanel({ productionId, productionName }: Props) {
   }
 
   return (
-    <div className="space-y-4 rounded border border-stone-200 bg-stone-50 p-4 dark:border-stone-700 dark:bg-stone-900/50">
+    <div className="space-y-4 rounded border border-surface-border bg-card p-4">
       <div>
         <h3 className="font-serif text-lg font-semibold">Publish to a shared folder</h3>
-        <p className="text-xs text-stone-500">
+        <p className="text-xs text-muted">
           Optional. Pick a folder (Google Drive, iCloud Drive, Dropbox, anywhere)
           and Standby writes the PDFs you'd otherwise distribute manually:
           rehearsal reports, contact sheet, prop list, production info. Share
@@ -137,13 +137,13 @@ export default function PublishPanel({ productionId, productionName }: Props) {
       </div>
 
       {!supported ? (
-        <p className="rounded border border-stone-200 bg-white p-3 text-sm text-stone-600 dark:border-stone-700 dark:bg-stone-900 dark:text-stone-400">
+        <p className="rounded border border-surface-border bg-card p-3 text-sm text-stone-600 dark:text-stone-400">
           The File System Access API isn't available on this browser (Safari
           and Firefox don't ship it yet). Use a Chromium-based browser to set
           this up.
         </p>
       ) : folderName ? (
-        <div className="space-y-2 rounded border border-stone-200 bg-white p-3 dark:border-stone-700 dark:bg-stone-900">
+        <div className="space-y-2 rounded border border-surface-border bg-card p-3">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
               <p className="text-sm font-medium">
@@ -151,7 +151,7 @@ export default function PublishPanel({ productionId, productionName }: Props) {
                 {productionName ? <em>{productionName}</em> : 'this show'} to{' '}
                 <code>{folderName}</code>
               </p>
-              <p className="text-xs text-stone-500">
+              <p className="text-xs text-muted">
                 Last published: {formatRelative(lastPublishedAt)}. Auto-writes
                 happen when you save a rehearsal report, contact, prop, or
                 production edit.
@@ -168,13 +168,13 @@ export default function PublishPanel({ productionId, productionName }: Props) {
           </div>
         </div>
       ) : (
-        <div className="flex flex-wrap items-center justify-between gap-3 rounded border border-stone-200 bg-white p-3 dark:border-stone-700 dark:bg-stone-900">
+        <div className="flex flex-wrap items-center justify-between gap-3 rounded border border-surface-border bg-card p-3">
           <div>
             <p className="text-sm font-medium">
               Publish folder:{' '}
-              <span className="text-stone-500">Not set up</span>
+              <span className="text-muted">Not set up</span>
             </p>
-            <p className="text-xs text-stone-500">
+            <p className="text-xs text-muted">
               When you pick a folder, Standby does an initial publish of all
               the current PDFs.
             </p>

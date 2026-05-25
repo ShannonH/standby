@@ -104,7 +104,7 @@ export default function ProductionForm({ production, onSaved, onCancel }: Props)
         <Input {...register('venue')} />
       </Field>
 
-      <fieldset className="space-y-3 border-t border-stone-200 pt-4 dark:border-stone-800">
+      <fieldset className="space-y-3 border-t border-surface-border pt-4">
         <legend className="font-serif text-lg font-semibold">Key dates</legend>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           <Field label="First rehearsal" optional>

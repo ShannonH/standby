@@ -142,12 +142,12 @@ export default function AutoBackupPanel({ productionId }: Props) {
   }
 
   return (
-    <div className="space-y-4 rounded border border-stone-200 bg-stone-50 p-4 dark:border-stone-700 dark:bg-stone-900/50">
+    <div className="space-y-4 rounded border border-surface-border bg-card p-4">
       <div>
         <h3 className="font-serif text-lg font-semibold">
           Auto-backup &amp; storage durability
         </h3>
-        <p className="text-xs text-stone-500">
+        <p className="text-xs text-muted">
           Two protections so a cleared browser cache doesn't lose your show:
           mark Standby's local storage as persistent, and write a copy of
           the show JSON to a folder you pick. A folder synced to iCloud /
@@ -156,7 +156,7 @@ export default function AutoBackupPanel({ productionId }: Props) {
       </div>
 
       {/* Persistent storage row */}
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded border border-stone-200 bg-white p-3 dark:border-stone-700 dark:bg-stone-900">
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded border border-surface-border bg-card p-3">
         <div>
           <p className="text-sm font-medium">
             Browser storage:{' '}
@@ -170,7 +170,7 @@ export default function AutoBackupPanel({ productionId }: Props) {
               </span>
             )}
           </p>
-          <p className="text-xs text-stone-500">
+          <p className="text-xs text-muted">
             {status?.persistent === true
               ? 'Your data is protected from automatic browser eviction.'
               : 'Browser may evict data under storage pressure. Install as a PWA or bookmark the site for auto-grant in Chrome.'}
@@ -193,13 +193,13 @@ export default function AutoBackupPanel({ productionId }: Props) {
       </div>
 
       {/* Folder backup row */}
-      <div className="space-y-2 rounded border border-stone-200 bg-white p-3 dark:border-stone-700 dark:bg-stone-900">
+      <div className="space-y-2 rounded border border-surface-border bg-card p-3">
         {!supported ? (
           <div>
-            <p className="text-sm font-medium text-stone-700 dark:text-stone-300">
+            <p className="text-sm font-medium text-[color:rgb(var(--text-primary))]">
               Folder auto-backup: not supported on this browser
             </p>
-            <p className="text-xs text-stone-500">
+            <p className="text-xs text-muted">
               The File System Access API isn't available here (Safari and
               Firefox don't ship it). Use{' '}
               <em>Export current show as JSON</em> below for manual backups.
@@ -215,7 +215,7 @@ export default function AutoBackupPanel({ productionId }: Props) {
                     ON
                   </span>
                 </p>
-                <p className="text-xs text-stone-500">
+                <p className="text-xs text-muted">
                   Saving to <code>{folderName}</code> · Last saved{' '}
                   {formatRelative(lastBackupAt)}
                   {productionId === null && ' · (pick a production to enable writes)'}
@@ -240,9 +240,9 @@ export default function AutoBackupPanel({ productionId }: Props) {
             <div>
               <p className="text-sm font-medium">
                 Folder auto-backup:{' '}
-                <span className="text-stone-500">Off</span>
+                <span className="text-muted">Off</span>
               </p>
-              <p className="text-xs text-stone-500">
+              <p className="text-xs text-muted">
                 Pick a folder (your Dropbox, iCloud Drive, anywhere you like)
                 and Standby writes the show JSON there on every change.
               </p>

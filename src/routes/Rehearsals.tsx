@@ -90,7 +90,7 @@ function RehearsalsInner() {
             <h2 className="font-serif text-3xl font-semibold">
               Rehearsal reports
             </h2>
-            <p className="mt-1 text-sm text-stone-500">
+            <p className="mt-1 text-sm text-muted">
               For <span className="font-medium">{production.name}</span>. The
               nightly report — attendance, time breakdown, and numbered
               notes by department. Hit <em>Distribute</em> on any report to
@@ -116,7 +116,7 @@ function RehearsalsInner() {
       )}
 
       {mode.kind === 'distribute' && distributingReport && production.id !== undefined && (
-        <div className="space-y-3 rounded border border-stone-200 p-4 dark:border-stone-700">
+        <div className="space-y-3 rounded border border-surface-border p-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <h3 className="font-serif text-xl font-semibold">
               Distribute Day {distributingReport.dayNumber} report
@@ -146,7 +146,7 @@ function RehearsalsInner() {
       )}
 
       {mode.kind === 'new' && (
-        <div className="space-y-3 rounded border border-stone-200 p-4 dark:border-stone-700">
+        <div className="space-y-3 rounded border border-surface-border p-4">
           <h3 className="font-serif text-xl font-semibold">
             New rehearsal report
           </h3>
@@ -162,7 +162,7 @@ function RehearsalsInner() {
       )}
 
       {mode.kind === 'edit' && editingReport && (
-        <div className="space-y-3 rounded border border-stone-200 p-4 dark:border-stone-700">
+        <div className="space-y-3 rounded border border-surface-border p-4">
           <h3 className="font-serif text-xl font-semibold">
             Edit Day {editingReport.dayNumber}
           </h3>

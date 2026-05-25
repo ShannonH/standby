@@ -41,7 +41,7 @@ function ContactsInner() {
     <section className="mx-auto max-w-4xl space-y-10">
       <header>
         <h2 className="font-serif text-3xl font-semibold">Contacts</h2>
-        <p className="mt-1 text-sm text-stone-500">
+        <p className="mt-1 text-sm text-muted">
           For <span className="font-medium">{current.name}</span>. Cast,
           creative team, production, crew, venue. Mark a contact{' '}
           <em>do not publish</em> to keep them off the distributed contact
@@ -52,14 +52,14 @@ function ContactsInner() {
 
       <ContactList productionId={current.id} />
 
-      <section className="space-y-3 border-t border-stone-200 pt-8 dark:border-stone-800">
+      <section className="space-y-3 border-t border-surface-border pt-8">
         <h3 className="font-serif text-xl font-semibold">Groups</h3>
         <ContactGroupManager productionId={current.id} />
       </section>
 
       {contacts.length > 0 && (
         <>
-          <section className="space-y-3 border-t border-stone-200 pt-8 dark:border-stone-800">
+          <section className="space-y-3 border-t border-surface-border pt-8">
             <h3 className="font-serif text-xl font-semibold">Exports</h3>
             <PdfDownloadButton
               label="Download contact sheet (PDF)"

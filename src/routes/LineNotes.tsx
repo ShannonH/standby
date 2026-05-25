@@ -107,7 +107,7 @@ function LineNotesInner() {
     <section className="mx-auto max-w-5xl space-y-8">
       <header>
         <h2 className="font-serif text-3xl font-semibold">Line notes</h2>
-        <p className="mt-1 text-sm text-stone-500">
+        <p className="mt-1 text-sm text-muted">
           For <span className="font-medium">{production.name}</span>. Capture
           flubs as they happen — Enter saves a note and re-focuses the page
           field so you can keep typing without leaving the keyboard. The
@@ -122,7 +122,7 @@ function LineNotesInner() {
           attribute lines to.
         </p>
       ) : editingNote ? (
-        <div className="space-y-3 rounded border border-stone-200 p-4 dark:border-stone-700">
+        <div className="space-y-3 rounded border border-surface-border p-4">
           <h3 className="font-serif text-xl font-semibold">Edit line note</h3>
           <LineNoteForm
             productionId={production.id}
@@ -135,7 +135,7 @@ function LineNotesInner() {
           />
         </div>
       ) : (
-        <div className="space-y-3 rounded border border-stone-200 bg-stone-50 p-4 dark:border-stone-700 dark:bg-stone-900/50">
+        <div className="space-y-3 rounded border border-surface-border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Add line note</h3>
           <LineNoteForm
             productionId={production.id}
@@ -150,7 +150,7 @@ function LineNotesInner() {
 
       {notes.length > 0 && (
         <>
-          <section className="space-y-3 border-t border-stone-200 pt-8 dark:border-stone-800">
+          <section className="space-y-3 border-t border-surface-border pt-8">
             <h3 className="font-serif text-xl font-semibold">Exports</h3>
             <div className="flex flex-wrap items-end gap-3">
               <Field label="Per-actor PDF">
@@ -180,7 +180,7 @@ function LineNotesInner() {
                 Download all as CSV
               </Button>
             </div>
-            <p className="text-xs text-stone-500">
+            <p className="text-xs text-muted">
               Per-actor PDFs only contain that actor's notes (private). The CSV
               is the SM's archive — never give it to actors as-is.
             </p>

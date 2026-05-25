@@ -32,7 +32,7 @@ export default function LineNoteList({ notes, cast, onEdit }: Props) {
 
   if (notes.length === 0) {
     return (
-      <p className="rounded border border-dashed border-stone-300 p-6 text-center text-sm text-stone-500 dark:border-stone-700">
+      <p className="rounded border border-dashed border-stone-300 p-6 text-center text-sm text-muted">
         No line notes yet. Use the form above to add some during rehearsal —
         Enter saves and clears the form so you can keep typing.
       </p>
@@ -45,7 +45,7 @@ export default function LineNoteList({ notes, cast, onEdit }: Props) {
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-stone-500">
+      <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-muted">
         <span>
           {undeliveredCount} undelivered · {deliveredCount} delivered
         </span>
@@ -61,7 +61,7 @@ export default function LineNoteList({ notes, cast, onEdit }: Props) {
       </div>
 
       {grouped.length === 0 && (
-        <p className="rounded border border-dashed border-stone-300 p-6 text-center text-sm text-stone-500 dark:border-stone-700">
+        <p className="rounded border border-dashed border-stone-300 p-6 text-center text-sm text-muted">
           All notes delivered. Toggle "Show delivered" to see history.
         </p>
       )}
@@ -69,12 +69,12 @@ export default function LineNoteList({ notes, cast, onEdit }: Props) {
       {grouped.map(([characterId, list]) => (
         <section
           key={characterId}
-          className="rounded border border-stone-200 dark:border-stone-700"
+          className="rounded border border-surface-border"
         >
-          <header className="flex flex-wrap items-center justify-between gap-2 border-b border-stone-200 bg-stone-50 px-3 py-2 dark:border-stone-700 dark:bg-stone-900">
+          <header className="flex flex-wrap items-center justify-between gap-2 border-b border-surface-border bg-card px-3 py-2">
             <h3 className="font-serif text-lg font-semibold">
               {castName(characterId)}{' '}
-              <span className="text-sm font-normal text-stone-500">
+              <span className="text-sm font-normal text-muted">
                 · {list.length} note{list.length === 1 ? '' : 's'}
               </span>
             </h3>
@@ -101,12 +101,12 @@ export default function LineNoteList({ notes, cast, onEdit }: Props) {
               Mark all delivered
             </Button>
           </header>
-          <ul className="divide-y divide-stone-200 dark:divide-stone-800">
+          <ul className="divide-y divide-surface-border">
             {list.map((n) => (
               <li key={n.id} className="p-3">
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div className="min-w-0 flex-1">
-                    <p className="text-xs text-stone-500">
+                    <p className="text-xs text-muted">
                       {n.rehearsalDate} · p.{n.page || '—'} ·{' '}
                       {LINE_TYPE_LABELS[n.lineType]}
                       {n.delivered && (
@@ -117,20 +117,20 @@ export default function LineNoteList({ notes, cast, onEdit }: Props) {
                     </p>
                     <div className="mt-1 grid gap-1 text-sm sm:grid-cols-2">
                       <p>
-                        <span className="text-xs uppercase tracking-wide text-stone-500">
+                        <span className="text-xs uppercase tracking-wide text-muted">
                           Scripted:{' '}
                         </span>
                         {n.scriptedText || '—'}
                       </p>
                       <p>
-                        <span className="text-xs uppercase tracking-wide text-stone-500">
+                        <span className="text-xs uppercase tracking-wide text-muted">
                           Spoken:{' '}
                         </span>
                         {n.spokenText || '—'}
                       </p>
                     </div>
                     {n.comment && (
-                      <p className="mt-1 text-xs italic text-stone-600 dark:text-stone-400">
+                      <p className="mt-1 text-xs italic text-muted">
                         {n.comment}
                       </p>
                     )}

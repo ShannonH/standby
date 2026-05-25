@@ -11,7 +11,7 @@ interface FieldProps {
 export function Field({ label, optional, error, hint, children }: FieldProps) {
   return (
     <label className="block">
-      <span className="text-sm font-medium text-stone-700 dark:text-stone-300">
+      <span className="text-sm font-medium text-[color:rgb(var(--text-primary))]">
         {label}
         {optional && (
           <span className="text-stone-400"> (optional)</span>
@@ -19,7 +19,7 @@ export function Field({ label, optional, error, hint, children }: FieldProps) {
       </span>
       <div className="mt-1">{children}</div>
       {hint && !error && (
-        <span className="mt-1 block text-xs text-stone-500">{hint}</span>
+        <span className="mt-1 block text-xs text-muted">{hint}</span>
       )}
       {error && (
         <span className="mt-1 block text-xs text-red-600 dark:text-red-400">
@@ -31,7 +31,7 @@ export function Field({ label, optional, error, hint, children }: FieldProps) {
 }
 
 const inputClass =
-  'w-full rounded border border-stone-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-stone-900 focus:outline-none focus:ring-1 focus:ring-stone-900 dark:border-stone-700 dark:bg-stone-800 dark:focus:border-stone-100 dark:focus:ring-stone-100'
+  'w-full rounded border border-stone-300 bg-card px-3 py-2 text-sm shadow-sm focus:border-stone-900 focus:outline-none focus:ring-1 focus:ring-stone-900 dark:bg-stone-800 dark:focus:border-stone-100 dark:focus:ring-stone-100'
 
 export const Input = forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>(
   function Input(props, ref) {
@@ -100,7 +100,7 @@ export function Checkbox({
   ...props
 }: { label: string } & React.InputHTMLAttributes<HTMLInputElement>) {
   return (
-    <label className="flex items-start gap-2 text-sm text-stone-700 dark:text-stone-300">
+    <label className="flex items-start gap-2 text-sm text-[color:rgb(var(--text-primary))]">
       <input
         type="checkbox"
         {...props}

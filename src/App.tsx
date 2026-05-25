@@ -53,12 +53,12 @@ export default function App() {
 
   return (
     <div className="flex h-full">
-      <aside className="hidden w-56 shrink-0 border-r border-stone-200 bg-white p-4 dark:border-stone-800 dark:bg-stone-900 print:hidden sm:flex sm:flex-col">
+      <aside className="hidden w-56 shrink-0 border-r border-surface-border bg-card p-4 print:hidden sm:flex sm:flex-col">
         <div className="mb-6">
           <h1 className="font-serif text-2xl font-semibold tracking-tight">
             Standby
           </h1>
-          <p className="text-xs text-stone-500">SM paperwork, local-first</p>
+          <p className="text-xs text-muted">SM paperwork, local-first</p>
         </div>
         <nav className="flex flex-col gap-1">
           {nav.map((item) => (
@@ -81,7 +81,7 @@ export default function App() {
         <button
           type="button"
           onClick={() => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))}
-          className="mt-auto self-start text-xs text-stone-500 hover:text-stone-900 dark:hover:text-stone-100"
+          className="mt-auto self-start text-xs text-muted hover:text-stone-900 dark:hover:text-stone-100"
         >
           {theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
         </button>

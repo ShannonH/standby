@@ -212,10 +212,10 @@ export default function DistributePanel({
   }
 
   return (
-    <div className="space-y-4 rounded border border-stone-200 bg-stone-50 p-4 dark:border-stone-700 dark:bg-stone-900/50">
+    <div className="space-y-4 rounded border border-surface-border bg-card p-4">
       <div>
         <h4 className="font-serif text-lg font-semibold">Distribute</h4>
-        <p className="text-xs text-stone-500">
+        <p className="text-xs text-muted">
           Generates a PDF and opens your mail client with the recipient group
           BCC'd. By default, the full report is included in the email body so
           you don't have to attach the PDF — but the PDF download is always
@@ -272,12 +272,12 @@ export default function DistributePanel({
           {includeInline && (
             <details
               open
-              className="rounded border border-stone-200 bg-white dark:border-stone-700 dark:bg-stone-900"
+              className="rounded border border-surface-border bg-card"
             >
               <summary className="cursor-pointer px-3 py-2 text-sm font-medium">
                 Preview of what's appended to the email body
               </summary>
-              <pre className="max-h-72 overflow-auto whitespace-pre-wrap break-words border-t border-stone-200 p-3 font-mono text-xs leading-relaxed dark:border-stone-800">
+              <pre className="max-h-72 overflow-auto whitespace-pre-wrap break-words border-t border-surface-border p-3 font-mono text-xs leading-relaxed">
                 {inlineBody}
               </pre>
             </details>
@@ -289,7 +289,7 @@ export default function DistributePanel({
         className={`text-xs ${
           tooLong
             ? 'text-amber-700 dark:text-amber-400'
-            : 'text-stone-500'
+            : 'text-muted'
         }`}
       >
         Email URL length: ~{encodedLength.toLocaleString()} chars

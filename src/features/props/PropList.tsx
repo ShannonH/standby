@@ -36,7 +36,7 @@ export default function PropList({ productionId, onEdit }: Props) {
 
   if (props.length === 0) {
     return (
-      <p className="rounded border border-dashed border-stone-300 p-6 text-center text-sm text-stone-500 dark:border-stone-700">
+      <p className="rounded border border-dashed border-stone-300 p-6 text-center text-sm text-muted">
         No props yet. The prop list grows from the script during pre-production
         and gets reconciled with the props master in rehearsals.
       </p>
@@ -72,14 +72,14 @@ export default function PropList({ productionId, onEdit }: Props) {
             ))}
           </Select>
         </Field>
-        <span className="ml-auto text-sm text-stone-500">
+        <span className="ml-auto text-sm text-muted">
           {filtered.length} / {props.length}
         </span>
       </div>
 
-      <div className="overflow-x-auto rounded border border-stone-200 dark:border-stone-700">
+      <div className="overflow-x-auto rounded border border-surface-border">
         <table className="w-full text-sm">
-          <thead className="bg-stone-50 text-left text-xs uppercase tracking-wide text-stone-500 dark:bg-stone-900">
+          <thead className="bg-card text-left text-xs uppercase tracking-wide text-muted">
             <tr>
               <th className="px-3 py-2">Name</th>
               <th className="px-3 py-2">Scenes</th>
@@ -89,7 +89,7 @@ export default function PropList({ productionId, onEdit }: Props) {
               <th className="px-3 py-2"></th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-stone-200 dark:divide-stone-800">
+          <tbody className="divide-y divide-surface-border">
             {filtered.map((p) => (
               <PropRow key={p.id} prop={p} onEdit={onEdit} />
             ))}
@@ -112,15 +112,15 @@ function PropRow({
       <td className="px-3 py-2 align-top">
         <p className="font-medium">{prop.name}</p>
         {prop.characters.length > 0 && (
-          <p className="text-xs text-stone-500">
+          <p className="text-xs text-muted">
             {prop.characters.join(', ')}
           </p>
         )}
         {prop.consumable && (
-          <p className="text-xs italic text-stone-500">consumable</p>
+          <p className="text-xs italic text-muted">consumable</p>
         )}
       </td>
-      <td className="px-3 py-2 align-top text-xs text-stone-600 dark:text-stone-400">
+      <td className="px-3 py-2 align-top text-xs text-muted">
         {prop.scenes.length > 0 ? prop.scenes.join(', ') : '—'}
       </td>
       <td className="px-3 py-2 align-top">
@@ -132,7 +132,7 @@ function PropRow({
               status: e.target.value as PropStatus,
             })
           }}
-          className="rounded border border-stone-300 bg-white px-2 py-1 text-xs dark:border-stone-700 dark:bg-stone-800"
+          className="rounded border border-stone-300 bg-card px-2 py-1 text-xs dark:bg-stone-800"
         >
           {(
             Object.entries(PROP_STATUS_LABELS) as [PropStatus, string][]

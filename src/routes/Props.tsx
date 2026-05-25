@@ -102,7 +102,7 @@ function PropsInner() {
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
             <h2 className="font-serif text-3xl font-semibold">Props</h2>
-            <p className="mt-1 text-sm text-stone-500">
+            <p className="mt-1 text-sm text-muted">
               For <span className="font-medium">{production.name}</span>. The
               shared truth across the SM, props master, and designers. Click
               a status dropdown in the table to change it without opening
@@ -117,7 +117,7 @@ function PropsInner() {
       </header>
 
       {isCreating && (
-        <div className="space-y-3 rounded border border-stone-200 p-4 dark:border-stone-700">
+        <div className="space-y-3 rounded border border-surface-border p-4">
           <h3 className="font-serif text-xl font-semibold">New prop</h3>
           <PropForm
             productionId={production.id}
@@ -128,7 +128,7 @@ function PropsInner() {
       )}
 
       {editingProp && (
-        <div className="space-y-3 rounded border border-stone-200 p-4 dark:border-stone-700">
+        <div className="space-y-3 rounded border border-surface-border p-4">
           <h3 className="font-serif text-xl font-semibold">
             Edit: {editingProp.name}
           </h3>
@@ -145,7 +145,7 @@ function PropsInner() {
 
       {props.length > 0 && production.id !== undefined && (
         <>
-          <section className="space-y-3 border-t border-stone-200 pt-8 dark:border-stone-800">
+          <section className="space-y-3 border-t border-surface-border pt-8">
             <h3 className="font-serif text-xl font-semibold">Exports</h3>
             <div className="flex flex-wrap gap-3">
               <Button onClick={downloadPdf}>Download prop list (PDF)</Button>

@@ -21,7 +21,7 @@ export default function SendLogList({ productionId, limit = 20 }: Props) {
 
   if (entries.length === 0) {
     return (
-      <p className="rounded border border-dashed border-stone-300 p-4 text-center text-sm text-stone-500 dark:border-stone-700">
+      <p className="rounded border border-dashed border-stone-300 p-4 text-center text-sm text-muted">
         Nothing distributed yet. When you open your mail client or share via
         system from any of the paperwork pages, it'll log here.
       </p>
@@ -30,7 +30,7 @@ export default function SendLogList({ productionId, limit = 20 }: Props) {
 
   return (
     <div className="space-y-3">
-      <ul className="divide-y divide-stone-200 rounded border border-stone-200 dark:divide-stone-800 dark:border-stone-700">
+      <ul className="divide-y divide-stone-200 rounded border border-stone-200">
         {entries.map((e) => (
           <li
             key={e.id}
@@ -38,7 +38,7 @@ export default function SendLogList({ productionId, limit = 20 }: Props) {
           >
             <div className="min-w-0">
               <p className="text-sm font-medium">{e.artifact}</p>
-              <p className="text-xs text-stone-500">
+              <p className="text-xs text-muted">
                 {formatTimestamp(e.sentAt)} ·{' '}
                 <span className="font-medium">{e.recipientGroup}</span> ·{' '}
                 {e.recipientCount} recipient
@@ -64,7 +64,7 @@ export default function SendLogList({ productionId, limit = 20 }: Props) {
           </li>
         ))}
       </ul>
-      <p className="text-xs text-stone-500">
+      <p className="text-xs text-muted">
         Send log is local-only — it records when you opened your mail client,
         not whether the email was actually delivered. Treat it as a personal
         audit trail.

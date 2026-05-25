@@ -20,24 +20,25 @@ export default function Settings() {
   const resetSettings = useAppStore((s) => s.resetSettings)
 
   return (
-    <section className="mx-auto max-w-3xl space-y-10">
+    <section className="mx-auto max-w-4xl space-y-12">
       <header>
-        <h2 className="font-serif text-3xl font-semibold">Settings</h2>
-        <p className="mt-1 text-sm text-stone-500">
+        <h2 className="text-3xl font-semibold">Settings</h2>
+        <p className="mt-1 text-sm text-muted">
           Personal preferences. Stored in your browser; never leave this device.
         </p>
       </header>
 
       {/* Theme */}
-      <section className="space-y-3">
+      <section className="space-y-4">
         <div>
-          <h3 className="font-serif text-xl font-semibold">Theme</h3>
-          <p className="text-sm text-stone-500">
-            Accent color used for buttons, the active nav item, and focus
-            rings. Light / dark mode toggle is in the left nav as always.
+          <h3 className="text-xl font-semibold">Theme</h3>
+          <p className="text-sm text-muted">
+            Each theme changes the fonts, surface colors, accent, and border
+            radius — try a few. Light / dark mode toggle stays in the left
+            nav and works with every theme.
           </p>
         </div>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {THEME_ORDER.map((theme) => (
             <ThemeCard
               key={theme}
@@ -52,10 +53,9 @@ export default function Settings() {
       {/* Font size */}
       <section className="space-y-3">
         <div>
-          <h3 className="font-serif text-xl font-semibold">Font size</h3>
-          <p className="text-sm text-stone-500">
-            Scales the entire UI. Bump it up if you're reading from across a
-            booth, or down if you want to fit more on a laptop screen.
+          <h3 className="text-xl font-semibold">Font size</h3>
+          <p className="text-sm text-muted">
+            Scales the entire UI. Bump it up for reading from across a booth.
           </p>
         </div>
         <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
@@ -64,14 +64,14 @@ export default function Settings() {
               key={size}
               type="button"
               onClick={() => updateSettings({ fontSize: size })}
-              className={`flex flex-col items-start gap-1 rounded border p-3 text-left transition ${
+              className={`flex flex-col items-start gap-1 rounded-theme border p-3 text-left transition ${
                 settings.fontSize === size
-                  ? 'border-[rgb(var(--accent))] bg-[rgb(var(--accent))/0.06] ring-1 ring-[rgb(var(--accent))]'
-                  : 'border-stone-300 hover:border-stone-500 dark:border-stone-700 dark:hover:border-stone-500'
+                  ? 'border-accent bg-accent/5 ring-1 ring-accent'
+                  : 'border-surface-border hover:border-accent'
               }`}
             >
               <span className="font-medium">{FONT_SIZE_LABELS[size]}</span>
-              <span className="text-xs text-stone-500">
+              <span className="text-xs text-muted">
                 {FONT_SIZE_DESCRIPTIONS[size]}
               </span>
             </button>
@@ -82,10 +82,9 @@ export default function Settings() {
       {/* PDF paper size */}
       <section className="space-y-3">
         <div>
-          <h3 className="font-serif text-xl font-semibold">PDF paper size</h3>
-          <p className="text-sm text-stone-500">
-            Applied to every PDF Standby generates — rehearsal reports,
-            contact sheet, prop list, production info, line notes.
+          <h3 className="text-xl font-semibold">PDF paper size</h3>
+          <p className="text-sm text-muted">
+            Applied to every PDF Standby generates.
           </p>
         </div>
         <div className="grid gap-2 sm:grid-cols-2">
@@ -94,10 +93,10 @@ export default function Settings() {
               key={size}
               type="button"
               onClick={() => updateSettings({ paperSize: size })}
-              className={`rounded border p-3 text-left transition ${
+              className={`rounded-theme border p-3 text-left transition ${
                 settings.paperSize === size
-                  ? 'border-[rgb(var(--accent))] bg-[rgb(var(--accent))/0.06] ring-1 ring-[rgb(var(--accent))]'
-                  : 'border-stone-300 hover:border-stone-500 dark:border-stone-700 dark:hover:border-stone-500'
+                  ? 'border-accent bg-accent/5 ring-1 ring-accent'
+                  : 'border-surface-border hover:border-accent'
               }`}
             >
               <span className="font-medium">{PAPER_SIZE_LABELS[size]}</span>
@@ -106,7 +105,7 @@ export default function Settings() {
         </div>
       </section>
 
-      <section className="border-t border-stone-200 pt-6 dark:border-stone-800">
+      <section className="border-t border-surface-border pt-6">
         <Button variant="ghost" onClick={resetSettings}>
           Reset all to default
         </Button>
@@ -121,6 +120,12 @@ interface ThemeCardProps {
   onSelect: () => void
 }
 
+/**
+ * Each theme card has `data-theme={theme}` on the button itself, so all of
+ * the CSS variables inside (--accent, --surface-elev, --font-display, etc.)
+ * resolve to THAT theme's values regardless of which theme is currently
+ * active on <html>. The card is a real preview, not a tinted swatch.
+ */
 function ThemeCard({ theme, selected, onSelect }: ThemeCardProps) {
   const meta = THEMES[theme]
   return (
@@ -128,35 +133,37 @@ function ThemeCard({ theme, selected, onSelect }: ThemeCardProps) {
       type="button"
       onClick={onSelect}
       data-theme={theme}
-      className={`group flex flex-col items-stretch gap-3 rounded border p-3 text-left transition ${
+      className={`group flex flex-col items-stretch gap-3 rounded-theme border bg-card p-4 text-left transition ${
         selected
-          ? 'border-[rgb(var(--accent))] ring-1 ring-[rgb(var(--accent))]'
-          : 'border-stone-300 hover:border-stone-500 dark:border-stone-700 dark:hover:border-stone-500'
+          ? 'border-accent ring-2 ring-accent'
+          : 'border-surface-border hover:border-accent'
       }`}
     >
-      {/* Swatch row — uses the theme's actual accent color */}
-      <div className="flex items-center gap-2">
-        <span
-          aria-hidden
-          className="inline-block h-10 w-10 rounded shadow-inner ring-1 ring-stone-300 dark:ring-stone-700"
-          style={{ backgroundColor: meta.swatch }}
-        />
-        <span
-          aria-hidden
-          className="inline-block rounded bg-[rgb(var(--accent))] px-3 py-1 text-xs font-semibold text-[rgb(var(--on-accent))]"
-        >
-          Button
-        </span>
+      {/* Typography preview — h4 picks up theme font + tracking + transform
+          from the global @layer base rule. */}
+      <div className="flex items-end justify-between gap-3">
+        <h4 className="m-0 text-5xl leading-none">Aa</h4>
+        <div className="text-right text-xs text-muted">
+          <div>{meta.displayFont}</div>
+          {meta.bodyFont !== meta.displayFont && (
+            <div className="opacity-75">+ {meta.bodyFont}</div>
+          )}
+        </div>
       </div>
+
+      {/* Accent pill — uses the theme's accent + on-accent + tracking */}
+      <h4 className="m-0 inline-block self-start rounded-theme bg-accent px-3 py-1 text-xs leading-tight text-on-accent">
+        {meta.tagline}
+      </h4>
+
+      {/* Theme name in its body font */}
       <div>
-        <p className="font-serif text-lg font-semibold">{meta.label}</p>
-        <p className="text-xs italic text-stone-500">"{meta.tagline}"</p>
-        <p className="mt-1 text-xs text-stone-500">{meta.description}</p>
+        <p className="text-lg font-semibold">{meta.label}</p>
+        <p className="text-xs text-muted">{meta.description}</p>
       </div>
+
       {selected && (
-        <span className="text-xs font-medium text-[rgb(var(--accent))]">
-          ✓ Selected
-        </span>
+        <span className="text-xs font-medium text-accent">✓ Selected</span>
       )}
     </button>
   )

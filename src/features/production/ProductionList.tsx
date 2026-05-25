@@ -32,12 +32,12 @@ export default function ProductionList({ onEdit }: Props) {
             className={`flex flex-wrap items-center justify-between gap-3 rounded border p-3 ${
               isCurrent
                 ? 'border-[rgb(var(--accent))] bg-[rgb(var(--accent))/0.05]'
-                : 'border-stone-200 dark:border-stone-700'
+                : 'border-surface-border'
             }`}
           >
             <div className="min-w-0">
               <p className="font-serif text-lg font-semibold">{p.name}</p>
-              <p className="text-xs text-stone-500">
+              <p className="text-xs text-muted">
                 {TYPE_LABELS[p.type] ?? p.type}
                 {p.season ? ` · ${p.season}` : ''}
                 {p.venue ? ` · ${p.venue}` : ''}

@@ -36,7 +36,7 @@ export default function ContactGroupManager({ productionId }: Props) {
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-stone-600 dark:text-stone-400">
+      <p className="text-sm text-muted">
         Bundle contacts so you can BCC them in one click — "All Cast",
         "Design Team", "Music Team", whatever splits your distribution.
         Every group you create shows up in the recipient picker on the
@@ -63,7 +63,7 @@ export default function ContactGroupManager({ productionId }: Props) {
       </div>
 
       {groups.length === 0 ? (
-        <p className="rounded border border-dashed border-stone-300 p-4 text-center text-sm text-stone-500 dark:border-stone-700">
+        <p className="rounded border border-dashed border-stone-300 p-4 text-center text-sm text-muted">
           No groups yet.
         </p>
       ) : (
@@ -73,12 +73,12 @@ export default function ContactGroupManager({ productionId }: Props) {
             return (
               <li
                 key={g.id}
-                className="rounded border border-stone-200 dark:border-stone-700"
+                className="rounded border border-surface-border"
               >
                 <div className="flex items-center justify-between p-3">
                   <div>
                     <p className="font-medium">{g.name}</p>
-                    <p className="text-xs text-stone-500">
+                    <p className="text-xs text-muted">
                       {g.contactIds.length} member
                       {g.contactIds.length === 1 ? '' : 's'}
                     </p>
@@ -105,9 +105,9 @@ export default function ContactGroupManager({ productionId }: Props) {
                   </div>
                 </div>
                 {isOpen && g.id !== undefined && (
-                  <div className="border-t border-stone-200 p-3 dark:border-stone-700">
+                  <div className="border-t border-surface-border p-3">
                     {contacts.length === 0 ? (
-                      <p className="text-sm text-stone-500">
+                      <p className="text-sm text-muted">
                         Add contacts first.
                       </p>
                     ) : (
@@ -129,7 +129,7 @@ export default function ContactGroupManager({ productionId }: Props) {
                                 <span>
                                   {c.name}
                                   {c.role && (
-                                    <span className="text-stone-500">
+                                    <span className="text-muted">
                                       {' '}
                                       · {c.role}
                                     </span>

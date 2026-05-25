@@ -40,7 +40,7 @@ export default function ProductionRoute() {
     <section className="mx-auto max-w-4xl space-y-10">
       <header>
         <h2 className="font-serif text-3xl font-semibold">Production</h2>
-        <p className="mt-1 text-sm text-stone-500">
+        <p className="mt-1 text-sm text-muted">
           The show's name, type, venue, and key dates. Everything else
           (contacts, rehearsals, props) attaches to whichever production
           you have selected — switch between shows with the buttons below.
@@ -124,7 +124,7 @@ export default function ProductionRoute() {
             generatePdf={generatePdf}
           />
 
-          <section className="space-y-3 border-t border-stone-200 pt-8 dark:border-stone-800">
+          <section className="space-y-3 border-t border-surface-border pt-8">
             <h3 className="font-serif text-xl font-semibold">Send log</h3>
             <SendLogList productionId={current.id} />
           </section>

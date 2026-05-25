@@ -47,9 +47,9 @@ export default function ImportExport({ productionId }: Props) {
   }
 
   return (
-    <div className="space-y-3 rounded border border-stone-200 bg-stone-50 p-4 dark:border-stone-700 dark:bg-stone-900/50">
+    <div className="space-y-3 rounded border border-surface-border bg-card p-4">
       <h3 className="font-serif text-lg font-semibold">Backup &amp; restore</h3>
-      <p className="text-sm text-stone-600 dark:text-stone-400">
+      <p className="text-sm text-muted">
         Your show lives in your browser's IndexedDB. Export to a{' '}
         <code>.standby.json</code> file to back it up or move it to another
         device. Import to load a saved show as a new entry.

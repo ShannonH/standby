@@ -140,11 +140,11 @@ export default function RehearsalReportForm({
       <section>
         <h3 className="mb-3 font-serif text-lg font-semibold">Attendance</h3>
         {attendance.fields.length === 0 ? (
-          <p className="rounded border border-dashed border-stone-300 p-4 text-center text-sm text-stone-500 dark:border-stone-700">
+          <p className="rounded border border-dashed border-stone-300 p-4 text-center text-sm text-muted">
             No cast yet. Add cast in Contacts first — they'll auto-populate here.
           </p>
         ) : (
-          <ul className="divide-y divide-stone-200 rounded border border-stone-200 dark:divide-stone-800 dark:border-stone-700">
+          <ul className="divide-y divide-stone-200 rounded border border-stone-200">
             {attendance.fields.map((field, idx) => {
               const status = watch(`attendance.${idx}.status`)
               return (
@@ -195,7 +195,7 @@ export default function RehearsalReportForm({
           </Button>
         </div>
         {timeBlocks.fields.length === 0 ? (
-          <p className="rounded border border-dashed border-stone-300 p-4 text-center text-sm text-stone-500 dark:border-stone-700">
+          <p className="rounded border border-dashed border-stone-300 p-4 text-center text-sm text-muted">
             No time blocks yet. Add one per scene or activity worked.
           </p>
         ) : (
@@ -237,7 +237,7 @@ export default function RehearsalReportForm({
         <h3 className="mb-3 font-serif text-lg font-semibold">
           Departmental notes
         </h3>
-        <p className="mb-4 text-sm text-stone-500">
+        <p className="mb-4 text-sm text-muted">
           Notes per department, numbered automatically on export. Default
           phrasing follows Porter &amp; Alcorn's collaborative tone — frame
           notes as questions or requests, not corrections.
@@ -255,7 +255,7 @@ export default function RehearsalReportForm({
         </div>
       </section>
 
-      <div className="flex flex-wrap items-center gap-3 border-t border-stone-200 pt-6 dark:border-stone-800">
+      <div className="flex flex-wrap items-center gap-3 border-t border-surface-border pt-6">
         <Button type="submit" disabled={isSubmitting}>
           {report ? 'Save changes' : 'Save rehearsal report'}
         </Button>
@@ -290,7 +290,7 @@ function DeptNotesSection({
   return (
     <details
       open={fields.length > 0}
-      className="rounded border border-stone-200 p-3 dark:border-stone-700"
+      className="rounded border border-surface-border p-3"
     >
       <summary className="flex cursor-pointer items-center justify-between font-medium">
         <span>
@@ -301,7 +301,7 @@ function DeptNotesSection({
       <div className="mt-3 space-y-2">
         {fields.map((field, idx) => (
           <div key={field.id} className="flex items-start gap-2">
-            <span className="mt-2 text-xs text-stone-500">#{idx + 1}</span>
+            <span className="mt-2 text-xs text-muted">#{idx + 1}</span>
             <Input
               {...register(`notes.${deptKey}.${idx}.text`)}
               placeholder="One note per line — e.g. 'Could we confirm the act 2 prop list by Friday?'"

@@ -1,69 +1,214 @@
+/* ─── Theme fonts ────────────────────────────────────────────────────────
+   All themes share the same set of @font-face declarations bundled by
+   @fontsource. Browsers only DOWNLOAD a font file when CSS actually
+   references it, so unused fonts just sit on disk inside dist/. */
+
 @import '@fontsource/eb-garamond/400.css';
 @import '@fontsource/eb-garamond/400-italic.css';
 @import '@fontsource/eb-garamond/600.css';
 @import '@fontsource/eb-garamond/600-italic.css';
+
+@import '@fontsource/playfair-display/600.css';
+@import '@fontsource/playfair-display/700.css';
+@import '@fontsource/playfair-display/900.css';
+
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/700.css';
+
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/600.css';
+
+@import '@fontsource/outfit/400.css';
+@import '@fontsource/outfit/600.css';
+@import '@fontsource/outfit/700.css';
+
+@import '@fontsource/cormorant-garamond/400.css';
+@import '@fontsource/cormorant-garamond/400-italic.css';
+@import '@fontsource/cormorant-garamond/600.css';
+@import '@fontsource/cormorant-garamond/600-italic.css';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* ─── Themes ─────────────────────────────────────────────────────────────
-   Themes set three CSS variables: --accent (button / active / focus color),
-   --accent-hover, and --on-accent (text color that sits on top of an
-   accent-filled surface). Tailwind arbitrary values like
-   `bg-[rgb(var(--accent))]` pick these up automatically.
+   Each theme defines a complete palette: accent + accent-hover + on-accent,
+   surface bg + surface elevation + border, text primary + secondary, plus
+   typography (display font, body font, optional letter-spacing and case-
+   transform on headings), and a base border-radius.
 
-   `default` swaps its accent in dark mode to maintain contrast; the
-   themed presets (stage / midnight / etc.) keep their character in both. */
+   Light/dark variants where appropriate. The strongly-themed presets
+   (Stage, Midnight, Marquee, Rosewood) hold their character in both modes;
+   the neutral Default theme inverts.
+
+   Tailwind utilities like `bg-card`, `border-surface`, `text-muted`, and
+   `bg-accent` are wired to these vars via tailwind.config.ts. */
 
 :root,
 [data-theme='default'] {
-  --accent: 28 25 23; /* stone-900 */
-  --accent-hover: 68 64 60; /* stone-700 */
-  --on-accent: 250 250 249; /* stone-50 */
+  --accent: 28 25 23;
+  --accent-hover: 68 64 60;
+  --on-accent: 250 250 249;
+  --surface-bg: 250 250 249; /* stone-50 */
+  --surface-elev: 255 255 255; /* white */
+  --surface-border: 231 229 228; /* stone-200 */
+  --text-primary: 28 25 23;
+  --text-secondary: 87 83 78; /* stone-600 */
+  --font-display: 'EB Garamond', Georgia, 'Times New Roman', serif;
+  --font-body: 'EB Garamond', Georgia, 'Times New Roman', serif;
+  --display-tracking: normal;
+  --display-transform: none;
+  --display-weight: 600;
+  --radius: 0.25rem;
 }
 .dark[data-theme='default'] {
-  --accent: 250 250 249; /* stone-50 */
-  --accent-hover: 214 211 209; /* stone-300 */
-  --on-accent: 28 25 23; /* stone-900 */
+  --accent: 250 250 249;
+  --accent-hover: 214 211 209;
+  --on-accent: 28 25 23;
+  --surface-bg: 12 10 9; /* stone-950 */
+  --surface-elev: 28 25 23; /* stone-900 */
+  --surface-border: 68 64 60; /* stone-700 */
+  --text-primary: 250 250 249;
+  --text-secondary: 168 162 158; /* stone-400 */
 }
 
-[data-theme='stage'],
+[data-theme='stage'] {
+  --accent: 217 119 6; /* amber-600 */
+  --accent-hover: 180 83 9; /* amber-700 */
+  --on-accent: 254 252 232; /* yellow-50 */
+  --surface-bg: 254 249 230; /* warm cream */
+  --surface-elev: 255 252 240;
+  --surface-border: 226 196 124;
+  --text-primary: 41 26 5;
+  --text-secondary: 120 53 15; /* amber-900 */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'EB Garamond', Georgia, serif;
+  --display-tracking: 0;
+  --display-transform: none;
+  --display-weight: 700;
+  --radius: 0.375rem;
+}
 .dark[data-theme='stage'] {
-  --accent: 245 158 11; /* amber-500 */
-  --accent-hover: 217 119 6; /* amber-600 */
-  --on-accent: 23 23 23; /* near-black */
+  --accent: 251 191 36; /* amber-400 */
+  --accent-hover: 245 158 11; /* amber-500 */
+  --on-accent: 23 18 11;
+  --surface-bg: 18 14 7;
+  --surface-elev: 35 26 12;
+  --surface-border: 92 64 23;
+  --text-primary: 254 240 197;
+  --text-secondary: 217 162 87;
 }
 
-[data-theme='midnight'],
+[data-theme='midnight'] {
+  --accent: 8 145 178; /* cyan-600 */
+  --accent-hover: 14 116 144; /* cyan-700 */
+  --on-accent: 247 254 255;
+  --surface-bg: 241 245 249; /* slate-100 */
+  --surface-elev: 255 255 255;
+  --surface-border: 191 219 254; /* blue-200 */
+  --text-primary: 15 23 42; /* slate-900 */
+  --text-secondary: 71 85 105; /* slate-600 */
+  --font-display: 'JetBrains Mono', 'Courier New', monospace;
+  --font-body: 'Inter', 'Helvetica Neue', sans-serif;
+  --display-tracking: -0.02em;
+  --display-transform: uppercase;
+  --display-weight: 700;
+  --radius: 0.125rem;
+}
 .dark[data-theme='midnight'] {
-  --accent: 37 99 235; /* blue-600 */
-  --accent-hover: 29 78 216; /* blue-700 */
-  --on-accent: 255 255 255;
+  --accent: 34 211 238; /* cyan-400 */
+  --accent-hover: 6 182 212; /* cyan-500 */
+  --on-accent: 8 19 36;
+  --surface-bg: 8 12 24; /* deep navy */
+  --surface-elev: 17 24 39; /* slate-900-ish */
+  --surface-border: 30 41 70;
+  --text-primary: 226 232 240; /* slate-200 */
+  --text-secondary: 148 163 184; /* slate-400 */
 }
 
-[data-theme='greenroom'],
+[data-theme='greenroom'] {
+  --accent: 5 150 105; /* emerald-600 */
+  --accent-hover: 4 120 87; /* emerald-700 */
+  --on-accent: 240 253 244;
+  --surface-bg: 240 253 244; /* emerald-50 */
+  --surface-elev: 255 255 255;
+  --surface-border: 187 247 208; /* emerald-200 */
+  --text-primary: 6 78 59; /* emerald-900 */
+  --text-secondary: 6 95 70; /* emerald-800 */
+  --font-display: 'Outfit', 'Inter', sans-serif;
+  --font-body: 'Outfit', 'Inter', sans-serif;
+  --display-tracking: -0.01em;
+  --display-transform: none;
+  --display-weight: 600;
+  --radius: 0.75rem;
+}
 .dark[data-theme='greenroom'] {
-  --accent: 4 120 87; /* emerald-700 */
-  --accent-hover: 6 95 70; /* emerald-800 */
-  --on-accent: 255 255 255;
+  --accent: 52 211 153; /* emerald-400 */
+  --accent-hover: 16 185 129; /* emerald-500 */
+  --on-accent: 6 78 59;
+  --surface-bg: 4 23 16;
+  --surface-elev: 11 41 30;
+  --surface-border: 22 78 53;
+  --text-primary: 209 250 229;
+  --text-secondary: 110 231 183;
 }
 
-[data-theme='marquee'],
+[data-theme='marquee'] {
+  --accent: 153 27 27; /* red-800 */
+  --accent-hover: 127 29 29; /* red-900 */
+  --on-accent: 255 251 235; /* warm cream */
+  --surface-bg: 255 251 235; /* very warm cream */
+  --surface-elev: 254 246 220;
+  --surface-border: 234 179 8; /* yellow-500 — gilded */
+  --text-primary: 76 4 4;
+  --text-secondary: 153 27 27;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'EB Garamond', Georgia, serif;
+  --display-tracking: 0.04em;
+  --display-transform: uppercase;
+  --display-weight: 900;
+  --radius: 0.5rem;
+}
 .dark[data-theme='marquee'] {
-  --accent: 185 28 28; /* red-700 */
-  --accent-hover: 153 27 27; /* red-800 */
-  --on-accent: 255 254 226; /* cream */
+  --accent: 220 38 38; /* red-600 */
+  --accent-hover: 185 28 28;
+  --on-accent: 255 251 235;
+  --surface-bg: 38 8 8;
+  --surface-elev: 64 14 14;
+  --surface-border: 161 98 7; /* darker gilded */
+  --text-primary: 254 226 226;
+  --text-secondary: 252 165 165;
 }
 
-[data-theme='rosewood'],
-.dark[data-theme='rosewood'] {
+[data-theme='rosewood'] {
   --accent: 159 18 57; /* rose-800 */
   --accent-hover: 136 19 55; /* rose-900 */
-  --on-accent: 254 242 242; /* rose-50 */
+  --on-accent: 255 241 242;
+  --surface-bg: 255 241 242; /* rose-50 */
+  --surface-elev: 255 248 249;
+  --surface-border: 251 207 232; /* pink-200 */
+  --text-primary: 76 5 25;
+  --text-secondary: 159 18 57;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Cormorant Garamond', Georgia, serif;
+  --display-tracking: 0.01em;
+  --display-transform: none;
+  --display-weight: 600;
+  --display-italic: italic;
+  --radius: 0.375rem;
+}
+.dark[data-theme='rosewood'] {
+  --accent: 244 63 94; /* rose-500 */
+  --accent-hover: 225 29 72; /* rose-600 */
+  --on-accent: 76 5 25;
+  --surface-bg: 30 10 14;
+  --surface-elev: 55 17 27;
+  --surface-border: 109 26 51;
+  --text-primary: 252 231 243;
+  --text-secondary: 244 114 182;
 }
 
-/* ─── Font size ────────────────────────────────────────────────────────── */
+/* ─── Font size ─────────────────────────────────────────────────────────── */
 
 html[data-font-size='sm'] {
   font-size: 14px;
@@ -78,26 +223,26 @@ html[data-font-size='xl'] {
   font-size: 20px;
 }
 
-@layer base {
-  html {
-    font-family:
-      'EB Garamond',
-      'Garamond',
-      Georgia,
-      'Times New Roman',
-      serif;
-  }
+/* ─── Base layer wiring ─────────────────────────────────────────────────── */
 
+@layer base {
+  html,
+  body {
+    font-family: var(--font-body);
+  }
+  body {
+    background-color: rgb(var(--surface-bg));
+    color: rgb(var(--text-primary));
+  }
   h1,
   h2,
   h3,
   h4 {
-    font-family:
-      'EB Garamond',
-      'Garamond',
-      Georgia,
-      'Times New Roman',
-      serif;
+    font-family: var(--font-display);
+    letter-spacing: var(--display-tracking, normal);
+    text-transform: var(--display-transform, none);
+    font-weight: var(--display-weight, 600);
+    font-style: var(--display-italic, normal);
   }
 }
 

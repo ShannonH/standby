@@ -160,7 +160,7 @@ export default function PropForm({
         </Field>
       </div>
 
-      <fieldset className="space-y-2 border-t border-stone-200 pt-4 dark:border-stone-800">
+      <fieldset className="space-y-2 border-t border-surface-border pt-4">
         <legend className="font-medium">Special handling</legend>
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
           {PROP_SPECIAL_HANDLING_VALUES.map((tag) => (

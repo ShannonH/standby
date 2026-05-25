@@ -35,8 +35,9 @@ export default function ProductionRoute() {
       <header>
         <h2 className="font-serif text-3xl font-semibold">Production</h2>
         <p className="mt-1 text-sm text-stone-500">
-          Production metadata and key dates. The foundation everything else
-          hangs off (PRD §7.1).
+          The show's name, type, venue, and key dates. Everything else
+          (contacts, rehearsals, props) attaches to whichever production
+          you have selected — switch between shows with the buttons below.
         </p>
       </header>
 

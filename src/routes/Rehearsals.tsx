@@ -88,9 +88,11 @@ function RehearsalsInner() {
               Rehearsal reports
             </h2>
             <p className="mt-1 text-sm text-stone-500">
-              For <span className="font-medium">{production.name}</span>.
-              Stern &amp; Gold 12e format; Porter &amp; Alcorn-aligned tone
-              defaults.
+              For <span className="font-medium">{production.name}</span>. The
+              nightly report — attendance, time breakdown, and numbered
+              notes by department. Hit <em>Distribute</em> on any report to
+              email it to the team with the full text in the email body.
+              Department sections only appear in the PDF if they have notes.
             </p>
           </div>
           {mode.kind === 'list' && (

@@ -97,8 +97,11 @@ function PropsInner() {
           <div>
             <h2 className="font-serif text-3xl font-semibold">Props</h2>
             <p className="mt-1 text-sm text-stone-500">
-              For <span className="font-medium">{production.name}</span>.
-              Master list reconciled across SM, props master, and designers.
+              For <span className="font-medium">{production.name}</span>. The
+              shared truth across the SM, props master, and designers. Click
+              a status dropdown in the table to change it without opening
+              the full editor. Flag special handling — food, weapons, fire,
+              breakaway, fragile, liquid — so nothing's a surprise at tech.
             </p>
           </div>
           {!isCreating && !editingProp && (

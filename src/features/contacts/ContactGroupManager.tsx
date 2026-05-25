@@ -37,8 +37,10 @@ export default function ContactGroupManager({ productionId }: Props) {
   return (
     <div className="space-y-4">
       <p className="text-sm text-stone-600 dark:text-stone-400">
-        Groups bundle contacts for batched distribution (e.g. "All Cast",
-        "Design Team", "Music Team"). Used by §7.9 in M2.
+        Bundle contacts so you can BCC them in one click — "All Cast",
+        "Design Team", "Music Team", whatever splits your distribution.
+        Every group you create shows up in the recipient picker on the
+        Distribute panels.
       </p>
 
       <div className="flex flex-wrap items-end gap-3">

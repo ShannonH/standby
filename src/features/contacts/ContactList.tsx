@@ -86,8 +86,8 @@ export default function ContactList({ productionId }: Props) {
       {contacts.length === 0 && !isCreating && (
         <p className="rounded border border-dashed border-stone-300 p-6 text-center text-sm text-stone-500 dark:border-stone-700">
           No contacts yet. Add cast, creative team, designers, and crew here —
-          they'll show up on the contact sheet and (later) in distribution
-          groups.
+          they'll appear on the contact sheet, in the rehearsal-report
+          attendance picker, and in any distribution groups you build.
         </p>
       )}
 

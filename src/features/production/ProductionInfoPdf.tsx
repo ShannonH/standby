@@ -7,8 +7,8 @@ import {
 } from '@react-pdf/renderer'
 import type { Production } from '@/lib/db'
 
-// Letter paper, 0.75-inch margins, Times-Roman body — matches Broadway-PSM
-// formal-packet aesthetic per PRD §11.7.
+// Letter paper, 0.75-inch margins, Times-Roman body — formal Broadway-PSM
+// packet aesthetic.
 
 const styles = StyleSheet.create({
   page: {

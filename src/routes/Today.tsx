@@ -59,10 +59,38 @@ export default function Today() {
         <Card label="Production details" value="Edit" to="/production" />
       </div>
 
-      <p className="mt-8 text-sm text-stone-500">
-        Daily-driver paperwork (rehearsal reports, line notes, prop list,
-        distribution) lands in M2. See <code>docs/PRD.md</code> §12.
-      </p>
+      <div className="mt-12 space-y-3 border-t border-stone-200 pt-6 text-sm text-stone-600 dark:border-stone-800 dark:text-stone-400">
+        <p className="font-medium text-stone-800 dark:text-stone-200">
+          Where to go next
+        </p>
+        <ul className="space-y-1.5">
+          <li>
+            <strong>Rehearsals</strong> — nightly report: attendance, time
+            breakdown, and notes grouped by department.
+          </li>
+          <li>
+            <strong>Line notes</strong> — capture mistakes during rehearsal.
+            Enter saves a note and clears the form so you keep typing.
+          </li>
+          <li>
+            <strong>Props</strong> — master list with status, source, and
+            special-handling tags. Click a status to change it inline.
+          </li>
+          <li>
+            <strong>Contacts</strong> — cast, creative, production, crew.
+            Build named groups for batched distribution.
+          </li>
+          <li>
+            <strong>Production</strong> — show metadata, key dates, and JSON
+            backup/restore.
+          </li>
+        </ul>
+        <p className="pt-2 text-xs">
+          Every paperwork page has a <em>Distribute</em> panel that opens
+          your mail client with the recipient group BCC'd and the full
+          report in the email body — no attachments to remember.
+        </p>
+      </div>
     </section>
   )
 }

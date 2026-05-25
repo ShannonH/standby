@@ -106,8 +106,10 @@ function LineNotesInner() {
         <h2 className="font-serif text-3xl font-semibold">Line notes</h2>
         <p className="mt-1 text-sm text-stone-500">
           For <span className="font-medium">{production.name}</span>. Capture
-          fast during rehearsal — Enter saves a note and refocuses for the
-          next.
+          flubs as they happen — Enter saves a note and re-focuses the page
+          field so you can keep typing without leaving the keyboard. The
+          list below groups by actor; each actor's notes are private to
+          them when you distribute.
         </p>
       </header>
 

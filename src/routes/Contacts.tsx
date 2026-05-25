@@ -36,8 +36,11 @@ function ContactsInner() {
       <header>
         <h2 className="font-serif text-3xl font-semibold">Contacts</h2>
         <p className="mt-1 text-sm text-stone-500">
-          For <span className="font-medium">{current.name}</span>. Grouped by
-          category for the contact sheet; named groups feed M2 distribution.
+          For <span className="font-medium">{current.name}</span>. Cast,
+          creative team, production, crew, venue. Mark a contact{' '}
+          <em>do not publish</em> to keep them off the distributed contact
+          sheet. Add a phone number so they show up if you ever wire up SMS.
+          Build named groups below for one-click batch distribution.
         </p>
       </header>
 

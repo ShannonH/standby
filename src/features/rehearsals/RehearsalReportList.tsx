@@ -38,8 +38,10 @@ export default function RehearsalReportList({
   if (reports.length === 0) {
     return (
       <p className="rounded border border-dashed border-stone-300 p-6 text-center text-sm text-stone-500 dark:border-stone-700">
-        No rehearsal reports yet. The "+ New rehearsal report" button creates
-        your first one.
+        No rehearsal reports yet. After a rehearsal, hit "+ New rehearsal
+        report" to capture attendance, what you worked, and notes for each
+        department. The form pre-fills today's date and increments the day
+        number for you.
       </p>
     )
   }

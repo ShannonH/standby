@@ -26,8 +26,34 @@ function initialTheme(): Theme {
     : 'light'
 }
 
+/** A rotating SM call under the wordmark. One is picked per page load —
+ *  the SM gets a different call each time they refresh, like flipping
+ *  through a prompt corner card deck. Italics for the literal stage-call
+ *  lines, plain for the descriptive ones. */
+const TAGLINES: ReadonlyArray<{ text: string; italic?: boolean }> = [
+  { text: 'Standing by.', italic: true },
+  { text: 'From the prompt corner.' },
+  { text: 'Calling the show.' },
+  { text: 'Hold for places.', italic: true },
+  { text: 'Quiet on book.', italic: true },
+  { text: 'Half hour, please.', italic: true },
+  { text: 'Top of show.', italic: true },
+  { text: 'On book, off email.' },
+  { text: 'Cue 1, GO.', italic: true },
+  { text: 'Standby — and… GO.', italic: true },
+  { text: 'No more rehearsal-report emails at midnight.' },
+  { text: 'Notes for the company.' },
+  { text: 'The prompt book lives here now.' },
+  { text: 'Made for the booth.' },
+]
+
+function pickTagline(): { text: string; italic?: boolean } {
+  return TAGLINES[Math.floor(Math.random() * TAGLINES.length)]!
+}
+
 export default function App() {
   const [theme, setTheme] = useState<Theme>(initialTheme)
+  const [tagline] = useState(pickTagline)
   const appTheme = useAppStore((s) => s.settings.theme)
   const fontSize = useAppStore((s) => s.settings.fontSize)
 
@@ -58,7 +84,12 @@ export default function App() {
           <h1 className="font-serif text-2xl font-semibold tracking-tight">
             Standby
           </h1>
-          <p className="text-xs text-muted">SM paperwork, local-first</p>
+          <p
+            className={`text-xs text-muted ${tagline.italic ? 'italic' : ''}`}
+            title="Refresh for a different call."
+          >
+            {tagline.text}
+          </p>
         </div>
         <nav className="flex flex-col gap-1">
           {nav.map((item) => (

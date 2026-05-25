@@ -7,7 +7,7 @@ export default function Today() {
   const productions = useProductions()
   const current = useCurrentProduction()
   const contacts = useContacts(current?.id)
-  const userName = useAppStore((s) => s.settings.userName)
+  const userName = useAppStore((s) => s.settings.userName) ?? ''
   const greeting = greet(userName)
   const trimmedName = userName.trim()
 

@@ -43,6 +43,11 @@ describe('greet', () => {
     expect(greet('   ', at(20))).toBe('Good evening.')
   })
 
+  it('handles undefined and null defensively (persisted-state hydration lag)', () => {
+    expect(greet(undefined, at(20))).toBe('Good evening.')
+    expect(greet(null, at(20))).toBe('Good evening.')
+  })
+
   it('uses "Long night" for late-night hours', () => {
     expect(greet('Rayne', at(23))).toBe('Long night, Rayne.')
     expect(greet('Rayne', at(2))).toBe('Long night, Rayne.')

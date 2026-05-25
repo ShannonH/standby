@@ -29,13 +29,21 @@ const SALUTATIONS: Record<GreetingKind, string> = {
  * stands on its own (no trailing comma); if a name is provided it's
  * appended after a comma and the salutation gets a period.
  *
- *   greet('Rayne')  // "Good evening, Rayne."
- *   greet('')       // "Good evening."
+ *   greet('Rayne')   // "Good evening, Rayne."
+ *   greet('')        // "Good evening."
+ *   greet(undefined) // "Good evening."
+ *
+ * `name` is loosely typed to defend against persisted-state hydration
+ * lag (e.g. a Zustand store loading an older settings snapshot that
+ * doesn't yet have the userName field).
  */
-export function greet(name: string, now: Date = new Date()): string {
+export function greet(
+  name: string | undefined | null,
+  now: Date = new Date(),
+): string {
   const kind = pickGreetingKind(now)
   const salutation = SALUTATIONS[kind]
-  const trimmed = name.trim()
+  const trimmed = (name ?? '').trim()
   return trimmed.length > 0
     ? `${salutation}, ${trimmed}.`
     : `${salutation}.`

@@ -42,7 +42,7 @@ export default function Settings() {
         </div>
         <Field label="Name (or how you sign off)">
           <Input
-            value={settings.userName}
+            value={settings.userName ?? ''}
             onChange={(e) => updateSettings({ userName: e.target.value })}
             placeholder="e.g. Rayne"
             className="max-w-sm"

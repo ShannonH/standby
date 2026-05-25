@@ -43,6 +43,24 @@ export const useAppStore = create<AppState>()(
         currentProductionId: state.currentProductionId,
         settings: state.settings,
       }),
+      // Deep-merge persisted state with current defaults. Zustand's default
+      // is a shallow merge, which means adding a new field to AppSettings
+      // (e.g. userName in v0.8) would leave older localStorage saves with
+      // that field missing — undefined would leak into render and crash
+      // anything that calls `.trim()` on it. This merge always backfills
+      // every key from DEFAULT_SETTINGS, with persisted values taking
+      // precedence where present.
+      merge: (persisted, current) => {
+        const p = (persisted ?? {}) as Partial<AppState>
+        return {
+          ...current,
+          ...p,
+          settings: {
+            ...current.settings,
+            ...(p.settings ?? {}),
+          },
+        }
+      },
     },
   ),
 )

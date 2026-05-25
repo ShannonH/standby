@@ -1,11 +1,17 @@
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 
 interface AppState {
-  productionId: number | null
-  setProductionId: (id: number | null) => void
+  currentProductionId: number | null
+  setCurrentProductionId: (id: number | null) => void
 }
 
-export const useAppStore = create<AppState>((set) => ({
-  productionId: null,
-  setProductionId: (id) => set({ productionId: id }),
-}))
+export const useAppStore = create<AppState>()(
+  persist(
+    (set) => ({
+      currentProductionId: null,
+      setCurrentProductionId: (id) => set({ currentProductionId: id }),
+    }),
+    { name: 'standby:app-state' },
+  ),
+)

@@ -1,12 +1,60 @@
-export default function Contacts() {
+import PdfDownloadButton from '@/components/PdfDownloadButton'
+import RequiresProduction from '@/components/RequiresProduction'
+import ContactGroupManager from '@/features/contacts/ContactGroupManager'
+import ContactList from '@/features/contacts/ContactList'
+import { useContacts, useCurrentProduction } from '@/lib/hooks'
+
+export default function ContactsRoute() {
   return (
-    <section className="mx-auto max-w-3xl">
-      <h2 className="font-serif text-3xl font-semibold">Contacts</h2>
-      <p className="mt-2 text-stone-600 dark:text-stone-400">
-        Contact sheet placeholder. Grouped by Cast, Creative, Production, Crew,
-        Venue/Admin. Includes pronouns and named groups for §7.9 distribution.
-        See <code>docs/PRD.md</code> §7.2.
-      </p>
+    <RequiresProduction>
+      <ContactsInner />
+    </RequiresProduction>
+  )
+}
+
+function ContactsInner() {
+  const current = useCurrentProduction()
+  const contacts = useContacts(current?.id)
+  if (!current?.id) return null
+
+  async function generatePdf(): Promise<Blob> {
+    if (!current) throw new Error('No production')
+    const [{ pdf }, { default: ContactSheetPdf }] = await Promise.all([
+      import('@react-pdf/renderer'),
+      import('@/features/contacts/ContactSheetPdf'),
+    ])
+    return pdf(
+      <ContactSheetPdf production={current} contacts={contacts} />,
+    ).toBlob()
+  }
+
+  return (
+    <section className="mx-auto max-w-4xl space-y-10">
+      <header>
+        <h2 className="font-serif text-3xl font-semibold">Contacts</h2>
+        <p className="mt-1 text-sm text-stone-500">
+          For <span className="font-medium">{current.name}</span>. Grouped by
+          category for the contact sheet; named groups feed M2 distribution.
+        </p>
+      </header>
+
+      <ContactList productionId={current.id} />
+
+      <section className="space-y-3 border-t border-stone-200 pt-8 dark:border-stone-800">
+        <h3 className="font-serif text-xl font-semibold">Groups</h3>
+        <ContactGroupManager productionId={current.id} />
+      </section>
+
+      {contacts.length > 0 && (
+        <section className="space-y-3 border-t border-stone-200 pt-8 dark:border-stone-800">
+          <h3 className="font-serif text-xl font-semibold">Exports</h3>
+          <PdfDownloadButton
+            label="Download contact sheet (PDF)"
+            filename={`${current.name.replace(/[^a-z0-9]/gi, '_')}-contact-sheet.pdf`}
+            generate={generatePdf}
+          />
+        </section>
+      )}
     </section>
   )
 }

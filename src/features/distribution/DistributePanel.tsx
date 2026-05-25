@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { Button, Field, Input, Select, Textarea } from '@/components/Form'
 import { db, type Contact, type ContactGroup } from '@/lib/db'
 import { useContactGroups, useContacts } from '@/lib/hooks'
+import { buildMailtoUrl } from '@/lib/mailto'
 
 interface Props {
   productionId: number
@@ -111,11 +112,7 @@ export default function DistributePanel({
       // drag-attach. mailto: itself cannot carry attachments.
       await downloadPdf()
 
-      const params = new URLSearchParams()
-      params.set('bcc', recipients.emails.join(','))
-      params.set('subject', subject)
-      params.set('body', body)
-      const url = `mailto:?${params.toString()}`
+      const url = buildMailtoUrl(recipients.emails, subject, body)
       window.location.href = url
 
       await logSend()

@@ -7,6 +7,77 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── Themes ─────────────────────────────────────────────────────────────
+   Themes set three CSS variables: --accent (button / active / focus color),
+   --accent-hover, and --on-accent (text color that sits on top of an
+   accent-filled surface). Tailwind arbitrary values like
+   `bg-[rgb(var(--accent))]` pick these up automatically.
+
+   `default` swaps its accent in dark mode to maintain contrast; the
+   themed presets (stage / midnight / etc.) keep their character in both. */
+
+:root,
+[data-theme='default'] {
+  --accent: 28 25 23; /* stone-900 */
+  --accent-hover: 68 64 60; /* stone-700 */
+  --on-accent: 250 250 249; /* stone-50 */
+}
+.dark[data-theme='default'] {
+  --accent: 250 250 249; /* stone-50 */
+  --accent-hover: 214 211 209; /* stone-300 */
+  --on-accent: 28 25 23; /* stone-900 */
+}
+
+[data-theme='stage'],
+.dark[data-theme='stage'] {
+  --accent: 245 158 11; /* amber-500 */
+  --accent-hover: 217 119 6; /* amber-600 */
+  --on-accent: 23 23 23; /* near-black */
+}
+
+[data-theme='midnight'],
+.dark[data-theme='midnight'] {
+  --accent: 37 99 235; /* blue-600 */
+  --accent-hover: 29 78 216; /* blue-700 */
+  --on-accent: 255 255 255;
+}
+
+[data-theme='greenroom'],
+.dark[data-theme='greenroom'] {
+  --accent: 4 120 87; /* emerald-700 */
+  --accent-hover: 6 95 70; /* emerald-800 */
+  --on-accent: 255 255 255;
+}
+
+[data-theme='marquee'],
+.dark[data-theme='marquee'] {
+  --accent: 185 28 28; /* red-700 */
+  --accent-hover: 153 27 27; /* red-800 */
+  --on-accent: 255 254 226; /* cream */
+}
+
+[data-theme='rosewood'],
+.dark[data-theme='rosewood'] {
+  --accent: 159 18 57; /* rose-800 */
+  --accent-hover: 136 19 55; /* rose-900 */
+  --on-accent: 254 242 242; /* rose-50 */
+}
+
+/* ─── Font size ────────────────────────────────────────────────────────── */
+
+html[data-font-size='sm'] {
+  font-size: 14px;
+}
+html[data-font-size='md'] {
+  font-size: 16px;
+}
+html[data-font-size='lg'] {
+  font-size: 18px;
+}
+html[data-font-size='xl'] {
+  font-size: 20px;
+}
+
 @layer base {
   html {
     font-family:

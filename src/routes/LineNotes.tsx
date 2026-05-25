@@ -43,6 +43,8 @@ function LineNotesInner() {
     const actor = cast.find((c) => c.id === pdfActorId)
     if (!actor) return
     const actorNotes = notes.filter((n) => n.characterId === pdfActorId)
+    const { useAppStore } = await import('@/lib/store')
+    const paperSize = useAppStore.getState().settings.paperSize
     const [{ pdf }, { default: LineNotesPdf }] = await Promise.all([
       import('@react-pdf/renderer'),
       import('@/features/line-notes/LineNotesPdf'),
@@ -52,6 +54,7 @@ function LineNotesInner() {
         production={production}
         actor={actor}
         notes={actorNotes}
+        paperSize={paperSize}
       />,
     ).toBlob()
     const url = URL.createObjectURL(blob)
@@ -200,6 +203,9 @@ function LineNotesInner() {
                   defaultBody={lineNotesBody(actor.name)}
                   inlineBody={renderLineNotesText(production, actor, actorNotes)}
                   generatePdf={async () => {
+                    const { useAppStore } = await import('@/lib/store')
+                    const paperSize =
+                      useAppStore.getState().settings.paperSize
                     const [{ pdf }, { default: LineNotesPdf }] =
                       await Promise.all([
                         import('@react-pdf/renderer'),
@@ -210,6 +216,7 @@ function LineNotesInner() {
                         production={production}
                         actor={actor}
                         notes={actorNotes}
+                        paperSize={paperSize}
                       />,
                     ).toBlob()
                   }}

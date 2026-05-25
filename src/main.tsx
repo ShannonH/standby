@@ -8,6 +8,7 @@ import Contacts from './routes/Contacts'
 import Rehearsals from './routes/Rehearsals'
 import LineNotes from './routes/LineNotes'
 import Props from './routes/Props'
+import Settings from './routes/Settings'
 import './index.css'
 
 const router = createBrowserRouter(
@@ -22,6 +23,7 @@ const router = createBrowserRouter(
         { path: 'rehearsals', element: <Rehearsals /> },
         { path: 'line-notes', element: <LineNotes /> },
         { path: 'props', element: <Props /> },
+        { path: 'settings', element: <Settings /> },
       ],
     },
   ],

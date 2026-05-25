@@ -31,7 +31,7 @@ export default function ProductionList({ onEdit }: Props) {
             key={p.id}
             className={`flex flex-wrap items-center justify-between gap-3 rounded border p-3 ${
               isCurrent
-                ? 'border-stone-900 bg-stone-50 dark:border-stone-100 dark:bg-stone-900'
+                ? 'border-[rgb(var(--accent))] bg-[rgb(var(--accent))/0.05]'
                 : 'border-stone-200 dark:border-stone-700'
             }`}
           >
@@ -45,7 +45,7 @@ export default function ProductionList({ onEdit }: Props) {
             </div>
             <div className="flex flex-wrap items-center gap-2">
               {isCurrent ? (
-                <span className="rounded bg-stone-900 px-2 py-1 text-xs font-medium text-white dark:bg-stone-100 dark:text-stone-900">
+                <span className="rounded bg-[rgb(var(--accent))] px-2 py-1 text-xs font-medium text-[rgb(var(--on-accent))]">
                   Current
                 </span>
               ) : (

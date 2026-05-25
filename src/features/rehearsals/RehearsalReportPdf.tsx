@@ -13,6 +13,7 @@ import {
   type RehearsalReport,
 } from '@/lib/db'
 import { NOTE_DEPT_LABELS } from '@/lib/schemas'
+import type { PaperSize } from '@/lib/settings'
 
 // Stern/Gold-conformant rehearsal report layout — letter paper, Times-Roman.
 // Departmental notes numbered per-section so designers can reply
@@ -159,12 +160,14 @@ interface Props {
   production: Production
   report: RehearsalReport
   contacts: Contact[]
+  paperSize?: PaperSize
 }
 
 export default function RehearsalReportPdf({
   production,
   report,
   contacts,
+  paperSize = 'LETTER',
 }: Props) {
   const contactName = (id: number) =>
     contacts.find((c) => c.id === id)?.name ?? '(removed)'
@@ -178,7 +181,7 @@ export default function RehearsalReportPdf({
       title={`${production.name} — Rehearsal Report Day ${report.dayNumber}`}
       author="Standby"
     >
-      <Page size="LETTER" style={styles.page}>
+      <Page size={paperSize} style={styles.page}>
         <Text style={styles.title}>{production.name}</Text>
         <Text style={styles.subtitle}>
           Rehearsal Report · Day {report.dayNumber} · {formatDate(report.date)}

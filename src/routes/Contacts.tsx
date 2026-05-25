@@ -4,6 +4,7 @@ import ContactGroupManager from '@/features/contacts/ContactGroupManager'
 import ContactList from '@/features/contacts/ContactList'
 import DistributePanel from '@/features/distribution/DistributePanel'
 import { useContacts, useCurrentProduction } from '@/lib/hooks'
+import { useAppStore } from '@/lib/store'
 import { contactSheetBody } from '@/lib/templates'
 import { renderContactSheetText } from '@/lib/text-reports'
 
@@ -22,12 +23,17 @@ function ContactsInner() {
 
   async function generatePdf(): Promise<Blob> {
     if (!current) throw new Error('No production')
+    const paperSize = useAppStore.getState().settings.paperSize
     const [{ pdf }, { default: ContactSheetPdf }] = await Promise.all([
       import('@react-pdf/renderer'),
       import('@/features/contacts/ContactSheetPdf'),
     ])
     return pdf(
-      <ContactSheetPdf production={current} contacts={contacts} />,
+      <ContactSheetPdf
+        production={current}
+        contacts={contacts}
+        paperSize={paperSize}
+      />,
     ).toBlob()
   }
 

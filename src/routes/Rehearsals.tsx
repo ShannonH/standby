@@ -53,6 +53,8 @@ function RehearsalsInner() {
 
   async function generateBlob(report: RehearsalReport): Promise<Blob> {
     if (!production) throw new Error('No production')
+    const { useAppStore } = await import('@/lib/store')
+    const paperSize = useAppStore.getState().settings.paperSize
     const [{ pdf }, { default: RehearsalReportPdf }] = await Promise.all([
       import('@react-pdf/renderer'),
       import('@/features/rehearsals/RehearsalReportPdf'),
@@ -62,6 +64,7 @@ function RehearsalsInner() {
         production={production}
         report={report}
         contacts={allContacts}
+        paperSize={paperSize}
       />,
     ).toBlob()
   }

@@ -6,6 +6,7 @@ import {
   View,
 } from '@react-pdf/renderer'
 import type { Contact, Production } from '@/lib/db'
+import type { PaperSize } from '@/lib/settings'
 
 // Letter paper, formal serif (Times-Roman). Excludes contacts flagged
 // doNotPublish. Private fields (emergency contact, medical) are NEVER
@@ -99,9 +100,14 @@ const CATEGORY_ORDER: Contact['category'][] = [
 interface Props {
   production: Production
   contacts: Contact[]
+  paperSize?: PaperSize
 }
 
-export default function ContactSheetPdf({ production, contacts }: Props) {
+export default function ContactSheetPdf({
+  production,
+  contacts,
+  paperSize = 'LETTER',
+}: Props) {
   const publishable = contacts.filter((c) => !c.doNotPublish)
   const byCategory: Record<Contact['category'], Contact[]> = {
     cast: [],
@@ -123,7 +129,7 @@ export default function ContactSheetPdf({ production, contacts }: Props) {
       title={`${production.name} — Contact Sheet`}
       author="Standby"
     >
-      <Page size="LETTER" style={styles.page}>
+      <Page size={paperSize} style={styles.page}>
         <Text style={styles.title}>{production.name}</Text>
         <Text style={styles.subtitle}>
           Contact Sheet · {today}

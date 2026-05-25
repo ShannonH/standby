@@ -7,6 +7,7 @@ import {
 } from '@react-pdf/renderer'
 import type { Contact, LineNote, Production } from '@/lib/db'
 import { LINE_TYPE_LABELS } from '@/lib/schemas'
+import type { PaperSize } from '@/lib/settings'
 
 const styles = StyleSheet.create({
   page: {
@@ -91,10 +92,16 @@ interface Props {
   production: Production
   actor: Contact
   notes: LineNote[]
+  paperSize?: PaperSize
 }
 
 /** Per-actor line notes PDF. Only contains that actor's notes. */
-export default function LineNotesPdf({ production, actor, notes }: Props) {
+export default function LineNotesPdf({
+  production,
+  actor,
+  notes,
+  paperSize = 'LETTER',
+}: Props) {
   const today = new Date().toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
@@ -106,7 +113,7 @@ export default function LineNotesPdf({ production, actor, notes }: Props) {
       title={`${production.name} — Line notes for ${actor.name}`}
       author="Standby"
     >
-      <Page size="LETTER" style={styles.page}>
+      <Page size={paperSize} style={styles.page}>
         <Text style={styles.title}>{production.name}</Text>
         <Text style={styles.subtitle}>Line notes · Issued {today}</Text>
 

@@ -10,6 +10,7 @@ import ProductionForm from '@/features/production/ProductionForm'
 import ProductionList from '@/features/production/ProductionList'
 import { db } from '@/lib/db'
 import { useCurrentProduction, useProductions } from '@/lib/hooks'
+import { useAppStore } from '@/lib/store'
 import { productionInfoBody } from '@/lib/templates'
 import { renderProductionInfoText } from '@/lib/text-reports'
 
@@ -23,11 +24,14 @@ export default function ProductionRoute() {
 
   async function generatePdf(): Promise<Blob> {
     if (!current) throw new Error('No production selected')
+    const paperSize = useAppStore.getState().settings.paperSize
     const [{ pdf }, { default: ProductionInfoPdf }] = await Promise.all([
       import('@react-pdf/renderer'),
       import('@/features/production/ProductionInfoPdf'),
     ])
-    return pdf(<ProductionInfoPdf production={current} />).toBlob()
+    return pdf(
+      <ProductionInfoPdf production={current} paperSize={paperSize} />,
+    ).toBlob()
   }
 
   const showCreateForm = isCreating || productions.length === 0

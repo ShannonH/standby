@@ -6,6 +6,7 @@ import {
   View,
 } from '@react-pdf/renderer'
 import type { Production, Prop } from '@/lib/db'
+import type { PaperSize } from '@/lib/settings'
 import {
   PROP_SOURCE_LABELS,
   PROP_SPECIAL_HANDLING_LABELS,
@@ -78,9 +79,14 @@ const styles = StyleSheet.create({
 interface Props {
   production: Production
   props: Prop[]
+  paperSize?: PaperSize
 }
 
-export default function PropListPdf({ production, props }: Props) {
+export default function PropListPdf({
+  production,
+  props,
+  paperSize = 'LETTER',
+}: Props) {
   const today = new Date().toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
@@ -92,7 +98,7 @@ export default function PropListPdf({ production, props }: Props) {
       title={`${production.name} — Prop List`}
       author="Standby"
     >
-      <Page size="LETTER" style={styles.page}>
+      <Page size={paperSize} style={styles.page}>
         <Text style={styles.title}>{production.name}</Text>
         <Text style={styles.subtitle}>
           Prop List · {props.length} items · {today}

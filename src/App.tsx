@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import AutoBackupSync from '@/components/AutoBackupSync'
 import { requestPersistentStorage } from '@/lib/persistent-storage'
+import { useAppStore } from '@/lib/store'
 
 type NavItem = { to: string; label: string; end?: boolean }
 
@@ -12,6 +13,7 @@ const nav: readonly NavItem[] = [
   { to: '/rehearsals', label: 'Rehearsals' },
   { to: '/line-notes', label: 'Line notes' },
   { to: '/props', label: 'Props' },
+  { to: '/settings', label: 'Settings' },
 ]
 
 type Theme = 'light' | 'dark'
@@ -26,11 +28,20 @@ function initialTheme(): Theme {
 
 export default function App() {
   const [theme, setTheme] = useState<Theme>(initialTheme)
+  const appTheme = useAppStore((s) => s.settings.theme)
+  const fontSize = useAppStore((s) => s.settings.fontSize)
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', theme === 'dark')
     localStorage.setItem('standby:theme', theme)
   }, [theme])
+
+  // Apply theme + font size as data-attributes on <html>. The CSS in
+  // index.css uses these to swap accent CSS variables and base font-size.
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', appTheme)
+    document.documentElement.setAttribute('data-font-size', fontSize)
+  }, [appTheme, fontSize])
 
   // Ask the browser to mark our storage as persistent on first load.
   // Browsers grant silently if Standby is installed as a PWA or heavily
@@ -58,7 +69,7 @@ export default function App() {
               className={({ isActive }) =>
                 `rounded px-3 py-2 text-sm font-medium transition ${
                   isActive
-                    ? 'bg-stone-900 text-white dark:bg-stone-100 dark:text-stone-900'
+                    ? 'bg-[rgb(var(--accent))] text-[rgb(var(--on-accent))]'
                     : 'text-stone-700 hover:bg-stone-100 dark:text-stone-300 dark:hover:bg-stone-800'
                 }`
               }

@@ -37,12 +37,18 @@ function PropsInner() {
 
   async function generateBlob(): Promise<Blob> {
     if (!production) throw new Error('No production')
+    const { useAppStore } = await import('@/lib/store')
+    const paperSize = useAppStore.getState().settings.paperSize
     const [{ pdf }, { default: PropListPdf }] = await Promise.all([
       import('@react-pdf/renderer'),
       import('@/features/props/PropListPdf'),
     ])
     return pdf(
-      <PropListPdf production={production} props={props} />,
+      <PropListPdf
+        production={production}
+        props={props}
+        paperSize={paperSize}
+      />,
     ).toBlob()
   }
 

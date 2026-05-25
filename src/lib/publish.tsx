@@ -9,6 +9,7 @@ import ContactSheetPdf from '@/features/contacts/ContactSheetPdf'
 import ProductionInfoPdf from '@/features/production/ProductionInfoPdf'
 import PropListPdf from '@/features/props/PropListPdf'
 import RehearsalReportPdf from '@/features/rehearsals/RehearsalReportPdf'
+import { useAppStore } from './store'
 
 /**
  * Per-production "publish" folder. Standby auto-writes the public-facing
@@ -129,6 +130,13 @@ async function generatePdfBlob(element: React.ReactElement): Promise<Blob> {
   return pdf(element).toBlob()
 }
 
+/** Read the current paperSize preference from the Zustand store outside a
+ *  React render — publish functions run from form-submit handlers and the
+ *  publish-all button, not from components. */
+function currentPaperSize() {
+  return useAppStore.getState().settings.paperSize
+}
+
 function sanitize(name: string): string {
   return name.replace(/[^A-Za-z0-9\-_ ]/g, '_').trim() || 'untitled'
 }
@@ -152,6 +160,7 @@ export async function publishRehearsalReport(
       production={production}
       report={report}
       contacts={contacts}
+      paperSize={currentPaperSize()}
     />,
   )
   await writePdfBlob(reportsDir, reportFilename(report), blob)
@@ -163,7 +172,11 @@ export async function publishContactSheet(
   contacts: Contact[],
 ): Promise<void> {
   const blob = await generatePdfBlob(
-    <ContactSheetPdf production={production} contacts={contacts} />,
+    <ContactSheetPdf
+      production={production}
+      contacts={contacts}
+      paperSize={currentPaperSize()}
+    />,
   )
   await writePdfBlob(handle, 'Contact Sheet.pdf', blob)
 }
@@ -174,7 +187,11 @@ export async function publishPropList(
   props: Prop[],
 ): Promise<void> {
   const blob = await generatePdfBlob(
-    <PropListPdf production={production} props={props} />,
+    <PropListPdf
+      production={production}
+      props={props}
+      paperSize={currentPaperSize()}
+    />,
   )
   await writePdfBlob(handle, 'Prop List.pdf', blob)
 }
@@ -184,7 +201,10 @@ export async function publishProductionInfo(
   production: Production,
 ): Promise<void> {
   const blob = await generatePdfBlob(
-    <ProductionInfoPdf production={production} />,
+    <ProductionInfoPdf
+      production={production}
+      paperSize={currentPaperSize()}
+    />,
   )
   await writePdfBlob(handle, 'Production Info.pdf', blob)
 }

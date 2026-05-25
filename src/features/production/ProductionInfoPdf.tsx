@@ -6,6 +6,7 @@ import {
   View,
 } from '@react-pdf/renderer'
 import type { Production } from '@/lib/db'
+import type { PaperSize } from '@/lib/settings'
 
 // Letter paper, 0.75-inch margins, Times-Roman body — formal Broadway-PSM
 // packet aesthetic.
@@ -96,9 +97,13 @@ function Row({ label, value }: { label: string; value?: string }) {
 
 interface Props {
   production: Production
+  paperSize?: PaperSize
 }
 
-export default function ProductionInfoPdf({ production }: Props) {
+export default function ProductionInfoPdf({
+  production,
+  paperSize = 'LETTER',
+}: Props) {
   const today = new Date().toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
@@ -110,7 +115,7 @@ export default function ProductionInfoPdf({ production }: Props) {
       title={`${production.name} — Production Information`}
       author="Standby"
     >
-      <Page size="LETTER" style={styles.page}>
+      <Page size={paperSize} style={styles.page}>
         <Text style={styles.title}>{production.name}</Text>
         <Text style={styles.subtitle}>
           Production Information Sheet · Generated {today}

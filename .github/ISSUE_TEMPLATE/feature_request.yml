@@ -1,0 +1,43 @@
+name: Feature request
+description: Suggest a new feature or enhancement.
+title: '[feat] '
+labels: ['enhancement']
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an improvement. The more grounded in a real-show workflow the request is, the more likely it ships.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you trying to solve?
+      description: Describe the situation in your own show / program / workflow that prompted the idea.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would the feature look like?
+      description: A rough sketch of the behavior. Don't worry about implementation details.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: What have you tried instead?
+      description: Existing Standby features, other tools, paper workarounds — anything you've used to bridge the gap so far.
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: How critical is this to your workflow?
+      options:
+        - Nice to have
+        - Would use it regularly
+        - Currently blocking me from using Standby for a show
+    validations:
+      required: true

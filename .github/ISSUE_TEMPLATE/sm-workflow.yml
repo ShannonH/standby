@@ -1,0 +1,41 @@
+name: SM workflow gap
+description: For stage managers — something Standby is missing from your daily workflow, or doing differently than your program teaches.
+title: '[sm] '
+labels: ['sm-workflow']
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This template is for working SMs and students. **You don't need to know how to code.** The more concrete the situation you describe — what show, what convention, what your program expects — the more useful this is.
+
+  - type: textarea
+    id: situation
+    attributes:
+      label: What were you trying to do?
+      description: The artifact (call sheet, line notes, etc.), the moment in the process (pre-prod, tech, run), and what you ended up doing instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: convention
+    attributes:
+      label: What's the convention?
+      description: Is this from your training (Stern & Gold, Porter & Alcorn, Kelly, Off Headset), an Equity rulebook expectation, your program's house style, regional practice — or just what feels right?
+    validations:
+      required: true
+
+  - type: input
+    id: program
+    attributes:
+      label: Program or context
+      description: Optional. Helps us understand the regional / institutional variation.
+      placeholder: e.g. Ball State BFA SM, professional regional, community theatre
+    validations:
+      required: false
+
+  - type: textarea
+    id: sample
+    attributes:
+      label: Sample paperwork
+      description: If you can share a redacted PDF or screenshot of how this looks elsewhere, attach it here. Hugely helpful for matching the visual convention.

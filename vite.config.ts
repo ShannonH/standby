@@ -4,8 +4,13 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 import path from 'node:path'
 
+// Base path is parameterized so self-hosters (e.g. universities running
+// Standby in Docker on their own domain at /) can override without forking.
+// Default keeps the existing GitHub Pages deploy working unchanged.
+const BASE_PATH = process.env.VITE_BASE_PATH ?? '/standby/'
+
 export default defineConfig({
-  base: '/standby/',
+  base: BASE_PATH,
   plugins: [
     react(),
     VitePWA({

@@ -1,0 +1,67 @@
+name: Bug report
+description: Something's not working the way it should.
+title: '[bug] '
+labels: ['bug']
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report this. A few details up front make fixes much faster.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you do, and what did Standby do instead of what you expected?
+      placeholder: |
+        Saved a rehearsal report, clicked Distribute, and the mail client opened with an empty BCC.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+      description: Brief is fine.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Numbered list, ideally something I can follow on a fresh load.
+      placeholder: |
+        1. Load the sample show
+        2. Open Rehearsals → Day 1 → Distribute
+        3. Pick "Creative Team" as the recipient group
+        4. Click "Open in mail client"
+    validations:
+      required: true
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser + version
+      placeholder: e.g. Chrome 130 on macOS 15
+    validations:
+      required: true
+
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where are you running Standby?
+      options:
+        - The public site (shannonh.github.io/standby)
+        - Self-hosted via Docker
+        - Local dev (npm run dev)
+        - Other (mention below)
+    validations:
+      required: true
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else?
+      description: Screenshots, console errors, the standby.json export if it's data-related, the show this happened on, etc.

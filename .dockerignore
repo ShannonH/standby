@@ -1,0 +1,37 @@
+# Everything in here is excluded from the Docker build context. Keeping
+# this list tight keeps `docker build` fast.
+
+# Node + build outputs
+node_modules
+dist
+dev-dist
+coverage
+playwright-report
+test-results
+*.tsbuildinfo
+
+# Git + GitHub
+.git
+.gitignore
+
+# Editors
+.vscode
+.idea
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Logs and env
+*.log
+.env
+.env.*
+!.env.example
+
+# Docs we don't need at build time (source code references docs/ via
+# the docs route but it doesn't import any markdown). Keep README out
+# of the build to shave a few KB; nginx doesn't serve it.
+docs
+
+# CI / GitHub-only files
+.github

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Question or discussion
+    url: https://github.com/ShannonH/standby/discussions
+    about: For general questions, suggestions, or workflow discussion that doesn't fit a structured template.
+  - name: Read the docs
+    url: https://github.com/ShannonH/standby/tree/main/docs
+    about: PRD, research notes, and glossary covering the project's direction and stage-management vocabulary.

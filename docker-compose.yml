@@ -1,0 +1,30 @@
+# Standby — docker-compose for the "stand it up on a server" use case.
+#
+# Quickstart:
+#   docker compose up -d
+#
+# Then visit http://localhost:8080. Override PORT to bind a different port.
+#
+# To run a pre-built image from GitHub Container Registry instead of
+# rebuilding from source, swap the `build:` block for:
+#   image: ghcr.io/shannonh/standby:latest
+
+services:
+  standby:
+    build:
+      context: .
+      args:
+        # `/` is the right base for most self-hosted deploys. Override if
+        # you're serving Standby under a subpath like /sm/.
+        VITE_BASE_PATH: /
+    image: standby:latest
+    container_name: standby
+    ports:
+      - '${PORT:-8080}:80'
+    restart: unless-stopped
+    healthcheck:
+      test: ['CMD', 'wget', '-qO-', 'http://localhost/']
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s

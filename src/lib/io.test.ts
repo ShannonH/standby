@@ -113,6 +113,7 @@ describe('io: export/import round-trip', () => {
         contactGroups: [],
         rehearsals: [],
         lineNotes: [],
+        props: [],
       }),
     ).rejects.toThrow(/Unsupported show export version/)
   })

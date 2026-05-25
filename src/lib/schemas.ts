@@ -169,3 +169,100 @@ export const lineNoteInputSchema = z.object({
 })
 
 export type LineNoteInput = z.infer<typeof lineNoteInputSchema>
+
+// ─── Props ────────────────────────────────────────────────────────────────
+
+export const propSourceSchema = z.enum([
+  'rental',
+  'build',
+  'buy',
+  'pulled',
+  'actor-personal',
+  'unknown',
+])
+
+export type PropSource = z.infer<typeof propSourceSchema>
+
+export const PROP_SOURCE_LABELS: Record<PropSource, string> = {
+  rental: 'Rental',
+  build: 'Build',
+  buy: 'Buy',
+  pulled: 'Pulled from stock',
+  'actor-personal': 'Actor personal',
+  unknown: 'Unknown',
+}
+
+export const propStatusSchema = z.enum([
+  'needed',
+  'sourced',
+  'in-rehearsal',
+  'built',
+  'lost-replace',
+])
+
+export type PropStatus = z.infer<typeof propStatusSchema>
+
+export const PROP_STATUS_LABELS: Record<PropStatus, string> = {
+  needed: 'Needed',
+  sourced: 'Sourced',
+  'in-rehearsal': 'In rehearsal',
+  built: 'Built',
+  'lost-replace': 'Lost — replace',
+}
+
+export const propSpecialHandlingSchema = z.enum([
+  'food',
+  'weapons',
+  'fire',
+  'breakaway',
+  'fragile',
+  'liquid',
+])
+
+export type PropSpecialHandling = z.infer<typeof propSpecialHandlingSchema>
+
+export const PROP_SPECIAL_HANDLING_LABELS: Record<
+  PropSpecialHandling,
+  string
+> = {
+  food: 'Food',
+  weapons: 'Weapons',
+  fire: 'Fire',
+  breakaway: 'Breakaway',
+  fragile: 'Fragile',
+  liquid: 'Liquid',
+}
+
+export const PROP_SPECIAL_HANDLING_VALUES = [
+  'food',
+  'weapons',
+  'fire',
+  'breakaway',
+  'fragile',
+  'liquid',
+] as const
+
+/**
+ * Form-shaped schema for the prop editor. scenes/characters use a comma-
+ * separated string for ergonomic typing; specialHandling expands to one
+ * boolean per tag for easy checkbox rendering. The form-to-DB conversion
+ * happens in PropForm itself.
+ */
+export const propFormSchema = z.object({
+  name: z.string().min(1, 'Prop name is required'),
+  scenesText: z.string(),
+  charactersText: z.string(),
+  consumable: z.boolean(),
+  source: propSourceSchema,
+  status: propStatusSchema,
+  tableLocation: z.string().optional(),
+  food: z.boolean(),
+  weapons: z.boolean(),
+  fire: z.boolean(),
+  breakaway: z.boolean(),
+  fragile: z.boolean(),
+  liquid: z.boolean(),
+  notes: z.string().optional(),
+})
+
+export type PropFormInput = z.infer<typeof propFormSchema>

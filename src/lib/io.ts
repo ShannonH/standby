@@ -4,6 +4,7 @@ import {
   type ContactGroup,
   type LineNote,
   type Production,
+  type Prop,
   type RehearsalReport,
 } from './db'
 
@@ -15,8 +16,9 @@ import {
  * v1: initial — production + contacts + contactGroups
  * v2: adds rehearsals
  * v3: adds lineNotes
+ * v4: adds props
  */
-export const SHOW_EXPORT_VERSION = 3
+export const SHOW_EXPORT_VERSION = 4
 
 export interface ShowExport {
   schemaVersion: number
@@ -26,6 +28,7 @@ export interface ShowExport {
   contactGroups: ContactGroup[]
   rehearsals: RehearsalReport[]
   lineNotes: LineNote[]
+  props: Prop[]
 }
 
 /** Build a portable JSON snapshot of a single production and its entities. */
@@ -48,6 +51,10 @@ export async function exportShow(productionId: number): Promise<ShowExport> {
     .where('productionId')
     .equals(productionId)
     .toArray()
+  const props = await db.props
+    .where('productionId')
+    .equals(productionId)
+    .toArray()
   return {
     schemaVersion: SHOW_EXPORT_VERSION,
     exportedAt: new Date().toISOString(),
@@ -56,6 +63,7 @@ export async function exportShow(productionId: number): Promise<ShowExport> {
     contactGroups,
     rehearsals,
     lineNotes,
+    props,
   }
 }
 
@@ -80,6 +88,7 @@ export async function importShow(data: ShowExport): Promise<number> {
       db.contactGroups,
       db.rehearsals,
       db.lineNotes,
+      db.props,
     ],
     async () => {
       const now = new Date().toISOString()
@@ -139,6 +148,17 @@ export async function importShow(data: ShowExport): Promise<number> {
           productionId: newProductionId,
           characterId:
             contactIdMap.get(noteData.characterId) ?? noteData.characterId,
+        })
+      }
+
+      // Props added in v4. They don't reference contacts/characters by id,
+      // so no remapping is needed.
+      for (const prop of data.props ?? []) {
+        const { id: _ignoredPropId, ...propData } = prop
+        void _ignoredPropId
+        await db.props.add({
+          ...propData,
+          productionId: newProductionId,
         })
       }
 

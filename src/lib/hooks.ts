@@ -5,6 +5,7 @@ import {
   type ContactGroup,
   type LineNote,
   type Production,
+  type Prop,
   type RehearsalReport,
 } from './db'
 import { useAppStore } from './store'
@@ -91,6 +92,20 @@ export function useNextDayNumber(
       if (reports.length === 0) return 1
       return Math.max(...reports.map((r) => r.dayNumber)) + 1
     }, [productionId]) ?? 1
+  )
+}
+
+export function useProps(productionId: number | null | undefined): Prop[] {
+  return (
+    useLiveQuery(async () => {
+      if (productionId === null || productionId === undefined) {
+        return [] as Prop[]
+      }
+      return db.props
+        .where('productionId')
+        .equals(productionId)
+        .sortBy('name')
+    }, [productionId]) ?? []
   )
 }
 

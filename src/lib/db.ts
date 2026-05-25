@@ -48,6 +48,14 @@ export interface ContactGroup {
   contactIds: number[]
 }
 
+export type PropSpecialHandling =
+  | 'food'
+  | 'weapons'
+  | 'fire'
+  | 'breakaway'
+  | 'fragile'
+  | 'liquid'
+
 export interface Prop {
   id?: number
   productionId: number
@@ -58,7 +66,7 @@ export interface Prop {
   source: 'rental' | 'build' | 'buy' | 'pulled' | 'actor-personal' | 'unknown'
   status: 'needed' | 'sourced' | 'in-rehearsal' | 'built' | 'lost-replace'
   tableLocation?: string
-  specialHandling?: string[]
+  specialHandling?: PropSpecialHandling[]
   notes?: string
 }
 

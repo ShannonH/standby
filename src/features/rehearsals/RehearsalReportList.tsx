@@ -5,6 +5,7 @@ import { useRehearsals } from '@/lib/hooks'
 interface Props {
   productionId: number
   onEdit: (reportId: number) => void
+  onDistribute: (reportId: number) => void
   onDownloadPdf: (report: RehearsalReport) => Promise<void>
 }
 
@@ -29,6 +30,7 @@ function formatDate(iso: string): string {
 export default function RehearsalReportList({
   productionId,
   onEdit,
+  onDistribute,
   onDownloadPdf,
 }: Props) {
   const reports = useRehearsals(productionId)
@@ -60,12 +62,17 @@ export default function RehearsalReportList({
               {r.attendance.length} attendees · {totalNotes(r)} notes
             </p>
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <Button
               variant="secondary"
               onClick={() => void onDownloadPdf(r)}
             >
               PDF
+            </Button>
+            <Button
+              onClick={() => r.id !== undefined && onDistribute(r.id)}
+            >
+              Distribute
             </Button>
             <Button
               variant="ghost"

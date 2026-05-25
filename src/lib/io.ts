@@ -6,6 +6,7 @@ import {
   type Production,
   type Prop,
   type RehearsalReport,
+  type SendLogEntry,
 } from './db'
 
 /**
@@ -17,8 +18,9 @@ import {
  * v2: adds rehearsals
  * v3: adds lineNotes
  * v4: adds props
+ * v5: adds sendLog
  */
-export const SHOW_EXPORT_VERSION = 4
+export const SHOW_EXPORT_VERSION = 5
 
 export interface ShowExport {
   schemaVersion: number
@@ -29,6 +31,7 @@ export interface ShowExport {
   rehearsals: RehearsalReport[]
   lineNotes: LineNote[]
   props: Prop[]
+  sendLog: SendLogEntry[]
 }
 
 /** Build a portable JSON snapshot of a single production and its entities. */
@@ -55,6 +58,10 @@ export async function exportShow(productionId: number): Promise<ShowExport> {
     .where('productionId')
     .equals(productionId)
     .toArray()
+  const sendLog = await db.sendLog
+    .where('productionId')
+    .equals(productionId)
+    .toArray()
   return {
     schemaVersion: SHOW_EXPORT_VERSION,
     exportedAt: new Date().toISOString(),
@@ -64,6 +71,7 @@ export async function exportShow(productionId: number): Promise<ShowExport> {
     rehearsals,
     lineNotes,
     props,
+    sendLog,
   }
 }
 
@@ -89,6 +97,7 @@ export async function importShow(data: ShowExport): Promise<number> {
       db.rehearsals,
       db.lineNotes,
       db.props,
+      db.sendLog,
     ],
     async () => {
       const now = new Date().toISOString()
@@ -158,6 +167,16 @@ export async function importShow(data: ShowExport): Promise<number> {
         void _ignoredPropId
         await db.props.add({
           ...propData,
+          productionId: newProductionId,
+        })
+      }
+
+      // Send log added in v5. Historical artifact — copied verbatim.
+      for (const entry of data.sendLog ?? []) {
+        const { id: _ignoredEntryId, ...entryData } = entry
+        void _ignoredEntryId
+        await db.sendLog.add({
+          ...entryData,
           productionId: newProductionId,
         })
       }

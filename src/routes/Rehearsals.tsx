@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Button } from '@/components/Form'
 import RequiresProduction from '@/components/RequiresProduction'
+import DistributePanel from '@/features/distribution/DistributePanel'
 import RehearsalReportForm from '@/features/rehearsals/RehearsalReportForm'
 import RehearsalReportList from '@/features/rehearsals/RehearsalReportList'
 import { type RehearsalReport } from '@/lib/db'
@@ -11,6 +12,7 @@ import {
   useRehearsal,
   useRehearsals,
 } from '@/lib/hooks'
+import { rehearsalReportBody } from '@/lib/templates'
 
 export default function RehearsalsRoute() {
   return (
@@ -20,7 +22,11 @@ export default function RehearsalsRoute() {
   )
 }
 
-type Mode = { kind: 'list' } | { kind: 'new' } | { kind: 'edit'; id: number }
+type Mode =
+  | { kind: 'list' }
+  | { kind: 'new' }
+  | { kind: 'edit'; id: number }
+  | { kind: 'distribute'; id: number }
 
 function RehearsalsInner() {
   const production = useCurrentProduction()
@@ -34,6 +40,9 @@ function RehearsalsInner() {
   const editingReport = useRehearsal(
     mode.kind === 'edit' ? mode.id : null,
   )
+  const distributingReport = useRehearsal(
+    mode.kind === 'distribute' ? mode.id : null,
+  )
 
   if (!production?.id) return null
 
@@ -41,19 +50,24 @@ function RehearsalsInner() {
   // happen in the same room).
   const defaultLocation = reports[0]?.location
 
-  async function downloadPdf(report: RehearsalReport): Promise<void> {
-    if (!production) return
+  async function generateBlob(report: RehearsalReport): Promise<Blob> {
+    if (!production) throw new Error('No production')
     const [{ pdf }, { default: RehearsalReportPdf }] = await Promise.all([
       import('@react-pdf/renderer'),
       import('@/features/rehearsals/RehearsalReportPdf'),
     ])
-    const blob = await pdf(
+    return pdf(
       <RehearsalReportPdf
         production={production}
         report={report}
         contacts={allContacts}
       />,
     ).toBlob()
+  }
+
+  async function downloadPdf(report: RehearsalReport): Promise<void> {
+    if (!production) return
+    const blob = await generateBlob(report)
     const url = URL.createObjectURL(blob)
     const link = document.createElement('a')
     link.href = url
@@ -90,8 +104,34 @@ function RehearsalsInner() {
         <RehearsalReportList
           productionId={production.id}
           onEdit={(id) => setMode({ kind: 'edit', id })}
+          onDistribute={(id) => setMode({ kind: 'distribute', id })}
           onDownloadPdf={downloadPdf}
         />
+      )}
+
+      {mode.kind === 'distribute' && distributingReport && production.id !== undefined && (
+        <div className="space-y-3 rounded border border-stone-200 p-4 dark:border-stone-700">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <h3 className="font-serif text-xl font-semibold">
+              Distribute Day {distributingReport.dayNumber} report
+            </h3>
+            <Button variant="ghost" onClick={() => setMode({ kind: 'list' })}>
+              Back to list
+            </Button>
+          </div>
+          <DistributePanel
+            productionId={production.id}
+            artifactLabel={`Rehearsal Report — Day ${distributingReport.dayNumber}`}
+            filename={`${production.name.replace(/[^a-z0-9]/gi, '_')}-rehearsal-day-${distributingReport.dayNumber}.pdf`}
+            defaultSubject={`Rehearsal report — Day ${distributingReport.dayNumber} (${distributingReport.date}) — ${production.name}`}
+            defaultBody={rehearsalReportBody(
+              production.name,
+              distributingReport.dayNumber,
+              distributingReport.date,
+            )}
+            generatePdf={() => generateBlob(distributingReport)}
+          />
+        </div>
       )}
 
       {mode.kind === 'new' && (

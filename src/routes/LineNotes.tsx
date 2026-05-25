@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Button, Field, Select } from '@/components/Form'
 import RequiresProduction from '@/components/RequiresProduction'
+import DistributePanel from '@/features/distribution/DistributePanel'
 import LineNoteForm from '@/features/line-notes/LineNoteForm'
 import LineNoteList from '@/features/line-notes/LineNoteList'
 import { type Contact, type LineNote } from '@/lib/db'
@@ -11,6 +12,7 @@ import {
   useLineNotes,
 } from '@/lib/hooks'
 import { LINE_TYPE_LABELS } from '@/lib/schemas'
+import { lineNotesBody } from '@/lib/templates'
 
 export default function LineNotesRoute() {
   return (
@@ -141,41 +143,76 @@ function LineNotesInner() {
       <LineNoteList notes={notes} cast={cast} onEdit={setEditingId} />
 
       {notes.length > 0 && (
-        <section className="space-y-3 border-t border-stone-200 pt-8 dark:border-stone-800">
-          <h3 className="font-serif text-xl font-semibold">Exports</h3>
-          <div className="flex flex-wrap items-end gap-3">
-            <Field label="Per-actor PDF">
-              <Select
-                value={pdfActorId}
-                onChange={(e) =>
-                  setPdfActorId(e.target.value === '' ? '' : Number(e.target.value))
-                }
-              >
-                <option value="">Pick an actor…</option>
-                {cast
-                  .filter((c) =>
-                    notes.some((n) => n.characterId === c.id),
-                  )
-                  .map((c) => (
-                    <option key={c.id} value={c.id}>
-                      {c.name} (
-                      {notes.filter((n) => n.characterId === c.id).length})
-                    </option>
-                  ))}
-              </Select>
-            </Field>
-            <Button onClick={downloadActorPdf} disabled={pdfActorId === ''}>
-              Download actor PDF
-            </Button>
-            <Button variant="secondary" onClick={downloadAllCsv}>
-              Download all as CSV
-            </Button>
-          </div>
-          <p className="text-xs text-stone-500">
-            Per-actor PDFs only contain that actor's notes (private). The CSV
-            is the SM's archive — never give it to actors as-is.
-          </p>
-        </section>
+        <>
+          <section className="space-y-3 border-t border-stone-200 pt-8 dark:border-stone-800">
+            <h3 className="font-serif text-xl font-semibold">Exports</h3>
+            <div className="flex flex-wrap items-end gap-3">
+              <Field label="Per-actor PDF">
+                <Select
+                  value={pdfActorId}
+                  onChange={(e) =>
+                    setPdfActorId(
+                      e.target.value === '' ? '' : Number(e.target.value),
+                    )
+                  }
+                >
+                  <option value="">Pick an actor…</option>
+                  {cast
+                    .filter((c) => notes.some((n) => n.characterId === c.id))
+                    .map((c) => (
+                      <option key={c.id} value={c.id}>
+                        {c.name} (
+                        {notes.filter((n) => n.characterId === c.id).length})
+                      </option>
+                    ))}
+                </Select>
+              </Field>
+              <Button onClick={downloadActorPdf} disabled={pdfActorId === ''}>
+                Download actor PDF
+              </Button>
+              <Button variant="secondary" onClick={downloadAllCsv}>
+                Download all as CSV
+              </Button>
+            </div>
+            <p className="text-xs text-stone-500">
+              Per-actor PDFs only contain that actor's notes (private). The CSV
+              is the SM's archive — never give it to actors as-is.
+            </p>
+          </section>
+
+          {pdfActorId !== '' &&
+            production.id !== undefined &&
+            (() => {
+              const actor = cast.find((c) => c.id === pdfActorId)
+              if (!actor) return null
+              return (
+                <DistributePanel
+                  productionId={production.id}
+                  artifactLabel={`Line notes — ${actor.name}`}
+                  filename={`${production.name.replace(/[^a-z0-9]/gi, '_')}-line-notes-${actor.name.replace(/[^a-z0-9]/gi, '_')}.pdf`}
+                  defaultSubject={`Line notes — ${actor.name} — ${production.name}`}
+                  defaultBody={lineNotesBody(actor.name)}
+                  generatePdf={async () => {
+                    const actorNotes = notes.filter(
+                      (n) => n.characterId === pdfActorId,
+                    )
+                    const [{ pdf }, { default: LineNotesPdf }] =
+                      await Promise.all([
+                        import('@react-pdf/renderer'),
+                        import('@/features/line-notes/LineNotesPdf'),
+                      ])
+                    return pdf(
+                      <LineNotesPdf
+                        production={production}
+                        actor={actor}
+                        notes={actorNotes}
+                      />,
+                    ).toBlob()
+                  }}
+                />
+              )
+            })()}
+        </>
       )}
     </section>
   )

@@ -2,7 +2,9 @@ import PdfDownloadButton from '@/components/PdfDownloadButton'
 import RequiresProduction from '@/components/RequiresProduction'
 import ContactGroupManager from '@/features/contacts/ContactGroupManager'
 import ContactList from '@/features/contacts/ContactList'
+import DistributePanel from '@/features/distribution/DistributePanel'
 import { useContacts, useCurrentProduction } from '@/lib/hooks'
+import { contactSheetBody } from '@/lib/templates'
 
 export default function ContactsRoute() {
   return (
@@ -46,14 +48,24 @@ function ContactsInner() {
       </section>
 
       {contacts.length > 0 && (
-        <section className="space-y-3 border-t border-stone-200 pt-8 dark:border-stone-800">
-          <h3 className="font-serif text-xl font-semibold">Exports</h3>
-          <PdfDownloadButton
-            label="Download contact sheet (PDF)"
+        <>
+          <section className="space-y-3 border-t border-stone-200 pt-8 dark:border-stone-800">
+            <h3 className="font-serif text-xl font-semibold">Exports</h3>
+            <PdfDownloadButton
+              label="Download contact sheet (PDF)"
+              filename={`${current.name.replace(/[^a-z0-9]/gi, '_')}-contact-sheet.pdf`}
+              generate={generatePdf}
+            />
+          </section>
+          <DistributePanel
+            productionId={current.id}
+            artifactLabel="Contact sheet"
             filename={`${current.name.replace(/[^a-z0-9]/gi, '_')}-contact-sheet.pdf`}
-            generate={generatePdf}
+            defaultSubject={`Contact sheet — ${current.name}`}
+            defaultBody={contactSheetBody(current.name)}
+            generatePdf={generatePdf}
           />
-        </section>
+        </>
       )}
     </section>
   )

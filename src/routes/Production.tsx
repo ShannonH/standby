@@ -2,10 +2,13 @@ import { useState } from 'react'
 import ImportExport from '@/components/ImportExport'
 import PdfDownloadButton from '@/components/PdfDownloadButton'
 import { Button } from '@/components/Form'
+import DistributePanel from '@/features/distribution/DistributePanel'
+import SendLogList from '@/features/distribution/SendLogList'
 import ProductionForm from '@/features/production/ProductionForm'
 import ProductionList from '@/features/production/ProductionList'
 import { db } from '@/lib/db'
 import { useCurrentProduction, useProductions } from '@/lib/hooks'
+import { productionInfoBody } from '@/lib/templates'
 
 export default function ProductionRoute() {
   const productions = useProductions()
@@ -92,15 +95,31 @@ export default function ProductionRoute() {
         </section>
       )}
 
-      {current && !editing && !isCreating && (
-        <section className="space-y-3">
-          <h3 className="font-serif text-xl font-semibold">Exports</h3>
-          <PdfDownloadButton
-            label="Download production info sheet (PDF)"
+      {current && current.id !== undefined && !editing && !isCreating && (
+        <>
+          <section className="space-y-3">
+            <h3 className="font-serif text-xl font-semibold">Exports</h3>
+            <PdfDownloadButton
+              label="Download production info sheet (PDF)"
+              filename={`${current.name.replace(/[^a-z0-9]/gi, '_')}-production-info.pdf`}
+              generate={generatePdf}
+            />
+          </section>
+
+          <DistributePanel
+            productionId={current.id}
+            artifactLabel="Production information sheet"
             filename={`${current.name.replace(/[^a-z0-9]/gi, '_')}-production-info.pdf`}
-            generate={generatePdf}
+            defaultSubject={`Production info — ${current.name}`}
+            defaultBody={productionInfoBody(current.name)}
+            generatePdf={generatePdf}
           />
-        </section>
+
+          <section className="space-y-3 border-t border-stone-200 pt-8 dark:border-stone-800">
+            <h3 className="font-serif text-xl font-semibold">Send log</h3>
+            <SendLogList productionId={current.id} />
+          </section>
+        </>
       )}
 
       <ImportExport productionId={current?.id ?? null} />

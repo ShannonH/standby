@@ -7,6 +7,7 @@ import {
   type Production,
   type Prop,
   type RehearsalReport,
+  type SendLogEntry,
 } from './db'
 import { useAppStore } from './store'
 
@@ -92,6 +93,26 @@ export function useNextDayNumber(
       if (reports.length === 0) return 1
       return Math.max(...reports.map((r) => r.dayNumber)) + 1
     }, [productionId]) ?? 1
+  )
+}
+
+export function useSendLog(
+  productionId: number | null | undefined,
+  limit = 50,
+): SendLogEntry[] {
+  return (
+    useLiveQuery(async () => {
+      if (productionId === null || productionId === undefined) {
+        return [] as SendLogEntry[]
+      }
+      const entries = await db.sendLog
+        .where('productionId')
+        .equals(productionId)
+        .toArray()
+      return entries
+        .sort((a, b) => b.sentAt.localeCompare(a.sentAt))
+        .slice(0, limit)
+    }, [productionId, limit]) ?? []
   )
 }
 

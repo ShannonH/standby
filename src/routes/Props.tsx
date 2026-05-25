@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Button } from '@/components/Form'
 import RequiresProduction from '@/components/RequiresProduction'
+import DistributePanel from '@/features/distribution/DistributePanel'
 import PropForm from '@/features/props/PropForm'
 import PropList from '@/features/props/PropList'
 import { downloadCsv, toCsv } from '@/lib/csv'
@@ -10,6 +11,7 @@ import {
   PROP_SPECIAL_HANDLING_LABELS,
   PROP_STATUS_LABELS,
 } from '@/lib/schemas'
+import { propListBody } from '@/lib/templates'
 
 export default function PropsRoute() {
   return (
@@ -32,15 +34,20 @@ function PropsInner() {
     ? props.find((p) => p.id === editingId)
     : undefined
 
-  async function downloadPdf(): Promise<void> {
-    if (!production) return
+  async function generateBlob(): Promise<Blob> {
+    if (!production) throw new Error('No production')
     const [{ pdf }, { default: PropListPdf }] = await Promise.all([
       import('@react-pdf/renderer'),
       import('@/features/props/PropListPdf'),
     ])
-    const blob = await pdf(
+    return pdf(
       <PropListPdf production={production} props={props} />,
     ).toBlob()
+  }
+
+  async function downloadPdf(): Promise<void> {
+    if (!production) return
+    const blob = await generateBlob()
     const url = URL.createObjectURL(blob)
     const link = document.createElement('a')
     link.href = url
@@ -126,16 +133,26 @@ function PropsInner() {
 
       <PropList productionId={production.id} onEdit={setEditingId} />
 
-      {props.length > 0 && (
-        <section className="space-y-3 border-t border-stone-200 pt-8 dark:border-stone-800">
-          <h3 className="font-serif text-xl font-semibold">Exports</h3>
-          <div className="flex flex-wrap gap-3">
-            <Button onClick={downloadPdf}>Download prop list (PDF)</Button>
-            <Button variant="secondary" onClick={downloadAsCsv}>
-              Download as CSV (for the props master)
-            </Button>
-          </div>
-        </section>
+      {props.length > 0 && production.id !== undefined && (
+        <>
+          <section className="space-y-3 border-t border-stone-200 pt-8 dark:border-stone-800">
+            <h3 className="font-serif text-xl font-semibold">Exports</h3>
+            <div className="flex flex-wrap gap-3">
+              <Button onClick={downloadPdf}>Download prop list (PDF)</Button>
+              <Button variant="secondary" onClick={downloadAsCsv}>
+                Download as CSV (for the props master)
+              </Button>
+            </div>
+          </section>
+          <DistributePanel
+            productionId={production.id}
+            artifactLabel="Prop list"
+            filename={`${production.name.replace(/[^a-z0-9]/gi, '_')}-prop-list.pdf`}
+            defaultSubject={`Prop list — ${production.name}`}
+            defaultBody={propListBody(production.name)}
+            generatePdf={generateBlob}
+          />
+        </>
       )}
     </section>
   )

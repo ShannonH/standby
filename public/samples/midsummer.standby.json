@@ -350,6 +350,112 @@
     {
       "id": 1,
       "productionId": 0,
+      "date": "2026-06-01",
+      "location": "Studio Theatre",
+      "version": 1,
+      "notes": [
+        { "text": "Bring a pencil and your script." },
+        { "text": "Welcome to the company!" }
+      ],
+      "callTimes": [
+        { "contactId": 1, "time": "18:00" },
+        { "contactId": 2, "time": "18:00" },
+        { "contactId": 3, "time": "18:00" },
+        { "contactId": 4, "time": "18:00" },
+        { "contactId": 5, "time": "18:00" },
+        { "contactId": 6, "time": "18:00" },
+        { "contactId": 7, "time": "18:00" },
+        { "contactId": 8, "time": "18:00" },
+        { "contactId": 9, "time": "18:00" },
+        { "contactId": 10, "time": "18:00" },
+        { "contactId": 11, "time": "18:00" },
+        { "contactId": 12, "time": "18:00" }
+      ],
+      "scheduleItems": [
+        {
+          "time": "6:00p",
+          "activity": "Welcome and introductions",
+          "calledMode": "all",
+          "calledContactIds": []
+        },
+        {
+          "time": "6:15p",
+          "activity": "First read-through, Acts 1–3",
+          "calledMode": "all",
+          "calledContactIds": []
+        },
+        {
+          "time": "8:00p",
+          "activity": "Break",
+          "calledMode": "company",
+          "calledContactIds": []
+        },
+        {
+          "time": "8:15p",
+          "activity": "Read-through Acts 4–5",
+          "calledMode": "all",
+          "calledContactIds": []
+        },
+        {
+          "time": "8:45p",
+          "activity": "Design presentations",
+          "description": "- Scenic, costume, lighting walk-throughs",
+          "calledMode": "all",
+          "calledContactIds": []
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "productionId": 0,
+      "date": "2026-06-06",
+      "location": "Studio Theatre",
+      "version": 1,
+      "notes": [
+        { "text": "Lovers off-book for Acts 2 and 3 by Wednesday." }
+      ],
+      "callTimes": [
+        { "contactId": 3, "time": "18:00" },
+        { "contactId": 4, "time": "18:00" },
+        { "contactId": 5, "time": "18:00" },
+        { "contactId": 6, "time": "18:00" }
+      ],
+      "scheduleItems": [
+        {
+          "time": "6:00p",
+          "activity": "Warmup + vocal",
+          "calledMode": "all",
+          "calledContactIds": []
+        },
+        {
+          "time": "6:15p",
+          "activity": "Block 2.1 — lovers in the woods",
+          "calledMode": "specific",
+          "calledContactIds": [3, 4, 5, 6]
+        },
+        {
+          "time": "7:30p",
+          "activity": "Break",
+          "calledMode": "company",
+          "calledContactIds": []
+        },
+        {
+          "time": "7:45p",
+          "activity": "Block 3.2 — confusion of the lovers",
+          "calledMode": "specific",
+          "calledContactIds": [3, 4, 5, 6]
+        },
+        {
+          "time": "9:00p",
+          "activity": "Run the act with blocking",
+          "calledMode": "specific",
+          "calledContactIds": [3, 4, 5, 6]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "productionId": 0,
       "date": "2026-06-13",
       "location": "Studio Theatre",
       "version": 1,
@@ -375,8 +481,8 @@
         {
           "time": "6:00p",
           "activity": "Warmups + vocal",
-          "calledMode": "all",
-          "calledContactIds": []
+          "calledMode": "specific",
+          "calledContactIds": [1, 2, 7]
         },
         {
           "time": "6:30p",
@@ -397,6 +503,148 @@
           "description": "- Pyramus and Thisbe play-within-a-play",
           "calledMode": "specific",
           "calledContactIds": [1, 2, 8, 9, 10, 11, 12]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "productionId": 0,
+      "date": "2026-06-22",
+      "location": "Cowan Hall — Mainstage",
+      "version": 1,
+      "notes": [
+        { "text": "Designer run today — designers in house. Please be on time." },
+        { "text": "Costume calls at the half — meet Sofia at the dressing rooms." }
+      ],
+      "callTimes": [
+        { "contactId": 1, "time": "13:00" },
+        { "contactId": 2, "time": "13:00" },
+        { "contactId": 3, "time": "13:00" },
+        { "contactId": 4, "time": "13:00" },
+        { "contactId": 5, "time": "13:00" },
+        { "contactId": 6, "time": "13:00" },
+        { "contactId": 7, "time": "13:00" },
+        { "contactId": 8, "time": "13:00" },
+        { "contactId": 9, "time": "13:00" },
+        { "contactId": 10, "time": "13:00" },
+        { "contactId": 11, "time": "13:00" },
+        { "contactId": 12, "time": "13:00" }
+      ],
+      "scheduleItems": [
+        {
+          "time": "1:00p",
+          "activity": "Warmup + vocal",
+          "calledMode": "all",
+          "calledContactIds": []
+        },
+        {
+          "time": "1:30p",
+          "activity": "Run Acts 1 and 2",
+          "calledMode": "all",
+          "calledContactIds": []
+        },
+        {
+          "time": "3:30p",
+          "activity": "Break",
+          "calledMode": "company",
+          "calledContactIds": []
+        },
+        {
+          "time": "3:45p",
+          "activity": "Run Acts 3 and 4",
+          "calledMode": "all",
+          "calledContactIds": []
+        },
+        {
+          "time": "5:45p",
+          "activity": "Dinner break",
+          "calledMode": "company",
+          "calledContactIds": []
+        },
+        {
+          "time": "7:00p",
+          "activity": "Run Act 5 + bows",
+          "calledMode": "all",
+          "calledContactIds": []
+        },
+        {
+          "time": "8:00p",
+          "activity": "Designer notes session",
+          "description": "- Sit out front with the design team",
+          "calledMode": "all",
+          "calledContactIds": []
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "productionId": 0,
+      "date": "2026-07-05",
+      "location": "Cowan Hall — Mainstage",
+      "version": 2,
+      "notes": [
+        { "text": "v2: Photo call added after the dress run." },
+        { "text": "Costumes on by 6:30 PM. Hair and makeup, please come ready." },
+        { "text": "Tomorrow is first preview — get rest tonight." }
+      ],
+      "callTimes": [
+        { "contactId": 1, "time": "17:30" },
+        { "contactId": 2, "time": "17:30" },
+        { "contactId": 3, "time": "17:30" },
+        { "contactId": 4, "time": "17:30" },
+        { "contactId": 5, "time": "17:30" },
+        { "contactId": 6, "time": "17:30" },
+        { "contactId": 7, "time": "17:30" },
+        { "contactId": 8, "time": "18:00" },
+        { "contactId": 9, "time": "18:00" },
+        { "contactId": 10, "time": "18:00" },
+        { "contactId": 11, "time": "18:00" },
+        { "contactId": 12, "time": "18:00" }
+      ],
+      "scheduleItems": [
+        {
+          "time": "5:30p",
+          "activity": "Principals' hair and makeup",
+          "calledMode": "specific",
+          "calledContactIds": [1, 2, 3, 4, 5, 6, 7]
+        },
+        {
+          "time": "6:00p",
+          "activity": "Mechanicals arrive + hair/makeup",
+          "calledMode": "specific",
+          "calledContactIds": [8, 9, 10, 11, 12]
+        },
+        {
+          "time": "6:30p",
+          "activity": "Costumes on, fight call",
+          "calledMode": "all",
+          "calledContactIds": []
+        },
+        {
+          "time": "7:00p",
+          "activity": "Vocal + body warmup",
+          "calledMode": "all",
+          "calledContactIds": []
+        },
+        {
+          "time": "7:30p",
+          "activity": "Final dress run",
+          "description": "- Full show, no stopping. Notes after.",
+          "calledMode": "all",
+          "calledContactIds": []
+        },
+        {
+          "time": "10:00p",
+          "activity": "Notes",
+          "calledMode": "all",
+          "calledContactIds": []
+        },
+        {
+          "time": "10:30p",
+          "activity": "Photo call",
+          "description": "- Marketing shots and headshots in costume",
+          "calledMode": "all",
+          "calledContactIds": []
         }
       ]
     }

@@ -115,6 +115,7 @@ describe('io: export/import round-trip', () => {
         lineNotes: [],
         props: [],
         sendLog: [],
+        dailyCalls: [],
       }),
     ).rejects.toThrow(/Unsupported show export version/)
   })

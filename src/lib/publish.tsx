@@ -1,11 +1,13 @@
 import {
   db,
   type Contact,
+  type DailyCall,
   type Production,
   type Prop,
   type RehearsalReport,
 } from './db'
 import ContactSheetPdf from '@/features/contacts/ContactSheetPdf'
+import DailyCallPdf from '@/features/calls/DailyCallPdf'
 import ProductionInfoPdf from '@/features/production/ProductionInfoPdf'
 import PropListPdf from '@/features/props/PropListPdf'
 import RehearsalReportPdf from '@/features/rehearsals/RehearsalReportPdf'
@@ -146,6 +148,11 @@ function reportFilename(report: RehearsalReport): string {
   return `Day-${padded}-${report.date}.pdf`
 }
 
+function callFilename(call: DailyCall): string {
+  const v = call.version > 1 ? `-v${call.version}` : ''
+  return `Call-${call.date}${v}.pdf`
+}
+
 // ─── Single-artifact publishers ───────────────────────────────────────────
 
 export async function publishRehearsalReport(
@@ -209,6 +216,24 @@ export async function publishProductionInfo(
   await writePdfBlob(handle, 'Production Info.pdf', blob)
 }
 
+export async function publishDailyCall(
+  handle: FileSystemDirectoryHandle,
+  production: Production,
+  call: DailyCall,
+  contacts: Contact[],
+): Promise<void> {
+  const callsDir = await getOrCreateSubdir(handle, 'Daily Calls')
+  const blob = await generatePdfBlob(
+    <DailyCallPdf
+      production={production}
+      call={call}
+      contacts={contacts}
+      paperSize={currentPaperSize()}
+    />,
+  )
+  await writePdfBlob(callsDir, callFilename(call), blob)
+}
+
 // ─── "If a folder is connected, write to it" convenience wrappers ────────
 //
 // Call these from form submit / delete handlers — they no-op silently when
@@ -265,10 +290,26 @@ export async function maybePublishProductionInfo(
   await publishProductionInfo(handle, production)
 }
 
+export async function maybePublishDailyCall(
+  productionId: number,
+  callId: number,
+): Promise<void> {
+  const handle = await getStoredPublishDirectory(productionId)
+  if (!handle) return
+  const [production, call, contacts] = await Promise.all([
+    db.productions.get(productionId),
+    db.dailyCalls.get(callId),
+    db.contacts.where('productionId').equals(productionId).toArray(),
+  ])
+  if (!production || !call) return
+  await publishDailyCall(handle, production, call, contacts)
+}
+
 // ─── Full republish ───────────────────────────────────────────────────────
 
 export interface PublishSummary {
   reports: number
+  dailyCalls: number
   contactSheet: boolean
   propList: boolean
   productionInfo: boolean
@@ -284,11 +325,12 @@ export async function publishAll(
   if (!handle) {
     throw new Error('No publish folder is connected for this production.')
   }
-  const [production, contacts, props, reports] = await Promise.all([
+  const [production, contacts, props, reports, dailyCalls] = await Promise.all([
     db.productions.get(productionId),
     db.contacts.where('productionId').equals(productionId).toArray(),
     db.props.where('productionId').equals(productionId).toArray(),
     db.rehearsals.where('productionId').equals(productionId).toArray(),
+    db.dailyCalls.where('productionId').equals(productionId).toArray(),
   ])
   if (!production) {
     throw new Error('Production not found.')
@@ -296,6 +338,7 @@ export async function publishAll(
 
   const summary: PublishSummary = {
     reports: 0,
+    dailyCalls: 0,
     contactSheet: false,
     propList: false,
     productionInfo: false,
@@ -342,6 +385,18 @@ export async function publishAll(
     } catch (err) {
       summary.errors.push(
         `Day ${report.dayNumber}: ${err instanceof Error ? err.message : String(err)}`,
+      )
+    }
+    await yieldToUi()
+  }
+
+  for (const call of dailyCalls) {
+    try {
+      await publishDailyCall(handle, production, call, contacts)
+      summary.dailyCalls += 1
+    } catch (err) {
+      summary.errors.push(
+        `Daily Call ${call.date}: ${err instanceof Error ? err.message : String(err)}`,
       )
     }
     await yieldToUi()

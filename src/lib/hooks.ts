@@ -3,6 +3,7 @@ import {
   db,
   type Contact,
   type ContactGroup,
+  type DailyCall,
   type LineNote,
   type Production,
   type Prop,
@@ -93,6 +94,56 @@ export function useNextDayNumber(
       if (reports.length === 0) return 1
       return Math.max(...reports.map((r) => r.dayNumber)) + 1
     }, [productionId]) ?? 1
+  )
+}
+
+export function useDailyCalls(
+  productionId: number | null | undefined,
+): DailyCall[] {
+  return (
+    useLiveQuery(async () => {
+      if (productionId === null || productionId === undefined) {
+        return [] as DailyCall[]
+      }
+      const calls = await db.dailyCalls
+        .where('productionId')
+        .equals(productionId)
+        .toArray()
+      // Most-recent date first; within same date, highest version first.
+      return calls.sort(
+        (a, b) =>
+          b.date.localeCompare(a.date) || b.version - a.version,
+      )
+    }, [productionId]) ?? []
+  )
+}
+
+export function useDailyCall(
+  callId: number | null | undefined,
+): DailyCall | undefined {
+  return useLiveQuery(async () => {
+    if (callId === null || callId === undefined) return undefined
+    return db.dailyCalls.get(callId)
+  }, [callId])
+}
+
+/** Next version number to use for a given date, or 1 if none exists yet. */
+export function useNextCallVersion(
+  productionId: number | null | undefined,
+  date: string,
+): number {
+  return (
+    useLiveQuery(async () => {
+      if (productionId === null || productionId === undefined) return 1
+      if (!date) return 1
+      const calls = await db.dailyCalls
+        .where('productionId')
+        .equals(productionId)
+        .toArray()
+      const sameDate = calls.filter((c) => c.date === date)
+      if (sameDate.length === 0) return 1
+      return Math.max(...sameDate.map((c) => c.version)) + 1
+    }, [productionId, date]) ?? 1
   )
 }
 

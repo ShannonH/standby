@@ -2,6 +2,7 @@ import {
   db,
   type Contact,
   type ContactGroup,
+  type DailyCall,
   type LineNote,
   type Production,
   type Prop,
@@ -19,8 +20,9 @@ import {
  * v3: adds lineNotes
  * v4: adds props
  * v5: adds sendLog
+ * v6: adds dailyCalls
  */
-export const SHOW_EXPORT_VERSION = 5
+export const SHOW_EXPORT_VERSION = 6
 
 export interface ShowExport {
   schemaVersion: number
@@ -32,6 +34,7 @@ export interface ShowExport {
   lineNotes: LineNote[]
   props: Prop[]
   sendLog: SendLogEntry[]
+  dailyCalls: DailyCall[]
 }
 
 /** Build a portable JSON snapshot of a single production and its entities. */
@@ -62,6 +65,10 @@ export async function exportShow(productionId: number): Promise<ShowExport> {
     .where('productionId')
     .equals(productionId)
     .toArray()
+  const dailyCalls = await db.dailyCalls
+    .where('productionId')
+    .equals(productionId)
+    .toArray()
   return {
     schemaVersion: SHOW_EXPORT_VERSION,
     exportedAt: new Date().toISOString(),
@@ -72,6 +79,7 @@ export async function exportShow(productionId: number): Promise<ShowExport> {
     lineNotes,
     props,
     sendLog,
+    dailyCalls,
   }
 }
 
@@ -98,6 +106,7 @@ export async function importShow(data: ShowExport): Promise<number> {
       db.lineNotes,
       db.props,
       db.sendLog,
+      db.dailyCalls,
     ],
     async () => {
       const now = new Date().toISOString()
@@ -178,6 +187,29 @@ export async function importShow(data: ShowExport): Promise<number> {
         await db.sendLog.add({
           ...entryData,
           productionId: newProductionId,
+        })
+      }
+
+      // Daily calls added in v6. They reference contacts by id in callTimes
+      // and scheduleItems.calledContactIds — both remapped via the
+      // contactIdMap built earlier.
+      for (const call of data.dailyCalls ?? []) {
+        const { id: _ignoredCallId, ...callData } = call
+        void _ignoredCallId
+        const remappedCallTimes = callData.callTimes.map((ct) => ({
+          ...ct,
+          contactId: contactIdMap.get(ct.contactId) ?? ct.contactId,
+        }))
+        const remappedScheduleItems = callData.scheduleItems.map((si) => ({
+          ...si,
+          calledContactIds: si.calledContactIds
+            .map((id) => contactIdMap.get(id) ?? id),
+        }))
+        await db.dailyCalls.add({
+          ...callData,
+          productionId: newProductionId,
+          callTimes: remappedCallTimes,
+          scheduleItems: remappedScheduleItems,
         })
       }
 

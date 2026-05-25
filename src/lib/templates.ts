@@ -65,6 +65,19 @@ Production information for ${productionName}. Key dates and venue details includ
 `
 }
 
+export function dailyCallBody(
+  productionName: string,
+  dateLabel: string,
+  smName?: string,
+): string {
+  return `Hi all —
+
+Tomorrow's daily call for ${productionName} (${dateLabel}). Your call time is below; please come ready as noted.
+
+Reach out if you spot a conflict.${signoff(smName)}
+`
+}
+
 export function lineNotesBody(actorName: string, smName?: string): string {
   return `Hi ${actorName} —
 

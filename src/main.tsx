@@ -6,6 +6,7 @@ import Today from './routes/Today'
 import Production from './routes/Production'
 import Contacts from './routes/Contacts'
 import Rehearsals from './routes/Rehearsals'
+import DailyCall from './routes/DailyCall'
 import LineNotes from './routes/LineNotes'
 import Props from './routes/Props'
 import Settings from './routes/Settings'
@@ -21,6 +22,7 @@ const router = createBrowserRouter(
         { path: 'production', element: <Production /> },
         { path: 'contacts', element: <Contacts /> },
         { path: 'rehearsals', element: <Rehearsals /> },
+        { path: 'daily-call', element: <DailyCall /> },
         { path: 'line-notes', element: <LineNotes /> },
         { path: 'props', element: <Props /> },
         { path: 'settings', element: <Settings /> },

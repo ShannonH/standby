@@ -11,6 +11,7 @@ const nav: readonly NavItem[] = [
   { to: '/', label: 'Today', end: true },
   { to: '/production', label: 'Production' },
   { to: '/contacts', label: 'Contacts' },
+  { to: '/daily-call', label: 'Daily call' },
   { to: '/rehearsals', label: 'Rehearsals' },
   { to: '/line-notes', label: 'Line notes' },
   { to: '/props', label: 'Props' },

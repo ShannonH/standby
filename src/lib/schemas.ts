@@ -242,6 +242,53 @@ export const PROP_SPECIAL_HANDLING_VALUES = [
   'liquid',
 ] as const
 
+// ─── Daily call ────────────────────────────────────────────────────────────
+
+export const scheduleCalledModeSchema = z.enum([
+  'all',
+  'company',
+  'specific',
+  'custom',
+])
+
+export type ScheduleCalledMode = z.infer<typeof scheduleCalledModeSchema>
+
+export const SCHEDULE_CALLED_MODE_LABELS: Record<ScheduleCalledMode, string> = {
+  all: 'All called',
+  company: 'Full company',
+  specific: 'Specific cast',
+  custom: 'Custom text',
+}
+
+export const dailyCallNoteSchema = z.object({
+  text: z.string(),
+})
+
+export const dailyCallTimeSchema = z.object({
+  contactId: z.number().int().positive(),
+  time: z.string(),
+})
+
+export const scheduleItemSchema = z.object({
+  time: z.string().min(1, 'Time is required'),
+  activity: z.string().min(1, 'Activity is required'),
+  description: z.string().optional(),
+  calledMode: scheduleCalledModeSchema,
+  calledContactIds: z.array(z.number().int().positive()),
+  customLabel: z.string().optional(),
+})
+
+export const dailyCallInputSchema = z.object({
+  date: z.string().min(1, 'Date is required'),
+  location: z.string().min(1, 'Location is required'),
+  version: z.coerce.number().int().min(1, 'Version must be at least 1'),
+  notes: z.array(dailyCallNoteSchema),
+  callTimes: z.array(dailyCallTimeSchema),
+  scheduleItems: z.array(scheduleItemSchema),
+})
+
+export type DailyCallInput = z.infer<typeof dailyCallInputSchema>
+
 /**
  * Form-shaped schema for the prop editor. scenes/characters use a comma-
  * separated string for ergonomic typing; specialHandling expands to one

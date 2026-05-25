@@ -1,5 +1,6 @@
 import type {
   Contact,
+  DailyCall,
   LineNote,
   Production,
   Prop,
@@ -232,6 +233,71 @@ export function renderProductionInfoText(production: Production): string {
     }
   }
 
+  return lines.join('\n').trimEnd()
+}
+
+function abbreviateName(name: string): string {
+  const parts = name.trim().split(/\s+/)
+  if (parts.length < 2) return name
+  const first = parts[0]!
+  const last = parts[parts.length - 1]!
+  return `${first[0]}. ${last}`
+}
+
+/** Plain-text daily call. Mirrors the PDF — header, notes, call times,
+ *  schedule with abbreviated cast lists. */
+export function renderDailyCallText(
+  production: Production,
+  call: DailyCall,
+  contacts: readonly Contact[],
+): string {
+  const nameOf = (id: number) =>
+    contacts.find((c) => c.id === id)?.name ?? '(removed)'
+
+  const lines: string[] = []
+  lines.push(production.name.toUpperCase())
+  lines.push(`DAILY CALL${call.version > 1 ? ` (v${call.version})` : ''}`)
+  lines.push(`${formatLongDate(call.date)}, ${call.location}`)
+  lines.push('')
+
+  if (call.notes.length > 0) {
+    lines.push('NOTES')
+    call.notes.forEach((n, i) => {
+      lines.push(`  ${i + 1}. ${n.text}`)
+    })
+    lines.push('')
+  }
+
+  if (call.callTimes.length > 0) {
+    lines.push('CALL TIME')
+    for (const ct of call.callTimes) {
+      lines.push(`  ${ct.time}  ${nameOf(ct.contactId)}`)
+    }
+    lines.push('')
+  }
+
+  if (call.scheduleItems.length > 0) {
+    lines.push('REHEARSAL SCHEDULE')
+    for (const item of call.scheduleItems) {
+      lines.push(`  ${item.time}  ${item.activity}`)
+      if (item.description) lines.push(`         ${item.description}`)
+      let calledLine: string | null = null
+      if (item.calledMode === 'all') calledLine = 'All called'
+      else if (item.calledMode === 'company') calledLine = 'Full company'
+      else if (item.calledMode === 'custom') {
+        calledLine = item.customLabel?.trim() || null
+      } else if (item.calledMode === 'specific') {
+        const named = item.calledContactIds
+          .map((id) => abbreviateName(nameOf(id)))
+          .filter((n) => n !== '(removed)')
+        calledLine = named.length > 0 ? named.join(', ') : null
+      }
+      if (calledLine) lines.push(`         ${calledLine}`)
+      lines.push('')
+    }
+  }
+
+  lines.push('— Subject to change.')
   return lines.join('\n').trimEnd()
 }
 

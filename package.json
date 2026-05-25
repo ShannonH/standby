@@ -26,6 +26,7 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
+    "@fontsource/allura": "^5.2.8",
     "@fontsource/cormorant-garamond": "^5.2.11",
     "@fontsource/eb-garamond": "^5.2.7",
     "@fontsource/inter": "^5.2.8",

@@ -167,6 +167,49 @@ export interface SendLogEntry {
   pdfFilename?: string
 }
 
+// ─── Daily call ────────────────────────────────────────────────────────────
+//
+// The daily call is the *next-day* schedule the SM sends out the night before
+// rehearsal: who's called at what time, plus an ordered schedule of activities
+// with the cast called for each one. Distinct from the rehearsal report
+// (which is the *after-the-fact* summary of what actually happened).
+
+export interface DailyCallTime {
+  contactId: number
+  time: string // "10:00" — staggered per cast member when needed
+}
+
+export interface DailyCallNote {
+  text: string
+}
+
+/** What appears under each schedule item in red. Modes:
+ *   - 'all'      → renders "All called"
+ *   - 'company'  → renders "Full company" (typical for meal break)
+ *   - 'specific' → renders the abbreviated names of contactIds
+ *   - 'custom'   → renders the customLabel string verbatim */
+export type ScheduleCalledMode = 'all' | 'company' | 'specific' | 'custom'
+
+export interface DailyCallScheduleItem {
+  time: string // "10:00a", "2:15p" — kept as freeform string for "10:15a" style
+  activity: string
+  description?: string // optional secondary line, indented
+  calledMode: ScheduleCalledMode
+  calledContactIds: number[] // populated when calledMode === 'specific'
+  customLabel?: string // populated when calledMode === 'custom'
+}
+
+export interface DailyCall {
+  id?: number
+  productionId: number
+  date: string // "2026-06-15"
+  location: string
+  version: number // 1, 2, 3 for revisions of the same day's call
+  notes: DailyCallNote[]
+  callTimes: DailyCallTime[]
+  scheduleItems: DailyCallScheduleItem[]
+}
+
 /** Key-value settings table — currently holds the auto-backup directory
  *  handle (a FileSystemDirectoryHandle is structured-clonable, so it
  *  persists across reloads). Keep keys namespaced like 'autoBackup:dir'. */
@@ -184,6 +227,7 @@ class StandbyDB extends Dexie {
   rehearsals!: EntityTable<RehearsalReport, 'id'>
   sendLog!: EntityTable<SendLogEntry, 'id'>
   settings!: EntityTable<SettingsEntry, 'key'>
+  dailyCalls!: EntityTable<DailyCall, 'id'>
 
   constructor() {
     super('standby')
@@ -196,8 +240,6 @@ class StandbyDB extends Dexie {
       rehearsals: '++id, productionId, date, dayNumber',
       sendLog: '++id, productionId, sentAt, artifact',
     })
-    // v2: adds the settings table. Existing data (productions, contacts, etc.)
-    // is untouched — Dexie's incremental schema upgrade handles the rest.
     this.version(2).stores({
       productions: '++id, name',
       contacts: '++id, productionId, category, name',
@@ -207,6 +249,18 @@ class StandbyDB extends Dexie {
       rehearsals: '++id, productionId, date, dayNumber',
       sendLog: '++id, productionId, sentAt, artifact',
       settings: '&key',
+    })
+    // v3: adds dailyCalls.
+    this.version(3).stores({
+      productions: '++id, name',
+      contacts: '++id, productionId, category, name',
+      contactGroups: '++id, productionId, name',
+      props: '++id, productionId, name, status',
+      lineNotes: '++id, productionId, rehearsalDate, characterId, delivered',
+      rehearsals: '++id, productionId, date, dayNumber',
+      sendLog: '++id, productionId, sentAt, artifact',
+      settings: '&key',
+      dailyCalls: '++id, productionId, date, version',
     })
   }
 }
@@ -227,6 +281,7 @@ export async function deleteProductionCascade(productionId: number): Promise<voi
       db.lineNotes,
       db.rehearsals,
       db.sendLog,
+      db.dailyCalls,
     ],
     async () => {
       await db.contacts.where('productionId').equals(productionId).delete()
@@ -235,6 +290,7 @@ export async function deleteProductionCascade(productionId: number): Promise<voi
       await db.lineNotes.where('productionId').equals(productionId).delete()
       await db.rehearsals.where('productionId').equals(productionId).delete()
       await db.sendLog.where('productionId').equals(productionId).delete()
+      await db.dailyCalls.where('productionId').equals(productionId).delete()
       await db.productions.delete(productionId)
     },
   )

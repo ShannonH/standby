@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 5,
+  "schemaVersion": 6,
   "exportedAt": "2026-05-25T12:00:00.000Z",
   "production": {
     "name": "A Midsummer Night's Dream",
@@ -344,6 +344,61 @@
       "recipientGroup": "Creative Team",
       "recipientCount": 5,
       "pdfFilename": "A_Midsummer_Night_s_Dream-rehearsal-day-10.pdf"
+    }
+  ],
+  "dailyCalls": [
+    {
+      "id": 1,
+      "productionId": 0,
+      "date": "2026-06-13",
+      "location": "Studio Theatre",
+      "version": 1,
+      "notes": [
+        { "text": "Please come knowing your Act 5 lines off-book." },
+        { "text": "Water bottles are on the SR props table — refill as needed." }
+      ],
+      "callTimes": [
+        { "contactId": 1, "time": "18:00" },
+        { "contactId": 2, "time": "18:00" },
+        { "contactId": 3, "time": "18:30" },
+        { "contactId": 4, "time": "18:30" },
+        { "contactId": 5, "time": "18:30" },
+        { "contactId": 6, "time": "18:30" },
+        { "contactId": 7, "time": "18:00" },
+        { "contactId": 8, "time": "19:00" },
+        { "contactId": 9, "time": "19:00" },
+        { "contactId": 10, "time": "19:00" },
+        { "contactId": 11, "time": "19:00" },
+        { "contactId": 12, "time": "19:00" }
+      ],
+      "scheduleItems": [
+        {
+          "time": "6:00p",
+          "activity": "Warmups + vocal",
+          "calledMode": "all",
+          "calledContactIds": []
+        },
+        {
+          "time": "6:30p",
+          "activity": "Block 3.2 — confusion of the lovers",
+          "description": "Cleanup pass with revised choreo",
+          "calledMode": "specific",
+          "calledContactIds": [3, 4, 5, 6, 7]
+        },
+        {
+          "time": "7:30p",
+          "activity": "Dinner break",
+          "calledMode": "company",
+          "calledContactIds": []
+        },
+        {
+          "time": "8:00p",
+          "activity": "Run Act 5 with the mechanicals",
+          "description": "- Pyramus and Thisbe play-within-a-play",
+          "calledMode": "specific",
+          "calledContactIds": [1, 2, 8, 9, 10, 11, 12]
+        }
+      ]
     }
   ]
 }

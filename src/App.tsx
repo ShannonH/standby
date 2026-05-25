@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import { NavLink, Outlet } from 'react-router-dom'
+import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import AutoBackupSync from '@/components/AutoBackupSync'
+import { useCurrentProduction } from '@/lib/hooks'
 import { requestPersistentStorage } from '@/lib/persistent-storage'
 import { useAppStore } from '@/lib/store'
 
@@ -56,6 +57,8 @@ export default function App() {
   const [tagline] = useState(pickTagline)
   const appTheme = useAppStore((s) => s.settings.theme)
   const fontSize = useAppStore((s) => s.settings.fontSize)
+  const location = useLocation()
+  const production = useCurrentProduction()
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', theme === 'dark')
@@ -76,6 +79,32 @@ export default function App() {
   useEffect(() => {
     void requestPersistentStorage()
   }, [])
+
+  // Tab title reflects the current route and production so multiple tabs of
+  // Standby (different shows, different sections) are distinguishable. The
+  // Today route is implicit — no need to spell out "Today · …".
+  //
+  // Examples:
+  //   On /                with My Way    → "My Way — Standby"
+  //   On /rehearsals      with My Way    → "Rehearsals · My Way — Standby"
+  //   On /settings        no production  → "Settings — Standby"
+  //   On /                no production  → "Standby"
+  useEffect(() => {
+    const matched = nav.find((item) =>
+      item.end
+        ? location.pathname === item.to
+        : location.pathname.startsWith(item.to),
+    )
+    const routeLabel = matched?.label
+    const productionName = production?.name
+
+    const parts: string[] = []
+    if (routeLabel && routeLabel !== 'Today') parts.push(routeLabel)
+    if (productionName) parts.push(productionName)
+
+    document.title =
+      parts.length === 0 ? 'Standby' : `${parts.join(' · ')} — Standby`
+  }, [location.pathname, production?.name])
 
   return (
     <div className="flex h-full">

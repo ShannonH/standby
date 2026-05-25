@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import AutoBackupPanel from '@/components/AutoBackupPanel'
 import ImportExport from '@/components/ImportExport'
 import PdfDownloadButton from '@/components/PdfDownloadButton'
 import { Button } from '@/components/Form'
@@ -125,6 +126,7 @@ export default function ProductionRoute() {
         </>
       )}
 
+      <AutoBackupPanel productionId={current?.id ?? null} />
       <ImportExport productionId={current?.id ?? null} />
     </section>
   )

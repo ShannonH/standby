@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
+import AutoBackupSync from '@/components/AutoBackupSync'
+import { requestPersistentStorage } from '@/lib/persistent-storage'
 
 type NavItem = { to: string; label: string; end?: boolean }
 
@@ -29,6 +31,14 @@ export default function App() {
     document.documentElement.classList.toggle('dark', theme === 'dark')
     localStorage.setItem('standby:theme', theme)
   }, [theme])
+
+  // Ask the browser to mark our storage as persistent on first load.
+  // Browsers grant silently if Standby is installed as a PWA or heavily
+  // interacted with; otherwise they may prompt or decline. The user can
+  // re-request from the Auto-backup panel on the Production page.
+  useEffect(() => {
+    void requestPersistentStorage()
+  }, [])
 
   return (
     <div className="flex h-full">
@@ -68,6 +78,7 @@ export default function App() {
       <main className="flex-1 overflow-y-auto p-6 sm:p-10">
         <Outlet />
       </main>
+      <AutoBackupSync />
     </div>
   )
 }

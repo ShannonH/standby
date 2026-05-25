@@ -167,6 +167,14 @@ export interface SendLogEntry {
   pdfFilename?: string
 }
 
+/** Key-value settings table — currently holds the auto-backup directory
+ *  handle (a FileSystemDirectoryHandle is structured-clonable, so it
+ *  persists across reloads). Keep keys namespaced like 'autoBackup:dir'. */
+export interface SettingsEntry {
+  key: string
+  value: unknown
+}
+
 class StandbyDB extends Dexie {
   productions!: EntityTable<Production, 'id'>
   contacts!: EntityTable<Contact, 'id'>
@@ -175,6 +183,7 @@ class StandbyDB extends Dexie {
   lineNotes!: EntityTable<LineNote, 'id'>
   rehearsals!: EntityTable<RehearsalReport, 'id'>
   sendLog!: EntityTable<SendLogEntry, 'id'>
+  settings!: EntityTable<SettingsEntry, 'key'>
 
   constructor() {
     super('standby')
@@ -186,6 +195,18 @@ class StandbyDB extends Dexie {
       lineNotes: '++id, productionId, rehearsalDate, characterId, delivered',
       rehearsals: '++id, productionId, date, dayNumber',
       sendLog: '++id, productionId, sentAt, artifact',
+    })
+    // v2: adds the settings table. Existing data (productions, contacts, etc.)
+    // is untouched — Dexie's incremental schema upgrade handles the rest.
+    this.version(2).stores({
+      productions: '++id, name',
+      contacts: '++id, productionId, category, name',
+      contactGroups: '++id, productionId, name',
+      props: '++id, productionId, name, status',
+      lineNotes: '++id, productionId, rehearsalDate, characterId, delivered',
+      rehearsals: '++id, productionId, date, dayNumber',
+      sendLog: '++id, productionId, sentAt, artifact',
+      settings: '&key',
     })
   }
 }

@@ -13,6 +13,7 @@ import {
   type NoteDeptKey,
   type RehearsalReport,
 } from '@/lib/db'
+import { maybePublishRehearsalReport } from '@/lib/publish'
 import {
   NOTE_DEPT_LABELS,
   rehearsalReportInputSchema,
@@ -92,11 +93,16 @@ export default function RehearsalReportForm({
       timeBlocks: data.timeBlocks,
       notes: data.notes,
     }
+    let reportId: number
     if (report?.id !== undefined) {
       await db.rehearsals.update(report.id, payload)
+      reportId = report.id
     } else {
-      await db.rehearsals.add(payload as RehearsalReport)
+      reportId = (await db.rehearsals.add(
+        payload as RehearsalReport,
+      )) as number
     }
+    void maybePublishRehearsalReport(productionId, reportId)
     onSaved?.()
   }
 

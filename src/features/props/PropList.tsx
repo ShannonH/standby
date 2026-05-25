@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { Button, Field, Input, Select } from '@/components/Form'
 import { db, type Prop } from '@/lib/db'
 import { useProps } from '@/lib/hooks'
+import { maybePublishPropList } from '@/lib/publish'
 import {
   PROP_SOURCE_LABELS,
   PROP_SPECIAL_HANDLING_LABELS,
@@ -175,6 +176,7 @@ function PropRow({
               if (prop.id === undefined) return
               if (!window.confirm(`Delete "${prop.name}"?`)) return
               await db.props.delete(prop.id)
+              void maybePublishPropList(prop.productionId)
             }}
           >
             Delete

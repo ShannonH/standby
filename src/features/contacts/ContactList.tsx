@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { Button, Input } from '@/components/Form'
 import { db, type Contact } from '@/lib/db'
 import { useContacts } from '@/lib/hooks'
+import { maybePublishContactSheet } from '@/lib/publish'
 import ContactForm from './ContactForm'
 
 const CATEGORY_LABELS: Record<Contact['category'], string> = {
@@ -151,6 +152,7 @@ export default function ContactList({ productionId }: Props) {
                             )
                             if (!confirmed) return
                             await db.contacts.delete(c.id)
+                            void maybePublishContactSheet(productionId)
                           }}
                         >
                           Delete

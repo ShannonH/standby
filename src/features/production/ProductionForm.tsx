@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button, Checkbox, Field, Input, Select } from '@/components/Form'
 import { db, type Production } from '@/lib/db'
+import { maybePublishProductionInfo } from '@/lib/publish'
 import { productionInputSchema, type ProductionInput } from '@/lib/schemas'
 import { useAppStore } from '@/lib/store'
 
@@ -49,6 +50,7 @@ export default function ProductionForm({ production, onSaved, onCancel }: Props)
         ...data,
         updatedAt: now,
       })
+      void maybePublishProductionInfo(production.id)
       onSaved?.(production.id)
     } else {
       const newId = (await db.productions.add({
@@ -57,6 +59,7 @@ export default function ProductionForm({ production, onSaved, onCancel }: Props)
         updatedAt: now,
       } as Production)) as number
       setCurrentProductionId(newId)
+      void maybePublishProductionInfo(newId)
       onSaved?.(newId)
     }
   }

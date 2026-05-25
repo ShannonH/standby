@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button, Checkbox, Field, Input, Select, Textarea } from '@/components/Form'
 import { db, type Prop } from '@/lib/db'
+import { maybePublishPropList } from '@/lib/publish'
 import {
   PROP_SOURCE_LABELS,
   PROP_SPECIAL_HANDLING_LABELS,
@@ -98,6 +99,7 @@ export default function PropForm({
     } else {
       await db.props.add(payload as Prop)
     }
+    void maybePublishPropList(productionId)
     onSaved?.()
   }
 

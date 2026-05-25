@@ -2,6 +2,7 @@ import { useState } from 'react'
 import AutoBackupPanel from '@/components/AutoBackupPanel'
 import ImportExport from '@/components/ImportExport'
 import PdfDownloadButton from '@/components/PdfDownloadButton'
+import PublishPanel from '@/components/PublishPanel'
 import { Button } from '@/components/Form'
 import DistributePanel from '@/features/distribution/DistributePanel'
 import SendLogList from '@/features/distribution/SendLogList'
@@ -127,6 +128,10 @@ export default function ProductionRoute() {
       )}
 
       <AutoBackupPanel productionId={current?.id ?? null} />
+      <PublishPanel
+        productionId={current?.id ?? null}
+        productionName={current?.name}
+      />
       <ImportExport productionId={current?.id ?? null} />
     </section>
   )

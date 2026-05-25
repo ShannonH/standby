@@ -9,6 +9,7 @@ import {
   Textarea,
 } from '@/components/Form'
 import { db, type Contact } from '@/lib/db'
+import { maybePublishContactSheet } from '@/lib/publish'
 import { contactInputSchema, type ContactInput } from '@/lib/schemas'
 
 interface Props {
@@ -69,6 +70,7 @@ export default function ContactForm({
     } else {
       await db.contacts.add(payload as Contact)
     }
+    void maybePublishContactSheet(productionId)
     onSaved?.()
   }
 

@@ -1,11 +1,20 @@
-import { db, type Contact, type ContactGroup, type Production } from './db'
+import {
+  db,
+  type Contact,
+  type ContactGroup,
+  type Production,
+  type RehearsalReport,
+} from './db'
 
 /**
  * Bumped whenever the export format changes shape in a way that an
  * older importer would mishandle. Standby's import path checks this
  * before reading data.
+ *
+ * v1: initial — production + contacts + contactGroups
+ * v2: adds rehearsals
  */
-export const SHOW_EXPORT_VERSION = 1
+export const SHOW_EXPORT_VERSION = 2
 
 export interface ShowExport {
   schemaVersion: number
@@ -13,6 +22,7 @@ export interface ShowExport {
   production: Production
   contacts: Contact[]
   contactGroups: ContactGroup[]
+  rehearsals: RehearsalReport[]
 }
 
 /** Build a portable JSON snapshot of a single production and its entities. */
@@ -27,12 +37,17 @@ export async function exportShow(productionId: number): Promise<ShowExport> {
     .where('productionId')
     .equals(productionId)
     .toArray()
+  const rehearsals = await db.rehearsals
+    .where('productionId')
+    .equals(productionId)
+    .toArray()
   return {
     schemaVersion: SHOW_EXPORT_VERSION,
     exportedAt: new Date().toISOString(),
     production,
     contacts,
     contactGroups,
+    rehearsals,
   }
 }
 
@@ -51,9 +66,7 @@ export async function importShow(data: ShowExport): Promise<number> {
   }
   return db.transaction(
     'rw',
-    db.productions,
-    db.contacts,
-    db.contactGroups,
+    [db.productions, db.contacts, db.contactGroups, db.rehearsals],
     async () => {
       const now = new Date().toISOString()
       const { id: _ignoredProdId, ...productionData } = data.production
@@ -83,6 +96,23 @@ export async function importShow(data: ShowExport): Promise<number> {
           ...groupData,
           productionId: newProductionId,
           contactIds: remappedContactIds,
+        })
+      }
+
+      // Rehearsals were added in v2. Older v1 exports won't have this array;
+      // importShow refuses non-current versions outright, so this is always
+      // present at the type level.
+      for (const rehearsal of data.rehearsals ?? []) {
+        const { id: _ignoredRehearsalId, ...rehearsalData } = rehearsal
+        void _ignoredRehearsalId
+        const remappedAttendance = rehearsalData.attendance.map((entry) => ({
+          ...entry,
+          contactId: contactIdMap.get(entry.contactId) ?? entry.contactId,
+        }))
+        await db.rehearsals.add({
+          ...rehearsalData,
+          productionId: newProductionId,
+          attendance: remappedAttendance,
         })
       }
 

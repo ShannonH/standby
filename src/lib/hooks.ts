@@ -1,5 +1,11 @@
 import { useLiveQuery } from 'dexie-react-hooks'
-import { db, type Contact, type ContactGroup, type Production } from './db'
+import {
+  db,
+  type Contact,
+  type ContactGroup,
+  type Production,
+  type RehearsalReport,
+} from './db'
 import { useAppStore } from './store'
 
 export function useProductions(): Production[] {
@@ -38,5 +44,51 @@ export function useContactGroups(
         .equals(productionId)
         .sortBy('name')
     }, [productionId]) ?? []
+  )
+}
+
+export function useRehearsals(
+  productionId: number | null | undefined,
+): RehearsalReport[] {
+  return (
+    useLiveQuery(async () => {
+      if (productionId === null || productionId === undefined) {
+        return [] as RehearsalReport[]
+      }
+      // Sort descending — most recent first for the list view.
+      const reports = await db.rehearsals
+        .where('productionId')
+        .equals(productionId)
+        .toArray()
+      return reports.sort((a, b) =>
+        b.date.localeCompare(a.date) || b.dayNumber - a.dayNumber,
+      )
+    }, [productionId]) ?? []
+  )
+}
+
+export function useRehearsal(
+  reportId: number | null | undefined,
+): RehearsalReport | undefined {
+  return useLiveQuery(async () => {
+    if (reportId === null || reportId === undefined) return undefined
+    return db.rehearsals.get(reportId)
+  }, [reportId])
+}
+
+/** Next available day-number for a production (max + 1, or 1 if none). */
+export function useNextDayNumber(
+  productionId: number | null | undefined,
+): number {
+  return (
+    useLiveQuery(async () => {
+      if (productionId === null || productionId === undefined) return 1
+      const reports = await db.rehearsals
+        .where('productionId')
+        .equals(productionId)
+        .toArray()
+      if (reports.length === 0) return 1
+      return Math.max(...reports.map((r) => r.dayNumber)) + 1
+    }, [productionId]) ?? 1
   )
 }

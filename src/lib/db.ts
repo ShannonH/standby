@@ -75,6 +75,67 @@ export interface LineNote {
   delivered?: boolean
 }
 
+export type AttendanceStatus = 'present' | 'late' | 'absent' | 'excused'
+
+export interface AttendanceEntry {
+  contactId: number
+  status: AttendanceStatus
+  minutesLate?: number
+}
+
+export interface TimeBlock {
+  start: string
+  end: string
+  activity: string
+}
+
+/** A single departmental note. Wrapped as an object so useFieldArray works
+ *  natively and so we can add fields like `resolved` later without schema churn. */
+export interface DeptNote {
+  text: string
+  resolved?: boolean
+}
+
+export interface RehearsalNotes {
+  scenic: DeptNote[]
+  costumes: DeptNote[]
+  wigsMakeup: DeptNote[]
+  props: DeptNote[]
+  lighting: DeptNote[]
+  sound: DeptNote[]
+  projections: DeptNote[]
+  music: DeptNote[]
+  production: DeptNote[]
+}
+
+export const NOTE_DEPT_KEYS = [
+  'scenic',
+  'costumes',
+  'wigsMakeup',
+  'props',
+  'lighting',
+  'sound',
+  'projections',
+  'music',
+  'production',
+] as const
+
+export type NoteDeptKey = (typeof NOTE_DEPT_KEYS)[number]
+
+export function emptyRehearsalNotes(): RehearsalNotes {
+  return {
+    scenic: [],
+    costumes: [],
+    wigsMakeup: [],
+    props: [],
+    lighting: [],
+    sound: [],
+    projections: [],
+    music: [],
+    production: [],
+  }
+}
+
 export interface RehearsalReport {
   id?: number
   productionId: number
@@ -83,23 +144,9 @@ export interface RehearsalReport {
   startTime: string
   endTime: string
   location?: string
-  attendance: Array<{
-    contactId: number
-    status: 'present' | 'late' | 'absent' | 'excused'
-    minutesLate?: number
-  }>
-  timeBlocks: Array<{ start: string; end: string; activity: string }>
-  notes: {
-    scenic: string[]
-    costumes: string[]
-    wigsMakeup: string[]
-    props: string[]
-    lighting: string[]
-    sound: string[]
-    projections: string[]
-    music: string[]
-    production: string[]
-  }
+  attendance: AttendanceEntry[]
+  timeBlocks: TimeBlock[]
+  notes: RehearsalNotes
 }
 
 export interface SendLogEntry {

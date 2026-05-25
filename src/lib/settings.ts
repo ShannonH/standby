@@ -16,12 +16,17 @@ export interface AppSettings {
   fontSize: FontSize
   theme: Theme
   paperSize: PaperSize
+  /** SM's name. Used for greeting on Today, the email sign-off in
+   *  distribution templates, and nowhere else. Empty string = no
+   *  personalization. */
+  userName: string
 }
 
 export const DEFAULT_SETTINGS: AppSettings = {
   fontSize: 'md',
   theme: 'default',
   paperSize: 'LETTER',
+  userName: '',
 }
 
 export const FONT_SIZE_LABELS: Record<FontSize, string> = {

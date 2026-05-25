@@ -12,6 +12,7 @@ import {
   useLineNotes,
 } from '@/lib/hooks'
 import { LINE_TYPE_LABELS } from '@/lib/schemas'
+import { useAppStore } from '@/lib/store'
 import { lineNotesBody } from '@/lib/templates'
 import { renderLineNotesText } from '@/lib/text-reports'
 
@@ -200,7 +201,10 @@ function LineNotesInner() {
                   artifactLabel={`Line notes — ${actor.name}`}
                   filename={`${production.name.replace(/[^a-z0-9]/gi, '_')}-line-notes-${actor.name.replace(/[^a-z0-9]/gi, '_')}.pdf`}
                   defaultSubject={`Line notes — ${actor.name} — ${production.name}`}
-                  defaultBody={lineNotesBody(actor.name)}
+                  defaultBody={lineNotesBody(
+                    actor.name,
+                    useAppStore.getState().settings.userName,
+                  )}
                   inlineBody={renderLineNotesText(production, actor, actorNotes)}
                   generatePdf={async () => {
                     const { useAppStore } = await import('@/lib/store')

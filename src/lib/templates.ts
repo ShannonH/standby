@@ -8,10 +8,18 @@
 // the minority path. Phrase the templates as a brief framing of the
 // content that follows.
 
+/** Appends "\n\n— Name" if a name is provided, otherwise nothing.
+ *  Lets recipients see who sent the report without scanning headers. */
+function signoff(smName?: string): string {
+  const name = smName?.trim() ?? ''
+  return name.length > 0 ? `\n\n— ${name}` : ''
+}
+
 export function rehearsalReportBody(
   productionName: string,
   dayNumber: number,
   dateLabel: string,
+  smName?: string,
 ): string {
   return `Hi all —
 
@@ -19,40 +27,49 @@ Tonight's rehearsal report for ${productionName}, Day ${dayNumber} (${dateLabel}
 
 Department notes are numbered, so reply with "Re: Costumes #3" etc. if you need to refer to a specific note.
 
-Thanks for everything today.
+Thanks for everything today.${signoff(smName)}
 `
 }
 
-export function contactSheetBody(productionName: string): string {
+export function contactSheetBody(
+  productionName: string,
+  smName?: string,
+): string {
   return `Hi all —
 
 The current contact sheet for ${productionName}. Please flag any corrections to me directly.
 
-Entries marked "do not publish" are kept private and are not included.
+Entries marked "do not publish" are kept private and are not included.${signoff(smName)}
 `
 }
 
-export function propListBody(productionName: string): string {
+export function propListBody(
+  productionName: string,
+  smName?: string,
+): string {
   return `Hi all —
 
 Current prop list for ${productionName}. Status, source, and special-handling tags for each prop are included.
 
-Reply with any additions, changes, or questions.
+Reply with any additions, changes, or questions.${signoff(smName)}
 `
 }
 
-export function productionInfoBody(productionName: string): string {
+export function productionInfoBody(
+  productionName: string,
+  smName?: string,
+): string {
   return `Hi all —
 
-Production information for ${productionName}. Key dates and venue details included.
+Production information for ${productionName}. Key dates and venue details included.${signoff(smName)}
 `
 }
 
-export function lineNotesBody(actorName: string): string {
+export function lineNotesBody(actorName: string, smName?: string): string {
   return `Hi ${actorName} —
 
 Your line notes from rehearsal. These are private — for you only.
 
-Take a quick look before our next rehearsal. Questions on any of them, find me or the AD.
+Take a quick look before our next rehearsal. Questions on any of them, find me or the AD.${signoff(smName)}
 `
 }

@@ -72,7 +72,10 @@ function ContactsInner() {
             artifactLabel="Contact sheet"
             filename={`${current.name.replace(/[^a-z0-9]/gi, '_')}-contact-sheet.pdf`}
             defaultSubject={`Contact sheet — ${current.name}`}
-            defaultBody={contactSheetBody(current.name)}
+            defaultBody={contactSheetBody(
+              current.name,
+              useAppStore.getState().settings.userName,
+            )}
             inlineBody={renderContactSheetText(current, contacts)}
             generatePdf={generatePdf}
           />

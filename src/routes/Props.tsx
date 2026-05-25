@@ -11,6 +11,7 @@ import {
   PROP_SPECIAL_HANDLING_LABELS,
   PROP_STATUS_LABELS,
 } from '@/lib/schemas'
+import { useAppStore } from '@/lib/store'
 import { propListBody } from '@/lib/templates'
 import { renderPropListText } from '@/lib/text-reports'
 
@@ -159,7 +160,10 @@ function PropsInner() {
             artifactLabel="Prop list"
             filename={`${production.name.replace(/[^a-z0-9]/gi, '_')}-prop-list.pdf`}
             defaultSubject={`Prop list — ${production.name}`}
-            defaultBody={propListBody(production.name)}
+            defaultBody={propListBody(
+              production.name,
+              useAppStore.getState().settings.userName,
+            )}
             inlineBody={renderPropListText(production, props)}
             generatePdf={generateBlob}
           />

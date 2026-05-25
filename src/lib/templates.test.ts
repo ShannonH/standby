@@ -21,6 +21,16 @@ const ALL_TEMPLATES: Array<{ name: string; text: string }> = [
   { name: 'propListBody', text: propListBody('My Way') },
   { name: 'productionInfoBody', text: productionInfoBody('My Way') },
   { name: 'lineNotesBody', text: lineNotesBody('Alice') },
+  // Also the signed-off variants, in case anyone re-introduces "attached"
+  // talk via the sign-off path.
+  {
+    name: 'rehearsalReportBody (with name)',
+    text: rehearsalReportBody('My Way', 5, '2026-06-15', 'Rayne'),
+  },
+  {
+    name: 'contactSheetBody (with name)',
+    text: contactSheetBody('My Way', 'Rayne'),
+  },
 ]
 
 describe('templates: no "attached" language', () => {
@@ -54,5 +64,38 @@ describe('templates: still convey context', () => {
   it('contactSheetBody still explains the "do not publish" convention', () => {
     const out = contactSheetBody('My Way')
     expect(out).toContain('do not publish')
+  })
+})
+
+describe('templates: sign-off', () => {
+  it('appends "— Name" when smName is provided', () => {
+    expect(rehearsalReportBody('My Way', 1, 'today', 'Rayne')).toContain(
+      '\n\n— Rayne\n',
+    )
+    expect(contactSheetBody('My Way', 'Rayne')).toContain('\n\n— Rayne\n')
+    expect(propListBody('My Way', 'Rayne')).toContain('\n\n— Rayne\n')
+    expect(productionInfoBody('My Way', 'Rayne')).toContain('\n\n— Rayne\n')
+    expect(lineNotesBody('Alice', 'Rayne')).toContain('\n\n— Rayne\n')
+  })
+
+  it('omits the sign-off when smName is empty or undefined', () => {
+    // "Hi all —" greeting already contains an em-dash; check the actual
+    // sign-off pattern (a paragraph break, em-dash, then a name).
+    const signoffPattern = /\n\n— \S/
+    expect(rehearsalReportBody('My Way', 1, 'today')).not.toMatch(
+      signoffPattern,
+    )
+    expect(rehearsalReportBody('My Way', 1, 'today', '')).not.toMatch(
+      signoffPattern,
+    )
+    expect(rehearsalReportBody('My Way', 1, 'today', '   ')).not.toMatch(
+      signoffPattern,
+    )
+  })
+
+  it('trims whitespace around the sign-off name', () => {
+    expect(rehearsalReportBody('My Way', 1, 'today', '  Rayne  ')).toContain(
+      '\n\n— Rayne\n',
+    )
   })
 })

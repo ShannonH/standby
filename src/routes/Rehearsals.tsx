@@ -12,6 +12,7 @@ import {
   useRehearsal,
   useRehearsals,
 } from '@/lib/hooks'
+import { useAppStore } from '@/lib/store'
 import { rehearsalReportBody } from '@/lib/templates'
 import { renderRehearsalReportText } from '@/lib/text-reports'
 
@@ -134,6 +135,7 @@ function RehearsalsInner() {
               production.name,
               distributingReport.dayNumber,
               distributingReport.date,
+              useAppStore.getState().settings.userName,
             )}
             inlineBody={renderRehearsalReportText(
               production,

@@ -119,7 +119,10 @@ export default function ProductionRoute() {
             artifactLabel="Production information sheet"
             filename={`${current.name.replace(/[^a-z0-9]/gi, '_')}-production-info.pdf`}
             defaultSubject={`Production info — ${current.name}`}
-            defaultBody={productionInfoBody(current.name)}
+            defaultBody={productionInfoBody(
+              current.name,
+              useAppStore.getState().settings.userName,
+            )}
             inlineBody={renderProductionInfoText(current)}
             generatePdf={generatePdf}
           />

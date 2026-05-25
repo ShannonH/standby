@@ -1,16 +1,23 @@
 import { Link } from 'react-router-dom'
+import { greet } from '@/lib/greeting'
 import { useContacts, useCurrentProduction, useProductions } from '@/lib/hooks'
+import { useAppStore } from '@/lib/store'
 
 export default function Today() {
   const productions = useProductions()
   const current = useCurrentProduction()
   const contacts = useContacts(current?.id)
+  const userName = useAppStore((s) => s.settings.userName)
+  const greeting = greet(userName)
+  const trimmedName = userName.trim()
 
   if (productions.length === 0) {
     return (
       <section className="mx-auto max-w-3xl">
         <h2 className="font-serif text-3xl font-semibold">
-          Welcome to Standby
+          {trimmedName
+            ? `Welcome to Standby, ${trimmedName}.`
+            : 'Welcome to Standby'}
         </h2>
         <p className="mt-3 text-muted">
           A free, offline-first paperwork hub for theatre stage managers. Your
@@ -32,7 +39,8 @@ export default function Today() {
   if (!current) {
     return (
       <section className="mx-auto max-w-3xl">
-        <h2 className="font-serif text-3xl font-semibold">Today</h2>
+        <p className="text-sm italic text-muted">{greeting}</p>
+        <h2 className="mt-1 font-serif text-3xl font-semibold">Today</h2>
         <p className="mt-3 text-muted">
           No production is currently selected.
         </p>
@@ -47,7 +55,8 @@ export default function Today() {
 
   return (
     <section className="mx-auto max-w-3xl">
-      <h2 className="font-serif text-3xl font-semibold">{current.name}</h2>
+      <p className="text-sm italic text-muted">{greeting}</p>
+      <h2 className="mt-1 font-serif text-3xl font-semibold">{current.name}</h2>
       <p className="text-sm text-muted">
         {current.type}
         {current.season ? ` · ${current.season}` : ''}

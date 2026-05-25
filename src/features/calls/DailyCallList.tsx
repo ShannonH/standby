@@ -5,6 +5,7 @@ import { useDailyCalls } from '@/lib/hooks'
 interface Props {
   productionId: number
   onEdit: (id: number) => void
+  onDistribute: (id: number) => void
   onDownloadPdf: (call: DailyCall) => Promise<void>
   onDuplicate: (call: DailyCall) => void
 }
@@ -23,6 +24,7 @@ function formatDate(iso: string): string {
 export default function DailyCallList({
   productionId,
   onEdit,
+  onDistribute,
   onDownloadPdf,
   onDuplicate,
 }: Props) {
@@ -65,6 +67,11 @@ export default function DailyCallList({
           <div className="flex flex-wrap gap-2">
             <Button variant="secondary" onClick={() => void onDownloadPdf(c)}>
               PDF
+            </Button>
+            <Button
+              onClick={() => c.id !== undefined && onDistribute(c.id)}
+            >
+              Distribute
             </Button>
             <Button variant="ghost" onClick={() => onDuplicate(c)}>
               Duplicate

@@ -134,6 +134,7 @@ function DailyCallInner() {
         <DailyCallList
           productionId={production.id}
           onEdit={(id) => setMode({ kind: 'edit', id })}
+          onDistribute={(id) => setMode({ kind: 'distribute', id })}
           onDuplicate={duplicate}
           onDownloadPdf={downloadPdf}
         />
@@ -208,28 +209,6 @@ function DailyCallInner() {
         </div>
       )}
 
-      {mode.kind === 'list' && calls.length > 0 && (
-        <section className="space-y-3 border-t border-surface-border pt-8">
-          <h3 className="font-serif text-xl font-semibold">Distribute</h3>
-          <p className="text-sm text-muted">
-            Pick a call from the list to send to the company.
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {calls.slice(0, 5).map((c) => (
-              <Button
-                key={c.id}
-                variant="secondary"
-                onClick={() =>
-                  c.id !== undefined && setMode({ kind: 'distribute', id: c.id })
-                }
-              >
-                {c.date}
-                {c.version > 1 && ` v${c.version}`}
-              </Button>
-            ))}
-          </div>
-        </section>
-      )}
     </section>
   )
 }

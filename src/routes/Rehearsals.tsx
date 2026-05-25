@@ -13,6 +13,7 @@ import {
   useRehearsals,
 } from '@/lib/hooks'
 import { rehearsalReportBody } from '@/lib/templates'
+import { renderRehearsalReportText } from '@/lib/text-reports'
 
 export default function RehearsalsRoute() {
   return (
@@ -128,6 +129,11 @@ function RehearsalsInner() {
               production.name,
               distributingReport.dayNumber,
               distributingReport.date,
+            )}
+            inlineBody={renderRehearsalReportText(
+              production,
+              distributingReport,
+              allContacts,
             )}
             generatePdf={() => generateBlob(distributingReport)}
           />

@@ -9,6 +9,7 @@ import ProductionList from '@/features/production/ProductionList'
 import { db } from '@/lib/db'
 import { useCurrentProduction, useProductions } from '@/lib/hooks'
 import { productionInfoBody } from '@/lib/templates'
+import { renderProductionInfoText } from '@/lib/text-reports'
 
 export default function ProductionRoute() {
   const productions = useProductions()
@@ -112,6 +113,7 @@ export default function ProductionRoute() {
             filename={`${current.name.replace(/[^a-z0-9]/gi, '_')}-production-info.pdf`}
             defaultSubject={`Production info — ${current.name}`}
             defaultBody={productionInfoBody(current.name)}
+            inlineBody={renderProductionInfoText(current)}
             generatePdf={generatePdf}
           />
 

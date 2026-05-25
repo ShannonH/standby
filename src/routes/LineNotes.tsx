@@ -13,6 +13,7 @@ import {
 } from '@/lib/hooks'
 import { LINE_TYPE_LABELS } from '@/lib/schemas'
 import { lineNotesBody } from '@/lib/templates'
+import { renderLineNotesText } from '@/lib/text-reports'
 
 export default function LineNotesRoute() {
   return (
@@ -185,6 +186,9 @@ function LineNotesInner() {
             (() => {
               const actor = cast.find((c) => c.id === pdfActorId)
               if (!actor) return null
+              const actorNotes = notes.filter(
+                (n) => n.characterId === pdfActorId,
+              )
               return (
                 <DistributePanel
                   productionId={production.id}
@@ -192,10 +196,8 @@ function LineNotesInner() {
                   filename={`${production.name.replace(/[^a-z0-9]/gi, '_')}-line-notes-${actor.name.replace(/[^a-z0-9]/gi, '_')}.pdf`}
                   defaultSubject={`Line notes — ${actor.name} — ${production.name}`}
                   defaultBody={lineNotesBody(actor.name)}
+                  inlineBody={renderLineNotesText(production, actor, actorNotes)}
                   generatePdf={async () => {
-                    const actorNotes = notes.filter(
-                      (n) => n.characterId === pdfActorId,
-                    )
                     const [{ pdf }, { default: LineNotesPdf }] =
                       await Promise.all([
                         import('@react-pdf/renderer'),

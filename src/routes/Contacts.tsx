@@ -5,6 +5,7 @@ import ContactList from '@/features/contacts/ContactList'
 import DistributePanel from '@/features/distribution/DistributePanel'
 import { useContacts, useCurrentProduction } from '@/lib/hooks'
 import { contactSheetBody } from '@/lib/templates'
+import { renderContactSheetText } from '@/lib/text-reports'
 
 export default function ContactsRoute() {
   return (
@@ -63,6 +64,7 @@ function ContactsInner() {
             filename={`${current.name.replace(/[^a-z0-9]/gi, '_')}-contact-sheet.pdf`}
             defaultSubject={`Contact sheet — ${current.name}`}
             defaultBody={contactSheetBody(current.name)}
+            inlineBody={renderContactSheetText(current, contacts)}
             generatePdf={generatePdf}
           />
         </>

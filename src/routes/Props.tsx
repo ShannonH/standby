@@ -12,6 +12,7 @@ import {
   PROP_STATUS_LABELS,
 } from '@/lib/schemas'
 import { propListBody } from '@/lib/templates'
+import { renderPropListText } from '@/lib/text-reports'
 
 export default function PropsRoute() {
   return (
@@ -150,6 +151,7 @@ function PropsInner() {
             filename={`${production.name.replace(/[^a-z0-9]/gi, '_')}-prop-list.pdf`}
             defaultSubject={`Prop list — ${production.name}`}
             defaultBody={propListBody(production.name)}
+            inlineBody={renderPropListText(production, props)}
             generatePdf={generateBlob}
           />
         </>

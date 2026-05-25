@@ -1,5 +1,12 @@
 import { useMemo, useState } from 'react'
-import { Button, Field, Input, Select, Textarea } from '@/components/Form'
+import {
+  Button,
+  Checkbox,
+  Field,
+  Input,
+  Select,
+  Textarea,
+} from '@/components/Form'
 import { db, type Contact, type ContactGroup } from '@/lib/db'
 import { useContactGroups, useContacts } from '@/lib/hooks'
 import { buildMailtoUrl } from '@/lib/mailto'
@@ -12,8 +19,13 @@ interface Props {
   filename: string
   /** Pre-filled email subject line. */
   defaultSubject: string
-  /** Pre-filled email body. */
+  /** Pre-filled email body (the intro / sign-off prose). */
   defaultBody: string
+  /** Plain-text version of the full artifact. When provided, the panel
+   *  shows a toggle (default ON) to append this to the email body so the
+   *  recipient sees the report inline instead of having to open the PDF.
+   *  This matches SM convention — rehearsal reports go in the body. */
+  inlineBody?: string
   /** Lazy-builds the PDF as a Blob when "Download PDF" or "Share" is clicked. */
   generatePdf: () => Promise<Blob>
 }
@@ -24,19 +36,25 @@ interface ResolvedRecipients {
   label: string
 }
 
+/** Rough URL-length budget above which most mail clients start to choke.
+ *  Outlook is the harshest at ~2000 chars; Apple Mail and Gmail accept much
+ *  more. Pick 6000 as a balance — gives a warning before things truncate. */
+const MAILTO_LENGTH_WARN = 6000
+
 /**
- * Reusable distribution panel. Lives below an artifact view and lets the SM:
+ * Reusable distribution panel.
  *
  *   1. Download the artifact as a PDF.
  *   2. Pick a contact group (or "All contacts with email").
  *   3. Open the user's mail client via mailto: with the group BCC'd, subject
- *      and body pre-filled. The user then drags the downloaded PDF into the
- *      compose window (mailto: cannot carry attachments).
- *   4. On mobile, use the Web Share API to share the PDF natively (full
- *      attach flow without the manual drag step).
+ *      pre-filled, and body pre-filled. When inlineBody is provided and the
+ *      toggle is on, the full report text is appended to the body so the
+ *      recipient sees the report inline. This matches SM convention — the
+ *      rehearsal report has always been distributed in the email body; the
+ *      PDF is the archival/formal version.
+ *   4. On mobile, use the Web Share API to share the PDF natively.
  *
- * Every distribution action writes to `db.sendLog` so the SM has a record of
- * what went out, when, and to whom.
+ * Every distribution action writes to `db.sendLog`.
  */
 export default function DistributePanel({
   productionId,
@@ -44,6 +62,7 @@ export default function DistributePanel({
   filename,
   defaultSubject,
   defaultBody,
+  inlineBody,
   generatePdf,
 }: Props) {
   const contactGroups = useContactGroups(productionId)
@@ -51,6 +70,7 @@ export default function DistributePanel({
   const [groupId, setGroupId] = useState<string>('all')
   const [subject, setSubject] = useState(defaultSubject)
   const [body, setBody] = useState(defaultBody)
+  const [includeInline, setIncludeInline] = useState(true)
   const [pdfBlob, setPdfBlob] = useState<Blob | null>(null)
   const [pdfUrl, setPdfUrl] = useState<string | null>(null)
   const [status, setStatus] = useState<string | null>(null)
@@ -62,6 +82,23 @@ export default function DistributePanel({
       resolveRecipients(groupId, contactGroups, contacts),
     [groupId, contactGroups, contacts],
   )
+
+  const effectiveBody = useMemo(
+    () =>
+      inlineBody && includeInline ? `${body}\n\n${inlineBody}` : body,
+    [body, inlineBody, includeInline],
+  )
+
+  const encodedLength = useMemo(
+    () =>
+      encodeURIComponent(effectiveBody).length +
+      encodeURIComponent(subject).length +
+      recipients.emails.join(',').length +
+      40,
+    [effectiveBody, subject, recipients.emails],
+  )
+
+  const tooLong = encodedLength > MAILTO_LENGTH_WARN
 
   const canShareFiles =
     typeof navigator !== 'undefined' &&
@@ -108,16 +145,22 @@ export default function DistributePanel({
     }
     setBusy('mailto')
     try {
-      // Make sure the PDF is generated and downloaded first so it's ready to
-      // drag-attach. mailto: itself cannot carry attachments.
-      await downloadPdf()
+      // If the body contains the full report, the recipient doesn't strictly
+      // need the PDF. Skip the auto-download to avoid an unsolicited file
+      // sitting in the user's Downloads folder. They can use "Download PDF"
+      // explicitly when they want one.
+      if (!inlineBody || !includeInline) {
+        await downloadPdf()
+      }
 
-      const url = buildMailtoUrl(recipients.emails, subject, body)
+      const url = buildMailtoUrl(recipients.emails, subject, effectiveBody)
       window.location.href = url
 
       await logSend()
       setStatus(
-        `Opened your mail client with ${recipients.count} BCC recipients. Drag the downloaded PDF into the compose window.`,
+        inlineBody && includeInline
+          ? `Opened mail client with ${recipients.count} BCC recipients. Full report is in the email body — no attachment needed.`
+          : `Opened mail client with ${recipients.count} BCC recipients. Drag the downloaded PDF into the compose window.`,
       )
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err))
@@ -141,13 +184,12 @@ export default function DistributePanel({
       }
       await navigator.share({
         title: subject,
-        text: body,
+        text: effectiveBody,
         files: [file],
       })
       await logSend()
       setStatus('Shared via system share sheet.')
     } catch (err) {
-      // AbortError = user cancelled, not really an error.
       if (err instanceof Error && err.name === 'AbortError') {
         setStatus(null)
       } else {
@@ -175,8 +217,9 @@ export default function DistributePanel({
         <h4 className="font-serif text-lg font-semibold">Distribute</h4>
         <p className="text-xs text-stone-500">
           Generates a PDF and opens your mail client with the recipient group
-          BCC'd. Then you drag the PDF into the compose window. On mobile,
-          'Share' attaches the PDF for you.
+          BCC'd. By default, the full report is included in the email body so
+          you don't have to attach the PDF — but the PDF download is always
+          available for archival or formal handoff.
         </p>
       </div>
 
@@ -204,13 +247,61 @@ export default function DistributePanel({
       <Field label="Subject">
         <Input value={subject} onChange={(e) => setSubject(e.target.value)} />
       </Field>
-      <Field label="Body">
+      <Field
+        label={inlineBody ? 'Body — intro / sign-off' : 'Body'}
+        hint={
+          inlineBody
+            ? 'Goes above the report content. Customize the greeting or add a note.'
+            : undefined
+        }
+      >
         <Textarea
           value={body}
           onChange={(e) => setBody(e.target.value)}
           rows={4}
         />
       </Field>
+
+      {inlineBody !== undefined && (
+        <div className="space-y-2">
+          <Checkbox
+            checked={includeInline}
+            onChange={(e) => setIncludeInline(e.target.checked)}
+            label="Include the full report in the email body (recipients see it inline — no attachment needed)"
+          />
+          {includeInline && (
+            <details
+              open
+              className="rounded border border-stone-200 bg-white dark:border-stone-700 dark:bg-stone-900"
+            >
+              <summary className="cursor-pointer px-3 py-2 text-sm font-medium">
+                Preview of what's appended to the email body
+              </summary>
+              <pre className="max-h-72 overflow-auto whitespace-pre-wrap break-words border-t border-stone-200 p-3 font-mono text-xs leading-relaxed dark:border-stone-800">
+                {inlineBody}
+              </pre>
+            </details>
+          )}
+        </div>
+      )}
+
+      <p
+        className={`text-xs ${
+          tooLong
+            ? 'text-amber-700 dark:text-amber-400'
+            : 'text-stone-500'
+        }`}
+      >
+        Email URL length: ~{encodedLength.toLocaleString()} chars
+        {tooLong && (
+          <>
+            {' '}
+            — Outlook and some older clients may truncate. Consider unchecking
+            "include full report in body" and sending the PDF as an
+            attachment instead.
+          </>
+        )}
+      </p>
 
       <div className="flex flex-wrap gap-3">
         <Button onClick={downloadPdf} disabled={busy !== null}>
@@ -221,7 +312,11 @@ export default function DistributePanel({
           onClick={openInMailClient}
           disabled={busy !== null || recipients.count === 0}
         >
-          {busy === 'mailto' ? 'Opening…' : 'Open in mail client (BCC group)'}
+          {busy === 'mailto'
+            ? 'Opening…'
+            : inlineBody && includeInline
+              ? 'Open in mail client (BCC + inline report)'
+              : 'Open in mail client (BCC group)'}
         </Button>
         {canShareFiles && (
           <Button

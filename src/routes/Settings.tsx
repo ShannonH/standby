@@ -6,13 +6,16 @@ import {
   PAPER_SIZE_LABELS,
   THEMES,
   THEME_ORDER,
+  TIME_FORMAT_LABELS,
   type FontSize,
   type PaperSize,
   type Theme,
+  type TimeFormat,
 } from '@/lib/settings'
 
 const FONT_SIZES: FontSize[] = ['sm', 'md', 'lg', 'xl']
 const PAPER_SIZES: PaperSize[] = ['LETTER', 'A4']
+const TIME_FORMATS: TimeFormat[] = ['12h', '24h']
 
 export default function Settings() {
   const settings = useAppStore((s) => s.settings)
@@ -96,6 +99,33 @@ export default function Settings() {
               <span className="text-xs text-muted">
                 {FONT_SIZE_DESCRIPTIONS[size]}
               </span>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {/* Time format */}
+      <section className="space-y-3">
+        <div>
+          <h3 className="text-xl font-semibold">Time format</h3>
+          <p className="text-sm text-muted">
+            How call times and rehearsal start/end times are displayed in
+            the UI and in generated PDFs.
+          </p>
+        </div>
+        <div className="grid gap-2 sm:grid-cols-2">
+          {TIME_FORMATS.map((fmt) => (
+            <button
+              key={fmt}
+              type="button"
+              onClick={() => updateSettings({ timeFormat: fmt })}
+              className={`rounded-theme border p-3 text-left transition ${
+                settings.timeFormat === fmt
+                  ? 'border-accent bg-accent/5 ring-1 ring-accent'
+                  : 'border-surface-border hover:border-accent'
+              }`}
+            >
+              <span className="font-medium">{TIME_FORMAT_LABELS[fmt]}</span>
             </button>
           ))}
         </div>

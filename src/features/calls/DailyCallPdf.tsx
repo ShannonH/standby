@@ -8,7 +8,8 @@ import {
   View,
 } from '@react-pdf/renderer'
 import type { Contact, DailyCall, Production } from '@/lib/db'
-import type { PaperSize } from '@/lib/settings'
+import type { PaperSize, TimeFormat } from '@/lib/settings'
+import { formatTime } from '@/lib/time-format'
 
 // Register the script title font once on module load. The dynamic import path
 // for this module is the existing PDF download flow, so this only runs the
@@ -20,6 +21,19 @@ Font.register({
 
 // Stable red used for accents (call times, called-cast, notes, footer).
 const STAGE_RED = '#b91c1c'
+
+/**
+ * Pick a title font size based on character count so long show names don't
+ * collide with the subhead below. Allura has decorative ascenders/descenders
+ * — long titles wrap and chew up vertical space fast.
+ */
+function pickTitleSize(name: string): number {
+  const n = name.length
+  if (n > 28) return 30
+  if (n > 22) return 36
+  if (n > 16) return 42
+  return 48
+}
 
 const styles = StyleSheet.create({
   page: {
@@ -38,21 +52,21 @@ const styles = StyleSheet.create({
   },
   titleBlock: {
     alignItems: 'center',
-    marginBottom: 4,
+    marginBottom: 6,
   },
   title: {
     fontFamily: 'Allura',
-    fontSize: 48,
     textAlign: 'center',
-    marginBottom: 4,
-    // Allura sits high on its baseline, so a slight bump helps optical balance.
-    paddingTop: 4,
-    paddingBottom: 6,
+    // Allura is a script font with tall ascenders + long descenders. The
+    // line-height here is what keeps wrapped titles from colliding with
+    // either the line above or the subhead below.
+    lineHeight: 1.35,
   },
   subhead: {
     textAlign: 'center',
     fontSize: 14,
     fontFamily: 'Times-Roman',
+    marginTop: 8,
   },
   subheadSmall: {
     textAlign: 'center',
@@ -101,7 +115,7 @@ const styles = StyleSheet.create({
   callTimeTime: {
     color: STAGE_RED,
     marginRight: 6,
-    width: 40,
+    width: 50,
   },
   callTimeName: {
     fontFamily: 'Times-Roman',
@@ -165,6 +179,7 @@ interface Props {
   call: DailyCall
   contacts: Contact[]
   paperSize?: PaperSize
+  timeFormat?: TimeFormat
 }
 
 export default function DailyCallPdf({
@@ -172,8 +187,8 @@ export default function DailyCallPdf({
   call,
   contacts,
   paperSize = 'LETTER',
+  timeFormat = '12h',
 }: Props) {
-  // Stable lookup for name rendering.
   const nameOf = (id: number): string =>
     contacts.find((c) => c.id === id)?.name ?? '(removed)'
 
@@ -183,7 +198,6 @@ export default function DailyCallPdf({
   const leftColumn = call.callTimes.slice(0, half)
   const rightColumn = call.callTimes.slice(half)
 
-  // Render the red "called" line under each schedule item.
   function calledText(
     item: DailyCall['scheduleItems'][number],
   ): string | null {
@@ -204,6 +218,8 @@ export default function DailyCallPdf({
     }
   }
 
+  const titleSize = pickTitleSize(production.name)
+
   return (
     <Document
       title={`${production.name} — Daily Call ${call.date} v${call.version}`}
@@ -215,7 +231,9 @@ export default function DailyCallPdf({
         </Text>
 
         <View style={styles.titleBlock}>
-          <Text style={styles.title}>{production.name}</Text>
+          <Text style={[styles.title, { fontSize: titleSize }]}>
+            {production.name}
+          </Text>
         </View>
         <Text style={styles.subhead}>Daily Call</Text>
         <Text style={styles.subheadSmall}>
@@ -241,7 +259,9 @@ export default function DailyCallPdf({
           <View style={styles.callTimeColumn}>
             {leftColumn.map((ct, i) => (
               <View key={i} style={styles.callTimeRow}>
-                <Text style={styles.callTimeTime}>{ct.time}</Text>
+                <Text style={styles.callTimeTime}>
+                  {formatTime(ct.time, timeFormat)}
+                </Text>
                 <Text style={styles.callTimeName}>{nameOf(ct.contactId)}</Text>
               </View>
             ))}
@@ -249,7 +269,9 @@ export default function DailyCallPdf({
           <View style={styles.callTimeColumn}>
             {rightColumn.map((ct, i) => (
               <View key={i} style={styles.callTimeRow}>
-                <Text style={styles.callTimeTime}>{ct.time}</Text>
+                <Text style={styles.callTimeTime}>
+                  {formatTime(ct.time, timeFormat)}
+                </Text>
                 <Text style={styles.callTimeName}>{nameOf(ct.contactId)}</Text>
               </View>
             ))}
@@ -263,7 +285,9 @@ export default function DailyCallPdf({
           return (
             <View key={i} style={styles.scheduleItem} wrap={false}>
               <View style={styles.scheduleHead}>
-                <Text style={styles.scheduleTime}>{item.time}</Text>
+                <Text style={styles.scheduleTime}>
+                  {formatTime(item.time, timeFormat)}
+                </Text>
                 <Text style={styles.scheduleActivity}>{item.activity}</Text>
               </View>
               {item.description && (

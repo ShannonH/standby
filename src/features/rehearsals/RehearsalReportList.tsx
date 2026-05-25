@@ -1,6 +1,8 @@
 import { Button } from '@/components/Form'
 import { db, NOTE_DEPT_KEYS, type RehearsalReport } from '@/lib/db'
 import { useRehearsals } from '@/lib/hooks'
+import { useAppStore } from '@/lib/store'
+import { formatTime } from '@/lib/time-format'
 
 interface Props {
   productionId: number
@@ -34,6 +36,7 @@ export default function RehearsalReportList({
   onDownloadPdf,
 }: Props) {
   const reports = useRehearsals(productionId)
+  const timeFormat = useAppStore((s) => s.settings.timeFormat)
 
   if (reports.length === 0) {
     return (
@@ -59,7 +62,8 @@ export default function RehearsalReportList({
               <span className="text-muted">· {formatDate(r.date)}</span>
             </p>
             <p className="text-xs text-muted">
-              {r.startTime}–{r.endTime}
+              {formatTime(r.startTime, timeFormat)}–
+              {formatTime(r.endTime, timeFormat)}
               {r.location ? ` · ${r.location}` : ''} ·{' '}
               {r.attendance.length} attendees · {totalNotes(r)} notes
             </p>

@@ -95,7 +95,8 @@ describe('renderRehearsalReportText', () => {
     expect(out).toContain('Studio Theatre')
     expect(out).toContain('Alice — Present')
     expect(out).toContain('Bob — Late (5 min)')
-    expect(out).toContain('18:00–19:30   Act 1, scenes 1–3')
+    // Default time format is 12h; "18:00" / "19:30" render as "6:00p" / "7:30p".
+    expect(out).toContain('6:00p–7:30p   Act 1, scenes 1–3')
     expect(out).toContain('COSTUMES')
     expect(out).toContain('1. Could we confirm the act 2 jacket fitting?')
     expect(out).toContain('2. Wig 3 returned to stock.')

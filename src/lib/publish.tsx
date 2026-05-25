@@ -139,6 +139,10 @@ function currentPaperSize() {
   return useAppStore.getState().settings.paperSize
 }
 
+function currentTimeFormat() {
+  return useAppStore.getState().settings.timeFormat
+}
+
 function sanitize(name: string): string {
   return name.replace(/[^A-Za-z0-9\-_ ]/g, '_').trim() || 'untitled'
 }
@@ -168,6 +172,7 @@ export async function publishRehearsalReport(
       report={report}
       contacts={contacts}
       paperSize={currentPaperSize()}
+      timeFormat={currentTimeFormat()}
     />,
   )
   await writePdfBlob(reportsDir, reportFilename(report), blob)
@@ -229,6 +234,7 @@ export async function publishDailyCall(
       call={call}
       contacts={contacts}
       paperSize={currentPaperSize()}
+      timeFormat={currentTimeFormat()}
     />,
   )
   await writePdfBlob(callsDir, callFilename(call), blob)

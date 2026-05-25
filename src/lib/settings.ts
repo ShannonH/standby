@@ -11,11 +11,15 @@ export type Theme =
   | 'marquee'
   | 'rosewood'
 export type PaperSize = 'LETTER' | 'A4'
+export type TimeFormat = '12h' | '24h'
 
 export interface AppSettings {
   fontSize: FontSize
   theme: Theme
   paperSize: PaperSize
+  /** Whether times like "18:00" render as "6:00p" (12h) or "18:00" (24h).
+   *  Defaults to 12h, which is US theater convention. */
+  timeFormat: TimeFormat
   /** SM's name. Used for greeting on Today, the email sign-off in
    *  distribution templates, and nowhere else. Empty string = no
    *  personalization. */
@@ -26,7 +30,13 @@ export const DEFAULT_SETTINGS: AppSettings = {
   fontSize: 'md',
   theme: 'default',
   paperSize: 'LETTER',
+  timeFormat: '12h',
   userName: '',
+}
+
+export const TIME_FORMAT_LABELS: Record<TimeFormat, string> = {
+  '12h': '12-hour (6:00p)',
+  '24h': '24-hour (18:00)',
 }
 
 export const FONT_SIZE_LABELS: Record<FontSize, string> = {

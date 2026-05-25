@@ -7,6 +7,8 @@ import type {
   RehearsalReport,
 } from './db'
 import { NOTE_DEPT_KEYS } from './db'
+import { useAppStore } from './store'
+import { formatTime } from './time-format'
 import {
   LINE_TYPE_LABELS,
   NOTE_DEPT_LABELS,
@@ -74,13 +76,14 @@ export function renderRehearsalReportText(
   report: RehearsalReport,
   contacts: readonly Contact[],
 ): string {
+  const timeFormat = useAppStore.getState().settings.timeFormat
   const lines: string[] = []
 
   lines.push(production.name.toUpperCase())
   lines.push(`REHEARSAL REPORT — DAY ${report.dayNumber}`)
   const headerBits = [
     formatLongDate(report.date),
-    `${report.startTime}–${report.endTime}`,
+    `${formatTime(report.startTime, timeFormat)}–${formatTime(report.endTime, timeFormat)}`,
   ]
   if (report.location) headerBits.push(report.location)
   lines.push(headerBits.join(' | '))
@@ -103,7 +106,9 @@ export function renderRehearsalReportText(
   if (report.timeBlocks.length > 0) {
     lines.push('TIME BREAKDOWN')
     for (const tb of report.timeBlocks) {
-      lines.push(`  ${tb.start}–${tb.end}   ${tb.activity}`)
+      lines.push(
+        `  ${formatTime(tb.start, timeFormat)}–${formatTime(tb.end, timeFormat)}   ${tb.activity}`,
+      )
     }
     lines.push('')
   }
@@ -251,6 +256,7 @@ export function renderDailyCallText(
   call: DailyCall,
   contacts: readonly Contact[],
 ): string {
+  const timeFormat = useAppStore.getState().settings.timeFormat
   const nameOf = (id: number) =>
     contacts.find((c) => c.id === id)?.name ?? '(removed)'
 
@@ -271,7 +277,7 @@ export function renderDailyCallText(
   if (call.callTimes.length > 0) {
     lines.push('CALL TIME')
     for (const ct of call.callTimes) {
-      lines.push(`  ${ct.time}  ${nameOf(ct.contactId)}`)
+      lines.push(`  ${formatTime(ct.time, timeFormat)}  ${nameOf(ct.contactId)}`)
     }
     lines.push('')
   }
@@ -279,7 +285,7 @@ export function renderDailyCallText(
   if (call.scheduleItems.length > 0) {
     lines.push('REHEARSAL SCHEDULE')
     for (const item of call.scheduleItems) {
-      lines.push(`  ${item.time}  ${item.activity}`)
+      lines.push(`  ${formatTime(item.time, timeFormat)}  ${item.activity}`)
       if (item.description) lines.push(`         ${item.description}`)
       let calledLine: string | null = null
       if (item.calledMode === 'all') calledLine = 'All called'

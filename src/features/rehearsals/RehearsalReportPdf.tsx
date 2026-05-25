@@ -13,7 +13,8 @@ import {
   type RehearsalReport,
 } from '@/lib/db'
 import { NOTE_DEPT_LABELS } from '@/lib/schemas'
-import type { PaperSize } from '@/lib/settings'
+import type { PaperSize, TimeFormat } from '@/lib/settings'
+import { formatTime } from '@/lib/time-format'
 
 // Stern/Gold-conformant rehearsal report layout — letter paper, Times-Roman.
 // Departmental notes numbered per-section so designers can reply
@@ -161,6 +162,7 @@ interface Props {
   report: RehearsalReport
   contacts: Contact[]
   paperSize?: PaperSize
+  timeFormat?: TimeFormat
 }
 
 export default function RehearsalReportPdf({
@@ -168,6 +170,7 @@ export default function RehearsalReportPdf({
   report,
   contacts,
   paperSize = 'LETTER',
+  timeFormat = '12h',
 }: Props) {
   const contactName = (id: number) =>
     contacts.find((c) => c.id === id)?.name ?? '(removed)'
@@ -191,7 +194,8 @@ export default function RehearsalReportPdf({
           <View style={styles.headerItem}>
             <Text style={styles.headerLabel}>Time</Text>
             <Text style={styles.headerValue}>
-              {report.startTime}–{report.endTime}
+              {formatTime(report.startTime, timeFormat)}–
+              {formatTime(report.endTime, timeFormat)}
             </Text>
           </View>
           {report.location && (
@@ -231,7 +235,8 @@ export default function RehearsalReportPdf({
             {report.timeBlocks.map((tb, i) => (
               <View key={i} style={styles.timeBlockRow}>
                 <Text style={styles.timeCell}>
-                  {tb.start}–{tb.end}
+                  {formatTime(tb.start, timeFormat)}–
+                  {formatTime(tb.end, timeFormat)}
                 </Text>
                 <Text style={styles.activityCell}>{tb.activity}</Text>
               </View>

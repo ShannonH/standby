@@ -63,7 +63,7 @@ function DailyCallInner() {
 
   async function generateBlob(call: DailyCall): Promise<Blob> {
     if (!production) throw new Error('No production')
-    const paperSize = useAppStore.getState().settings.paperSize
+    const settings = useAppStore.getState().settings
     const [{ pdf }, { default: DailyCallPdf }] = await Promise.all([
       import('@react-pdf/renderer'),
       import('@/features/calls/DailyCallPdf'),
@@ -73,7 +73,8 @@ function DailyCallInner() {
         production={production}
         call={call}
         contacts={contacts}
-        paperSize={paperSize}
+        paperSize={settings.paperSize}
+        timeFormat={settings.timeFormat}
       />,
     ).toBlob()
   }

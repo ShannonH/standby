@@ -3,6 +3,7 @@ import {
   db,
   type Contact,
   type ContactGroup,
+  type LineNote,
   type Production,
   type RehearsalReport,
 } from './db'
@@ -90,5 +91,31 @@ export function useNextDayNumber(
       if (reports.length === 0) return 1
       return Math.max(...reports.map((r) => r.dayNumber)) + 1
     }, [productionId]) ?? 1
+  )
+}
+
+export function useLineNotes(
+  productionId: number | null | undefined,
+): LineNote[] {
+  return (
+    useLiveQuery(async () => {
+      if (productionId === null || productionId === undefined) {
+        return [] as LineNote[]
+      }
+      const notes = await db.lineNotes
+        .where('productionId')
+        .equals(productionId)
+        .toArray()
+      // Sort: undelivered first, then by date descending, then by page.
+      return notes.sort((a, b) => {
+        const aDelivered = a.delivered ? 1 : 0
+        const bDelivered = b.delivered ? 1 : 0
+        if (aDelivered !== bDelivered) return aDelivered - bDelivered
+        if (a.rehearsalDate !== b.rehearsalDate) {
+          return b.rehearsalDate.localeCompare(a.rehearsalDate)
+        }
+        return a.page.localeCompare(b.page, undefined, { numeric: true })
+      })
+    }, [productionId]) ?? []
   )
 }

@@ -125,3 +125,47 @@ export const NOTE_DEPT_LABELS = [
   { key: 'music', label: 'Music' },
   { key: 'production', label: 'Production / Admin' },
 ] as const
+
+// ─── Line notes ────────────────────────────────────────────────────────────
+
+export const lineTypeSchema = z.enum([
+  'paraphrase',
+  'drop',
+  'add',
+  'jump',
+  'missed-cue',
+  'call-line',
+])
+
+export type LineType = z.infer<typeof lineTypeSchema>
+
+export const LINE_TYPE_LABELS: Record<LineType, string> = {
+  paraphrase: 'Paraphrase',
+  drop: 'Dropped line',
+  add: 'Added line',
+  jump: 'Jumped',
+  'missed-cue': 'Missed cue',
+  'call-line': 'Called line',
+}
+
+/** Order line types in the way SMs typically prioritize them. */
+export const LINE_TYPE_ORDER: LineType[] = [
+  'paraphrase',
+  'drop',
+  'add',
+  'jump',
+  'missed-cue',
+  'call-line',
+]
+
+export const lineNoteInputSchema = z.object({
+  rehearsalDate: z.string().min(1, 'Date is required'),
+  page: z.string(),
+  characterId: z.coerce.number().int().positive('Pick a cast member'),
+  lineType: lineTypeSchema,
+  scriptedText: z.string(),
+  spokenText: z.string(),
+  comment: z.string().optional(),
+})
+
+export type LineNoteInput = z.infer<typeof lineNoteInputSchema>

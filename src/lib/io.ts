@@ -2,6 +2,7 @@ import {
   db,
   type Contact,
   type ContactGroup,
+  type LineNote,
   type Production,
   type RehearsalReport,
 } from './db'
@@ -13,8 +14,9 @@ import {
  *
  * v1: initial — production + contacts + contactGroups
  * v2: adds rehearsals
+ * v3: adds lineNotes
  */
-export const SHOW_EXPORT_VERSION = 2
+export const SHOW_EXPORT_VERSION = 3
 
 export interface ShowExport {
   schemaVersion: number
@@ -23,6 +25,7 @@ export interface ShowExport {
   contacts: Contact[]
   contactGroups: ContactGroup[]
   rehearsals: RehearsalReport[]
+  lineNotes: LineNote[]
 }
 
 /** Build a portable JSON snapshot of a single production and its entities. */
@@ -41,6 +44,10 @@ export async function exportShow(productionId: number): Promise<ShowExport> {
     .where('productionId')
     .equals(productionId)
     .toArray()
+  const lineNotes = await db.lineNotes
+    .where('productionId')
+    .equals(productionId)
+    .toArray()
   return {
     schemaVersion: SHOW_EXPORT_VERSION,
     exportedAt: new Date().toISOString(),
@@ -48,6 +55,7 @@ export async function exportShow(productionId: number): Promise<ShowExport> {
     contacts,
     contactGroups,
     rehearsals,
+    lineNotes,
   }
 }
 
@@ -66,7 +74,13 @@ export async function importShow(data: ShowExport): Promise<number> {
   }
   return db.transaction(
     'rw',
-    [db.productions, db.contacts, db.contactGroups, db.rehearsals],
+    [
+      db.productions,
+      db.contacts,
+      db.contactGroups,
+      db.rehearsals,
+      db.lineNotes,
+    ],
     async () => {
       const now = new Date().toISOString()
       const { id: _ignoredProdId, ...productionData } = data.production
@@ -99,9 +113,8 @@ export async function importShow(data: ShowExport): Promise<number> {
         })
       }
 
-      // Rehearsals were added in v2. Older v1 exports won't have this array;
-      // importShow refuses non-current versions outright, so this is always
-      // present at the type level.
+      // Rehearsals were added in v2. importShow refuses non-current
+      // versions outright, so this is always present at the type level.
       for (const rehearsal of data.rehearsals ?? []) {
         const { id: _ignoredRehearsalId, ...rehearsalData } = rehearsal
         void _ignoredRehearsalId
@@ -113,6 +126,19 @@ export async function importShow(data: ShowExport): Promise<number> {
           ...rehearsalData,
           productionId: newProductionId,
           attendance: remappedAttendance,
+        })
+      }
+
+      // Line notes added in v3. characterId points at a contact (cast),
+      // so it needs remapping like attendance.
+      for (const note of data.lineNotes ?? []) {
+        const { id: _ignoredNoteId, ...noteData } = note
+        void _ignoredNoteId
+        await db.lineNotes.add({
+          ...noteData,
+          productionId: newProductionId,
+          characterId:
+            contactIdMap.get(noteData.characterId) ?? noteData.characterId,
         })
       }
 

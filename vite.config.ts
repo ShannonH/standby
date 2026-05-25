@@ -31,7 +31,9 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,svg,woff2}'],
+        // Include .json so bundled sample shows (public/samples/*.standby.json)
+        // are precached and importable offline once the SW has caught them.
+        globPatterns: ['**/*.{js,css,html,svg,woff2,json}'],
       },
     }),
   ],

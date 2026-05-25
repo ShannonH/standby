@@ -1,0 +1,349 @@
+{
+  "schemaVersion": 5,
+  "exportedAt": "2026-05-25T12:00:00.000Z",
+  "production": {
+    "name": "A Midsummer Night's Dream",
+    "workingTitle": "Midsummer",
+    "season": "Summer 2026",
+    "type": "play",
+    "organization": "Sample University Department of Theatre",
+    "venue": "Studio Theatre",
+    "firstRehearsal": "2026-06-01",
+    "designerRun": "2026-06-22",
+    "techStart": "2026-06-25",
+    "firstPreview": "2026-07-06",
+    "opening": "2026-07-08",
+    "closing": "2026-07-19",
+    "equityMode": true,
+    "createdAt": "2026-05-25T12:00:00.000Z",
+    "updatedAt": "2026-05-25T12:00:00.000Z"
+  },
+  "contacts": [
+    { "id": 1, "productionId": 0, "category": "cast", "name": "Avery Singh", "role": "Theseus / Oberon", "email": "avery.singh@sample.edu", "phone": "555-0101", "pronouns": "he/him" },
+    { "id": 2, "productionId": 0, "category": "cast", "name": "Beatrice Lin", "role": "Hippolyta / Titania", "email": "beatrice.lin@sample.edu", "phone": "555-0102", "pronouns": "she/her" },
+    { "id": 3, "productionId": 0, "category": "cast", "name": "Cassidy Brown", "role": "Hermia", "email": "cassidy.brown@sample.edu", "phone": "555-0103", "pronouns": "she/her" },
+    { "id": 4, "productionId": 0, "category": "cast", "name": "Devon Martinez", "role": "Helena", "email": "devon.m@sample.edu", "phone": "555-0104", "pronouns": "they/them" },
+    { "id": 5, "productionId": 0, "category": "cast", "name": "Eli Park", "role": "Lysander", "email": "eli.park@sample.edu", "phone": "555-0105", "pronouns": "he/him" },
+    { "id": 6, "productionId": 0, "category": "cast", "name": "Fiona Reyes", "role": "Demetrius", "email": "fiona.reyes@sample.edu", "phone": "555-0106", "pronouns": "she/her" },
+    { "id": 7, "productionId": 0, "category": "cast", "name": "Gabe Chen", "role": "Puck", "email": "gabe.chen@sample.edu", "phone": "555-0107", "pronouns": "he/him" },
+    { "id": 8, "productionId": 0, "category": "cast", "name": "Harper Quinn", "role": "Bottom", "email": "harper.q@sample.edu", "phone": "555-0108", "pronouns": "they/them" },
+    { "id": 9, "productionId": 0, "category": "cast", "name": "Indigo Patel", "role": "Quince", "email": "indigo.p@sample.edu", "phone": "555-0109", "pronouns": "they/them" },
+    { "id": 10, "productionId": 0, "category": "cast", "name": "Jasper Wong", "role": "Flute", "email": "jasper.w@sample.edu", "phone": "555-0110", "pronouns": "he/him" },
+    { "id": 11, "productionId": 0, "category": "cast", "name": "Kira Davies", "role": "Snout", "email": "kira.d@sample.edu", "phone": "555-0111", "pronouns": "she/her" },
+    { "id": 12, "productionId": 0, "category": "cast", "name": "Leo Hammond", "role": "Starveling", "email": "leo.h@sample.edu", "phone": "555-0112", "pronouns": "he/him" },
+    { "id": 13, "productionId": 0, "category": "creative", "name": "Maya Patel", "role": "Director", "email": "maya.patel@sample.edu", "phone": "555-0200", "pronouns": "she/her" },
+    { "id": 14, "productionId": 0, "category": "creative", "name": "Jordan Lee", "role": "Assistant Director", "email": "jordan.lee@sample.edu", "phone": "555-0201", "pronouns": "they/them" },
+    { "id": 15, "productionId": 0, "category": "creative", "name": "Sofia Chen", "role": "Costume Designer", "email": "sofia.chen@sample.edu", "phone": "555-0202", "pronouns": "she/her" },
+    { "id": 16, "productionId": 0, "category": "creative", "name": "Marcus Webb", "role": "Scenic Designer", "email": "marcus.webb@sample.edu", "phone": "555-0203", "pronouns": "he/him" },
+    { "id": 17, "productionId": 0, "category": "creative", "name": "Riley Park", "role": "Lighting Designer", "email": "riley.park@sample.edu", "phone": "555-0204", "pronouns": "they/them" },
+    { "id": 18, "productionId": 0, "category": "production", "name": "Sam Rivera", "role": "Stage Manager", "email": "sam.rivera@sample.edu", "phone": "555-0300", "pronouns": "she/her" },
+    { "id": 19, "productionId": 0, "category": "production", "name": "Nico Vásquez", "role": "Assistant Stage Manager", "email": "nico.v@sample.edu", "phone": "555-0301", "pronouns": "he/him" },
+    { "id": 20, "productionId": 0, "category": "production", "name": "Taylor Brooks", "role": "Production Manager", "email": "taylor.brooks@sample.edu", "phone": "555-0302", "pronouns": "they/them" },
+    { "id": 21, "productionId": 0, "category": "crew", "name": "Pat Murphy", "role": "Light Board Op", "email": "pat.murphy@sample.edu", "pronouns": "they/them" },
+    { "id": 22, "productionId": 0, "category": "crew", "name": "Quinn Adams", "role": "Sound Board Op", "email": "quinn.adams@sample.edu", "pronouns": "she/her" }
+  ],
+  "contactGroups": [
+    { "id": 1, "productionId": 0, "name": "All Cast", "contactIds": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] },
+    { "id": 2, "productionId": 0, "name": "Designers", "contactIds": [15, 16, 17] },
+    { "id": 3, "productionId": 0, "name": "Creative Team", "contactIds": [13, 14, 15, 16, 17] },
+    { "id": 4, "productionId": 0, "name": "Mechanicals (Cast)", "contactIds": [8, 9, 10, 11, 12] },
+    { "id": 5, "productionId": 0, "name": "Lovers (Cast)", "contactIds": [3, 4, 5, 6] }
+  ],
+  "rehearsals": [
+    {
+      "id": 1,
+      "productionId": 0,
+      "date": "2026-06-01",
+      "dayNumber": 1,
+      "startTime": "18:00",
+      "endTime": "21:00",
+      "location": "Studio Theatre",
+      "attendance": [
+        { "contactId": 1, "status": "present" },
+        { "contactId": 2, "status": "present" },
+        { "contactId": 3, "status": "present" },
+        { "contactId": 4, "status": "present" },
+        { "contactId": 5, "status": "present" },
+        { "contactId": 6, "status": "late", "minutesLate": 8 },
+        { "contactId": 7, "status": "present" },
+        { "contactId": 8, "status": "present" },
+        { "contactId": 9, "status": "present" },
+        { "contactId": 10, "status": "present" },
+        { "contactId": 11, "status": "excused" },
+        { "contactId": 12, "status": "present" }
+      ],
+      "timeBlocks": [
+        { "start": "18:00", "end": "18:15", "activity": "Welcome and introductions" },
+        { "start": "18:15", "end": "20:00", "activity": "First read-through, Acts 1–3" },
+        { "start": "20:00", "end": "20:15", "activity": "Break" },
+        { "start": "20:15", "end": "21:00", "activity": "Read-through Acts 4–5, design presentations" }
+      ],
+      "notes": {
+        "scenic": [
+          { "text": "Marcus walked us through the forest model — could we get the full ground plan to the SMs by Wednesday?" }
+        ],
+        "costumes": [
+          { "text": "Sofia: measurements scheduled for Saturday — cast received the link." }
+        ],
+        "wigsMakeup": [],
+        "props": [
+          { "text": "Discussed the donkey head — Sofia and Marcus aligning on hand-off." }
+        ],
+        "lighting": [
+          { "text": "Riley showed initial sketch for the forest. Strong starting point — director excited." }
+        ],
+        "sound": [],
+        "projections": [],
+        "music": [
+          { "text": "Confirmed no live underscoring; sound design will cover atmosphere." }
+        ],
+        "production": [
+          { "text": "Fiona was 8 minutes late — traffic; confirmed for next call." },
+          { "text": "Kira excused (academic conflict); will catch up on read-through notes Friday." }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "productionId": 0,
+      "date": "2026-06-06",
+      "dayNumber": 5,
+      "startTime": "18:00",
+      "endTime": "22:00",
+      "location": "Studio Theatre",
+      "attendance": [
+        { "contactId": 3, "status": "present" },
+        { "contactId": 4, "status": "present" },
+        { "contactId": 5, "status": "present" },
+        { "contactId": 6, "status": "present" }
+      ],
+      "timeBlocks": [
+        { "start": "18:00", "end": "19:30", "activity": "Block Act 2, Scene 1 — lovers in the woods" },
+        { "start": "19:30", "end": "19:45", "activity": "Break" },
+        { "start": "19:45", "end": "21:00", "activity": "Block Act 3, Scene 2 — confusion of the lovers" },
+        { "start": "21:00", "end": "22:00", "activity": "Run the act with blocking" }
+      ],
+      "notes": {
+        "scenic": [
+          { "text": "The downstage-left tree is in the lovers' main path — could we shift it two feet upstage?" }
+        ],
+        "costumes": [
+          { "text": "Hermia's gown needs to move freely through fight choreography. Sofia attending Friday rehearsal to watch." }
+        ],
+        "wigsMakeup": [],
+        "props": [
+          { "text": "Helena to carry a small lantern in 2.1 — need to confirm practical vs. fake." }
+        ],
+        "lighting": [
+          { "text": "Looking for a chase or shimmer effect for fairy interactions in 2.1." }
+        ],
+        "sound": [
+          { "text": "Wind-and-leaves bed established for forest scenes — Quinn building." }
+        ],
+        "projections": [],
+        "music": [],
+        "production": [
+          { "text": "Full lover scenes blocked. Director thrilled with the chemistry." }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "productionId": 0,
+      "date": "2026-06-12",
+      "dayNumber": 10,
+      "startTime": "18:00",
+      "endTime": "22:00",
+      "location": "Studio Theatre",
+      "attendance": [
+        { "contactId": 8, "status": "present" },
+        { "contactId": 9, "status": "present" },
+        { "contactId": 10, "status": "present" },
+        { "contactId": 11, "status": "present" },
+        { "contactId": 12, "status": "present" }
+      ],
+      "timeBlocks": [
+        { "start": "18:00", "end": "19:00", "activity": "Block Pyramus and Thisbe rehearsal scene (Act 5)" },
+        { "start": "19:00", "end": "20:30", "activity": "Stage the play-within-a-play" },
+        { "start": "20:30", "end": "20:45", "activity": "Break" },
+        { "start": "20:45", "end": "22:00", "activity": "Run with comedy beats and props" }
+      ],
+      "notes": {
+        "scenic": [],
+        "costumes": [
+          { "text": "Bottom's donkey head try-on this week — Sofia coordinating with Marcus." }
+        ],
+        "wigsMakeup": [
+          { "text": "Discussed makeup approach for Pyramus death scene — keep it broad and comic." }
+        ],
+        "props": [
+          { "text": "Need the Wall costume/prop by next Friday — comic timing depends on it." },
+          { "text": "Lion costume hand-prop list updated." }
+        ],
+        "lighting": [
+          { "text": "Theatre-within-the-theatre lighting needs intentional fakeness — discussed." }
+        ],
+        "sound": [],
+        "projections": [],
+        "music": [],
+        "production": [
+          { "text": "Wonderful work tonight — Pyramus rehearsal scene already very funny." }
+        ]
+      }
+    }
+  ],
+  "lineNotes": [
+    {
+      "id": 1, "productionId": 0, "rehearsalDate": "2026-06-06", "page": "47",
+      "characterId": 3, "lineType": "paraphrase",
+      "scriptedText": "I would my father look'd but with my eyes.",
+      "spokenText": "I wish my father saw with my eyes."
+    },
+    {
+      "id": 2, "productionId": 0, "rehearsalDate": "2026-06-06", "page": "52",
+      "characterId": 5, "lineType": "drop",
+      "scriptedText": "Helen, to you our minds we will unfold.",
+      "spokenText": "",
+      "comment": "Dropped the entire line; jumped to the next."
+    },
+    {
+      "id": 3, "productionId": 0, "rehearsalDate": "2026-06-06", "page": "63",
+      "characterId": 4, "lineType": "add",
+      "scriptedText": "O hell! to choose love by another's eyes.",
+      "spokenText": "Oh god — hell! To choose love by another's eyes."
+    },
+    {
+      "id": 4, "productionId": 0, "rehearsalDate": "2026-06-12", "page": "89",
+      "characterId": 8, "lineType": "paraphrase",
+      "scriptedText": "Methought I was, and methought I had —",
+      "spokenText": "Me thought I was, and me thought I had —",
+      "comment": "Two words instead of \"methought\" — minor."
+    },
+    {
+      "id": 5, "productionId": 0, "rehearsalDate": "2026-06-12", "page": "93",
+      "characterId": 9, "lineType": "missed-cue",
+      "scriptedText": "\"Whereat with blade, with bloody blameful blade…\"",
+      "spokenText": "",
+      "comment": "Quince came in late by ~2 seconds. Cue light fired correctly."
+    }
+  ],
+  "props": [
+    {
+      "id": 1, "productionId": 0, "name": "Love-in-idleness flower",
+      "scenes": ["2.1", "3.2", "4.1"],
+      "characters": ["Oberon", "Puck"],
+      "consumable": false,
+      "source": "build",
+      "status": "in-rehearsal",
+      "tableLocation": "SR Props Table, shelf 1",
+      "notes": "Small purple flower with concealed pouch for 'juice' effect"
+    },
+    {
+      "id": 2, "productionId": 0, "name": "Donkey head",
+      "scenes": ["3.1", "3.2", "4.1"],
+      "characters": ["Bottom"],
+      "consumable": false,
+      "source": "rental",
+      "status": "needed",
+      "specialHandling": ["fragile"],
+      "notes": "Rented from Costume Collective; arrives 2026-06-20"
+    },
+    {
+      "id": 3, "productionId": 0, "name": "Hermia's letter",
+      "scenes": ["1.1"],
+      "characters": ["Hermia"],
+      "consumable": true,
+      "source": "build",
+      "status": "sourced",
+      "tableLocation": "SL Props Table",
+      "notes": "Period-style scroll; budget for 12 (1 per performance)"
+    },
+    {
+      "id": 4, "productionId": 0, "name": "Wooden swords (×2)",
+      "scenes": ["3.2"],
+      "characters": ["Lysander", "Demetrius"],
+      "consumable": false,
+      "source": "pulled",
+      "status": "sourced",
+      "specialHandling": ["weapons"],
+      "tableLocation": "SR Props Table, locked cabinet",
+      "notes": "Soft-tipped; fight choreography approved by Riley"
+    },
+    {
+      "id": 5, "productionId": 0, "name": "Fairy lanterns (×6)",
+      "scenes": ["2.1", "3.2"],
+      "characters": ["Fairies (ensemble)"],
+      "consumable": false,
+      "source": "buy",
+      "status": "built",
+      "specialHandling": ["fire"],
+      "tableLocation": "USR Props Closet",
+      "notes": "Battery LED inside; never actual flame on set"
+    },
+    {
+      "id": 6, "productionId": 0, "name": "Wall costume/prop",
+      "scenes": ["5.1"],
+      "characters": ["Snout"],
+      "consumable": false,
+      "source": "build",
+      "status": "in-rehearsal",
+      "specialHandling": ["breakaway"],
+      "notes": "Hand-held; chink in the wall (peephole) must be visible from house"
+    },
+    {
+      "id": 7, "productionId": 0, "name": "Lion costume hand-prop (mane)",
+      "scenes": ["5.1"],
+      "characters": ["Snug"],
+      "consumable": false,
+      "source": "build",
+      "status": "needed",
+      "notes": "Detachable mane Snug can lift in 5.1 — 'my face is my face' joke"
+    },
+    {
+      "id": 8, "productionId": 0, "name": "Goblet (×4)",
+      "scenes": ["1.1", "4.1", "5.1"],
+      "characters": ["Theseus", "Hippolyta"],
+      "consumable": false,
+      "source": "pulled",
+      "status": "sourced",
+      "tableLocation": "SL Props Table",
+      "notes": "Pewter; cleaning between performances"
+    },
+    {
+      "id": 9, "productionId": 0, "name": "Stage blood (vial)",
+      "scenes": ["5.1"],
+      "characters": ["Pyramus (Bottom)", "Thisbe (Flute)"],
+      "consumable": true,
+      "source": "buy",
+      "status": "sourced",
+      "specialHandling": ["liquid"],
+      "notes": "Karo-syrup based; one vial per performance for spillage and timing"
+    }
+  ],
+  "sendLog": [
+    {
+      "id": 1, "productionId": 0,
+      "sentAt": "2026-06-01T22:30:00.000Z",
+      "artifact": "Rehearsal Report — Day 1",
+      "recipientGroup": "Creative Team",
+      "recipientCount": 5,
+      "pdfFilename": "A_Midsummer_Night_s_Dream-rehearsal-day-1.pdf"
+    },
+    {
+      "id": 2, "productionId": 0,
+      "sentAt": "2026-06-06T22:45:00.000Z",
+      "artifact": "Rehearsal Report — Day 5",
+      "recipientGroup": "Creative Team",
+      "recipientCount": 5,
+      "pdfFilename": "A_Midsummer_Night_s_Dream-rehearsal-day-5.pdf"
+    },
+    {
+      "id": 3, "productionId": 0,
+      "sentAt": "2026-06-12T22:30:00.000Z",
+      "artifact": "Rehearsal Report — Day 10",
+      "recipientGroup": "Creative Team",
+      "recipientCount": 5,
+      "pdfFilename": "A_Midsummer_Night_s_Dream-rehearsal-day-10.pdf"
+    }
+  ]
+}

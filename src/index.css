@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family:
+      'EB Garamond',
+      'Garamond',
+      Georgia,
+      'Times New Roman',
+      serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family:
+      'EB Garamond',
+      'Garamond',
+      Georgia,
+      'Times New Roman',
+      serif;
+  }
+}
+
+/* Print stylesheet — letter paper, Broadway-PSM packet aesthetic */
+@media print {
+  @page {
+    size: letter;
+    margin: 0.75in;
+  }
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  .print\:hidden {
+    display: none !important;
+  }
+}

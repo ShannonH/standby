@@ -27,24 +27,26 @@ function initialTheme(): Theme {
     : 'light'
 }
 
-/** A rotating SM call under the wordmark. One is picked per page load —
- *  the SM gets a different call each time they refresh, like flipping
- *  through a prompt corner card deck. Italics for the literal stage-call
- *  lines, plain for the descriptive ones. */
+/** A rotating SM call under the wordmark. One is picked per page load,
+ *  so the SM sees a different call each refresh, like flipping through a
+ *  deck of stage-management calls. Italics on the literal calls so they
+ *  read like the SM is actually saying them; plain text on descriptive
+ *  lines. */
 const TAGLINES: ReadonlyArray<{ text: string; italic?: boolean }> = [
   { text: 'Standing by.', italic: true },
-  { text: 'From the prompt corner.' },
-  { text: 'Calling the show.' },
+  { text: 'Places, please.', italic: true },
   { text: 'Hold for places.', italic: true },
-  { text: 'Quiet on book.', italic: true },
   { text: 'Half hour, please.', italic: true },
   { text: 'Top of show.', italic: true },
-  { text: 'On book, off email.' },
+  { text: 'Open the house.', italic: true },
+  { text: 'Quiet on book.', italic: true },
+  { text: 'Off headset.', italic: true },
   { text: 'Cue 1, GO.', italic: true },
   { text: 'Standby — and… GO.', italic: true },
+  { text: 'Calling the show.' },
+  { text: 'On book, off email.' },
   { text: 'No more rehearsal-report emails at midnight.' },
   { text: 'Notes for the company.' },
-  { text: 'The prompt book lives here now.' },
   { text: 'Made for the booth.' },
 ]
 

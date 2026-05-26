@@ -210,6 +210,44 @@ export interface DailyCall {
   scheduleItems: DailyCallScheduleItem[]
 }
 
+// ─── Master tracking sheet ─────────────────────────────────────────────────
+//
+// The ASM's bible during tech and run: who enters/exits where, what they're
+// carrying, what the crew is doing in support. Each TrackingEntry is one
+// event. If three actors enter together at the same moment, that's ONE entry
+// with three contactIds, not three rows — the spreadsheet shape with "merged
+// cells" disappears in favor of a clean data model.
+
+export type TrackingEntryKind =
+  | 'entry' // regular entrance / exit / crossover
+  | 'scene-shift' // gray divider in the table, used as a section break
+  | 'crew' // yellow row in the table — a crew action, not an actor action
+
+export interface TrackingEntry {
+  id?: number
+  productionId: number
+  /** Stable ordering across the whole show. Lower = earlier. */
+  sequence: number
+  /** Script page reference. "11", "12a", "5.1" — freeform string. */
+  page: string
+  kind: TrackingEntryKind
+  /** Actor / crew references. Empty for scene-shift rows that only need a label. */
+  contactIds: number[]
+  /** Used when the "who" is a crew or character not in the contacts table.
+   *  Renders verbatim in the WHO column when present. */
+  whoOverride?: string
+  /** What action — "ENT", "EXT", "EXT/ENT", "grab coin pouch", etc.
+   *  Freeform string so house conventions are honored. */
+  what: string
+  /** Where — backstage position code. "RW", "LW", "LCAP", "ARB", etc.
+   *  Freeform string. */
+  where: string
+  /** Scene label for scene-shift rows ("SCENE SHIFT", "Act 2 — top", etc.). */
+  sceneLabel?: string
+  /** Freeform notes — prop hand-offs, costume change reminders, etc. */
+  notes?: string
+}
+
 /** Key-value settings table — currently holds the auto-backup directory
  *  handle (a FileSystemDirectoryHandle is structured-clonable, so it
  *  persists across reloads). Keep keys namespaced like 'autoBackup:dir'. */
@@ -228,6 +266,7 @@ class StandbyDB extends Dexie {
   sendLog!: EntityTable<SendLogEntry, 'id'>
   settings!: EntityTable<SettingsEntry, 'key'>
   dailyCalls!: EntityTable<DailyCall, 'id'>
+  tracking!: EntityTable<TrackingEntry, 'id'>
 
   constructor() {
     super('standby')
@@ -250,7 +289,6 @@ class StandbyDB extends Dexie {
       sendLog: '++id, productionId, sentAt, artifact',
       settings: '&key',
     })
-    // v3: adds dailyCalls.
     this.version(3).stores({
       productions: '++id, name',
       contacts: '++id, productionId, category, name',
@@ -261,6 +299,19 @@ class StandbyDB extends Dexie {
       sendLog: '++id, productionId, sentAt, artifact',
       settings: '&key',
       dailyCalls: '++id, productionId, date, version',
+    })
+    // v4: adds tracking.
+    this.version(4).stores({
+      productions: '++id, name',
+      contacts: '++id, productionId, category, name',
+      contactGroups: '++id, productionId, name',
+      props: '++id, productionId, name, status',
+      lineNotes: '++id, productionId, rehearsalDate, characterId, delivered',
+      rehearsals: '++id, productionId, date, dayNumber',
+      sendLog: '++id, productionId, sentAt, artifact',
+      settings: '&key',
+      dailyCalls: '++id, productionId, date, version',
+      tracking: '++id, productionId, sequence, page, kind',
     })
   }
 }
@@ -282,6 +333,7 @@ export async function deleteProductionCascade(productionId: number): Promise<voi
       db.rehearsals,
       db.sendLog,
       db.dailyCalls,
+      db.tracking,
     ],
     async () => {
       await db.contacts.where('productionId').equals(productionId).delete()
@@ -291,6 +343,7 @@ export async function deleteProductionCascade(productionId: number): Promise<voi
       await db.rehearsals.where('productionId').equals(productionId).delete()
       await db.sendLog.where('productionId').equals(productionId).delete()
       await db.dailyCalls.where('productionId').equals(productionId).delete()
+      await db.tracking.where('productionId').equals(productionId).delete()
       await db.productions.delete(productionId)
     },
   )

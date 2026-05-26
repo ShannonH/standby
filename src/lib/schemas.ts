@@ -289,6 +289,72 @@ export const dailyCallInputSchema = z.object({
 
 export type DailyCallInput = z.infer<typeof dailyCallInputSchema>
 
+// ─── Master tracking ───────────────────────────────────────────────────────
+
+export const trackingEntryKindSchema = z.enum([
+  'entry',
+  'scene-shift',
+  'crew',
+])
+
+export type TrackingEntryKind = z.infer<typeof trackingEntryKindSchema>
+
+export const TRACKING_KIND_LABELS: Record<TrackingEntryKind, string> = {
+  entry: 'Entry',
+  'scene-shift': 'Scene shift',
+  crew: 'Crew action',
+}
+
+/** Common "WHAT" values offered as auto-complete suggestions; user can type
+ *  any string they want. */
+export const COMMON_TRACKING_WHATS = [
+  'ENT',
+  'EXT',
+  'ENT/EXT',
+  'EXT/ENT',
+  'CROSS',
+  'SET',
+  'STRIKE',
+  'GRAB',
+  'HAND-OFF',
+] as const
+
+/** Common "WHERE" values offered as auto-complete suggestions; user can type
+ *  any string they want. Different houses use different position codes. */
+export const COMMON_TRACKING_WHERES = [
+  'SR',
+  'SL',
+  'CS',
+  'RW',
+  'LW',
+  'CW',
+  'USR',
+  'USL',
+  'DSR',
+  'DSL',
+  'LCAP',
+  'RCAP',
+  'CD',
+  'ARB',
+  'CD',
+  'RA',
+  'LA',
+] as const
+
+export const trackingEntryInputSchema = z.object({
+  sequence: z.coerce.number().int().nonnegative(),
+  page: z.string(),
+  kind: trackingEntryKindSchema,
+  contactIds: z.array(z.number().int().positive()),
+  whoOverride: z.string().optional(),
+  what: z.string(),
+  where: z.string(),
+  sceneLabel: z.string().optional(),
+  notes: z.string().optional(),
+})
+
+export type TrackingEntryInput = z.infer<typeof trackingEntryInputSchema>
+
 /**
  * Form-shaped schema for the prop editor. scenes/characters use a comma-
  * separated string for ergonomic typing; specialHandling expands to one

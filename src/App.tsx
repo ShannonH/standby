@@ -15,6 +15,7 @@ const nav: readonly NavItem[] = [
   { to: '/rehearsals', label: 'Rehearsals' },
   { to: '/line-notes', label: 'Line notes' },
   { to: '/props', label: 'Props' },
+  { to: '/tracking', label: 'Tracking' },
   { to: '/settings', label: 'Settings' },
 ]
 

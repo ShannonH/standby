@@ -9,6 +9,7 @@ import {
   type Prop,
   type RehearsalReport,
   type SendLogEntry,
+  type TrackingEntry,
 } from './db'
 import { useAppStore } from './store'
 
@@ -144,6 +145,41 @@ export function useNextCallVersion(
       if (sameDate.length === 0) return 1
       return Math.max(...sameDate.map((c) => c.version)) + 1
     }, [productionId, date]) ?? 1
+  )
+}
+
+export function useTrackingEntries(
+  productionId: number | null | undefined,
+): TrackingEntry[] {
+  return (
+    useLiveQuery(async () => {
+      if (productionId === null || productionId === undefined) {
+        return [] as TrackingEntry[]
+      }
+      const entries = await db.tracking
+        .where('productionId')
+        .equals(productionId)
+        .toArray()
+      return entries.sort((a, b) => a.sequence - b.sequence)
+    }, [productionId]) ?? []
+  )
+}
+
+/** Next sequence number to use for a new tracking entry in this production. */
+export function useNextTrackingSequence(
+  productionId: number | null | undefined,
+): number {
+  return (
+    useLiveQuery(async () => {
+      if (productionId === null || productionId === undefined) return 10
+      const entries = await db.tracking
+        .where('productionId')
+        .equals(productionId)
+        .toArray()
+      if (entries.length === 0) return 10
+      // Step by 10 so manually inserting between two rows is easy.
+      return Math.max(...entries.map((e) => e.sequence)) + 10
+    }, [productionId]) ?? 10
   )
 }
 

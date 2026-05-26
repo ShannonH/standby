@@ -8,6 +8,7 @@ import {
   type Prop,
   type RehearsalReport,
   type SendLogEntry,
+  type TrackingEntry,
 } from './db'
 
 /**
@@ -21,8 +22,9 @@ import {
  * v4: adds props
  * v5: adds sendLog
  * v6: adds dailyCalls
+ * v7: adds tracking
  */
-export const SHOW_EXPORT_VERSION = 6
+export const SHOW_EXPORT_VERSION = 7
 
 export interface ShowExport {
   schemaVersion: number
@@ -35,6 +37,7 @@ export interface ShowExport {
   props: Prop[]
   sendLog: SendLogEntry[]
   dailyCalls: DailyCall[]
+  tracking: TrackingEntry[]
 }
 
 /** Build a portable JSON snapshot of a single production and its entities. */
@@ -69,6 +72,10 @@ export async function exportShow(productionId: number): Promise<ShowExport> {
     .where('productionId')
     .equals(productionId)
     .toArray()
+  const tracking = await db.tracking
+    .where('productionId')
+    .equals(productionId)
+    .toArray()
   return {
     schemaVersion: SHOW_EXPORT_VERSION,
     exportedAt: new Date().toISOString(),
@@ -80,6 +87,7 @@ export async function exportShow(productionId: number): Promise<ShowExport> {
     props,
     sendLog,
     dailyCalls,
+    tracking,
   }
 }
 
@@ -107,6 +115,7 @@ export async function importShow(data: ShowExport): Promise<number> {
       db.props,
       db.sendLog,
       db.dailyCalls,
+      db.tracking,
     ],
     async () => {
       const now = new Date().toISOString()
@@ -210,6 +219,19 @@ export async function importShow(data: ShowExport): Promise<number> {
           productionId: newProductionId,
           callTimes: remappedCallTimes,
           scheduleItems: remappedScheduleItems,
+        })
+      }
+
+      // Tracking entries added in v7. contactIds get remapped.
+      for (const entry of data.tracking ?? []) {
+        const { id: _ignoredId, ...entryData } = entry
+        void _ignoredId
+        const remappedContactIds = entryData.contactIds
+          .map((id) => contactIdMap.get(id) ?? id)
+        await db.tracking.add({
+          ...entryData,
+          productionId: newProductionId,
+          contactIds: remappedContactIds,
         })
       }
 

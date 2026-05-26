@@ -10,6 +10,7 @@ import DailyCall from './routes/DailyCall'
 import LineNotes from './routes/LineNotes'
 import Props from './routes/Props'
 import Settings from './routes/Settings'
+import Tracking from './routes/Tracking'
 import './index.css'
 
 const router = createBrowserRouter(
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
         { path: 'daily-call', element: <DailyCall /> },
         { path: 'line-notes', element: <LineNotes /> },
         { path: 'props', element: <Props /> },
+        { path: 'tracking', element: <Tracking /> },
         { path: 'settings', element: <Settings /> },
       ],
     },

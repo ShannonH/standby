@@ -1,0 +1,208 @@
+import {
+  Document,
+  Page,
+  StyleSheet,
+  Text,
+  View,
+} from '@react-pdf/renderer'
+import type { Contact, Production, TrackingEntry } from '@/lib/db'
+import type { PaperSize } from '@/lib/settings'
+
+// Per-actor track handout — the actor's personal "what do I do, when, and
+// where" reference. Auto-derived from the master tracking sheet.
+
+const STAGE_RED = '#b91c1c'
+
+const styles = StyleSheet.create({
+  page: {
+    fontFamily: 'Times-Roman',
+    fontSize: 10,
+    paddingHorizontal: 54,
+    paddingVertical: 54,
+    lineHeight: 1.4,
+  },
+  title: {
+    fontFamily: 'Times-Bold',
+    fontSize: 16,
+    marginBottom: 2,
+  },
+  subtitle: {
+    fontSize: 10,
+    color: '#555',
+    marginBottom: 4,
+  },
+  actorBlock: {
+    fontFamily: 'Times-Bold',
+    fontSize: 13,
+    marginTop: 8,
+    marginBottom: 12,
+    color: STAGE_RED,
+  },
+  introCopy: {
+    fontSize: 9,
+    color: '#555',
+    marginBottom: 16,
+    fontStyle: 'italic',
+  },
+  tableHead: {
+    flexDirection: 'row',
+    fontFamily: 'Times-Bold',
+    fontSize: 8,
+    color: '#555',
+    paddingVertical: 3,
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#999',
+  },
+  row: {
+    flexDirection: 'row',
+    paddingVertical: 4,
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#e7e5e4',
+  },
+  sceneShiftRow: {
+    backgroundColor: '#e7e5e4',
+    paddingVertical: 3,
+    paddingHorizontal: 4,
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#a8a29e',
+    textAlign: 'center',
+    fontFamily: 'Times-Bold',
+    fontSize: 9,
+    letterSpacing: 1,
+    textTransform: 'uppercase',
+    color: '#555',
+  },
+  cellPage: { width: '10%', color: '#666' },
+  cellWhat: { width: '20%' },
+  cellWhere: { width: '15%' },
+  cellNotes: { width: '55%' },
+  empty: {
+    fontStyle: 'italic',
+    color: '#666',
+    marginTop: 12,
+  },
+  footer: {
+    position: 'absolute',
+    bottom: 36,
+    left: 54,
+    right: 54,
+    fontSize: 8,
+    color: '#888',
+    textAlign: 'center',
+    borderTopWidth: 0.5,
+    borderTopColor: '#bbb',
+    paddingTop: 6,
+  },
+  pageNumber: {
+    position: 'absolute',
+    bottom: 24,
+    right: 54,
+    fontSize: 8,
+    color: '#888',
+  },
+})
+
+interface Props {
+  production: Production
+  actor: Contact
+  /** Pre-filtered to entries that involve this actor, plus scene-shift
+   *  markers retained for structural context. */
+  entries: TrackingEntry[]
+  paperSize?: PaperSize
+}
+
+export default function PerActorTrackPdf({
+  production,
+  actor,
+  entries,
+  paperSize = 'LETTER',
+}: Props) {
+  const today = new Date().toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
+
+  // Strip leading and trailing scene-shifts (they add no info around the
+  // actor's actual entries).
+  const trimmed = trimSceneShifts(entries)
+
+  // Only show "real" entries the actor is in; scene-shifts give structure.
+  const realEntries = trimmed.filter((e) => e.kind !== 'scene-shift')
+
+  return (
+    <Document
+      title={`${production.name} — Track for ${actor.name}`}
+      author="Standby"
+    >
+      <Page size={paperSize} style={styles.page}>
+        <Text style={styles.title}>{production.name}</Text>
+        <Text style={styles.subtitle}>Personal Track · Issued {today}</Text>
+
+        <Text style={styles.actorBlock}>
+          {actor.name}
+          {actor.role ? ` — ${actor.role}` : ''}
+        </Text>
+
+        <Text style={styles.introCopy}>
+          This is your personal track, pulled from the master tracking sheet.
+          It shows the entrances, exits, and crew hand-offs you're involved
+          in, in order. Scene-shift dividers are included as structural
+          markers.
+        </Text>
+
+        {realEntries.length === 0 ? (
+          <Text style={styles.empty}>
+            No tracking entries reference you yet. The SM will update this
+            once the master sheet has more rows.
+          </Text>
+        ) : (
+          <>
+            <View style={styles.tableHead}>
+              <Text style={styles.cellPage}>PAGE</Text>
+              <Text style={styles.cellWhat}>WHAT</Text>
+              <Text style={styles.cellWhere}>WHERE</Text>
+              <Text style={styles.cellNotes}>NOTES</Text>
+            </View>
+            {trimmed.map((e, i) => {
+              if (e.kind === 'scene-shift') {
+                return (
+                  <Text key={i} style={styles.sceneShiftRow}>
+                    {e.sceneLabel || 'SCENE SHIFT'}
+                  </Text>
+                )
+              }
+              return (
+                <View key={i} style={styles.row} wrap={false}>
+                  <Text style={styles.cellPage}>{e.page}</Text>
+                  <Text style={styles.cellWhat}>{e.what}</Text>
+                  <Text style={styles.cellWhere}>{e.where}</Text>
+                  <Text style={styles.cellNotes}>{e.notes ?? ''}</Text>
+                </View>
+              )
+            })}
+          </>
+        )}
+
+        <Text style={styles.footer} fixed>
+          {production.name} · Track for {actor.name} · Generated by Standby
+        </Text>
+        <Text
+          style={styles.pageNumber}
+          render={({ pageNumber, totalPages }) =>
+            `${pageNumber} / ${totalPages}`
+          }
+          fixed
+        />
+      </Page>
+    </Document>
+  )
+}
+
+function trimSceneShifts(entries: TrackingEntry[]): TrackingEntry[] {
+  let start = 0
+  let end = entries.length
+  while (start < end && entries[start]!.kind === 'scene-shift') start++
+  while (end > start && entries[end - 1]!.kind === 'scene-shift') end--
+  return entries.slice(start, end)
+}

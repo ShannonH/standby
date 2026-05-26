@@ -9,6 +9,10 @@ interface Props {
   onEdit: (reportId: number) => void
   onDistribute: (reportId: number) => void
   onDownloadPdf: (report: RehearsalReport) => Promise<void>
+  /** When the list is empty, the empty state renders a centered "+ New
+   *  rehearsal report" button calling this. Lets the route file hide its
+   *  header button so we don't double-show the CTA. */
+  onCreate?: () => void
 }
 
 function totalNotes(report: RehearsalReport): number {
@@ -34,18 +38,23 @@ export default function RehearsalReportList({
   onEdit,
   onDistribute,
   onDownloadPdf,
+  onCreate,
 }: Props) {
   const reports = useRehearsals(productionId)
   const timeFormat = useAppStore((s) => s.settings.timeFormat)
 
   if (reports.length === 0) {
     return (
-      <p className="rounded border border-dashed border-surface-border p-6 text-center text-sm text-muted">
-        No rehearsal reports yet. After a rehearsal, hit "+ New rehearsal
-        report" to capture attendance, what you worked, and notes for each
-        department. The form pre-fills today's date and increments the day
-        number for you.
-      </p>
+      <div className="flex flex-col items-center gap-4 rounded border border-dashed border-surface-border p-10 text-center">
+        <p className="max-w-md text-sm text-muted">
+          No rehearsal reports yet. After a rehearsal, capture attendance,
+          what you worked, and notes for each department. The form pre-fills
+          today's date and increments the day number for you.
+        </p>
+        {onCreate && (
+          <Button onClick={onCreate}>+ New rehearsal report</Button>
+        )}
+      </div>
     )
   }
 

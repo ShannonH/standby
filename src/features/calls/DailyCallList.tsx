@@ -8,6 +8,8 @@ interface Props {
   onDistribute: (id: number) => void
   onDownloadPdf: (call: DailyCall) => Promise<void>
   onDuplicate: (call: DailyCall) => void
+  /** Empty-state CTA — see RehearsalReportList for the pattern. */
+  onCreate?: () => void
 }
 
 function formatDate(iso: string): string {
@@ -27,16 +29,20 @@ export default function DailyCallList({
   onDistribute,
   onDownloadPdf,
   onDuplicate,
+  onCreate,
 }: Props) {
   const calls = useDailyCalls(productionId)
 
   if (calls.length === 0) {
     return (
-      <p className="rounded border border-dashed border-surface-border p-6 text-center text-sm text-muted">
-        No daily calls yet. The night before each rehearsal, "+ New daily
-        call" generates one pre-filled with today's cast and a default call
-        time you can stagger per person.
-      </p>
+      <div className="flex flex-col items-center gap-4 rounded border border-dashed border-surface-border p-10 text-center">
+        <p className="max-w-md text-sm text-muted">
+          No daily calls yet. The night before each rehearsal, generate one
+          pre-filled with today's cast and a default call time you can
+          stagger per person.
+        </p>
+        {onCreate && <Button onClick={onCreate}>+ New daily call</Button>}
+      </div>
     )
   }
 

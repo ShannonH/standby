@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   useFieldArray,
   useForm,
@@ -81,6 +82,12 @@ export default function RehearsalReportForm({
   const attendance = useFieldArray({ control, name: 'attendance' })
   const timeBlocks = useFieldArray({ control, name: 'timeBlocks' })
 
+  // Brief "Saved ✓" confirmation between db write and navigation. Without
+  // it the form just disappears, which can leave the SM unsure whether
+  // anything happened — particularly anxious-making for the long form
+  // after 30 minutes of note entry.
+  const [justSaved, setJustSaved] = useState(false)
+
   const onSubmit = async (data: RehearsalReportInput) => {
     const payload: Omit<RehearsalReport, 'id'> = {
       productionId,
@@ -103,7 +110,10 @@ export default function RehearsalReportForm({
       )) as number
     }
     void maybePublishRehearsalReport(productionId, reportId)
-    onSaved?.()
+    setJustSaved(true)
+    // Hold the "Saved ✓" state long enough for the user to register it,
+    // then unmount the form via onSaved (route switches back to list).
+    window.setTimeout(() => onSaved?.(), 900)
   }
 
   function contactName(contactId: number): string {
@@ -256,10 +266,16 @@ export default function RehearsalReportForm({
       </section>
 
       <div className="flex flex-wrap items-center gap-3 border-t border-surface-border pt-6">
-        <Button type="submit" disabled={isSubmitting}>
-          {report ? 'Save changes' : 'Save rehearsal report'}
+        <Button type="submit" disabled={isSubmitting || justSaved}>
+          {justSaved
+            ? 'Saved ✓'
+            : isSubmitting
+              ? 'Saving…'
+              : report
+                ? 'Save changes'
+                : 'Save rehearsal report'}
         </Button>
-        {onCancel && (
+        {onCancel && !justSaved && (
           <Button variant="ghost" onClick={onCancel}>
             Cancel
           </Button>

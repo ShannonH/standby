@@ -1,19 +1,11 @@
 import { db } from '@/lib/db'
 import { useSendLog } from '@/lib/hooks'
+import { relativeTime } from '@/lib/relative-time'
 import { IconButton, TrashIcon } from '@/components/Form'
 
 interface Props {
   productionId: number
   limit?: number
-}
-
-function formatTimestamp(iso: string): string {
-  return new Date(iso).toLocaleString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: '2-digit',
-  })
 }
 
 export default function SendLogList({ productionId, limit = 20 }: Props) {
@@ -39,7 +31,13 @@ export default function SendLogList({ productionId, limit = 20 }: Props) {
             <div className="min-w-0">
               <p className="text-sm font-medium">{e.artifact}</p>
               <p className="text-xs text-muted">
-                {formatTimestamp(e.sentAt)} ·{' '}
+                <time
+                  dateTime={e.sentAt}
+                  title={new Date(e.sentAt).toLocaleString()}
+                >
+                  {relativeTime(e.sentAt)}
+                </time>{' '}
+                ·{' '}
                 <span className="font-medium">{e.recipientGroup}</span> ·{' '}
                 {e.recipientCount} recipient
                 {e.recipientCount === 1 ? '' : 's'}

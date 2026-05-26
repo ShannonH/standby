@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   useFieldArray,
   useForm,
@@ -104,6 +105,10 @@ export default function ShowReportForm({
   const incidents = useFieldArray({ control, name: 'incidents' })
   const understudies = useFieldArray({ control, name: 'understudyChanges' })
 
+  // Brief "Saved ✓" confirmation between db write and navigation — see
+  // RehearsalReportForm for the same pattern.
+  const [justSaved, setJustSaved] = useState(false)
+
   const onSubmit = async (data: ShowReportInput) => {
     const payload: Omit<ShowReport, 'id'> = {
       productionId,
@@ -130,7 +135,8 @@ export default function ShowReportForm({
       reportId = (await db.showReports.add(payload as ShowReport)) as number
     }
     void maybePublishShowReport(productionId, reportId)
-    onSaved?.()
+    setJustSaved(true)
+    window.setTimeout(() => onSaved?.(), 900)
   }
 
   return (
@@ -510,10 +516,16 @@ export default function ShowReportForm({
       </section>
 
       <div className="flex flex-wrap items-center gap-3 border-t border-surface-border pt-6">
-        <Button type="submit" disabled={isSubmitting}>
-          {report ? 'Save changes' : 'Save show report'}
+        <Button type="submit" disabled={isSubmitting || justSaved}>
+          {justSaved
+            ? 'Saved ✓'
+            : isSubmitting
+              ? 'Saving…'
+              : report
+                ? 'Save changes'
+                : 'Save show report'}
         </Button>
-        {onCancel && (
+        {onCancel && !justSaved && (
           <Button variant="ghost" onClick={onCancel}>
             Cancel
           </Button>

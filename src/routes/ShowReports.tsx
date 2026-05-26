@@ -100,7 +100,7 @@ function ShowReportsInner() {
               the same "Re: Costumes #3" numbering convention.
             </p>
           </div>
-          {mode.kind === 'list' && (
+          {mode.kind === 'list' && reports.length > 0 && (
             <Button onClick={() => setMode({ kind: 'new' })}>
               + New show report
             </Button>
@@ -114,6 +114,7 @@ function ShowReportsInner() {
           onEdit={(id) => setMode({ kind: 'edit', id })}
           onDistribute={(id) => setMode({ kind: 'distribute', id })}
           onDownloadPdf={downloadPdf}
+          onCreate={() => setMode({ kind: 'new' })}
         />
       )}
 

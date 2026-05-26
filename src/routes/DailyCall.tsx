@@ -122,7 +122,7 @@ function DailyCallInner() {
               in the email body.
             </p>
           </div>
-          {mode.kind === 'list' && (
+          {mode.kind === 'list' && calls.length > 0 && (
             <Button onClick={() => setMode({ kind: 'new' })}>
               + New daily call
             </Button>
@@ -137,6 +137,7 @@ function DailyCallInner() {
           onDistribute={(id) => setMode({ kind: 'distribute', id })}
           onDuplicate={duplicate}
           onDownloadPdf={downloadPdf}
+          onCreate={() => setMode({ kind: 'new' })}
         />
       )}
 

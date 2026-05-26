@@ -99,7 +99,7 @@ function RehearsalsInner() {
               Department sections only appear in the PDF if they have notes.
             </p>
           </div>
-          {mode.kind === 'list' && (
+          {mode.kind === 'list' && reports.length > 0 && (
             <Button onClick={() => setMode({ kind: 'new' })}>
               + New rehearsal report
             </Button>
@@ -113,6 +113,7 @@ function RehearsalsInner() {
           onEdit={(id) => setMode({ kind: 'edit', id })}
           onDistribute={(id) => setMode({ kind: 'distribute', id })}
           onDownloadPdf={downloadPdf}
+          onCreate={() => setMode({ kind: 'new' })}
         />
       )}
 

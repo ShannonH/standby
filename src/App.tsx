@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import AutoBackupSync from '@/components/AutoBackupSync'
+import BackToTop from '@/components/BackToTop'
 import { useCurrentProduction } from '@/lib/hooks'
 import { requestPersistentStorage } from '@/lib/persistent-storage'
 import { useAppStore } from '@/lib/store'
@@ -198,7 +199,15 @@ export default function App() {
             <line x1="3" y1="14" x2="17" y2="14" />
           </svg>
         </button>
-        <h1 className="font-display text-xl">Standby</h1>
+        <h1 className="font-display text-xl">
+          <NavLink
+            to="/"
+            end
+            className="rounded focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[rgb(var(--accent))]"
+          >
+            Standby
+          </NavLink>
+        </h1>
         {/* Spacer so the wordmark visually centers — same width as the
             hamburger button (40px = p-2 around 20px icon). */}
         <span aria-hidden="true" className="w-10" />
@@ -206,27 +215,38 @@ export default function App() {
 
       {/* Desktop sidebar — visible at ≥sm. */}
       <aside className="hidden w-56 shrink-0 border-r border-surface-border bg-card p-4 print:hidden sm:flex sm:flex-col">
-        <h1 className="mb-1 font-display text-2xl">Standby</h1>
+        <h1 className="mb-1 font-display text-2xl">
+          <NavLink
+            to="/"
+            end
+            className="rounded focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[rgb(var(--accent))]"
+          >
+            Standby
+          </NavLink>
+        </h1>
         {navList}
       </aside>
 
-      {/* Mobile drawer — overlay panel that slides in from the left. The
-          backdrop is a sibling button so click-outside closes the
-          drawer; the panel itself stops propagation. */}
+      {/* Mobile drawer — overlay panel that slides in from the left on
+          open. The backdrop is a sibling button so click-outside closes
+          the drawer. Both backdrop and panel use one-shot mount-time
+          animations defined in index.css; we don't animate close because
+          the unmount path is fast enough that an exit animation just
+          delays focus restoration. prefers-reduced-motion disables both. */}
       {mobileNavOpen && (
         <div className="fixed inset-0 z-50 sm:hidden" role="presentation">
           <button
             type="button"
             aria-label="Close navigation menu"
             onClick={() => setMobileNavOpen(false)}
-            className="absolute inset-0 bg-black/60"
+            className="animate-backdrop-fade-in absolute inset-0 bg-black/60"
           />
           <div
             id="mobile-nav-drawer"
             role="dialog"
             aria-modal="true"
             aria-label="Navigation"
-            className="absolute inset-y-0 left-0 flex w-72 max-w-[85%] flex-col border-r border-surface-border bg-card p-4 shadow-2xl"
+            className="animate-drawer-slide-in absolute inset-y-0 left-0 flex w-72 max-w-[85%] flex-col border-r border-surface-border bg-card p-4 shadow-2xl"
           >
             <div className="mb-4 flex items-center justify-end">
               <button
@@ -259,6 +279,7 @@ export default function App() {
       <main className="flex-1 overflow-y-auto p-6 sm:p-10">
         <Outlet />
       </main>
+      <BackToTop />
       <AutoBackupSync />
     </div>
   )

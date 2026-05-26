@@ -96,9 +96,12 @@ export default function ContactList({ productionId }: Props) {
         const list = grouped[cat]
         if (list.length === 0) return null
         return (
-          <section key={cat}>
-            <h3 className="mb-2 font-display text-lg">
-              {CATEGORY_LABELS[cat]}
+          <section key={cat} className="space-y-3">
+            <h3 className="flex items-baseline gap-2 font-display text-2xl">
+              <span>{CATEGORY_LABELS[cat]}</span>
+              <span className="text-base font-normal text-muted">
+                ({list.length})
+              </span>
             </h3>
             <ul className="divide-y divide-surface-border rounded border border-surface-border">
               {list.map((c) => (

@@ -10,6 +10,7 @@ export type Theme =
   | 'greenroom'
   | 'marquee'
   | 'rosewood'
+  | 'raynebow'
   | 'sampler'
 export type PaperSize = 'LETTER' | 'A4'
 export type TimeFormat = '12h' | '24h'
@@ -123,6 +124,15 @@ export const THEMES: Record<Theme, ThemeMeta> = {
     displayFont: 'Caveat',
     bodyFont: 'Nunito',
   },
+  raynebow: {
+    label: 'Raynebow',
+    description:
+      'Handwritten headings rendered as a real rainbow gradient. Pastel surfaces, hot-pink accent, generous rounded corners.',
+    swatch: '#ec4899',
+    tagline: 'Curtain’s a vibe.',
+    displayFont: 'Caveat',
+    bodyFont: 'Outfit',
+  },
 }
 
 export const THEME_ORDER: Theme[] = [
@@ -133,6 +143,7 @@ export const THEME_ORDER: Theme[] = [
   'marquee',
   'rosewood',
   'sampler',
+  'raynebow',
 ]
 
 export const PAPER_SIZE_LABELS: Record<PaperSize, string> = {

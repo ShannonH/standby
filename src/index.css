@@ -30,6 +30,9 @@
 @import '@fontsource/caveat/400.css';
 @import '@fontsource/caveat/700.css';
 
+@import '@fontsource/caveat/400.css';
+@import '@fontsource/caveat/700.css';
+
 @import '@fontsource/nunito/400.css';
 @import '@fontsource/nunito/600.css';
 @import '@fontsource/nunito/700.css';
@@ -221,6 +224,37 @@
   --text-secondary: 244 114 182;
 }
 
+/* Raynebow — handwritten Caveat headings with a real rainbow gradient.
+   Named for Rayne; the gradient kicks in via the @layer base override
+   further down. */
+[data-theme='raynebow'] {
+  --accent: 236 72 153; /* pink-500 */
+  --accent-hover: 219 39 119; /* pink-600 */
+  --on-accent: 255 255 255;
+  --surface-bg: 253 244 255; /* fuchsia-50, very soft */
+  --surface-elev: 255 255 255;
+  --surface-border: 249 168 212; /* pink-300 */
+  --text-primary: 88 28 135; /* purple-900 — readable on pastel */
+  --text-secondary: 126 34 206; /* purple-700 */
+  --font-display: 'Caveat', 'Comic Sans MS', cursive;
+  --font-body: 'Outfit', 'Inter', sans-serif;
+  --display-tracking: 0;
+  --display-transform: none;
+  --display-weight: 700;
+  --radius: 1rem; /* very rounded — whimsical */
+}
+.dark[data-theme='raynebow'],
+.dark [data-theme='raynebow'] {
+  --accent: 244 114 182; /* pink-400 — softer on dark */
+  --accent-hover: 236 72 153; /* pink-500 */
+  --on-accent: 46 16 101; /* violet-950 */
+  --surface-bg: 46 16 101; /* violet-950 */
+  --surface-elev: 76 29 149; /* violet-900 */
+  --surface-border: 147 51 234; /* purple-600 */
+  --text-primary: 253 242 248; /* pink-50 */
+  --text-secondary: 249 168 212; /* pink-300 */
+}
+
 [data-theme='sampler'] {
   --accent: 126 74 110; /* dusty plum */
   --accent-hover: 103 58 90;
@@ -292,6 +326,49 @@ html[data-font-size='xl'] {
     text-transform: var(--display-transform, none);
     font-weight: var(--display-weight, 600);
     font-style: var(--display-italic, normal);
+  }
+
+  /* Raynebow's signature: every heading is rendered with a real rainbow
+     gradient via background-clip:text. We override font-family with the
+     theme var (Caveat) and paint the strokes with the gradient. The
+     more-specific [data-theme=...] selectors win over the bare h1-h4
+     above. Two color stops sets — light mode uses fully-saturated 500s,
+     dark mode lightens to 400s for contrast on the violet background. */
+  [data-theme='raynebow'] h1,
+  [data-theme='raynebow'] h2,
+  [data-theme='raynebow'] h3,
+  [data-theme='raynebow'] h4 {
+    background-image: linear-gradient(
+      90deg,
+      #ec4899 0%,
+      #a855f7 20%,
+      #3b82f6 40%,
+      #10b981 60%,
+      #eab308 80%,
+      #f97316 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .dark[data-theme='raynebow'] h1,
+  .dark[data-theme='raynebow'] h2,
+  .dark[data-theme='raynebow'] h3,
+  .dark[data-theme='raynebow'] h4,
+  .dark [data-theme='raynebow'] h1,
+  .dark [data-theme='raynebow'] h2,
+  .dark [data-theme='raynebow'] h3,
+  .dark [data-theme='raynebow'] h4 {
+    background-image: linear-gradient(
+      90deg,
+      #f472b6 0%,
+      #c084fc 20%,
+      #60a5fa 40%,
+      #34d399 60%,
+      #fbbf24 80%,
+      #fb923c 100%
+    );
   }
 }
 

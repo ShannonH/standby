@@ -27,6 +27,13 @@
 @import '@fontsource/cormorant-garamond/600.css';
 @import '@fontsource/cormorant-garamond/600-italic.css';
 
+@import '@fontsource/caveat/400.css';
+@import '@fontsource/caveat/700.css';
+
+@import '@fontsource/nunito/400.css';
+@import '@fontsource/nunito/600.css';
+@import '@fontsource/nunito/700.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -212,6 +219,34 @@
   --surface-border: 109 26 51;
   --text-primary: 252 231 243;
   --text-secondary: 244 114 182;
+}
+
+[data-theme='sampler'] {
+  --accent: 126 74 110; /* dusty plum */
+  --accent-hover: 103 58 90;
+  --on-accent: 253 250 246;
+  --surface-bg: 253 250 246; /* warm oatmeal */
+  --surface-elev: 255 253 250;
+  --surface-border: 214 194 178; /* linen/burlap edge */
+  --text-primary: 58 38 50; /* deep plum-brown */
+  --text-secondary: 126 74 110;
+  --font-display: 'Caveat', 'Comic Sans MS', cursive;
+  --font-body: 'Nunito', 'Helvetica Neue', sans-serif;
+  --display-tracking: normal;
+  --display-transform: none;
+  --display-weight: 700;
+  --radius: 1rem;
+}
+.dark[data-theme='sampler'],
+.dark [data-theme='sampler'] {
+  --accent: 196 148 178; /* lighter mauve */
+  --accent-hover: 168 120 150;
+  --on-accent: 38 22 32;
+  --surface-bg: 30 22 28; /* deep warm brown */
+  --surface-elev: 48 34 42;
+  --surface-border: 86 60 74;
+  --text-primary: 245 235 240;
+  --text-secondary: 196 148 178;
 }
 
 /* ─── Font size ─────────────────────────────────────────────────────────── */

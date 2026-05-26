@@ -10,6 +10,7 @@ export type Theme =
   | 'greenroom'
   | 'marquee'
   | 'rosewood'
+  | 'sampler'
 export type PaperSize = 'LETTER' | 'A4'
 export type TimeFormat = '12h' | '24h'
 
@@ -114,6 +115,14 @@ export const THEMES: Record<Theme, ThemeMeta> = {
     displayFont: 'Cormorant Garamond',
     bodyFont: 'Cormorant Garamond',
   },
+  sampler: {
+    label: 'Sampler',
+    description: 'Oatmeal + plum + teal. Handwritten headings, soft rounds. Cross-stitch warmth.',
+    swatch: '#7e4a6e',
+    tagline: 'Stitch by stitch.',
+    displayFont: 'Caveat',
+    bodyFont: 'Nunito',
+  },
 }
 
 export const THEME_ORDER: Theme[] = [
@@ -123,6 +132,7 @@ export const THEME_ORDER: Theme[] = [
   'greenroom',
   'marquee',
   'rosewood',
+  'sampler',
 ]
 
 export const PAPER_SIZE_LABELS: Record<PaperSize, string> = {

@@ -16,7 +16,7 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { Button, Input, Select } from '@/components/Form'
+import { Button, IconButton, Input, Select, TrashIcon } from '@/components/Form'
 import { db, type Contact, type TrackingEntry } from '@/lib/db'
 
 interface Props {
@@ -135,22 +135,27 @@ export default function TrackingTable({
   return (
     <div className="space-y-3">
       <div className="flex flex-wrap items-end gap-3">
-        <div className="min-w-0 flex-1">
-          <label className="text-sm font-medium">Search</label>
+        {/* Label-wraps an input here rather than label+for pair because
+            Input doesn't accept a stable id (it would conflict with the
+            Field context elsewhere). Wrapping is fully equivalent for
+            screen readers and skips id-plumbing. */}
+        <label className="block min-w-0 flex-1">
+          <span className="text-sm font-medium">Search</span>
           <Input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Page, what, where, notes, name…"
+            className="mt-1"
           />
-        </div>
-        <div>
-          <label className="text-sm font-medium">Filter by actor</label>
+        </label>
+        <label className="block">
+          <span className="text-sm font-medium">Filter by actor</span>
           <Select
             value={actorFilter}
             onChange={(e) =>
               setActorFilter(e.target.value === '' ? '' : Number(e.target.value))
             }
-            className="w-56"
+            className="mt-1 w-56"
           >
             <option value="">All actors</option>
             {actorsInTrack.map((c) => (
@@ -159,7 +164,7 @@ export default function TrackingTable({
               </option>
             ))}
           </Select>
-        </div>
+        </label>
         <span className="text-sm text-muted">
           {filtered.length} / {entries.length}
           {!isFiltered && (
@@ -170,29 +175,39 @@ export default function TrackingTable({
         </span>
       </div>
 
-      <div className="overflow-x-auto rounded border border-surface-border">
-        <table className="w-full text-sm">
-          <thead className="bg-surface-border/30 text-left text-xs uppercase tracking-wide text-muted">
-            <tr>
-              {!isFiltered && <th className="w-8 px-1 py-2"></th>}
-              <th className="px-3 py-2">Page</th>
-              <th className="px-3 py-2">Who</th>
-              <th className="px-3 py-2">What</th>
-              <th className="px-3 py-2">Where</th>
-              <th className="px-3 py-2">Notes</th>
-              <th className="px-3 py-2"></th>
-            </tr>
-          </thead>
-          {!isFiltered ? (
-            <DndContext
-              sensors={sensors}
-              collisionDetection={closestCenter}
-              onDragEnd={handleDragEnd}
-            >
-              <SortableContext
-                items={sortableIds}
-                strategy={verticalListSortingStrategy}
-              >
+      {/* DndContext + SortableContext wrap the entire scroll container,
+          NOT just the <tbody> — putting them between <table> and <tbody>
+          injects <div> elements that aren't valid table children and
+          breaks the screen-reader accessibility tree (Lighthouse caught
+          this). Both contexts render no DOM of their own; they're pure
+          providers, so wrapping the table is fine. */}
+      {!isFiltered ? (
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragEnd={handleDragEnd}
+        >
+          <SortableContext
+            items={sortableIds}
+            strategy={verticalListSortingStrategy}
+          >
+            <div className="overflow-x-auto rounded border border-surface-border">
+              <table className="w-full text-sm">
+                <thead className="bg-surface-border/30 text-left text-xs uppercase tracking-wide text-muted">
+                  <tr>
+                    <th scope="col" className="w-8 px-1 py-2">
+                      <span className="sr-only">Reorder</span>
+                    </th>
+                    <th scope="col" className="px-3 py-2">Page</th>
+                    <th scope="col" className="px-3 py-2">Who</th>
+                    <th scope="col" className="px-3 py-2">What</th>
+                    <th scope="col" className="px-3 py-2">Where</th>
+                    <th scope="col" className="px-3 py-2">Notes</th>
+                    <th scope="col" className="px-3 py-2">
+                      <span className="sr-only">Actions</span>
+                    </th>
+                  </tr>
+                </thead>
                 <tbody className="divide-y divide-surface-border">
                   {filtered.map((e) => (
                     <SortableRow
@@ -205,9 +220,25 @@ export default function TrackingTable({
                     />
                   ))}
                 </tbody>
-              </SortableContext>
-            </DndContext>
-          ) : (
+              </table>
+            </div>
+          </SortableContext>
+        </DndContext>
+      ) : (
+        <div className="overflow-x-auto rounded border border-surface-border">
+          <table className="w-full text-sm">
+            <thead className="bg-surface-border/30 text-left text-xs uppercase tracking-wide text-muted">
+              <tr>
+                <th scope="col" className="px-3 py-2">Page</th>
+                <th scope="col" className="px-3 py-2">Who</th>
+                <th scope="col" className="px-3 py-2">What</th>
+                <th scope="col" className="px-3 py-2">Where</th>
+                <th scope="col" className="px-3 py-2">Notes</th>
+                <th scope="col" className="px-3 py-2">
+                  <span className="sr-only">Actions</span>
+                </th>
+              </tr>
+            </thead>
             <tbody className="divide-y divide-surface-border">
               {filtered.map((e) => (
                 <SortableRow
@@ -220,9 +251,9 @@ export default function TrackingTable({
                 />
               ))}
             </tbody>
-          )}
-        </table>
-      </div>
+          </table>
+        </div>
+      )}
     </div>
   )
 }
@@ -334,16 +365,17 @@ function RowActions({
       >
         Edit
       </Button>
-      <Button
-        variant="danger"
+      <IconButton
+        tone="danger"
+        aria-label="Delete tracking entry"
         onClick={async () => {
           if (entry.id === undefined) return
           if (!window.confirm('Delete this tracking entry?')) return
           await db.tracking.delete(entry.id)
         }}
       >
-        ✕
-      </Button>
+        <TrashIcon />
+      </IconButton>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { Button } from '@/components/Form'
+import { Button, IconButton, TrashIcon } from '@/components/Form'
 import { db, type DailyCall } from '@/lib/db'
 import { useDailyCalls } from '@/lib/hooks'
 
@@ -82,8 +82,9 @@ export default function DailyCallList({
             >
               Edit
             </Button>
-            <Button
-              variant="danger"
+            <IconButton
+              tone="danger"
+              aria-label={`Delete daily call for ${formatDate(c.date)} (v${c.version})`}
               onClick={async () => {
                 if (c.id === undefined) return
                 if (
@@ -95,8 +96,8 @@ export default function DailyCallList({
                 await db.dailyCalls.delete(c.id)
               }}
             >
-              Delete
-            </Button>
+              <TrashIcon />
+            </IconButton>
           </div>
         </li>
       ))}

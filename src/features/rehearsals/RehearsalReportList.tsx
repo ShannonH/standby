@@ -1,4 +1,4 @@
-import { Button } from '@/components/Form'
+import { Button, IconButton, TrashIcon } from '@/components/Form'
 import { db, NOTE_DEPT_KEYS, type RehearsalReport } from '@/lib/db'
 import { useRehearsals } from '@/lib/hooks'
 import { useAppStore } from '@/lib/store'
@@ -86,8 +86,9 @@ export default function RehearsalReportList({
             >
               Edit
             </Button>
-            <Button
-              variant="danger"
+            <IconButton
+              tone="danger"
+              aria-label={`Delete rehearsal report for Day ${r.dayNumber}`}
               onClick={async () => {
                 if (r.id === undefined) return
                 if (
@@ -99,8 +100,8 @@ export default function RehearsalReportList({
                 await db.rehearsals.delete(r.id)
               }}
             >
-              Delete
-            </Button>
+              <TrashIcon />
+            </IconButton>
           </div>
         </li>
       ))}

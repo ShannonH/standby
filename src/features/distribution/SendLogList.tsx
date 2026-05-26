@@ -1,6 +1,6 @@
 import { db } from '@/lib/db'
 import { useSendLog } from '@/lib/hooks'
-import { Button } from '@/components/Form'
+import { IconButton, TrashIcon } from '@/components/Form'
 
 interface Props {
   productionId: number
@@ -51,16 +51,17 @@ export default function SendLogList({ productionId, limit = 20 }: Props) {
                 )}
               </p>
             </div>
-            <Button
-              variant="ghost"
+            <IconButton
+              tone="danger"
+              aria-label="Delete send-log entry"
               onClick={async () => {
                 if (e.id === undefined) return
                 if (!window.confirm('Delete this log entry?')) return
                 await db.sendLog.delete(e.id)
               }}
             >
-              Delete
-            </Button>
+              <TrashIcon />
+            </IconButton>
           </li>
         ))}
       </ul>

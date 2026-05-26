@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Button, Input } from '@/components/Form'
+import { Button, IconButton, Input, TrashIcon } from '@/components/Form'
 import { db, type Contact } from '@/lib/db'
 import { useContacts } from '@/lib/hooks'
 import { maybePublishContactSheet } from '@/lib/publish'
@@ -143,8 +143,9 @@ export default function ContactList({ productionId }: Props) {
                         >
                           Edit
                         </Button>
-                        <Button
-                          variant="danger"
+                        <IconButton
+                          tone="danger"
+                          aria-label={`Delete contact ${c.name}`}
                           onClick={async () => {
                             if (c.id === undefined) return
                             const confirmed = window.confirm(
@@ -155,8 +156,8 @@ export default function ContactList({ productionId }: Props) {
                             void maybePublishContactSheet(productionId)
                           }}
                         >
-                          Delete
-                        </Button>
+                          <TrashIcon />
+                        </IconButton>
                       </div>
                     </div>
                   )}

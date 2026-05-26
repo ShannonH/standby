@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Button, Field, Input, Select } from '@/components/Form'
+import { Button, Field, IconButton, Input, Select, TrashIcon } from '@/components/Form'
 import { db, type Prop } from '@/lib/db'
 import { useProps } from '@/lib/hooks'
 import { maybePublishPropList } from '@/lib/publish'
@@ -81,12 +81,14 @@ export default function PropList({ productionId, onEdit }: Props) {
         <table className="w-full text-sm">
           <thead className="bg-card text-left text-xs uppercase tracking-wide text-muted">
             <tr>
-              <th className="px-3 py-2">Name</th>
-              <th className="px-3 py-2">Scenes</th>
-              <th className="px-3 py-2">Status</th>
-              <th className="px-3 py-2">Source</th>
-              <th className="px-3 py-2">Handling</th>
-              <th className="px-3 py-2"></th>
+              <th scope="col" className="px-3 py-2">Name</th>
+              <th scope="col" className="px-3 py-2">Scenes</th>
+              <th scope="col" className="px-3 py-2">Status</th>
+              <th scope="col" className="px-3 py-2">Source</th>
+              <th scope="col" className="px-3 py-2">Handling</th>
+              <th scope="col" className="px-3 py-2">
+                <span className="sr-only">Actions</span>
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-surface-border">
@@ -170,8 +172,9 @@ function PropRow({
           >
             Edit
           </Button>
-          <Button
-            variant="danger"
+          <IconButton
+            tone="danger"
+            aria-label={`Delete prop ${prop.name}`}
             onClick={async () => {
               if (prop.id === undefined) return
               if (!window.confirm(`Delete "${prop.name}"?`)) return
@@ -179,8 +182,8 @@ function PropRow({
               void maybePublishPropList(prop.productionId)
             }}
           >
-            Delete
-          </Button>
+            <TrashIcon />
+          </IconButton>
         </div>
       </td>
     </tr>

@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Button } from '@/components/Form'
+import { Button, IconButton, TrashIcon } from '@/components/Form'
 import { db, type Contact, type LineNote } from '@/lib/db'
 import { LINE_TYPE_LABELS } from '@/lib/schemas'
 
@@ -153,16 +153,17 @@ export default function LineNoteList({ notes, cast, onEdit }: Props) {
                     >
                       Edit
                     </Button>
-                    <Button
-                      variant="danger"
+                    <IconButton
+                      tone="danger"
+                      aria-label="Delete line note"
                       onClick={async () => {
                         if (n.id === undefined) return
                         if (!window.confirm('Delete this line note?')) return
                         await db.lineNotes.delete(n.id)
                       }}
                     >
-                      Delete
-                    </Button>
+                      <TrashIcon />
+                    </IconButton>
                   </div>
                 </div>
               </li>

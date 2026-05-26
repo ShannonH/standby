@@ -1,4 +1,4 @@
-import { Button } from '@/components/Form'
+import { Button, IconButton, TrashIcon } from '@/components/Form'
 import { db, NOTE_DEPT_KEYS, type ShowReport } from '@/lib/db'
 import { useShowReports } from '@/lib/hooks'
 import { useAppStore } from '@/lib/store'
@@ -94,8 +94,9 @@ export default function ShowReportList({
               >
                 Edit
               </Button>
-              <Button
-                variant="danger"
+              <IconButton
+                tone="danger"
+                aria-label={`Delete show report for ${r.performanceLabel}`}
                 onClick={async () => {
                   if (r.id === undefined) return
                   if (
@@ -107,8 +108,8 @@ export default function ShowReportList({
                   await db.showReports.delete(r.id)
                 }}
               >
-                Delete
-              </Button>
+                <TrashIcon />
+              </IconButton>
             </div>
           </li>
         )

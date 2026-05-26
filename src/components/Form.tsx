@@ -192,6 +192,69 @@ export function Button({ variant = 'primary', className, ...props }: ButtonProps
   )
 }
 
+// ─── IconButton + standard icons ────────────────────────────────────────
+//
+// Small square buttons for row-level actions that don't need text. Built
+// for the destructive-action demotion pattern (list-row Delete used to
+// shout in solid red; now it whispers as a trash icon that turns red on
+// hover). Always requires an `aria-label` so screen-reader users know
+// what the button does — TypeScript enforces it.
+
+interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /** SR-announced action name. e.g. "Delete contact: Avery Stone".
+   *  Be specific — bare "Delete" multiplied across a list of rows is
+   *  worse than no label. */
+  'aria-label': string
+  /** Color treatment.
+   *  - `default`: muted by default, accent on hover (neutral actions).
+   *  - `danger`:  muted by default, red on hover (destructive). */
+  tone?: 'default' | 'danger'
+}
+
+export function IconButton({
+  tone = 'default',
+  className,
+  children,
+  ...props
+}: IconButtonProps) {
+  const toneClass =
+    tone === 'danger'
+      ? 'text-muted hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-950/40 dark:hover:text-red-400'
+      : 'text-muted hover:bg-surface-border/30 hover:text-[rgb(var(--text-primary))]'
+  return (
+    <button
+      type="button"
+      {...props}
+      className={`inline-flex h-9 w-9 items-center justify-center rounded transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[rgb(var(--accent))] disabled:cursor-not-allowed disabled:opacity-50 ${toneClass} ${className ?? ''}`}
+    >
+      {children}
+    </button>
+  )
+}
+
+/** Trash icon for IconButton children. 16px square, currentColor stroke. */
+export function TrashIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M2.5 4h11" />
+      <path d="M6 4V2.5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1V4" />
+      <path d="M3.5 4l.7 9a1.5 1.5 0 0 0 1.5 1.4h4.6a1.5 1.5 0 0 0 1.5-1.4l.7-9" />
+      <path d="M6.5 7v5" />
+      <path d="M9.5 7v5" />
+    </svg>
+  )
+}
+
 interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string
   /** Optional explanatory text rendered as a muted second line beneath

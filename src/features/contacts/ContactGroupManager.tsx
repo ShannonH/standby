@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, Field, Input } from '@/components/Form'
+import { Button, Field, IconButton, Input, TrashIcon } from '@/components/Form'
 import { db } from '@/lib/db'
 import { useContactGroups, useContacts } from '@/lib/hooks'
 
@@ -92,16 +92,17 @@ export default function ContactGroupManager({ productionId }: Props) {
                     >
                       {isOpen ? 'Done' : 'Manage members'}
                     </Button>
-                    <Button
-                      variant="danger"
+                    <IconButton
+                      tone="danger"
+                      aria-label={`Delete group ${g.name}`}
                       onClick={async () => {
                         if (g.id === undefined) return
                         if (!window.confirm(`Delete group "${g.name}"?`)) return
                         await db.contactGroups.delete(g.id)
                       }}
                     >
-                      Delete
-                    </Button>
+                      <TrashIcon />
+                    </IconButton>
                   </div>
                 </div>
                 {isOpen && g.id !== undefined && (

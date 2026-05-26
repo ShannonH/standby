@@ -1,4 +1,4 @@
-import { Button } from '@/components/Form'
+import { Button, IconButton, TrashIcon } from '@/components/Form'
 import { deleteProductionCascade } from '@/lib/db'
 import { useProductions } from '@/lib/hooks'
 import { useAppStore } from '@/lib/store'
@@ -61,8 +61,9 @@ export default function ProductionList({ onEdit }: Props) {
                   Edit
                 </Button>
               )}
-              <Button
-                variant="danger"
+              <IconButton
+                tone="danger"
+                aria-label={`Delete production ${p.name}`}
                 onClick={async () => {
                   if (p.id === undefined) return
                   const confirmed = window.confirm(
@@ -75,8 +76,8 @@ export default function ProductionList({ onEdit }: Props) {
                   }
                 }}
               >
-                Delete
-              </Button>
+                <TrashIcon />
+              </IconButton>
             </div>
           </li>
         )

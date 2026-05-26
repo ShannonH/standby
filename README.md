@@ -176,7 +176,7 @@ Standby is and will remain free for stage managers — that's not negotiable. Th
 
 If you've found Standby useful and want to help it stick around:
 
-- **[Sponsor on GitHub](https://github.com/sponsors/ShannonH).** Recurring or one-time. Goes directly to keeping this maintained — the time spent on a bug Rayne hits during tech week, the next feature a working SM asks for, the long-term cost of a custom domain and (eventually) a backend if a hosted tier ever makes sense. (Note: the Sponsor button activates once GitHub approves the account for the program. The link works either way.)
+- **[Sponsor on GitHub](https://github.com/sponsors/ShannonH).** Recurring or one-time. Goes toward maintenance time, a future custom domain, and the long-term path to a hosted "Standby Cloud" tier if there's appetite for one.
 - **Use it on a real show and tell us what broke.** Real-show friction is worth more than money. Open an [SM workflow gap](https://github.com/ShannonH/standby/issues/new?template=sm-workflow.yml) issue.
 - **Tell your program / theater about it.** Word-of-mouth in the SM world is how anything ever gets adopted. If you're at a BFA program or working at a theater that might benefit, send the link.
 
@@ -192,7 +192,7 @@ None of those are urgent. They're things to invest in if and when Standby is act
 
 ## Acknowledgments
 
-Built with — and continuously road-tested by — **Rayne Harris** (BFA SM, Ball State University), without whom Standby would still be a Google Doc. Her current Otterbein summer internship is where every UX decision gets pressure-tested first.
+Standby exists because of my daughter, **Rayne Harris** (BFA SM, Ball State University). She's the reason this app got built — watching her email every cast member individually with rehearsal PDFs from her Otterbein summer internship made it obvious there should be a tool for this. She's also the primary road-tester: every UX decision gets pressure-tested against a real summer at Otterbein Theatre before it ships.
 
 Form structures lean on **Stern & Gold, *Stage Management* 12e** (the long-running practical text). Default note phrasing leans on **Porter & Alcorn, *Stage Management Theory as a Guide to Practice* 2e** (the equity-and-inclusion-forward pedagogy). The *Off Headset* essay collection (Jaen & Sadler, eds.) is the supplementary reading that shapes the tone.
 

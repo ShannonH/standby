@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 6,
+  "schemaVersion": 7,
   "exportedAt": "2026-05-25T12:00:00.000Z",
   "production": {
     "name": "A Midsummer Night's Dream",
@@ -19,35 +19,290 @@
     "updatedAt": "2026-05-25T12:00:00.000Z"
   },
   "contacts": [
-    { "id": 1, "productionId": 0, "category": "cast", "name": "Avery Singh", "role": "Theseus / Oberon", "email": "avery.singh@sample.edu", "phone": "555-0101", "pronouns": "he/him" },
-    { "id": 2, "productionId": 0, "category": "cast", "name": "Beatrice Lin", "role": "Hippolyta / Titania", "email": "beatrice.lin@sample.edu", "phone": "555-0102", "pronouns": "she/her" },
-    { "id": 3, "productionId": 0, "category": "cast", "name": "Cassidy Brown", "role": "Hermia", "email": "cassidy.brown@sample.edu", "phone": "555-0103", "pronouns": "she/her" },
-    { "id": 4, "productionId": 0, "category": "cast", "name": "Devon Martinez", "role": "Helena", "email": "devon.m@sample.edu", "phone": "555-0104", "pronouns": "they/them" },
-    { "id": 5, "productionId": 0, "category": "cast", "name": "Eli Park", "role": "Lysander", "email": "eli.park@sample.edu", "phone": "555-0105", "pronouns": "he/him" },
-    { "id": 6, "productionId": 0, "category": "cast", "name": "Fiona Reyes", "role": "Demetrius", "email": "fiona.reyes@sample.edu", "phone": "555-0106", "pronouns": "she/her" },
-    { "id": 7, "productionId": 0, "category": "cast", "name": "Gabe Chen", "role": "Puck", "email": "gabe.chen@sample.edu", "phone": "555-0107", "pronouns": "he/him" },
-    { "id": 8, "productionId": 0, "category": "cast", "name": "Harper Quinn", "role": "Bottom", "email": "harper.q@sample.edu", "phone": "555-0108", "pronouns": "they/them" },
-    { "id": 9, "productionId": 0, "category": "cast", "name": "Indigo Patel", "role": "Quince", "email": "indigo.p@sample.edu", "phone": "555-0109", "pronouns": "they/them" },
-    { "id": 10, "productionId": 0, "category": "cast", "name": "Jasper Wong", "role": "Flute", "email": "jasper.w@sample.edu", "phone": "555-0110", "pronouns": "he/him" },
-    { "id": 11, "productionId": 0, "category": "cast", "name": "Kira Davies", "role": "Snout", "email": "kira.d@sample.edu", "phone": "555-0111", "pronouns": "she/her" },
-    { "id": 12, "productionId": 0, "category": "cast", "name": "Leo Hammond", "role": "Starveling", "email": "leo.h@sample.edu", "phone": "555-0112", "pronouns": "he/him" },
-    { "id": 13, "productionId": 0, "category": "creative", "name": "Maya Patel", "role": "Director", "email": "maya.patel@sample.edu", "phone": "555-0200", "pronouns": "she/her" },
-    { "id": 14, "productionId": 0, "category": "creative", "name": "Jordan Lee", "role": "Assistant Director", "email": "jordan.lee@sample.edu", "phone": "555-0201", "pronouns": "they/them" },
-    { "id": 15, "productionId": 0, "category": "creative", "name": "Sofia Chen", "role": "Costume Designer", "email": "sofia.chen@sample.edu", "phone": "555-0202", "pronouns": "she/her" },
-    { "id": 16, "productionId": 0, "category": "creative", "name": "Marcus Webb", "role": "Scenic Designer", "email": "marcus.webb@sample.edu", "phone": "555-0203", "pronouns": "he/him" },
-    { "id": 17, "productionId": 0, "category": "creative", "name": "Riley Park", "role": "Lighting Designer", "email": "riley.park@sample.edu", "phone": "555-0204", "pronouns": "they/them" },
-    { "id": 18, "productionId": 0, "category": "production", "name": "Sam Rivera", "role": "Stage Manager", "email": "sam.rivera@sample.edu", "phone": "555-0300", "pronouns": "she/her" },
-    { "id": 19, "productionId": 0, "category": "production", "name": "Nico Vásquez", "role": "Assistant Stage Manager", "email": "nico.v@sample.edu", "phone": "555-0301", "pronouns": "he/him" },
-    { "id": 20, "productionId": 0, "category": "production", "name": "Taylor Brooks", "role": "Production Manager", "email": "taylor.brooks@sample.edu", "phone": "555-0302", "pronouns": "they/them" },
-    { "id": 21, "productionId": 0, "category": "crew", "name": "Pat Murphy", "role": "Light Board Op", "email": "pat.murphy@sample.edu", "pronouns": "they/them" },
-    { "id": 22, "productionId": 0, "category": "crew", "name": "Quinn Adams", "role": "Sound Board Op", "email": "quinn.adams@sample.edu", "pronouns": "she/her" }
+    {
+      "id": 1,
+      "productionId": 0,
+      "category": "cast",
+      "name": "Avery Singh",
+      "role": "Theseus / Oberon",
+      "email": "avery.singh@sample.edu",
+      "phone": "555-0101",
+      "pronouns": "he/him"
+    },
+    {
+      "id": 2,
+      "productionId": 0,
+      "category": "cast",
+      "name": "Beatrice Lin",
+      "role": "Hippolyta / Titania",
+      "email": "beatrice.lin@sample.edu",
+      "phone": "555-0102",
+      "pronouns": "she/her"
+    },
+    {
+      "id": 3,
+      "productionId": 0,
+      "category": "cast",
+      "name": "Cassidy Brown",
+      "role": "Hermia",
+      "email": "cassidy.brown@sample.edu",
+      "phone": "555-0103",
+      "pronouns": "she/her"
+    },
+    {
+      "id": 4,
+      "productionId": 0,
+      "category": "cast",
+      "name": "Devon Martinez",
+      "role": "Helena",
+      "email": "devon.m@sample.edu",
+      "phone": "555-0104",
+      "pronouns": "they/them"
+    },
+    {
+      "id": 5,
+      "productionId": 0,
+      "category": "cast",
+      "name": "Eli Park",
+      "role": "Lysander",
+      "email": "eli.park@sample.edu",
+      "phone": "555-0105",
+      "pronouns": "he/him"
+    },
+    {
+      "id": 6,
+      "productionId": 0,
+      "category": "cast",
+      "name": "Fiona Reyes",
+      "role": "Demetrius",
+      "email": "fiona.reyes@sample.edu",
+      "phone": "555-0106",
+      "pronouns": "she/her"
+    },
+    {
+      "id": 7,
+      "productionId": 0,
+      "category": "cast",
+      "name": "Gabe Chen",
+      "role": "Puck",
+      "email": "gabe.chen@sample.edu",
+      "phone": "555-0107",
+      "pronouns": "he/him"
+    },
+    {
+      "id": 8,
+      "productionId": 0,
+      "category": "cast",
+      "name": "Harper Quinn",
+      "role": "Bottom",
+      "email": "harper.q@sample.edu",
+      "phone": "555-0108",
+      "pronouns": "they/them"
+    },
+    {
+      "id": 9,
+      "productionId": 0,
+      "category": "cast",
+      "name": "Indigo Patel",
+      "role": "Quince",
+      "email": "indigo.p@sample.edu",
+      "phone": "555-0109",
+      "pronouns": "they/them"
+    },
+    {
+      "id": 10,
+      "productionId": 0,
+      "category": "cast",
+      "name": "Jasper Wong",
+      "role": "Flute",
+      "email": "jasper.w@sample.edu",
+      "phone": "555-0110",
+      "pronouns": "he/him"
+    },
+    {
+      "id": 11,
+      "productionId": 0,
+      "category": "cast",
+      "name": "Kira Davies",
+      "role": "Snout",
+      "email": "kira.d@sample.edu",
+      "phone": "555-0111",
+      "pronouns": "she/her"
+    },
+    {
+      "id": 12,
+      "productionId": 0,
+      "category": "cast",
+      "name": "Leo Hammond",
+      "role": "Starveling",
+      "email": "leo.h@sample.edu",
+      "phone": "555-0112",
+      "pronouns": "he/him"
+    },
+    {
+      "id": 13,
+      "productionId": 0,
+      "category": "creative",
+      "name": "Maya Patel",
+      "role": "Director",
+      "email": "maya.patel@sample.edu",
+      "phone": "555-0200",
+      "pronouns": "she/her"
+    },
+    {
+      "id": 14,
+      "productionId": 0,
+      "category": "creative",
+      "name": "Jordan Lee",
+      "role": "Assistant Director",
+      "email": "jordan.lee@sample.edu",
+      "phone": "555-0201",
+      "pronouns": "they/them"
+    },
+    {
+      "id": 15,
+      "productionId": 0,
+      "category": "creative",
+      "name": "Sofia Chen",
+      "role": "Costume Designer",
+      "email": "sofia.chen@sample.edu",
+      "phone": "555-0202",
+      "pronouns": "she/her"
+    },
+    {
+      "id": 16,
+      "productionId": 0,
+      "category": "creative",
+      "name": "Marcus Webb",
+      "role": "Scenic Designer",
+      "email": "marcus.webb@sample.edu",
+      "phone": "555-0203",
+      "pronouns": "he/him"
+    },
+    {
+      "id": 17,
+      "productionId": 0,
+      "category": "creative",
+      "name": "Riley Park",
+      "role": "Lighting Designer",
+      "email": "riley.park@sample.edu",
+      "phone": "555-0204",
+      "pronouns": "they/them"
+    },
+    {
+      "id": 18,
+      "productionId": 0,
+      "category": "production",
+      "name": "Sam Rivera",
+      "role": "Stage Manager",
+      "email": "sam.rivera@sample.edu",
+      "phone": "555-0300",
+      "pronouns": "she/her"
+    },
+    {
+      "id": 19,
+      "productionId": 0,
+      "category": "production",
+      "name": "Nico Vásquez",
+      "role": "Assistant Stage Manager",
+      "email": "nico.v@sample.edu",
+      "phone": "555-0301",
+      "pronouns": "he/him"
+    },
+    {
+      "id": 20,
+      "productionId": 0,
+      "category": "production",
+      "name": "Taylor Brooks",
+      "role": "Production Manager",
+      "email": "taylor.brooks@sample.edu",
+      "phone": "555-0302",
+      "pronouns": "they/them"
+    },
+    {
+      "id": 21,
+      "productionId": 0,
+      "category": "crew",
+      "name": "Pat Murphy",
+      "role": "Light Board Op",
+      "email": "pat.murphy@sample.edu",
+      "pronouns": "they/them"
+    },
+    {
+      "id": 22,
+      "productionId": 0,
+      "category": "crew",
+      "name": "Quinn Adams",
+      "role": "Sound Board Op",
+      "email": "quinn.adams@sample.edu",
+      "pronouns": "she/her"
+    }
   ],
   "contactGroups": [
-    { "id": 1, "productionId": 0, "name": "All Cast", "contactIds": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] },
-    { "id": 2, "productionId": 0, "name": "Designers", "contactIds": [15, 16, 17] },
-    { "id": 3, "productionId": 0, "name": "Creative Team", "contactIds": [13, 14, 15, 16, 17] },
-    { "id": 4, "productionId": 0, "name": "Mechanicals (Cast)", "contactIds": [8, 9, 10, 11, 12] },
-    { "id": 5, "productionId": 0, "name": "Lovers (Cast)", "contactIds": [3, 4, 5, 6] }
+    {
+      "id": 1,
+      "productionId": 0,
+      "name": "All Cast",
+      "contactIds": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "id": 2,
+      "productionId": 0,
+      "name": "Designers",
+      "contactIds": [
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "id": 3,
+      "productionId": 0,
+      "name": "Creative Team",
+      "contactIds": [
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "id": 4,
+      "productionId": 0,
+      "name": "Mechanicals (Cast)",
+      "contactIds": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "id": 5,
+      "productionId": 0,
+      "name": "Lovers (Cast)",
+      "contactIds": [
+        3,
+        4,
+        5,
+        6
+      ]
+    }
   ],
   "rehearsals": [
     {
@@ -59,47 +314,114 @@
       "endTime": "21:00",
       "location": "Studio Theatre",
       "attendance": [
-        { "contactId": 1, "status": "present" },
-        { "contactId": 2, "status": "present" },
-        { "contactId": 3, "status": "present" },
-        { "contactId": 4, "status": "present" },
-        { "contactId": 5, "status": "present" },
-        { "contactId": 6, "status": "late", "minutesLate": 8 },
-        { "contactId": 7, "status": "present" },
-        { "contactId": 8, "status": "present" },
-        { "contactId": 9, "status": "present" },
-        { "contactId": 10, "status": "present" },
-        { "contactId": 11, "status": "excused" },
-        { "contactId": 12, "status": "present" }
+        {
+          "contactId": 1,
+          "status": "present"
+        },
+        {
+          "contactId": 2,
+          "status": "present"
+        },
+        {
+          "contactId": 3,
+          "status": "present"
+        },
+        {
+          "contactId": 4,
+          "status": "present"
+        },
+        {
+          "contactId": 5,
+          "status": "present"
+        },
+        {
+          "contactId": 6,
+          "status": "late",
+          "minutesLate": 8
+        },
+        {
+          "contactId": 7,
+          "status": "present"
+        },
+        {
+          "contactId": 8,
+          "status": "present"
+        },
+        {
+          "contactId": 9,
+          "status": "present"
+        },
+        {
+          "contactId": 10,
+          "status": "present"
+        },
+        {
+          "contactId": 11,
+          "status": "excused"
+        },
+        {
+          "contactId": 12,
+          "status": "present"
+        }
       ],
       "timeBlocks": [
-        { "start": "18:00", "end": "18:15", "activity": "Welcome and introductions" },
-        { "start": "18:15", "end": "20:00", "activity": "First read-through, Acts 1–3" },
-        { "start": "20:00", "end": "20:15", "activity": "Break" },
-        { "start": "20:15", "end": "21:00", "activity": "Read-through Acts 4–5, design presentations" }
+        {
+          "start": "18:00",
+          "end": "18:15",
+          "activity": "Welcome and introductions"
+        },
+        {
+          "start": "18:15",
+          "end": "20:00",
+          "activity": "First read-through, Acts 1–3"
+        },
+        {
+          "start": "20:00",
+          "end": "20:15",
+          "activity": "Break"
+        },
+        {
+          "start": "20:15",
+          "end": "21:00",
+          "activity": "Read-through Acts 4–5, design presentations"
+        }
       ],
       "notes": {
         "scenic": [
-          { "text": "Marcus walked us through the forest model — could we get the full ground plan to the SMs by Wednesday?" }
+          {
+            "text": "Marcus walked us through the forest model — could we get the full ground plan to the SMs by Wednesday?"
+          }
         ],
         "costumes": [
-          { "text": "Sofia: measurements scheduled for Saturday — cast received the link." }
+          {
+            "text": "Sofia: measurements scheduled for Saturday — cast received the link."
+          }
         ],
         "wigsMakeup": [],
         "props": [
-          { "text": "Discussed the donkey head — Sofia and Marcus aligning on hand-off." }
+          {
+            "text": "Discussed the donkey head — Sofia and Marcus aligning on hand-off."
+          }
         ],
         "lighting": [
-          { "text": "Riley showed initial sketch for the forest. Strong starting point — director excited." }
+          {
+            "text": "Riley showed initial sketch for the forest. Strong starting point — director excited."
+          }
         ],
         "sound": [],
         "projections": [],
         "music": [
-          { "text": "Confirmed no live underscoring; sound design will cover atmosphere." }
+          {
+            "text": "Confirmed no live underscoring; sound design will cover atmosphere."
+          }
         ],
         "production": [
-          { "text": "Fiona was 8 minutes late — traffic; confirmed for next call." },
-          { "text": "Kira excused (academic conflict); will catch up on read-through notes Friday." }
+          {
+            "text": "Fiona was 8 minutes late — traffic; confirmed for next call."
+          },
+          {
+            "text": "Kira excused (academic conflict); will catch up on read-through notes Friday."
+          }
         ]
       }
     },
@@ -112,38 +434,78 @@
       "endTime": "22:00",
       "location": "Studio Theatre",
       "attendance": [
-        { "contactId": 3, "status": "present" },
-        { "contactId": 4, "status": "present" },
-        { "contactId": 5, "status": "present" },
-        { "contactId": 6, "status": "present" }
+        {
+          "contactId": 3,
+          "status": "present"
+        },
+        {
+          "contactId": 4,
+          "status": "present"
+        },
+        {
+          "contactId": 5,
+          "status": "present"
+        },
+        {
+          "contactId": 6,
+          "status": "present"
+        }
       ],
       "timeBlocks": [
-        { "start": "18:00", "end": "19:30", "activity": "Block Act 2, Scene 1 — lovers in the woods" },
-        { "start": "19:30", "end": "19:45", "activity": "Break" },
-        { "start": "19:45", "end": "21:00", "activity": "Block Act 3, Scene 2 — confusion of the lovers" },
-        { "start": "21:00", "end": "22:00", "activity": "Run the act with blocking" }
+        {
+          "start": "18:00",
+          "end": "19:30",
+          "activity": "Block Act 2, Scene 1 — lovers in the woods"
+        },
+        {
+          "start": "19:30",
+          "end": "19:45",
+          "activity": "Break"
+        },
+        {
+          "start": "19:45",
+          "end": "21:00",
+          "activity": "Block Act 3, Scene 2 — confusion of the lovers"
+        },
+        {
+          "start": "21:00",
+          "end": "22:00",
+          "activity": "Run the act with blocking"
+        }
       ],
       "notes": {
         "scenic": [
-          { "text": "The downstage-left tree is in the lovers' main path — could we shift it two feet upstage?" }
+          {
+            "text": "The downstage-left tree is in the lovers' main path — could we shift it two feet upstage?"
+          }
         ],
         "costumes": [
-          { "text": "Hermia's gown needs to move freely through fight choreography. Sofia attending Friday rehearsal to watch." }
+          {
+            "text": "Hermia's gown needs to move freely through fight choreography. Sofia attending Friday rehearsal to watch."
+          }
         ],
         "wigsMakeup": [],
         "props": [
-          { "text": "Helena to carry a small lantern in 2.1 — need to confirm practical vs. fake." }
+          {
+            "text": "Helena to carry a small lantern in 2.1 — need to confirm practical vs. fake."
+          }
         ],
         "lighting": [
-          { "text": "Looking for a chase or shimmer effect for fairy interactions in 2.1." }
+          {
+            "text": "Looking for a chase or shimmer effect for fairy interactions in 2.1."
+          }
         ],
         "sound": [
-          { "text": "Wind-and-leaves bed established for forest scenes — Quinn building." }
+          {
+            "text": "Wind-and-leaves bed established for forest scenes — Quinn building."
+          }
         ],
         "projections": [],
         "music": [],
         "production": [
-          { "text": "Full lover scenes blocked. Director thrilled with the chemistry." }
+          {
+            "text": "Full lover scenes blocked. Director thrilled with the chemistry."
+          }
         ]
       }
     },
@@ -156,72 +518,135 @@
       "endTime": "22:00",
       "location": "Studio Theatre",
       "attendance": [
-        { "contactId": 8, "status": "present" },
-        { "contactId": 9, "status": "present" },
-        { "contactId": 10, "status": "present" },
-        { "contactId": 11, "status": "present" },
-        { "contactId": 12, "status": "present" }
+        {
+          "contactId": 8,
+          "status": "present"
+        },
+        {
+          "contactId": 9,
+          "status": "present"
+        },
+        {
+          "contactId": 10,
+          "status": "present"
+        },
+        {
+          "contactId": 11,
+          "status": "present"
+        },
+        {
+          "contactId": 12,
+          "status": "present"
+        }
       ],
       "timeBlocks": [
-        { "start": "18:00", "end": "19:00", "activity": "Block Pyramus and Thisbe rehearsal scene (Act 5)" },
-        { "start": "19:00", "end": "20:30", "activity": "Stage the play-within-a-play" },
-        { "start": "20:30", "end": "20:45", "activity": "Break" },
-        { "start": "20:45", "end": "22:00", "activity": "Run with comedy beats and props" }
+        {
+          "start": "18:00",
+          "end": "19:00",
+          "activity": "Block Pyramus and Thisbe rehearsal scene (Act 5)"
+        },
+        {
+          "start": "19:00",
+          "end": "20:30",
+          "activity": "Stage the play-within-a-play"
+        },
+        {
+          "start": "20:30",
+          "end": "20:45",
+          "activity": "Break"
+        },
+        {
+          "start": "20:45",
+          "end": "22:00",
+          "activity": "Run with comedy beats and props"
+        }
       ],
       "notes": {
         "scenic": [],
         "costumes": [
-          { "text": "Bottom's donkey head try-on this week — Sofia coordinating with Marcus." }
+          {
+            "text": "Bottom's donkey head try-on this week — Sofia coordinating with Marcus."
+          }
         ],
         "wigsMakeup": [
-          { "text": "Discussed makeup approach for Pyramus death scene — keep it broad and comic." }
+          {
+            "text": "Discussed makeup approach for Pyramus death scene — keep it broad and comic."
+          }
         ],
         "props": [
-          { "text": "Need the Wall costume/prop by next Friday — comic timing depends on it." },
-          { "text": "Lion costume hand-prop list updated." }
+          {
+            "text": "Need the Wall costume/prop by next Friday — comic timing depends on it."
+          },
+          {
+            "text": "Lion costume hand-prop list updated."
+          }
         ],
         "lighting": [
-          { "text": "Theatre-within-the-theatre lighting needs intentional fakeness — discussed." }
+          {
+            "text": "Theatre-within-the-theatre lighting needs intentional fakeness — discussed."
+          }
         ],
         "sound": [],
         "projections": [],
         "music": [],
         "production": [
-          { "text": "Wonderful work tonight — Pyramus rehearsal scene already very funny." }
+          {
+            "text": "Wonderful work tonight — Pyramus rehearsal scene already very funny."
+          }
         ]
       }
     }
   ],
   "lineNotes": [
     {
-      "id": 1, "productionId": 0, "rehearsalDate": "2026-06-06", "page": "47",
-      "characterId": 3, "lineType": "paraphrase",
+      "id": 1,
+      "productionId": 0,
+      "rehearsalDate": "2026-06-06",
+      "page": "47",
+      "characterId": 3,
+      "lineType": "paraphrase",
       "scriptedText": "I would my father look'd but with my eyes.",
       "spokenText": "I wish my father saw with my eyes."
     },
     {
-      "id": 2, "productionId": 0, "rehearsalDate": "2026-06-06", "page": "52",
-      "characterId": 5, "lineType": "drop",
+      "id": 2,
+      "productionId": 0,
+      "rehearsalDate": "2026-06-06",
+      "page": "52",
+      "characterId": 5,
+      "lineType": "drop",
       "scriptedText": "Helen, to you our minds we will unfold.",
       "spokenText": "",
       "comment": "Dropped the entire line; jumped to the next."
     },
     {
-      "id": 3, "productionId": 0, "rehearsalDate": "2026-06-06", "page": "63",
-      "characterId": 4, "lineType": "add",
+      "id": 3,
+      "productionId": 0,
+      "rehearsalDate": "2026-06-06",
+      "page": "63",
+      "characterId": 4,
+      "lineType": "add",
       "scriptedText": "O hell! to choose love by another's eyes.",
       "spokenText": "Oh god — hell! To choose love by another's eyes."
     },
     {
-      "id": 4, "productionId": 0, "rehearsalDate": "2026-06-12", "page": "89",
-      "characterId": 8, "lineType": "paraphrase",
+      "id": 4,
+      "productionId": 0,
+      "rehearsalDate": "2026-06-12",
+      "page": "89",
+      "characterId": 8,
+      "lineType": "paraphrase",
       "scriptedText": "Methought I was, and methought I had —",
       "spokenText": "Me thought I was, and me thought I had —",
       "comment": "Two words instead of \"methought\" — minor."
     },
     {
-      "id": 5, "productionId": 0, "rehearsalDate": "2026-06-12", "page": "93",
-      "characterId": 9, "lineType": "missed-cue",
+      "id": 5,
+      "productionId": 0,
+      "rehearsalDate": "2026-06-12",
+      "page": "93",
+      "characterId": 9,
+      "lineType": "missed-cue",
       "scriptedText": "\"Whereat with blade, with bloody blameful blade…\"",
       "spokenText": "",
       "comment": "Quince came in late by ~2 seconds. Cue light fired correctly."
@@ -229,9 +654,18 @@
   ],
   "props": [
     {
-      "id": 1, "productionId": 0, "name": "Love-in-idleness flower",
-      "scenes": ["2.1", "3.2", "4.1"],
-      "characters": ["Oberon", "Puck"],
+      "id": 1,
+      "productionId": 0,
+      "name": "Love-in-idleness flower",
+      "scenes": [
+        "2.1",
+        "3.2",
+        "4.1"
+      ],
+      "characters": [
+        "Oberon",
+        "Puck"
+      ],
       "consumable": false,
       "source": "build",
       "status": "in-rehearsal",
@@ -239,19 +673,35 @@
       "notes": "Small purple flower with concealed pouch for 'juice' effect"
     },
     {
-      "id": 2, "productionId": 0, "name": "Donkey head",
-      "scenes": ["3.1", "3.2", "4.1"],
-      "characters": ["Bottom"],
+      "id": 2,
+      "productionId": 0,
+      "name": "Donkey head",
+      "scenes": [
+        "3.1",
+        "3.2",
+        "4.1"
+      ],
+      "characters": [
+        "Bottom"
+      ],
       "consumable": false,
       "source": "rental",
       "status": "needed",
-      "specialHandling": ["fragile"],
+      "specialHandling": [
+        "fragile"
+      ],
       "notes": "Rented from Costume Collective; arrives 2026-06-20"
     },
     {
-      "id": 3, "productionId": 0, "name": "Hermia's letter",
-      "scenes": ["1.1"],
-      "characters": ["Hermia"],
+      "id": 3,
+      "productionId": 0,
+      "name": "Hermia's letter",
+      "scenes": [
+        "1.1"
+      ],
+      "characters": [
+        "Hermia"
+      ],
       "consumable": true,
       "source": "build",
       "status": "sourced",
@@ -259,50 +709,91 @@
       "notes": "Period-style scroll; budget for 12 (1 per performance)"
     },
     {
-      "id": 4, "productionId": 0, "name": "Wooden swords (×2)",
-      "scenes": ["3.2"],
-      "characters": ["Lysander", "Demetrius"],
+      "id": 4,
+      "productionId": 0,
+      "name": "Wooden swords (×2)",
+      "scenes": [
+        "3.2"
+      ],
+      "characters": [
+        "Lysander",
+        "Demetrius"
+      ],
       "consumable": false,
       "source": "pulled",
       "status": "sourced",
-      "specialHandling": ["weapons"],
+      "specialHandling": [
+        "weapons"
+      ],
       "tableLocation": "SR Props Table, locked cabinet",
       "notes": "Soft-tipped; fight choreography approved by Riley"
     },
     {
-      "id": 5, "productionId": 0, "name": "Fairy lanterns (×6)",
-      "scenes": ["2.1", "3.2"],
-      "characters": ["Fairies (ensemble)"],
+      "id": 5,
+      "productionId": 0,
+      "name": "Fairy lanterns (×6)",
+      "scenes": [
+        "2.1",
+        "3.2"
+      ],
+      "characters": [
+        "Fairies (ensemble)"
+      ],
       "consumable": false,
       "source": "buy",
       "status": "built",
-      "specialHandling": ["fire"],
+      "specialHandling": [
+        "fire"
+      ],
       "tableLocation": "USR Props Closet",
       "notes": "Battery LED inside; never actual flame on set"
     },
     {
-      "id": 6, "productionId": 0, "name": "Wall costume/prop",
-      "scenes": ["5.1"],
-      "characters": ["Snout"],
+      "id": 6,
+      "productionId": 0,
+      "name": "Wall costume/prop",
+      "scenes": [
+        "5.1"
+      ],
+      "characters": [
+        "Snout"
+      ],
       "consumable": false,
       "source": "build",
       "status": "in-rehearsal",
-      "specialHandling": ["breakaway"],
+      "specialHandling": [
+        "breakaway"
+      ],
       "notes": "Hand-held; chink in the wall (peephole) must be visible from house"
     },
     {
-      "id": 7, "productionId": 0, "name": "Lion costume hand-prop (mane)",
-      "scenes": ["5.1"],
-      "characters": ["Snug"],
+      "id": 7,
+      "productionId": 0,
+      "name": "Lion costume hand-prop (mane)",
+      "scenes": [
+        "5.1"
+      ],
+      "characters": [
+        "Snug"
+      ],
       "consumable": false,
       "source": "build",
       "status": "needed",
       "notes": "Detachable mane Snug can lift in 5.1 — 'my face is my face' joke"
     },
     {
-      "id": 8, "productionId": 0, "name": "Goblet (×4)",
-      "scenes": ["1.1", "4.1", "5.1"],
-      "characters": ["Theseus", "Hippolyta"],
+      "id": 8,
+      "productionId": 0,
+      "name": "Goblet (×4)",
+      "scenes": [
+        "1.1",
+        "4.1",
+        "5.1"
+      ],
+      "characters": [
+        "Theseus",
+        "Hippolyta"
+      ],
       "consumable": false,
       "source": "pulled",
       "status": "sourced",
@@ -310,19 +801,29 @@
       "notes": "Pewter; cleaning between performances"
     },
     {
-      "id": 9, "productionId": 0, "name": "Stage blood (vial)",
-      "scenes": ["5.1"],
-      "characters": ["Pyramus (Bottom)", "Thisbe (Flute)"],
+      "id": 9,
+      "productionId": 0,
+      "name": "Stage blood (vial)",
+      "scenes": [
+        "5.1"
+      ],
+      "characters": [
+        "Pyramus (Bottom)",
+        "Thisbe (Flute)"
+      ],
       "consumable": true,
       "source": "buy",
       "status": "sourced",
-      "specialHandling": ["liquid"],
+      "specialHandling": [
+        "liquid"
+      ],
       "notes": "Karo-syrup based; one vial per performance for spillage and timing"
     }
   ],
   "sendLog": [
     {
-      "id": 1, "productionId": 0,
+      "id": 1,
+      "productionId": 0,
       "sentAt": "2026-06-01T22:30:00.000Z",
       "artifact": "Rehearsal Report — Day 1",
       "recipientGroup": "Creative Team",
@@ -330,7 +831,8 @@
       "pdfFilename": "A_Midsummer_Night_s_Dream-rehearsal-day-1.pdf"
     },
     {
-      "id": 2, "productionId": 0,
+      "id": 2,
+      "productionId": 0,
       "sentAt": "2026-06-06T22:45:00.000Z",
       "artifact": "Rehearsal Report — Day 5",
       "recipientGroup": "Creative Team",
@@ -338,7 +840,8 @@
       "pdfFilename": "A_Midsummer_Night_s_Dream-rehearsal-day-5.pdf"
     },
     {
-      "id": 3, "productionId": 0,
+      "id": 3,
+      "productionId": 0,
       "sentAt": "2026-06-12T22:30:00.000Z",
       "artifact": "Rehearsal Report — Day 10",
       "recipientGroup": "Creative Team",
@@ -354,22 +857,62 @@
       "location": "Studio Theatre",
       "version": 1,
       "notes": [
-        { "text": "Bring a pencil and your script." },
-        { "text": "Welcome to the company!" }
+        {
+          "text": "Bring a pencil and your script."
+        },
+        {
+          "text": "Welcome to the company!"
+        }
       ],
       "callTimes": [
-        { "contactId": 1, "time": "18:00" },
-        { "contactId": 2, "time": "18:00" },
-        { "contactId": 3, "time": "18:00" },
-        { "contactId": 4, "time": "18:00" },
-        { "contactId": 5, "time": "18:00" },
-        { "contactId": 6, "time": "18:00" },
-        { "contactId": 7, "time": "18:00" },
-        { "contactId": 8, "time": "18:00" },
-        { "contactId": 9, "time": "18:00" },
-        { "contactId": 10, "time": "18:00" },
-        { "contactId": 11, "time": "18:00" },
-        { "contactId": 12, "time": "18:00" }
+        {
+          "contactId": 1,
+          "time": "18:00"
+        },
+        {
+          "contactId": 2,
+          "time": "18:00"
+        },
+        {
+          "contactId": 3,
+          "time": "18:00"
+        },
+        {
+          "contactId": 4,
+          "time": "18:00"
+        },
+        {
+          "contactId": 5,
+          "time": "18:00"
+        },
+        {
+          "contactId": 6,
+          "time": "18:00"
+        },
+        {
+          "contactId": 7,
+          "time": "18:00"
+        },
+        {
+          "contactId": 8,
+          "time": "18:00"
+        },
+        {
+          "contactId": 9,
+          "time": "18:00"
+        },
+        {
+          "contactId": 10,
+          "time": "18:00"
+        },
+        {
+          "contactId": 11,
+          "time": "18:00"
+        },
+        {
+          "contactId": 12,
+          "time": "18:00"
+        }
       ],
       "scheduleItems": [
         {
@@ -412,13 +955,27 @@
       "location": "Studio Theatre",
       "version": 1,
       "notes": [
-        { "text": "Lovers off-book for Acts 2 and 3 by Wednesday." }
+        {
+          "text": "Lovers off-book for Acts 2 and 3 by Wednesday."
+        }
       ],
       "callTimes": [
-        { "contactId": 3, "time": "18:00" },
-        { "contactId": 4, "time": "18:00" },
-        { "contactId": 5, "time": "18:00" },
-        { "contactId": 6, "time": "18:00" }
+        {
+          "contactId": 3,
+          "time": "18:00"
+        },
+        {
+          "contactId": 4,
+          "time": "18:00"
+        },
+        {
+          "contactId": 5,
+          "time": "18:00"
+        },
+        {
+          "contactId": 6,
+          "time": "18:00"
+        }
       ],
       "scheduleItems": [
         {
@@ -431,7 +988,12 @@
           "time": "6:15p",
           "activity": "Block 2.1 — lovers in the woods",
           "calledMode": "specific",
-          "calledContactIds": [3, 4, 5, 6]
+          "calledContactIds": [
+            3,
+            4,
+            5,
+            6
+          ]
         },
         {
           "time": "7:30p",
@@ -443,13 +1005,23 @@
           "time": "7:45p",
           "activity": "Block 3.2 — confusion of the lovers",
           "calledMode": "specific",
-          "calledContactIds": [3, 4, 5, 6]
+          "calledContactIds": [
+            3,
+            4,
+            5,
+            6
+          ]
         },
         {
           "time": "9:00p",
           "activity": "Run the act with blocking",
           "calledMode": "specific",
-          "calledContactIds": [3, 4, 5, 6]
+          "calledContactIds": [
+            3,
+            4,
+            5,
+            6
+          ]
         }
       ]
     },
@@ -460,36 +1032,86 @@
       "location": "Studio Theatre",
       "version": 1,
       "notes": [
-        { "text": "Please come knowing your Act 5 lines off-book." },
-        { "text": "Water bottles are on the SR props table — refill as needed." }
+        {
+          "text": "Please come knowing your Act 5 lines off-book."
+        },
+        {
+          "text": "Water bottles are on the SR props table — refill as needed."
+        }
       ],
       "callTimes": [
-        { "contactId": 1, "time": "18:00" },
-        { "contactId": 2, "time": "18:00" },
-        { "contactId": 3, "time": "18:30" },
-        { "contactId": 4, "time": "18:30" },
-        { "contactId": 5, "time": "18:30" },
-        { "contactId": 6, "time": "18:30" },
-        { "contactId": 7, "time": "18:00" },
-        { "contactId": 8, "time": "19:00" },
-        { "contactId": 9, "time": "19:00" },
-        { "contactId": 10, "time": "19:00" },
-        { "contactId": 11, "time": "19:00" },
-        { "contactId": 12, "time": "19:00" }
+        {
+          "contactId": 1,
+          "time": "18:00"
+        },
+        {
+          "contactId": 2,
+          "time": "18:00"
+        },
+        {
+          "contactId": 3,
+          "time": "18:30"
+        },
+        {
+          "contactId": 4,
+          "time": "18:30"
+        },
+        {
+          "contactId": 5,
+          "time": "18:30"
+        },
+        {
+          "contactId": 6,
+          "time": "18:30"
+        },
+        {
+          "contactId": 7,
+          "time": "18:00"
+        },
+        {
+          "contactId": 8,
+          "time": "19:00"
+        },
+        {
+          "contactId": 9,
+          "time": "19:00"
+        },
+        {
+          "contactId": 10,
+          "time": "19:00"
+        },
+        {
+          "contactId": 11,
+          "time": "19:00"
+        },
+        {
+          "contactId": 12,
+          "time": "19:00"
+        }
       ],
       "scheduleItems": [
         {
           "time": "6:00p",
           "activity": "Warmups + vocal",
           "calledMode": "specific",
-          "calledContactIds": [1, 2, 7]
+          "calledContactIds": [
+            1,
+            2,
+            7
+          ]
         },
         {
           "time": "6:30p",
           "activity": "Block 3.2 — confusion of the lovers",
           "description": "Cleanup pass with revised choreo",
           "calledMode": "specific",
-          "calledContactIds": [3, 4, 5, 6, 7]
+          "calledContactIds": [
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
         },
         {
           "time": "7:30p",
@@ -502,7 +1124,15 @@
           "activity": "Run Act 5 with the mechanicals",
           "description": "- Pyramus and Thisbe play-within-a-play",
           "calledMode": "specific",
-          "calledContactIds": [1, 2, 8, 9, 10, 11, 12]
+          "calledContactIds": [
+            1,
+            2,
+            8,
+            9,
+            10,
+            11,
+            12
+          ]
         }
       ]
     },
@@ -513,22 +1143,62 @@
       "location": "Cowan Hall — Mainstage",
       "version": 1,
       "notes": [
-        { "text": "Designer run today — designers in house. Please be on time." },
-        { "text": "Costume calls at the half — meet Sofia at the dressing rooms." }
+        {
+          "text": "Designer run today — designers in house. Please be on time."
+        },
+        {
+          "text": "Costume calls at the half — meet Sofia at the dressing rooms."
+        }
       ],
       "callTimes": [
-        { "contactId": 1, "time": "13:00" },
-        { "contactId": 2, "time": "13:00" },
-        { "contactId": 3, "time": "13:00" },
-        { "contactId": 4, "time": "13:00" },
-        { "contactId": 5, "time": "13:00" },
-        { "contactId": 6, "time": "13:00" },
-        { "contactId": 7, "time": "13:00" },
-        { "contactId": 8, "time": "13:00" },
-        { "contactId": 9, "time": "13:00" },
-        { "contactId": 10, "time": "13:00" },
-        { "contactId": 11, "time": "13:00" },
-        { "contactId": 12, "time": "13:00" }
+        {
+          "contactId": 1,
+          "time": "13:00"
+        },
+        {
+          "contactId": 2,
+          "time": "13:00"
+        },
+        {
+          "contactId": 3,
+          "time": "13:00"
+        },
+        {
+          "contactId": 4,
+          "time": "13:00"
+        },
+        {
+          "contactId": 5,
+          "time": "13:00"
+        },
+        {
+          "contactId": 6,
+          "time": "13:00"
+        },
+        {
+          "contactId": 7,
+          "time": "13:00"
+        },
+        {
+          "contactId": 8,
+          "time": "13:00"
+        },
+        {
+          "contactId": 9,
+          "time": "13:00"
+        },
+        {
+          "contactId": 10,
+          "time": "13:00"
+        },
+        {
+          "contactId": 11,
+          "time": "13:00"
+        },
+        {
+          "contactId": 12,
+          "time": "13:00"
+        }
       ],
       "scheduleItems": [
         {
@@ -583,36 +1253,92 @@
       "location": "Cowan Hall — Mainstage",
       "version": 2,
       "notes": [
-        { "text": "v2: Photo call added after the dress run." },
-        { "text": "Costumes on by 6:30 PM. Hair and makeup, please come ready." },
-        { "text": "Tomorrow is first preview — get rest tonight." }
+        {
+          "text": "v2: Photo call added after the dress run."
+        },
+        {
+          "text": "Costumes on by 6:30 PM. Hair and makeup, please come ready."
+        },
+        {
+          "text": "Tomorrow is first preview — get rest tonight."
+        }
       ],
       "callTimes": [
-        { "contactId": 1, "time": "17:30" },
-        { "contactId": 2, "time": "17:30" },
-        { "contactId": 3, "time": "17:30" },
-        { "contactId": 4, "time": "17:30" },
-        { "contactId": 5, "time": "17:30" },
-        { "contactId": 6, "time": "17:30" },
-        { "contactId": 7, "time": "17:30" },
-        { "contactId": 8, "time": "18:00" },
-        { "contactId": 9, "time": "18:00" },
-        { "contactId": 10, "time": "18:00" },
-        { "contactId": 11, "time": "18:00" },
-        { "contactId": 12, "time": "18:00" }
+        {
+          "contactId": 1,
+          "time": "17:30"
+        },
+        {
+          "contactId": 2,
+          "time": "17:30"
+        },
+        {
+          "contactId": 3,
+          "time": "17:30"
+        },
+        {
+          "contactId": 4,
+          "time": "17:30"
+        },
+        {
+          "contactId": 5,
+          "time": "17:30"
+        },
+        {
+          "contactId": 6,
+          "time": "17:30"
+        },
+        {
+          "contactId": 7,
+          "time": "17:30"
+        },
+        {
+          "contactId": 8,
+          "time": "18:00"
+        },
+        {
+          "contactId": 9,
+          "time": "18:00"
+        },
+        {
+          "contactId": 10,
+          "time": "18:00"
+        },
+        {
+          "contactId": 11,
+          "time": "18:00"
+        },
+        {
+          "contactId": 12,
+          "time": "18:00"
+        }
       ],
       "scheduleItems": [
         {
           "time": "5:30p",
           "activity": "Principals' hair and makeup",
           "calledMode": "specific",
-          "calledContactIds": [1, 2, 3, 4, 5, 6, 7]
+          "calledContactIds": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
         },
         {
           "time": "6:00p",
           "activity": "Mechanicals arrive + hair/makeup",
           "calledMode": "specific",
-          "calledContactIds": [8, 9, 10, 11, 12]
+          "calledContactIds": [
+            8,
+            9,
+            10,
+            11,
+            12
+          ]
         },
         {
           "time": "6:30p",
@@ -647,6 +1373,1207 @@
           "calledContactIds": []
         }
       ]
+    }
+  ],
+  "tracking": [
+    {
+      "sequence": 10,
+      "page": "1",
+      "kind": "scene-shift",
+      "contactIds": [],
+      "what": "",
+      "where": "",
+      "sceneLabel": "ACT 1, SCENE 1 — Athens. Theseus's Palace",
+      "productionId": 0
+    },
+    {
+      "sequence": 20,
+      "page": "1",
+      "kind": "entry",
+      "contactIds": [
+        1,
+        2
+      ],
+      "what": "ENT",
+      "where": "UC",
+      "notes": "Theseus & Hippolyta discovered at top",
+      "productionId": 0
+    },
+    {
+      "sequence": 30,
+      "page": "1",
+      "kind": "crew",
+      "contactIds": [
+        21
+      ],
+      "what": "preset check",
+      "where": "SR",
+      "notes": "Confirm flower + letter on SR props table",
+      "productionId": 0
+    },
+    {
+      "sequence": 40,
+      "page": "3",
+      "kind": "entry",
+      "contactIds": [
+        12
+      ],
+      "what": "ENT",
+      "where": "SL",
+      "notes": "Egeus enters with Hermia",
+      "productionId": 0
+    },
+    {
+      "sequence": 50,
+      "page": "3",
+      "kind": "entry",
+      "contactIds": [
+        3,
+        4,
+        5
+      ],
+      "what": "ENT",
+      "where": "SL",
+      "notes": "Hermia, Lysander, Demetrius brought before court",
+      "productionId": 0
+    },
+    {
+      "sequence": 60,
+      "page": "8",
+      "kind": "entry",
+      "contactIds": [
+        1,
+        2,
+        12
+      ],
+      "what": "EXT",
+      "where": "UC",
+      "notes": "Theseus, Hippolyta, Egeus exit after ruling",
+      "productionId": 0
+    },
+    {
+      "sequence": 70,
+      "page": "9",
+      "kind": "entry",
+      "contactIds": [
+        6
+      ],
+      "what": "ENT",
+      "where": "SR",
+      "notes": "Helena enters to Hermia",
+      "productionId": 0
+    },
+    {
+      "sequence": 80,
+      "page": "12",
+      "kind": "entry",
+      "contactIds": [
+        3,
+        4
+      ],
+      "what": "EXT",
+      "where": "SL",
+      "notes": "Hermia & Lysander exit — plan to flee",
+      "productionId": 0
+    },
+    {
+      "sequence": 90,
+      "page": "13",
+      "kind": "entry",
+      "contactIds": [
+        5
+      ],
+      "what": "EXT",
+      "where": "SR",
+      "productionId": 0
+    },
+    {
+      "sequence": 100,
+      "page": "14",
+      "kind": "entry",
+      "contactIds": [
+        6
+      ],
+      "what": "EXT",
+      "where": "SR",
+      "notes": "Helena exits — decides to tell Demetrius",
+      "productionId": 0
+    },
+    {
+      "sequence": 110,
+      "page": "15",
+      "kind": "scene-shift",
+      "contactIds": [],
+      "what": "",
+      "where": "",
+      "sceneLabel": "ACT 1, SCENE 2 — Quince's House",
+      "productionId": 0
+    },
+    {
+      "sequence": 120,
+      "page": "15",
+      "kind": "crew",
+      "contactIds": [
+        21
+      ],
+      "what": "strike court furniture",
+      "where": "SR",
+      "notes": "Quick shift — bench + throne off SR",
+      "productionId": 0
+    },
+    {
+      "sequence": 130,
+      "page": "15",
+      "kind": "crew",
+      "contactIds": [
+        22
+      ],
+      "what": "fly in workshop drop",
+      "where": "FLY",
+      "productionId": 0
+    },
+    {
+      "sequence": 140,
+      "page": "15",
+      "kind": "entry",
+      "contactIds": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "what": "ENT",
+      "where": "SL",
+      "notes": "Mechanicals enter — Bottom, Quince, Flute, Snout, Starveling",
+      "productionId": 0
+    },
+    {
+      "sequence": 150,
+      "page": "20",
+      "kind": "entry",
+      "contactIds": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "what": "EXT",
+      "where": "SL",
+      "notes": "All mechanicals exit together",
+      "productionId": 0
+    },
+    {
+      "sequence": 160,
+      "page": "21",
+      "kind": "scene-shift",
+      "contactIds": [],
+      "what": "",
+      "where": "",
+      "sceneLabel": "ACT 2, SCENE 1 — A Wood Near Athens",
+      "productionId": 0
+    },
+    {
+      "sequence": 170,
+      "page": "21",
+      "kind": "crew",
+      "contactIds": [
+        22
+      ],
+      "what": "fly out workshop / fly in forest",
+      "where": "FLY",
+      "productionId": 0
+    },
+    {
+      "sequence": 180,
+      "page": "21",
+      "kind": "crew",
+      "contactIds": [
+        21
+      ],
+      "what": "set forest ground row + fairy lights",
+      "where": "SR/SL",
+      "productionId": 0
+    },
+    {
+      "sequence": 190,
+      "page": "21",
+      "kind": "entry",
+      "contactIds": [
+        7
+      ],
+      "what": "ENT",
+      "where": "SR",
+      "notes": "Puck enters — 'How now, spirit?'",
+      "productionId": 0
+    },
+    {
+      "sequence": 200,
+      "page": "23",
+      "kind": "entry",
+      "contactIds": [
+        1,
+        2
+      ],
+      "what": "ENT",
+      "where": "UC",
+      "notes": "Oberon & Titania enter arguing (doubling: Avery as Oberon, Beatrice as Titania)",
+      "productionId": 0
+    },
+    {
+      "sequence": 210,
+      "page": "26",
+      "kind": "entry",
+      "contactIds": [
+        2
+      ],
+      "what": "EXT",
+      "where": "SL",
+      "notes": "Titania exits with fairy train",
+      "productionId": 0
+    },
+    {
+      "sequence": 220,
+      "page": "27",
+      "kind": "entry",
+      "contactIds": [
+        1
+      ],
+      "what": "send Puck for flower",
+      "where": "UC",
+      "productionId": 0
+    },
+    {
+      "sequence": 230,
+      "page": "27",
+      "kind": "entry",
+      "contactIds": [
+        7
+      ],
+      "what": "EXT",
+      "where": "SR",
+      "notes": "Puck exits for love-in-idleness",
+      "productionId": 0
+    },
+    {
+      "sequence": 240,
+      "page": "28",
+      "kind": "entry",
+      "contactIds": [
+        5,
+        6
+      ],
+      "what": "ENT",
+      "where": "SL",
+      "notes": "Demetrius & Helena enter — he pursued, she pursuing",
+      "productionId": 0
+    },
+    {
+      "sequence": 250,
+      "page": "30",
+      "kind": "entry",
+      "contactIds": [
+        5,
+        6
+      ],
+      "what": "EXT",
+      "where": "SR",
+      "notes": "Demetrius flees, Helena follows",
+      "productionId": 0
+    },
+    {
+      "sequence": 260,
+      "page": "30",
+      "kind": "entry",
+      "contactIds": [
+        7
+      ],
+      "what": "ENT",
+      "where": "SR",
+      "notes": "Puck returns with flower",
+      "productionId": 0
+    },
+    {
+      "sequence": 270,
+      "page": "31",
+      "kind": "entry",
+      "contactIds": [
+        1
+      ],
+      "what": "EXT",
+      "where": "UC",
+      "notes": "Oberon exits with flower — will anoint Titania",
+      "productionId": 0
+    },
+    {
+      "sequence": 280,
+      "page": "31",
+      "kind": "entry",
+      "contactIds": [
+        7
+      ],
+      "what": "EXT",
+      "where": "SL",
+      "notes": "Puck exits — sent to anoint Demetrius",
+      "productionId": 0
+    },
+    {
+      "sequence": 290,
+      "page": "32",
+      "kind": "scene-shift",
+      "contactIds": [],
+      "what": "",
+      "where": "",
+      "sceneLabel": "ACT 2, SCENE 2 — Another Part of the Wood",
+      "productionId": 0
+    },
+    {
+      "sequence": 300,
+      "page": "32",
+      "kind": "entry",
+      "contactIds": [
+        2
+      ],
+      "what": "ENT",
+      "where": "SL",
+      "notes": "Titania enters and sleeps",
+      "productionId": 0
+    },
+    {
+      "sequence": 310,
+      "page": "33",
+      "kind": "entry",
+      "contactIds": [
+        1
+      ],
+      "what": "ENT",
+      "where": "UC",
+      "notes": "Oberon anoints Titania",
+      "productionId": 0
+    },
+    {
+      "sequence": 320,
+      "page": "33",
+      "kind": "entry",
+      "contactIds": [
+        1
+      ],
+      "what": "EXT",
+      "where": "UC",
+      "productionId": 0
+    },
+    {
+      "sequence": 330,
+      "page": "34",
+      "kind": "entry",
+      "contactIds": [
+        3,
+        4
+      ],
+      "what": "ENT",
+      "where": "SR",
+      "notes": "Lysander & Hermia enter — lost and tired, lie down",
+      "productionId": 0
+    },
+    {
+      "sequence": 340,
+      "page": "35",
+      "kind": "entry",
+      "contactIds": [
+        7
+      ],
+      "what": "ENT",
+      "where": "SL",
+      "notes": "Puck enters — sees Lysander, wrong Athenian!",
+      "productionId": 0
+    },
+    {
+      "sequence": 350,
+      "page": "36",
+      "kind": "entry",
+      "contactIds": [
+        7
+      ],
+      "what": "EXT",
+      "where": "SL",
+      "notes": "Puck anoints Lysander and exits",
+      "productionId": 0
+    },
+    {
+      "sequence": 360,
+      "page": "36",
+      "kind": "entry",
+      "contactIds": [
+        5,
+        6
+      ],
+      "what": "ENT",
+      "where": "SR",
+      "notes": "Demetrius runs through, Helena follows",
+      "productionId": 0
+    },
+    {
+      "sequence": 370,
+      "page": "37",
+      "kind": "entry",
+      "contactIds": [
+        5
+      ],
+      "what": "EXT",
+      "where": "SL",
+      "productionId": 0
+    },
+    {
+      "sequence": 380,
+      "page": "37",
+      "kind": "entry",
+      "contactIds": [
+        4
+      ],
+      "what": "ENT — wakes",
+      "where": "SR",
+      "notes": "Lysander wakes, sees Helena, falls in love",
+      "productionId": 0
+    },
+    {
+      "sequence": 390,
+      "page": "38",
+      "kind": "entry",
+      "contactIds": [
+        4,
+        6
+      ],
+      "what": "EXT",
+      "where": "SL",
+      "notes": "Lysander follows Helena off",
+      "productionId": 0
+    },
+    {
+      "sequence": 400,
+      "page": "39",
+      "kind": "entry",
+      "contactIds": [
+        3
+      ],
+      "what": "ENT — wakes",
+      "where": "SR",
+      "notes": "Hermia wakes alone, frightened",
+      "productionId": 0
+    },
+    {
+      "sequence": 410,
+      "page": "39",
+      "kind": "entry",
+      "contactIds": [
+        3
+      ],
+      "what": "EXT",
+      "where": "SL",
+      "notes": "Hermia exits searching for Lysander",
+      "productionId": 0
+    },
+    {
+      "sequence": 420,
+      "page": "40",
+      "kind": "scene-shift",
+      "contactIds": [],
+      "what": "",
+      "where": "",
+      "sceneLabel": "ACT 3, SCENE 1 — The Wood. Titania Sleeping.",
+      "productionId": 0
+    },
+    {
+      "sequence": 430,
+      "page": "40",
+      "kind": "entry",
+      "contactIds": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "what": "ENT",
+      "where": "SR",
+      "notes": "Mechanicals enter to rehearse",
+      "productionId": 0
+    },
+    {
+      "sequence": 440,
+      "page": "42",
+      "kind": "entry",
+      "contactIds": [
+        7
+      ],
+      "what": "ENT",
+      "where": "SL",
+      "notes": "Puck enters unseen — watches rehearsal",
+      "productionId": 0
+    },
+    {
+      "sequence": 450,
+      "page": "44",
+      "kind": "entry",
+      "contactIds": [
+        8
+      ],
+      "what": "EXT/ENT",
+      "where": "SR→SR",
+      "notes": "Bottom exits into bush, returns with ass head",
+      "productionId": 0
+    },
+    {
+      "sequence": 460,
+      "page": "44",
+      "kind": "crew",
+      "contactIds": [
+        21
+      ],
+      "what": "hand off donkey head",
+      "where": "SR",
+      "notes": "Quick change — donkey head to Harper in SR wing",
+      "productionId": 0
+    },
+    {
+      "sequence": 470,
+      "page": "45",
+      "kind": "entry",
+      "contactIds": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "what": "EXT",
+      "where": "SR/SL",
+      "notes": "Mechanicals flee in terror",
+      "productionId": 0
+    },
+    {
+      "sequence": 480,
+      "page": "46",
+      "kind": "entry",
+      "contactIds": [
+        2
+      ],
+      "what": "ENT — wakes",
+      "where": "SL",
+      "notes": "Titania wakes, sees Bottom, falls in love",
+      "productionId": 0
+    },
+    {
+      "sequence": 490,
+      "page": "48",
+      "kind": "entry",
+      "contactIds": [
+        2,
+        8
+      ],
+      "what": "EXT",
+      "where": "SL",
+      "notes": "Titania leads Bottom off to bower",
+      "productionId": 0
+    },
+    {
+      "sequence": 500,
+      "page": "48",
+      "kind": "entry",
+      "contactIds": [
+        7
+      ],
+      "what": "EXT",
+      "where": "SR",
+      "productionId": 0
+    },
+    {
+      "sequence": 510,
+      "page": "49",
+      "kind": "scene-shift",
+      "contactIds": [],
+      "what": "",
+      "where": "",
+      "sceneLabel": "ACT 3, SCENE 2 — Another Part of the Wood",
+      "productionId": 0
+    },
+    {
+      "sequence": 520,
+      "page": "49",
+      "kind": "entry",
+      "contactIds": [
+        1
+      ],
+      "what": "ENT",
+      "where": "UC",
+      "notes": "Oberon waiting",
+      "productionId": 0
+    },
+    {
+      "sequence": 530,
+      "page": "49",
+      "kind": "entry",
+      "contactIds": [
+        7
+      ],
+      "what": "ENT",
+      "where": "SR",
+      "notes": "Puck reports — Bottom transformed",
+      "productionId": 0
+    },
+    {
+      "sequence": 540,
+      "page": "50",
+      "kind": "entry",
+      "contactIds": [
+        5,
+        6
+      ],
+      "what": "ENT",
+      "where": "SL",
+      "notes": "Demetrius & Hermia enter — ERROR: this is Demetrius & Helena! Puck's mistake revealed",
+      "productionId": 0
+    },
+    {
+      "sequence": 550,
+      "page": "52",
+      "kind": "entry",
+      "contactIds": [
+        3
+      ],
+      "what": "ENT",
+      "where": "SR",
+      "productionId": 0
+    },
+    {
+      "sequence": 560,
+      "page": "52",
+      "kind": "entry",
+      "contactIds": [
+        4
+      ],
+      "what": "ENT",
+      "where": "SL",
+      "notes": "Lysander enters pursuing Helena",
+      "productionId": 0
+    },
+    {
+      "sequence": 570,
+      "page": "55",
+      "kind": "entry",
+      "contactIds": [
+        5
+      ],
+      "what": "ENT — anointed",
+      "where": "SL",
+      "notes": "Oberon anoints Demetrius — now both men love Helena",
+      "productionId": 0
+    },
+    {
+      "sequence": 580,
+      "page": "63",
+      "kind": "entry",
+      "contactIds": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "what": "EXT",
+      "where": "SR/SL",
+      "notes": "All four lovers exit in fog (Puck leads them astray)",
+      "productionId": 0
+    },
+    {
+      "sequence": 590,
+      "page": "63",
+      "kind": "crew",
+      "contactIds": [
+        22
+      ],
+      "what": "fog machine cue",
+      "where": "SL",
+      "notes": "Hazer at SL — timed with Puck's speeches",
+      "productionId": 0
+    },
+    {
+      "sequence": 600,
+      "page": "64",
+      "kind": "entry",
+      "contactIds": [
+        7
+      ],
+      "what": "EXT",
+      "where": "UC",
+      "productionId": 0
+    },
+    {
+      "sequence": 610,
+      "page": "64",
+      "kind": "entry",
+      "contactIds": [
+        1
+      ],
+      "what": "EXT",
+      "where": "UC",
+      "productionId": 0
+    },
+    {
+      "sequence": 620,
+      "page": "65",
+      "kind": "scene-shift",
+      "contactIds": [],
+      "what": "",
+      "where": "",
+      "sceneLabel": "ACT 4, SCENE 1 — The Wood. Lovers Asleep.",
+      "productionId": 0
+    },
+    {
+      "sequence": 630,
+      "page": "65",
+      "kind": "entry",
+      "contactIds": [
+        2,
+        8
+      ],
+      "what": "ENT",
+      "where": "SL",
+      "notes": "Titania with Bottom in bower",
+      "productionId": 0
+    },
+    {
+      "sequence": 640,
+      "page": "66",
+      "kind": "entry",
+      "contactIds": [
+        1
+      ],
+      "what": "ENT",
+      "where": "UC",
+      "notes": "Oberon enters — pities Titania",
+      "productionId": 0
+    },
+    {
+      "sequence": 650,
+      "page": "67",
+      "kind": "entry",
+      "contactIds": [
+        7
+      ],
+      "what": "ENT",
+      "where": "SR",
+      "productionId": 0
+    },
+    {
+      "sequence": 660,
+      "page": "67",
+      "kind": "crew",
+      "contactIds": [
+        21
+      ],
+      "what": "receive donkey head",
+      "where": "SR",
+      "notes": "Harper hands off donkey head SR wing",
+      "productionId": 0
+    },
+    {
+      "sequence": 670,
+      "page": "68",
+      "kind": "entry",
+      "contactIds": [
+        2
+      ],
+      "what": "ENT — wakes (cured)",
+      "where": "SL",
+      "notes": "Titania wakes, sees Bottom, horrified",
+      "productionId": 0
+    },
+    {
+      "sequence": 680,
+      "page": "69",
+      "kind": "entry",
+      "contactIds": [
+        1,
+        2,
+        7
+      ],
+      "what": "EXT",
+      "where": "UC",
+      "notes": "Oberon, Titania, Puck exit reconciled",
+      "productionId": 0
+    },
+    {
+      "sequence": 690,
+      "page": "70",
+      "kind": "entry",
+      "contactIds": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "what": "ENT — wake",
+      "where": "SR/SL",
+      "notes": "Four lovers wake, confused but paired correctly",
+      "productionId": 0
+    },
+    {
+      "sequence": 700,
+      "page": "70",
+      "kind": "crew",
+      "contactIds": [
+        22
+      ],
+      "what": "fly out forest / fly in palace",
+      "where": "FLY",
+      "productionId": 0
+    },
+    {
+      "sequence": 710,
+      "page": "72",
+      "kind": "entry",
+      "contactIds": [
+        8
+      ],
+      "what": "ENT — wakes",
+      "where": "SR",
+      "notes": "Bottom wakes alone — 'I have had a dream'",
+      "productionId": 0
+    },
+    {
+      "sequence": 720,
+      "page": "73",
+      "kind": "entry",
+      "contactIds": [
+        8
+      ],
+      "what": "EXT",
+      "where": "SR",
+      "productionId": 0
+    },
+    {
+      "sequence": 730,
+      "page": "74",
+      "kind": "scene-shift",
+      "contactIds": [],
+      "what": "",
+      "where": "",
+      "sceneLabel": "ACT 4, SCENE 2 — Athens. Quince's House",
+      "productionId": 0
+    },
+    {
+      "sequence": 740,
+      "page": "74",
+      "kind": "entry",
+      "contactIds": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "what": "ENT",
+      "where": "SL",
+      "notes": "Mechanicals lamenting Bottom's absence",
+      "productionId": 0
+    },
+    {
+      "sequence": 750,
+      "page": "75",
+      "kind": "entry",
+      "contactIds": [
+        8
+      ],
+      "what": "ENT",
+      "where": "SR",
+      "notes": "Bottom returns! 'Masters, I am to discourse wonders'",
+      "productionId": 0
+    },
+    {
+      "sequence": 760,
+      "page": "76",
+      "kind": "entry",
+      "contactIds": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "what": "EXT",
+      "where": "SL",
+      "notes": "All exit to prepare play",
+      "productionId": 0
+    },
+    {
+      "sequence": 770,
+      "page": "77",
+      "kind": "scene-shift",
+      "contactIds": [],
+      "what": "",
+      "where": "",
+      "sceneLabel": "ACT 5, SCENE 1 — Athens. The Palace. Wedding Night.",
+      "productionId": 0
+    },
+    {
+      "sequence": 780,
+      "page": "77",
+      "kind": "crew",
+      "contactIds": [
+        21
+      ],
+      "what": "set wedding furniture",
+      "where": "SR/SL",
+      "notes": "Two benches + throne platform",
+      "productionId": 0
+    },
+    {
+      "sequence": 790,
+      "page": "77",
+      "kind": "crew",
+      "contactIds": [
+        22
+      ],
+      "what": "fly in palace drop",
+      "where": "FLY",
+      "productionId": 0
+    },
+    {
+      "sequence": 800,
+      "page": "77",
+      "kind": "entry",
+      "contactIds": [
+        1,
+        2
+      ],
+      "what": "ENT",
+      "where": "UC",
+      "notes": "Theseus & Hippolyta enter (Avery/Beatrice costume change from fairy royals)",
+      "productionId": 0
+    },
+    {
+      "sequence": 810,
+      "page": "77",
+      "kind": "entry",
+      "contactIds": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "what": "ENT",
+      "where": "SL",
+      "notes": "Lovers enter — now married",
+      "productionId": 0
+    },
+    {
+      "sequence": 820,
+      "page": "80",
+      "kind": "entry",
+      "contactIds": [
+        9
+      ],
+      "what": "ENT",
+      "where": "SR",
+      "notes": "Quince enters as Prologue",
+      "productionId": 0
+    },
+    {
+      "sequence": 830,
+      "page": "81",
+      "kind": "entry",
+      "contactIds": [
+        8,
+        10,
+        11,
+        12
+      ],
+      "what": "ENT",
+      "where": "SR",
+      "notes": "Rest of mechanicals enter for Pyramus & Thisbe",
+      "productionId": 0
+    },
+    {
+      "sequence": 840,
+      "page": "89",
+      "kind": "entry",
+      "contactIds": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "what": "EXT",
+      "where": "SR",
+      "notes": "Mechanicals exit after bergamask",
+      "productionId": 0
+    },
+    {
+      "sequence": 850,
+      "page": "90",
+      "kind": "entry",
+      "contactIds": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "what": "EXT",
+      "where": "UC",
+      "notes": "Court exits to bed",
+      "productionId": 0
+    },
+    {
+      "sequence": 860,
+      "page": "91",
+      "kind": "entry",
+      "contactIds": [
+        7
+      ],
+      "what": "ENT",
+      "where": "SR",
+      "notes": "Puck enters alone — 'If we shadows have offended'",
+      "productionId": 0
+    },
+    {
+      "sequence": 870,
+      "page": "91",
+      "kind": "crew",
+      "contactIds": [
+        22
+      ],
+      "what": "fairy lights to half",
+      "where": "FLY",
+      "notes": "Lighting cue: fairy lights dim during speech",
+      "productionId": 0
+    },
+    {
+      "sequence": 880,
+      "page": "92",
+      "kind": "entry",
+      "contactIds": [
+        1,
+        2
+      ],
+      "what": "ENT",
+      "where": "UC/SL",
+      "notes": "Oberon & Titania enter for fairy blessing",
+      "productionId": 0
+    },
+    {
+      "sequence": 890,
+      "page": "93",
+      "kind": "entry",
+      "contactIds": [
+        1,
+        2
+      ],
+      "what": "EXT",
+      "where": "UC",
+      "notes": "Fairy royals exit",
+      "productionId": 0
+    },
+    {
+      "sequence": 900,
+      "page": "93",
+      "kind": "entry",
+      "contactIds": [
+        7
+      ],
+      "what": "EXT — final",
+      "where": "SR",
+      "notes": "Puck's last exit after epilogue",
+      "productionId": 0
+    },
+    {
+      "sequence": 910,
+      "page": "93",
+      "kind": "scene-shift",
+      "contactIds": [],
+      "what": "",
+      "where": "",
+      "sceneLabel": "CURTAIN CALL",
+      "productionId": 0
+    },
+    {
+      "sequence": 920,
+      "page": "93",
+      "kind": "crew",
+      "contactIds": [
+        21,
+        22
+      ],
+      "what": "call cue GO",
+      "where": "BOOTH",
+      "productionId": 0
+    },
+    {
+      "sequence": 930,
+      "page": "93",
+      "kind": "entry",
+      "contactIds": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "what": "ENT bow",
+      "where": "SL",
+      "notes": "Mechanicals minus Bottom",
+      "productionId": 0
+    },
+    {
+      "sequence": 940,
+      "page": "93",
+      "kind": "entry",
+      "contactIds": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "what": "ENT bow",
+      "where": "SR",
+      "notes": "Lovers",
+      "productionId": 0
+    },
+    {
+      "sequence": 950,
+      "page": "93",
+      "kind": "entry",
+      "contactIds": [
+        1,
+        2
+      ],
+      "what": "ENT bow",
+      "where": "UC",
+      "notes": "Theseus/Hippolyta",
+      "productionId": 0
+    },
+    {
+      "sequence": 960,
+      "page": "93",
+      "kind": "entry",
+      "contactIds": [
+        8
+      ],
+      "what": "ENT bow",
+      "where": "SR",
+      "notes": "Bottom — solo bow",
+      "productionId": 0
+    },
+    {
+      "sequence": 970,
+      "page": "93",
+      "kind": "entry",
+      "contactIds": [
+        7
+      ],
+      "what": "ENT bow",
+      "where": "UC",
+      "notes": "Puck — last bow",
+      "productionId": 0
     }
   ]
 }

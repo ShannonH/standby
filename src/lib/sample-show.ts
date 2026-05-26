@@ -19,7 +19,7 @@ export function sampleShowUrl(): string {
 
 export const SAMPLE_SHOW_LABEL = "A Midsummer Night's Dream"
 export const SAMPLE_SHOW_DESCRIPTION =
-  'A studio production of Midsummer in pre-tech: 12 cast, design team, 3 rehearsal reports, 9 props, 5 line notes, named groups, and a few send-log entries. Imports as a new production alongside whatever you already have.'
+  'A studio production of Midsummer in pre-tech: 12 cast, design team, 3 rehearsal reports, 9 props, 5 line notes, 97 master tracking entries (full show), named groups, and a few send-log entries. Imports as a new production alongside whatever you already have.'
 
 /** Fetch the sample show JSON and import it. Returns the new production id. */
 export async function loadSampleShow(): Promise<number> {

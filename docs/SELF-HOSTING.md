@@ -110,4 +110,4 @@ The image rebuilds, the container restarts, and users on the next page load pick
 
 ## Questions
 
-Open a [Question or discussion](https://github.com/ShannonH/standby/discussions) thread on the repo, or email shannon.harris@blackboard.com.
+Open a [Question or discussion](https://github.com/ShannonH/standby/discussions) thread on the repo. Self-hosting questions are useful in public because the answer probably helps the next person too.

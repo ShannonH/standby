@@ -14,8 +14,8 @@ The Code of Conduct applies in all project spaces — the GitHub repo (issues, P
 
 If you experience or witness behavior that violates the Code of Conduct:
 
-- **Email:** shannon.harris@blackboard.com with subject "Standby Code of Conduct report"
-- **Direct:** if you'd rather contact a different maintainer, list any additional maintainers here as they come on board.
+- **Private DM the maintainer.** GitHub supports private messages between users with a recent interaction — opening a private discussion or commenting privately on a relevant issue both work. The maintainer's GitHub profile is linked from the repo.
+- **GitHub's abuse reporting** ([github.com/contact/report-abuse](https://github.com/contact/report-abuse)) is the right path if the behavior happens *in* the repo (issues, PRs, discussions) and you'd rather escalate to GitHub directly.
 
 Reports will be reviewed promptly and confidentially. Retaliation against anyone reporting in good faith is itself a violation.
 

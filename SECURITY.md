@@ -19,9 +19,9 @@ The realistic concerns are:
 If you've found something that looks like a security issue:
 
 - **Do not** open a public GitHub issue with reproduction steps.
-- **Do** email **shannon.harris@blackboard.com** with the subject "Standby security report" and a clear description, ideally with a minimal reproduction.
+- **Do** report it through GitHub's [private vulnerability reporting](https://github.com/ShannonH/standby/security/advisories/new) for this repo. That opens a private channel visible only to the maintainer; no public exposure during triage.
 
-Expect an initial reply within 5 business days. Coordinated disclosure timelines will be agreed in that first reply.
+Include a clear description and, ideally, a minimal reproduction. Expect an initial reply within 5 business days. Coordinated disclosure timelines will be agreed in that first reply.
 
 ## Scope
 

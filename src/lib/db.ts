@@ -248,6 +248,76 @@ export interface TrackingEntry {
   notes?: string
 }
 
+// ─── Blocking schematic ────────────────────────────────────────────────────
+//
+// Zone-based blocking notation. The stage is divided into 9 standard areas
+// (USR, USC, USL, SR, C, SL, DSR, DSC, DSL) following universal SM notation.
+// Each BlockingEntry records all actor positions for a given script page —
+// tap the zone, assign the actor, move to the next page.
+
+export type StageZone =
+  | 'USR' | 'USC' | 'USL'
+  | 'SR'  | 'C'   | 'SL'
+  | 'DSR' | 'DSC' | 'DSL'
+
+export const STAGE_ZONES: readonly StageZone[] = [
+  'USR', 'USC', 'USL',
+  'SR',  'C',   'SL',
+  'DSR', 'DSC', 'DSL',
+]
+
+export interface BlockingPosition {
+  contactId: number
+  zone: StageZone
+  notes?: string // "sits on bench", "crosses to SL during speech"
+}
+
+export interface BlockingEntry {
+  id?: number
+  productionId: number
+  /** Script page reference — matches tracking page field. */
+  page: string
+  /** Stable ordering across the whole show. Lower = earlier. */
+  sequence: number
+  /** Scene label for context — "Act 2, Scene 1", "Top of show", etc. */
+  sceneLabel?: string
+  /** All actor positions at this moment/page. */
+  positions: BlockingPosition[]
+  /** General blocking note for this page. */
+  notes?: string
+}
+
+// ─── Equity break calculator ───────────────────────────────────────────────
+//
+// AEA rules enforced:
+//   • 5-after-55: 5-minute break required after 55 minutes of continuous work
+//   • 10-out-of-12: In a 12-hour tech day, only 10 hours can be work
+//   • Meal within 5: Meal break must be called within 5 hours of initial call
+//
+// The BreakLog stores the day's event timeline so the SM can prove compliance
+// after the fact if a grievance is filed.
+
+export type BreakEventType = 'break-start' | 'break-end' | 'meal-start' | 'meal-end' | 'wrap'
+
+export interface BreakEvent {
+  type: BreakEventType
+  time: string // "HH:MM" format
+  note?: string
+}
+
+export interface BreakLog {
+  id?: number
+  productionId: number
+  /** ISO date — one log per day. */
+  date: string
+  /** '10-of-12' enables the 10/12-specific hour tracking rules. */
+  dayType: '10-of-12' | 'regular'
+  /** When rehearsal was called — "09:00". */
+  callTime: string
+  /** Ordered timeline of break/meal events for the day. */
+  events: BreakEvent[]
+}
+
 /** Key-value settings table — currently holds the auto-backup directory
  *  handle (a FileSystemDirectoryHandle is structured-clonable, so it
  *  persists across reloads). Keep keys namespaced like 'autoBackup:dir'. */
@@ -267,6 +337,8 @@ class StandbyDB extends Dexie {
   settings!: EntityTable<SettingsEntry, 'key'>
   dailyCalls!: EntityTable<DailyCall, 'id'>
   tracking!: EntityTable<TrackingEntry, 'id'>
+  blocking!: EntityTable<BlockingEntry, 'id'>
+  breakLogs!: EntityTable<BreakLog, 'id'>
 
   constructor() {
     super('standby')
@@ -313,6 +385,21 @@ class StandbyDB extends Dexie {
       dailyCalls: '++id, productionId, date, version',
       tracking: '++id, productionId, sequence, page, kind',
     })
+    // v5: adds blocking + breakLogs.
+    this.version(5).stores({
+      productions: '++id, name',
+      contacts: '++id, productionId, category, name',
+      contactGroups: '++id, productionId, name',
+      props: '++id, productionId, name, status',
+      lineNotes: '++id, productionId, rehearsalDate, characterId, delivered',
+      rehearsals: '++id, productionId, date, dayNumber',
+      sendLog: '++id, productionId, sentAt, artifact',
+      settings: '&key',
+      dailyCalls: '++id, productionId, date, version',
+      tracking: '++id, productionId, sequence, page, kind',
+      blocking: '++id, productionId, sequence, page',
+      breakLogs: '++id, productionId, date',
+    })
   }
 }
 
@@ -334,6 +421,8 @@ export async function deleteProductionCascade(productionId: number): Promise<voi
       db.sendLog,
       db.dailyCalls,
       db.tracking,
+      db.blocking,
+      db.breakLogs,
     ],
     async () => {
       await db.contacts.where('productionId').equals(productionId).delete()
@@ -344,6 +433,8 @@ export async function deleteProductionCascade(productionId: number): Promise<voi
       await db.sendLog.where('productionId').equals(productionId).delete()
       await db.dailyCalls.where('productionId').equals(productionId).delete()
       await db.tracking.where('productionId').equals(productionId).delete()
+      await db.blocking.where('productionId').equals(productionId).delete()
+      await db.breakLogs.where('productionId').equals(productionId).delete()
       await db.productions.delete(productionId)
     },
   )

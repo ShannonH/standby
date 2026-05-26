@@ -14,7 +14,7 @@ export function Field({ label, optional, error, hint, children }: FieldProps) {
       <span className="text-sm font-medium text-[color:rgb(var(--text-primary))]">
         {label}
         {optional && (
-          <span className="text-stone-400"> (optional)</span>
+          <span className="text-muted"> (optional)</span>
         )}
       </span>
       <div className="mt-1">{children}</div>
@@ -31,7 +31,7 @@ export function Field({ label, optional, error, hint, children }: FieldProps) {
 }
 
 const inputClass =
-  'w-full rounded border border-stone-300 bg-card px-3 py-2 text-sm shadow-sm focus:border-stone-900 focus:outline-none focus:ring-1 focus:ring-stone-900 dark:bg-stone-800 dark:focus:border-stone-100 dark:focus:ring-stone-100'
+  'w-full rounded border border-surface-border bg-card px-3 py-2 text-sm shadow-sm focus:border-[rgb(var(--accent))] focus:outline-none focus:ring-1 focus:ring-[rgb(var(--accent))] dark:bg-[rgb(var(--surface-elev))]'
 
 export const Input = forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>(
   function Input(props, ref) {
@@ -81,10 +81,10 @@ export function Button({ variant = 'primary', className, ...props }: ButtonProps
     primary:
       'bg-[rgb(var(--accent))] text-[rgb(var(--on-accent))] hover:bg-[rgb(var(--accent-hover))]',
     secondary:
-      'bg-stone-200 text-stone-900 hover:bg-stone-300 dark:bg-stone-800 dark:text-stone-100 dark:hover:bg-stone-700',
+      'bg-surface-border/40 text-[rgb(var(--text-primary))] hover:bg-surface-border/60',
     danger: 'bg-red-600 text-white hover:bg-red-700',
     ghost:
-      'bg-transparent text-stone-700 hover:bg-stone-100 dark:text-stone-300 dark:hover:bg-stone-800',
+      'bg-transparent text-muted hover:bg-surface-border/20',
   }
   return (
     <button
@@ -104,7 +104,7 @@ export function Checkbox({
       <input
         type="checkbox"
         {...props}
-        className="mt-0.5 h-4 w-4 rounded border-stone-300 text-stone-900 focus:ring-stone-900 dark:border-stone-600 dark:bg-stone-800"
+        className="mt-0.5 h-4 w-4 rounded border-surface-border text-accent focus:ring-accent"
       />
       <span>{label}</span>
     </label>

@@ -105,7 +105,7 @@ export default function ProductionForm({ production, onSaved, onCancel }: Props)
       </Field>
 
       <fieldset className="space-y-3 border-t border-surface-border pt-4">
-        <legend className="font-serif text-lg font-semibold">Key dates</legend>
+        <legend className="font-display text-lg font-semibold">Key dates</legend>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           <Field label="First rehearsal" optional>
             <Input {...register('firstRehearsal')} type="date" />

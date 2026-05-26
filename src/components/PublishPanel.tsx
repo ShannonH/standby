@@ -124,7 +124,7 @@ export default function PublishPanel({ productionId, productionName }: Props) {
   return (
     <div className="space-y-4 rounded border border-surface-border bg-card p-4">
       <div>
-        <h3 className="font-serif text-lg font-semibold">Publish to a shared folder</h3>
+        <h3 className="font-display text-lg">Publish to a shared folder</h3>
         <p className="text-xs text-muted">
           Optional. Pick a folder (Google Drive, iCloud Drive, Dropbox, anywhere)
           and Standby writes the PDFs you'd otherwise distribute manually:
@@ -137,7 +137,7 @@ export default function PublishPanel({ productionId, productionName }: Props) {
       </div>
 
       {!supported ? (
-        <p className="rounded border border-surface-border bg-card p-3 text-sm text-stone-600 dark:text-stone-400">
+        <p className="rounded border border-surface-border bg-card p-3 text-sm text-muted">
           The File System Access API isn't available on this browser (Safari
           and Firefox don't ship it yet). Use a Chromium-based browser to set
           this up.

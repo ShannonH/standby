@@ -1,5 +1,7 @@
 import {
   db,
+  type BlockingEntry,
+  type BreakLog,
   type Contact,
   type ContactGroup,
   type DailyCall,
@@ -23,8 +25,9 @@ import {
  * v5: adds sendLog
  * v6: adds dailyCalls
  * v7: adds tracking
+ * v8: adds blocking + breakLogs
  */
-export const SHOW_EXPORT_VERSION = 7
+export const SHOW_EXPORT_VERSION = 8
 
 export interface ShowExport {
   schemaVersion: number
@@ -38,6 +41,8 @@ export interface ShowExport {
   sendLog: SendLogEntry[]
   dailyCalls: DailyCall[]
   tracking: TrackingEntry[]
+  blocking: BlockingEntry[]
+  breakLogs: BreakLog[]
 }
 
 /** Build a portable JSON snapshot of a single production and its entities. */
@@ -76,6 +81,14 @@ export async function exportShow(productionId: number): Promise<ShowExport> {
     .where('productionId')
     .equals(productionId)
     .toArray()
+  const blocking = await db.blocking
+    .where('productionId')
+    .equals(productionId)
+    .toArray()
+  const breakLogs = await db.breakLogs
+    .where('productionId')
+    .equals(productionId)
+    .toArray()
   return {
     schemaVersion: SHOW_EXPORT_VERSION,
     exportedAt: new Date().toISOString(),
@@ -88,6 +101,8 @@ export async function exportShow(productionId: number): Promise<ShowExport> {
     sendLog,
     dailyCalls,
     tracking,
+    blocking,
+    breakLogs,
   }
 }
 
@@ -116,6 +131,8 @@ export async function importShow(data: ShowExport): Promise<number> {
       db.sendLog,
       db.dailyCalls,
       db.tracking,
+      db.blocking,
+      db.breakLogs,
     ],
     async () => {
       const now = new Date().toISOString()
@@ -232,6 +249,31 @@ export async function importShow(data: ShowExport): Promise<number> {
           ...entryData,
           productionId: newProductionId,
           contactIds: remappedContactIds,
+        })
+      }
+
+      // Blocking entries added in v8. positions[].contactId get remapped.
+      for (const entry of data.blocking ?? []) {
+        const { id: _ignoredId, ...entryData } = entry
+        void _ignoredId
+        const remappedPositions = entryData.positions.map((pos) => ({
+          ...pos,
+          contactId: contactIdMap.get(pos.contactId) ?? pos.contactId,
+        }))
+        await db.blocking.add({
+          ...entryData,
+          productionId: newProductionId,
+          positions: remappedPositions,
+        })
+      }
+
+      // Break logs added in v8. No contact references — copied verbatim.
+      for (const log of data.breakLogs ?? []) {
+        const { id: _ignoredId, ...logData } = log
+        void _ignoredId
+        await db.breakLogs.add({
+          ...logData,
+          productionId: newProductionId,
         })
       }
 

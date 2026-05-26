@@ -73,7 +73,7 @@ export default function ImportExport({ productionId }: Props) {
   return (
     <div className="space-y-6 rounded border border-surface-border bg-card p-4">
       <div className="space-y-3">
-        <h3 className="font-serif text-lg font-semibold">Backup &amp; restore</h3>
+        <h3 className="font-display text-lg">Backup &amp; restore</h3>
         <p className="text-sm text-muted">
           Your show lives in your browser's IndexedDB. Export to a{' '}
           <code>.standby.json</code> file to back it up or move it to another
@@ -103,7 +103,7 @@ export default function ImportExport({ productionId }: Props) {
       </div>
 
       <div className="space-y-3 border-t border-surface-border pt-4">
-        <h3 className="font-serif text-lg font-semibold">Try a sample show</h3>
+        <h3 className="font-display text-lg">Try a sample show</h3>
         <p className="text-sm text-muted">{SAMPLE_SHOW_DESCRIPTION}</p>
         <div className="flex flex-wrap items-center gap-3">
           <Button onClick={handleLoadSample} disabled={busy}>

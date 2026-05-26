@@ -36,7 +36,7 @@ export default function ProductionList({ onEdit }: Props) {
             }`}
           >
             <div className="min-w-0">
-              <p className="font-serif text-lg font-semibold">{p.name}</p>
+              <p className="font-display text-lg font-semibold">{p.name}</p>
               <p className="text-xs text-muted">
                 {TYPE_LABELS[p.type] ?? p.type}
                 {p.season ? ` · ${p.season}` : ''}

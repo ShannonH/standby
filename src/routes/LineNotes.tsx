@@ -107,7 +107,7 @@ function LineNotesInner() {
   return (
     <section className="mx-auto max-w-5xl space-y-8">
       <header>
-        <h2 className="font-serif text-3xl font-semibold">Line notes</h2>
+        <h2 className="font-display text-3xl">Line notes</h2>
         <p className="mt-1 text-sm text-muted">
           For <span className="font-medium">{production.name}</span>. Capture
           flubs as they happen — Enter saves a note and re-focuses the page
@@ -124,7 +124,7 @@ function LineNotesInner() {
         </p>
       ) : editingNote ? (
         <div className="space-y-3 rounded border border-surface-border p-4">
-          <h3 className="font-serif text-xl font-semibold">Edit line note</h3>
+          <h3 className="font-display text-xl">Edit line note</h3>
           <LineNoteForm
             productionId={production.id}
             cast={cast}
@@ -137,7 +137,7 @@ function LineNotesInner() {
         </div>
       ) : (
         <div className="space-y-3 rounded border border-surface-border bg-card p-4">
-          <h3 className="font-serif text-xl font-semibold">Add line note</h3>
+          <h3 className="font-display text-xl">Add line note</h3>
           <LineNoteForm
             productionId={production.id}
             cast={cast}
@@ -152,7 +152,7 @@ function LineNotesInner() {
       {notes.length > 0 && (
         <>
           <section className="space-y-3 border-t border-surface-border pt-8">
-            <h3 className="font-serif text-xl font-semibold">Exports</h3>
+            <h3 className="font-display text-xl">Exports</h3>
             <div className="flex flex-wrap items-end gap-3">
               <Field label="Per-actor PDF">
                 <Select

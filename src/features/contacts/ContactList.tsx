@@ -74,8 +74,8 @@ export default function ContactList({ productionId }: Props) {
       </div>
 
       {isCreating && (
-        <div className="rounded border border-stone-300 p-4">
-          <h3 className="mb-3 font-serif text-lg font-semibold">New contact</h3>
+        <div className="rounded border border-surface-border p-4">
+          <h3 className="mb-3 font-display text-lg">New contact</h3>
           <ContactForm
             productionId={productionId}
             onSaved={() => setIsCreating(false)}
@@ -85,7 +85,7 @@ export default function ContactList({ productionId }: Props) {
       )}
 
       {contacts.length === 0 && !isCreating && (
-        <p className="rounded border border-dashed border-stone-300 p-6 text-center text-sm text-muted">
+        <p className="rounded border border-dashed border-surface-border p-6 text-center text-sm text-muted">
           No contacts yet. Add cast, creative team, designers, and crew here —
           they'll appear on the contact sheet, in the rehearsal-report
           attendance picker, and in any distribution groups you build.
@@ -97,10 +97,10 @@ export default function ContactList({ productionId }: Props) {
         if (list.length === 0) return null
         return (
           <section key={cat}>
-            <h3 className="mb-2 font-serif text-lg font-semibold">
+            <h3 className="mb-2 font-display text-lg">
               {CATEGORY_LABELS[cat]}
             </h3>
-            <ul className="divide-y divide-stone-200 rounded border border-stone-200">
+            <ul className="divide-y divide-surface-border rounded border border-surface-border">
               {list.map((c) => (
                 <li key={c.id} className="p-3">
                   {editingId === c.id ? (
@@ -121,7 +121,7 @@ export default function ContactList({ productionId }: Props) {
                             </span>
                           )}
                           {c.doNotPublish && (
-                            <span className="ml-2 inline-block rounded bg-stone-200 px-1.5 py-0.5 text-xs font-medium text-stone-700 dark:bg-stone-800 dark:text-stone-300">
+                            <span className="ml-2 inline-block rounded bg-surface-border/40 px-1.5 py-0.5 text-xs font-medium text-[rgb(var(--text-primary))]">
                               private
                             </span>
                           )}

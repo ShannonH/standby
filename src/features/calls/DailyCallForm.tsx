@@ -123,7 +123,7 @@ export default function DailyCallForm({
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
       {/* Header */}
       <section>
-        <h3 className="mb-3 font-serif text-lg font-semibold">Header</h3>
+        <h3 className="mb-3 font-display text-lg">Header</h3>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <Field label="Date" error={errors.date?.message}>
             <Input {...register('date')} type="date" />
@@ -184,7 +184,7 @@ export default function DailyCallForm({
       {/* Call Times */}
       <section>
         <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-          <h3 className="font-serif text-lg font-semibold">Call times</h3>
+          <h3 className="font-display text-lg">Call times</h3>
           <Button variant="secondary" onClick={applyDefaultTimeToAll}>
             Set all to the same time…
           </Button>
@@ -215,7 +215,7 @@ export default function DailyCallForm({
       {/* Schedule */}
       <section>
         <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
-          <h3 className="font-serif text-lg font-semibold">Rehearsal schedule</h3>
+          <h3 className="font-display text-lg">Rehearsal schedule</h3>
           <Button
             variant="secondary"
             onClick={() =>

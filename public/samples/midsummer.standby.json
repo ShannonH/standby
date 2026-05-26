@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 7,
+  "schemaVersion": 8,
   "exportedAt": "2026-05-25T12:00:00.000Z",
   "production": {
     "name": "A Midsummer Night's Dream",
@@ -2574,6 +2574,118 @@
       "where": "UC",
       "notes": "Puck — last bow",
       "productionId": 0
+    }
+  ],
+  "blocking": [
+    {
+      "productionId": 0,
+      "page": "1",
+      "sequence": 1,
+      "sceneLabel": "I.1 – Theseus & Hippolyta",
+      "positions": [
+        { "contactId": 1, "zone": "C", "notes": "on throne" },
+        { "contactId": 2, "zone": "SL" },
+        { "contactId": 11, "zone": "DSR" },
+        { "contactId": 12, "zone": "DSL" }
+      ],
+      "notes": "Opening court scene"
+    },
+    {
+      "productionId": 0,
+      "page": "2",
+      "sequence": 2,
+      "sceneLabel": "I.1 – Lovers enter",
+      "positions": [
+        { "contactId": 1, "zone": "USC" },
+        { "contactId": 2, "zone": "USL" },
+        { "contactId": 3, "zone": "DSC" },
+        { "contactId": 4, "zone": "DSC" },
+        { "contactId": 5, "zone": "SR" },
+        { "contactId": 6, "zone": "SL" }
+      ],
+      "notes": ""
+    },
+    {
+      "productionId": 0,
+      "page": "3",
+      "sequence": 3,
+      "sceneLabel": "I.2 – Mechanicals",
+      "positions": [
+        { "contactId": 8, "zone": "C", "notes": "directing" },
+        { "contactId": 9, "zone": "SR" },
+        { "contactId": 10, "zone": "SL" },
+        { "contactId": 11, "zone": "DSR" },
+        { "contactId": 12, "zone": "DSL" }
+      ],
+      "notes": "Quince assigns parts"
+    },
+    {
+      "productionId": 0,
+      "page": "4",
+      "sequence": 4,
+      "sceneLabel": "II.1 – Forest: Oberon & Titania",
+      "positions": [
+        { "contactId": 1, "zone": "USR", "notes": "enters from wings" },
+        { "contactId": 2, "zone": "USL", "notes": "enters opposite" },
+        { "contactId": 7, "zone": "DSC", "notes": "hiding" }
+      ],
+      "notes": "First fairy court confrontation"
+    },
+    {
+      "productionId": 0,
+      "page": "5",
+      "sequence": 5,
+      "sceneLabel": "II.2 – Lovers lost in forest",
+      "positions": [
+        { "contactId": 3, "zone": "SR" },
+        { "contactId": 4, "zone": "USR" },
+        { "contactId": 5, "zone": "SL" },
+        { "contactId": 6, "zone": "USL" },
+        { "contactId": 7, "zone": "C", "notes": "applying flower" }
+      ],
+      "notes": "Puck's first mistake"
+    }
+  ],
+  "breakLogs": [
+    {
+      "productionId": 0,
+      "date": "2026-06-16",
+      "dayType": "regular",
+      "callTime": "10:00",
+      "events": [
+        { "type": "break-start", "time": "10:55" },
+        { "type": "break-end", "time": "11:00" },
+        { "type": "break-start", "time": "11:55" },
+        { "type": "break-end", "time": "12:00" },
+        { "type": "meal-start", "time": "13:00" },
+        { "type": "meal-end", "time": "14:00" },
+        { "type": "break-start", "time": "14:55" },
+        { "type": "break-end", "time": "15:00" },
+        { "type": "wrap", "time": "17:00" }
+      ]
+    },
+    {
+      "productionId": 0,
+      "date": "2026-06-17",
+      "dayType": "10-of-12",
+      "callTime": "09:00",
+      "events": [
+        { "type": "break-start", "time": "09:55" },
+        { "type": "break-end", "time": "10:00" },
+        { "type": "break-start", "time": "10:55" },
+        { "type": "break-end", "time": "11:00" },
+        { "type": "meal-start", "time": "12:00" },
+        { "type": "meal-end", "time": "13:00" },
+        { "type": "break-start", "time": "13:55" },
+        { "type": "break-end", "time": "14:00" },
+        { "type": "break-start", "time": "14:55" },
+        { "type": "break-end", "time": "15:00" },
+        { "type": "meal-start", "time": "17:00" },
+        { "type": "meal-end", "time": "18:00" },
+        { "type": "break-start", "time": "18:55" },
+        { "type": "break-end", "time": "19:00" },
+        { "type": "wrap", "time": "21:00", "note": "10-of-12 complete" }
+      ]
     }
   ]
 }

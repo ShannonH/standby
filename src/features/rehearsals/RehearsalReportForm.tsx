@@ -113,7 +113,7 @@ export default function RehearsalReportForm({
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
       <section>
-        <h3 className="mb-3 font-serif text-lg font-semibold">Header</h3>
+        <h3 className="mb-3 font-display text-lg">Header</h3>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           <Field label="Date" error={errors.date?.message}>
             <Input {...register('date')} type="date" />
@@ -138,13 +138,13 @@ export default function RehearsalReportForm({
       </section>
 
       <section>
-        <h3 className="mb-3 font-serif text-lg font-semibold">Attendance</h3>
+        <h3 className="mb-3 font-display text-lg">Attendance</h3>
         {attendance.fields.length === 0 ? (
-          <p className="rounded border border-dashed border-stone-300 p-4 text-center text-sm text-muted">
+          <p className="rounded border border-dashed border-surface-border p-4 text-center text-sm text-muted">
             No cast yet. Add cast in Contacts first — they'll auto-populate here.
           </p>
         ) : (
-          <ul className="divide-y divide-stone-200 rounded border border-stone-200">
+          <ul className="divide-y divide-surface-border rounded border border-surface-border">
             {attendance.fields.map((field, idx) => {
               const status = watch(`attendance.${idx}.status`)
               return (
@@ -184,7 +184,7 @@ export default function RehearsalReportForm({
 
       <section>
         <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
-          <h3 className="font-serif text-lg font-semibold">Time breakdown</h3>
+          <h3 className="font-display text-lg">Time breakdown</h3>
           <Button
             variant="secondary"
             onClick={() =>
@@ -195,7 +195,7 @@ export default function RehearsalReportForm({
           </Button>
         </div>
         {timeBlocks.fields.length === 0 ? (
-          <p className="rounded border border-dashed border-stone-300 p-4 text-center text-sm text-muted">
+          <p className="rounded border border-dashed border-surface-border p-4 text-center text-sm text-muted">
             No time blocks yet. Add one per scene or activity worked.
           </p>
         ) : (
@@ -234,7 +234,7 @@ export default function RehearsalReportForm({
       </section>
 
       <section>
-        <h3 className="mb-3 font-serif text-lg font-semibold">
+        <h3 className="mb-3 font-display text-lg">
           Departmental notes
         </h3>
         <p className="mb-4 text-sm text-muted">
@@ -295,7 +295,7 @@ function DeptNotesSection({
       <summary className="flex cursor-pointer items-center justify-between font-medium">
         <span>
           {label}{' '}
-          <span className="text-stone-400">({fields.length})</span>
+          <span className="text-muted">({fields.length})</span>
         </span>
       </summary>
       <div className="mt-3 space-y-2">

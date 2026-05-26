@@ -1,6 +1,8 @@
 import { useLiveQuery } from 'dexie-react-hooks'
 import {
   db,
+  type BlockingEntry,
+  type BreakLog,
   type Contact,
   type ContactGroup,
   type DailyCall,
@@ -241,4 +243,77 @@ export function useLineNotes(
       })
     }, [productionId]) ?? []
   )
+}
+
+export function useBlockingEntries(
+  productionId: number | null | undefined,
+): BlockingEntry[] {
+  return (
+    useLiveQuery(async () => {
+      if (productionId === null || productionId === undefined) {
+        return [] as BlockingEntry[]
+      }
+      const entries = await db.blocking
+        .where('productionId')
+        .equals(productionId)
+        .toArray()
+      return entries.sort((a, b) => a.sequence - b.sequence)
+    }, [productionId]) ?? []
+  )
+}
+
+export function useNextBlockingSequence(
+  productionId: number | null | undefined,
+): number {
+  return (
+    useLiveQuery(async () => {
+      if (productionId === null || productionId === undefined) return 10
+      const entries = await db.blocking
+        .where('productionId')
+        .equals(productionId)
+        .toArray()
+      if (entries.length === 0) return 10
+      return Math.max(...entries.map((e) => e.sequence)) + 10
+    }, [productionId]) ?? 10
+  )
+}
+
+export function useBreakLogs(
+  productionId: number | null | undefined,
+): BreakLog[] {
+  return (
+    useLiveQuery(async () => {
+      if (productionId === null || productionId === undefined) {
+        return [] as BreakLog[]
+      }
+      const logs = await db.breakLogs
+        .where('productionId')
+        .equals(productionId)
+        .toArray()
+      return logs.sort((a, b) => b.date.localeCompare(a.date))
+    }, [productionId]) ?? []
+  )
+}
+
+export function useBreakLog(
+  logId: number | null | undefined,
+): BreakLog | undefined {
+  return useLiveQuery(async () => {
+    if (logId === null || logId === undefined) return undefined
+    return db.breakLogs.get(logId)
+  }, [logId])
+}
+
+export function useTodayBreakLog(
+  productionId: number | null | undefined,
+): BreakLog | undefined {
+  const today = new Date().toISOString().slice(0, 10)
+  return useLiveQuery(async () => {
+    if (productionId === null || productionId === undefined) return undefined
+    const logs = await db.breakLogs
+      .where('productionId')
+      .equals(productionId)
+      .toArray()
+    return logs.find((l) => l.date === today)
+  }, [productionId, today])
 }

@@ -144,7 +144,7 @@ export default function AutoBackupPanel({ productionId }: Props) {
   return (
     <div className="space-y-4 rounded border border-surface-border bg-card p-4">
       <div>
-        <h3 className="font-serif text-lg font-semibold">
+        <h3 className="font-display text-lg">
           Auto-backup &amp; storage durability
         </h3>
         <p className="text-xs text-muted">

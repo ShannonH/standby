@@ -214,7 +214,7 @@ export default function DistributePanel({
   return (
     <div className="space-y-4 rounded border border-surface-border bg-card p-4">
       <div>
-        <h4 className="font-serif text-lg font-semibold">Distribute</h4>
+        <h4 className="font-display text-lg">Distribute</h4>
         <p className="text-xs text-muted">
           Generates a PDF and opens your mail client with the recipient group
           BCC'd. By default, the full report is included in the email body so

@@ -36,7 +36,7 @@ export default function PropList({ productionId, onEdit }: Props) {
 
   if (props.length === 0) {
     return (
-      <p className="rounded border border-dashed border-stone-300 p-6 text-center text-sm text-muted">
+      <p className="rounded border border-dashed border-surface-border p-6 text-center text-sm text-muted">
         No props yet. The prop list grows from the script during pre-production
         and gets reconciled with the props master in rehearsals.
       </p>
@@ -132,7 +132,7 @@ function PropRow({
               status: e.target.value as PropStatus,
             })
           }}
-          className="rounded border border-stone-300 bg-card px-2 py-1 text-xs dark:bg-stone-800"
+          className="rounded border border-surface-border bg-card px-2 py-1 text-xs"
         >
           {(
             Object.entries(PROP_STATUS_LABELS) as [PropStatus, string][]
@@ -159,7 +159,7 @@ function PropRow({
             ))}
           </div>
         ) : (
-          <span className="text-xs text-stone-400">—</span>
+          <span className="text-xs text-muted">—</span>
         )}
       </td>
       <td className="px-3 py-2 align-top">

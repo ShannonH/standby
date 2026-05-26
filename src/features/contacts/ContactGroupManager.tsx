@@ -63,7 +63,7 @@ export default function ContactGroupManager({ productionId }: Props) {
       </div>
 
       {groups.length === 0 ? (
-        <p className="rounded border border-dashed border-stone-300 p-4 text-center text-sm text-muted">
+        <p className="rounded border border-dashed border-surface-border p-4 text-center text-sm text-muted">
           No groups yet.
         </p>
       ) : (
@@ -124,7 +124,7 @@ export default function ContactGroupManager({ productionId }: Props) {
                                     c.id !== undefined &&
                                     void toggleMembership(g.id!, c.id)
                                   }
-                                  className="h-4 w-4 rounded border-stone-300 text-stone-900 focus:ring-stone-900 dark:border-stone-600 dark:bg-stone-800"
+                                  className="h-4 w-4 rounded border-surface-border text-accent focus:ring-accent"
                                 />
                                 <span>
                                   {c.name}

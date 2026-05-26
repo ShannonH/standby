@@ -113,7 +113,7 @@ function DailyCallInner() {
       <header>
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <h2 className="font-serif text-3xl font-semibold">Daily call</h2>
+            <h2 className="font-display text-3xl">Daily call</h2>
             <p className="mt-1 text-sm text-muted">
               For <span className="font-medium">{production.name}</span>. The
               call you send the night before — staggered call times, an
@@ -142,7 +142,7 @@ function DailyCallInner() {
 
       {mode.kind === 'new' && (
         <div className="space-y-3 rounded border border-surface-border p-4">
-          <h3 className="font-serif text-xl font-semibold">
+          <h3 className="font-display text-xl">
             {prefillCall ? 'Duplicate as new call' : 'New daily call'}
           </h3>
           <DailyCallForm
@@ -160,7 +160,7 @@ function DailyCallInner() {
 
       {mode.kind === 'edit' && editingCall && (
         <div className="space-y-3 rounded border border-surface-border p-4">
-          <h3 className="font-serif text-xl font-semibold">
+          <h3 className="font-display text-xl">
             Edit call for {editingCall.date}
             {editingCall.version > 1 && ` (v${editingCall.version})`}
           </h3>
@@ -180,7 +180,7 @@ function DailyCallInner() {
       {mode.kind === 'distribute' && distributingCall && (
         <div className="space-y-3 rounded border border-surface-border p-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <h3 className="font-serif text-xl font-semibold">
+            <h3 className="font-display text-xl">
               Distribute daily call: {distributingCall.date}
               {distributingCall.version > 1 &&
                 ` (v${distributingCall.version})`}

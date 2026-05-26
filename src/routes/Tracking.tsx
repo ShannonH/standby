@@ -273,7 +273,7 @@ function TrackingInner() {
       <header>
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <h2 className="font-serif text-3xl font-semibold">
+            <h2 className="font-display text-3xl">
               Master tracking
             </h2>
             <p className="mt-1 text-sm text-muted">
@@ -304,7 +304,7 @@ function TrackingInner() {
       {/* ─── CSV Import panel ──────────────────────────────────────────── */}
       {showCsvImport && mode.kind === 'view' && (
         <div className="space-y-3 rounded border border-surface-border bg-surface-secondary/30 p-4">
-          <h3 className="font-serif text-lg font-semibold">CSV Import</h3>
+          <h3 className="font-display text-lg">CSV Import</h3>
           <p className="text-sm text-muted">
             Paste or upload a CSV with columns:{' '}
             <code className="rounded bg-surface-secondary px-1 font-mono text-xs">
@@ -369,7 +369,7 @@ function TrackingInner() {
       {mode.kind === 'new' && (
         <div className="space-y-3 rounded border border-surface-border p-4">
           <div className="flex items-center justify-between gap-3">
-            <h3 className="font-serif text-xl font-semibold">New entry</h3>
+            <h3 className="font-display text-xl">New entry</h3>
             <label className="flex items-center gap-2 text-sm">
               <input
                 type="checkbox"
@@ -404,7 +404,7 @@ function TrackingInner() {
       {/* ─── Edit form ─────────────────────────────────────────────────── */}
       {mode.kind === 'edit' && editing && (
         <div className="space-y-3 rounded border border-surface-border p-4">
-          <h3 className="font-serif text-xl font-semibold">Edit entry</h3>
+          <h3 className="font-display text-xl">Edit entry</h3>
           <TrackingEntryForm
             productionId={production.id}
             entry={editing}
@@ -426,7 +426,7 @@ function TrackingInner() {
       {/* ─── Exports ───────────────────────────────────────────────────── */}
       {entries.length > 0 && (
         <section className="space-y-3 border-t border-surface-border pt-8">
-          <h3 className="font-serif text-xl font-semibold">Exports</h3>
+          <h3 className="font-display text-xl">Exports</h3>
           <p className="text-sm text-muted">
             Master sheet for the booth and ASMs. Per-actor PDFs are
             auto-derived from the same data — each actor sees only their

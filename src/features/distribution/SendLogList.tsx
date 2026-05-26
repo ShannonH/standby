@@ -21,7 +21,7 @@ export default function SendLogList({ productionId, limit = 20 }: Props) {
 
   if (entries.length === 0) {
     return (
-      <p className="rounded border border-dashed border-stone-300 p-4 text-center text-sm text-muted">
+      <p className="rounded border border-dashed border-surface-border p-4 text-center text-sm text-muted">
         Nothing distributed yet. When you open your mail client or share via
         system from any of the paperwork pages, it'll log here.
       </p>
@@ -30,7 +30,7 @@ export default function SendLogList({ productionId, limit = 20 }: Props) {
 
   return (
     <div className="space-y-3">
-      <ul className="divide-y divide-stone-200 rounded border border-stone-200">
+      <ul className="divide-y divide-surface-border rounded border border-surface-border">
         {entries.map((e) => (
           <li
             key={e.id}

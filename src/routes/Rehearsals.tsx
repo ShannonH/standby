@@ -88,7 +88,7 @@ function RehearsalsInner() {
       <header>
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <h2 className="font-serif text-3xl font-semibold">
+            <h2 className="font-display text-3xl">
               Rehearsal reports
             </h2>
             <p className="mt-1 text-sm text-muted">
@@ -119,7 +119,7 @@ function RehearsalsInner() {
       {mode.kind === 'distribute' && distributingReport && production.id !== undefined && (
         <div className="space-y-3 rounded border border-surface-border p-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <h3 className="font-serif text-xl font-semibold">
+            <h3 className="font-display text-xl">
               Distribute Day {distributingReport.dayNumber} report
             </h3>
             <Button variant="ghost" onClick={() => setMode({ kind: 'list' })}>
@@ -149,7 +149,7 @@ function RehearsalsInner() {
 
       {mode.kind === 'new' && (
         <div className="space-y-3 rounded border border-surface-border p-4">
-          <h3 className="font-serif text-xl font-semibold">
+          <h3 className="font-display text-xl">
             New rehearsal report
           </h3>
           <RehearsalReportForm
@@ -165,7 +165,7 @@ function RehearsalsInner() {
 
       {mode.kind === 'edit' && editingReport && (
         <div className="space-y-3 rounded border border-surface-border p-4">
-          <h3 className="font-serif text-xl font-semibold">
+          <h3 className="font-display text-xl">
             Edit Day {editingReport.dayNumber}
           </h3>
           <RehearsalReportForm

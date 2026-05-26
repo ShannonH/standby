@@ -48,7 +48,7 @@ export default function DailyCallList({
           className="flex flex-wrap items-center justify-between gap-3 p-3"
         >
           <div className="min-w-0">
-            <p className="font-serif text-lg font-semibold">
+            <p className="font-display text-lg font-semibold">
               {formatDate(c.date)}{' '}
               {c.version > 1 && (
                 <span className="text-sm font-normal text-muted">

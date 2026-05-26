@@ -14,7 +14,7 @@ export default function Today() {
   if (productions.length === 0) {
     return (
       <section className="mx-auto max-w-3xl">
-        <h2 className="font-serif text-3xl font-semibold">
+        <h2 className="font-display text-3xl">
           {trimmedName
             ? `Welcome to Standby, ${trimmedName}.`
             : 'Welcome to Standby'}
@@ -40,7 +40,7 @@ export default function Today() {
     return (
       <section className="mx-auto max-w-3xl">
         <p className="text-sm italic text-muted">{greeting}</p>
-        <h2 className="mt-1 font-serif text-3xl font-semibold">Today</h2>
+        <h2 className="mt-1 font-display text-3xl">Today</h2>
         <p className="mt-3 text-muted">
           No production is currently selected.
         </p>
@@ -56,7 +56,7 @@ export default function Today() {
   return (
     <section className="mx-auto max-w-3xl">
       <p className="text-sm italic text-muted">{greeting}</p>
-      <h2 className="mt-1 font-serif text-3xl font-semibold">{current.name}</h2>
+      <h2 className="mt-1 font-display text-3xl">{current.name}</h2>
       <p className="text-sm text-muted">
         {current.type}
         {current.season ? ` · ${current.season}` : ''}
@@ -68,8 +68,8 @@ export default function Today() {
         <Card label="Production details" value="Edit" to="/production" />
       </div>
 
-      <div className="mt-12 space-y-3 border-t border-surface-border pt-6 text-sm text-stone-600 dark:text-stone-400">
-        <p className="font-medium text-stone-800 dark:text-stone-200">
+      <div className="mt-12 space-y-3 border-t border-surface-border pt-6 text-sm text-muted">
+        <p className="font-medium text-[rgb(var(--text-primary))]">
           Where to go next
         </p>
         <ul className="space-y-1.5">
@@ -108,10 +108,10 @@ function Card({ label, value, to }: { label: string; value: string; to: string }
   return (
     <Link
       to={to}
-      className="block rounded border border-surface-border p-4 transition hover:border-stone-900 dark:hover:border-stone-100"
+      className="block rounded border border-surface-border p-4 transition hover:border-[rgb(var(--accent))]"
     >
       <p className="text-xs uppercase tracking-wide text-muted">{label}</p>
-      <p className="mt-1 font-serif text-2xl font-semibold">{value}</p>
+      <p className="mt-1 font-display text-2xl font-semibold">{value}</p>
     </Link>
   )
 }

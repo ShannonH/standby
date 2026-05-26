@@ -40,7 +40,7 @@ export default function RehearsalReportList({
 
   if (reports.length === 0) {
     return (
-      <p className="rounded border border-dashed border-stone-300 p-6 text-center text-sm text-muted">
+      <p className="rounded border border-dashed border-surface-border p-6 text-center text-sm text-muted">
         No rehearsal reports yet. After a rehearsal, hit "+ New rehearsal
         report" to capture attendance, what you worked, and notes for each
         department. The form pre-fills today's date and increments the day
@@ -50,14 +50,14 @@ export default function RehearsalReportList({
   }
 
   return (
-    <ul className="divide-y divide-stone-200 rounded border border-stone-200">
+    <ul className="divide-y divide-surface-border rounded border border-surface-border">
       {reports.map((r) => (
         <li
           key={r.id}
           className="flex flex-wrap items-center justify-between gap-3 p-3"
         >
           <div className="min-w-0">
-            <p className="font-serif text-lg font-semibold">
+            <p className="font-display text-lg font-semibold">
               Day {r.dayNumber}{' '}
               <span className="text-muted">· {formatDate(r.date)}</span>
             </p>

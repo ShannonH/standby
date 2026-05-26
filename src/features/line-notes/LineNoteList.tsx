@@ -32,7 +32,7 @@ export default function LineNoteList({ notes, cast, onEdit }: Props) {
 
   if (notes.length === 0) {
     return (
-      <p className="rounded border border-dashed border-stone-300 p-6 text-center text-sm text-muted">
+      <p className="rounded border border-dashed border-surface-border p-6 text-center text-sm text-muted">
         No line notes yet. Use the form above to add some during rehearsal —
         Enter saves and clears the form so you can keep typing.
       </p>
@@ -54,14 +54,14 @@ export default function LineNoteList({ notes, cast, onEdit }: Props) {
             type="checkbox"
             checked={showDelivered}
             onChange={(e) => setShowDelivered(e.target.checked)}
-            className="h-4 w-4 rounded border-stone-300 text-stone-900 focus:ring-stone-900 dark:border-stone-600 dark:bg-stone-800"
+            className="h-4 w-4 rounded border-surface-border text-accent focus:ring-accent"
           />
           Show delivered
         </label>
       </div>
 
       {grouped.length === 0 && (
-        <p className="rounded border border-dashed border-stone-300 p-6 text-center text-sm text-muted">
+        <p className="rounded border border-dashed border-surface-border p-6 text-center text-sm text-muted">
           All notes delivered. Toggle "Show delivered" to see history.
         </p>
       )}
@@ -72,7 +72,7 @@ export default function LineNoteList({ notes, cast, onEdit }: Props) {
           className="rounded border border-surface-border"
         >
           <header className="flex flex-wrap items-center justify-between gap-2 border-b border-surface-border bg-card px-3 py-2">
-            <h3 className="font-serif text-lg font-semibold">
+            <h3 className="font-display text-lg">
               {castName(characterId)}{' '}
               <span className="text-sm font-normal text-muted">
                 · {list.length} note{list.length === 1 ? '' : 's'}
@@ -110,7 +110,7 @@ export default function LineNoteList({ notes, cast, onEdit }: Props) {
                       {n.rehearsalDate} · p.{n.page || '—'} ·{' '}
                       {LINE_TYPE_LABELS[n.lineType]}
                       {n.delivered && (
-                        <span className="ml-2 inline-block rounded bg-stone-200 px-1.5 py-0.5 text-xs font-medium text-stone-700 dark:bg-stone-800 dark:text-stone-300">
+                        <span className="ml-2 inline-block rounded bg-surface-border/40 px-1.5 py-0.5 text-xs font-medium text-[rgb(var(--text-primary))]">
                           delivered
                         </span>
                       )}

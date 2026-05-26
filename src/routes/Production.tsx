@@ -39,7 +39,7 @@ export default function ProductionRoute() {
   return (
     <section className="mx-auto max-w-4xl space-y-10">
       <header>
-        <h2 className="font-serif text-3xl font-semibold">Production</h2>
+        <h2 className="font-display text-3xl">Production</h2>
         <p className="mt-1 text-sm text-muted">
           The show's name, type, venue, and key dates. Everything else
           (contacts, rehearsals, props) attaches to whichever production
@@ -50,7 +50,7 @@ export default function ProductionRoute() {
       {productions.length > 0 && (
         <section className="space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <h3 className="font-serif text-xl font-semibold">Your productions</h3>
+            <h3 className="font-display text-xl">Your productions</h3>
             <Button onClick={() => { setIsCreating(true); setEditingId(null) }}>
               + New production
             </Button>
@@ -66,7 +66,7 @@ export default function ProductionRoute() {
 
       {showCreateForm && (
         <section className="space-y-3">
-          <h3 className="font-serif text-xl font-semibold">
+          <h3 className="font-display text-xl">
             {productions.length === 0 ? 'Set up your first production' : 'New production'}
           </h3>
           <ProductionForm
@@ -78,7 +78,7 @@ export default function ProductionRoute() {
 
       {editing && (
         <section className="space-y-3">
-          <h3 className="font-serif text-xl font-semibold">
+          <h3 className="font-display text-xl">
             Edit: {editing.name}
           </h3>
           <ProductionForm
@@ -106,7 +106,7 @@ export default function ProductionRoute() {
       {current && current.id !== undefined && !editing && !isCreating && (
         <>
           <section className="space-y-3">
-            <h3 className="font-serif text-xl font-semibold">Exports</h3>
+            <h3 className="font-display text-xl">Exports</h3>
             <PdfDownloadButton
               label="Download production info sheet (PDF)"
               filename={`${current.name.replace(/[^a-z0-9]/gi, '_')}-production-info.pdf`}
@@ -128,7 +128,7 @@ export default function ProductionRoute() {
           />
 
           <section className="space-y-3 border-t border-surface-border pt-8">
-            <h3 className="font-serif text-xl font-semibold">Send log</h3>
+            <h3 className="font-display text-xl">Send log</h3>
             <SendLogList productionId={current.id} />
           </section>
         </>

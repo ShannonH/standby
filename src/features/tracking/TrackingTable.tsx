@@ -264,7 +264,7 @@ function SortableRow({
       <tr
         ref={setNodeRef}
         style={style}
-        className="bg-stone-200/60 dark:bg-stone-700/40"
+        className="bg-surface-border/30"
       >
         {showHandle && (
           <td className="w-8 cursor-grab px-1 py-2 text-center text-muted" {...attributes} {...listeners}>

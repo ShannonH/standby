@@ -16,6 +16,8 @@ const nav: readonly NavItem[] = [
   { to: '/line-notes', label: 'Line notes' },
   { to: '/props', label: 'Props' },
   { to: '/tracking', label: 'Tracking' },
+  { to: '/blocking', label: 'Blocking' },
+  { to: '/breaks', label: 'Breaks' },
   { to: '/settings', label: 'Settings' },
 ]
 
@@ -114,7 +116,7 @@ export default function App() {
     <div className="flex h-full">
       <aside className="hidden w-56 shrink-0 border-r border-surface-border bg-card p-4 print:hidden sm:flex sm:flex-col">
         <div className="mb-6">
-          <h1 className="font-serif text-2xl font-semibold tracking-tight">
+          <h1 className="font-display text-2xl">
             Standby
           </h1>
           <p
@@ -134,7 +136,7 @@ export default function App() {
                 `rounded px-3 py-2 text-sm font-medium transition ${
                   isActive
                     ? 'bg-[rgb(var(--accent))] text-[rgb(var(--on-accent))]'
-                    : 'text-stone-700 hover:bg-stone-100 dark:text-stone-300 dark:hover:bg-stone-800'
+                    : 'text-muted hover:bg-surface-border/20'
                 }`
               }
             >
@@ -145,7 +147,7 @@ export default function App() {
         <button
           type="button"
           onClick={() => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))}
-          className="mt-auto self-start text-xs text-muted hover:text-stone-900 dark:hover:text-stone-100"
+          className="mt-auto self-start text-xs text-muted hover:text-[rgb(var(--text-primary))]"
         >
           {theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
         </button>

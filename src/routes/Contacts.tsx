@@ -40,7 +40,7 @@ function ContactsInner() {
   return (
     <section className="mx-auto max-w-4xl space-y-10">
       <header>
-        <h2 className="font-serif text-3xl font-semibold">Contacts</h2>
+        <h2 className="font-display text-3xl">Contacts</h2>
         <p className="mt-1 text-sm text-muted">
           For <span className="font-medium">{current.name}</span>. Cast,
           creative team, production, crew, venue. Mark a contact{' '}
@@ -53,14 +53,14 @@ function ContactsInner() {
       <ContactList productionId={current.id} />
 
       <section className="space-y-3 border-t border-surface-border pt-8">
-        <h3 className="font-serif text-xl font-semibold">Groups</h3>
+        <h3 className="font-display text-xl">Groups</h3>
         <ContactGroupManager productionId={current.id} />
       </section>
 
       {contacts.length > 0 && (
         <>
           <section className="space-y-3 border-t border-surface-border pt-8">
-            <h3 className="font-serif text-xl font-semibold">Exports</h3>
+            <h3 className="font-display text-xl">Exports</h3>
             <PdfDownloadButton
               label="Download contact sheet (PDF)"
               filename={`${current.name.replace(/[^a-z0-9]/gi, '_')}-contact-sheet.pdf`}

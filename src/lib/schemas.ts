@@ -379,3 +379,74 @@ export const propFormSchema = z.object({
 })
 
 export type PropFormInput = z.infer<typeof propFormSchema>
+
+// ─── Show report ───────────────────────────────────────────────────────────
+
+export const incidentKindSchema = z.enum([
+  'medical',
+  'audience',
+  'technical',
+  'safety',
+  'other',
+])
+
+export type IncidentKind = z.infer<typeof incidentKindSchema>
+
+export const INCIDENT_KIND_LABELS: Record<IncidentKind, string> = {
+  medical: 'Medical',
+  audience: 'Audience',
+  technical: 'Technical',
+  safety: 'Safety',
+  other: 'Other',
+}
+
+export const actTimeSchema = z.object({
+  label: z.string().min(1, 'Act label required'),
+  start: z.string(),
+  end: z.string(),
+})
+
+export const intermissionTimeSchema = z.object({
+  label: z.string().optional(),
+  start: z.string(),
+  end: z.string(),
+})
+
+export const holdEventSchema = z.object({
+  when: z.string().min(1, 'When did the hold happen?'),
+  durationMinutes: z.coerce.number().int().nonnegative(),
+  reason: z.string().min(1, 'Reason required'),
+})
+
+export const incidentSchema = z.object({
+  kind: incidentKindSchema,
+  description: z.string().min(1, 'Description required'),
+})
+
+export const understudyChangeSchema = z.object({
+  contactId: z.coerce.number().int().positive('Pick a cast member'),
+  role: z.string().min(1, 'Role required'),
+  reason: z.string().optional(),
+})
+
+export const showReportInputSchema = z.object({
+  date: z.string().min(1, 'Date is required'),
+  performanceNumber: z.coerce
+    .number()
+    .int()
+    .min(1, 'Performance number must be at least 1'),
+  performanceLabel: z.string().min(1, 'Label required'),
+  location: z.string().optional(),
+  curtainUp: z.string().min(1, 'Curtain time required'),
+  curtainDown: z.string().optional(),
+  houseCount: z.coerce.number().int().nonnegative().optional(),
+  lateSeating: z.coerce.number().int().nonnegative().optional(),
+  acts: z.array(actTimeSchema),
+  intermissions: z.array(intermissionTimeSchema),
+  holds: z.array(holdEventSchema),
+  incidents: z.array(incidentSchema),
+  understudyChanges: z.array(understudyChangeSchema),
+  notes: rehearsalNotesSchema,
+})
+
+export type ShowReportInput = z.infer<typeof showReportInputSchema>

@@ -78,6 +78,22 @@ Reach out if you spot a conflict.${signoff(smName)}
 `
 }
 
+export function showReportBody(
+  productionName: string,
+  performanceLabel: string,
+  dateLabel: string,
+  smName?: string,
+): string {
+  return `Hi all —
+
+Tonight's show report for ${productionName} — ${performanceLabel} (${dateLabel}).
+
+Run times, holds, and any incidents are included below, followed by numbered department notes. Reply with "Re: Costumes #3" (etc.) to refer to a specific note.
+
+Thanks for the show.${signoff(smName)}
+`
+}
+
 export function lineNotesBody(actorName: string, smName?: string): string {
   return `Hi ${actorName} —
 

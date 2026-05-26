@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 8,
+  "schemaVersion": 9,
   "exportedAt": "2026-05-25T12:00:00.000Z",
   "production": {
     "name": "A Midsummer Night's Dream",
@@ -2686,6 +2686,110 @@
         { "type": "break-end", "time": "19:00" },
         { "type": "wrap", "time": "21:00", "note": "10-of-12 complete" }
       ]
+    }
+  ],
+  "showReports": [
+    {
+      "productionId": 0,
+      "date": "2026-06-20",
+      "performanceNumber": 1,
+      "performanceLabel": "Opening",
+      "location": "Studio Theatre",
+      "curtainUp": "19:30",
+      "curtainDown": "22:05",
+      "houseCount": 184,
+      "lateSeating": 2,
+      "acts": [
+        { "label": "Act I", "start": "19:32", "end": "20:38" },
+        { "label": "Act II", "start": "20:53", "end": "22:02" }
+      ],
+      "intermissions": [
+        { "label": "Intermission", "start": "20:38", "end": "20:53" }
+      ],
+      "holds": [
+        {
+          "when": "Mid-3.2 (the rude mechanicals)",
+          "durationMinutes": 2,
+          "reason": "Audience member needed assistance — ushers handled, show resumed."
+        }
+      ],
+      "incidents": [
+        {
+          "kind": "technical",
+          "description": "LX cue 78 (Titania's bower) fired one beat late. Spot op was on cue; investigating board delay before tomorrow."
+        }
+      ],
+      "understudyChanges": [],
+      "notes": {
+        "general": [
+          { "text": "Lovely opening. Energy in the house was electric — laughs landed in all the right places." }
+        ],
+        "scenic": [],
+        "lighting": [
+          { "text": "Could we look at the timing on LX 78? Felt a beat behind tonight." }
+        ],
+        "costumes": [
+          { "text": "Hem on Titania's wing harness coming loose — would love a check before tomorrow's call." },
+          { "text": "Puck's vest snap popped in the bow — quick fix, no show impact." }
+        ],
+        "sound": [
+          { "text": "Bottom's mic crackled on his Act 1 entrance. Replaced battery at intermission, no issues after." }
+        ],
+        "props": [
+          { "text": "Magic flower wilted faster than expected under the new gel — would a silk swap work?" }
+        ],
+        "music": [],
+        "production": [
+          { "text": "House staff was great about the late seating; thanks for tightening the FOH check-in." }
+        ],
+        "stageManagement": [
+          { "text": "Strike notes: returned all props to table, mic packs in dryer, wig 3 to wardrobe." }
+        ]
+      }
+    },
+    {
+      "productionId": 0,
+      "date": "2026-06-21",
+      "performanceNumber": 2,
+      "performanceLabel": "Performance 2",
+      "location": "Studio Theatre",
+      "curtainUp": "19:30",
+      "curtainDown": "21:58",
+      "houseCount": 162,
+      "lateSeating": 0,
+      "acts": [
+        { "label": "Act I", "start": "19:31", "end": "20:34" },
+        { "label": "Act II", "start": "20:49", "end": "21:56" }
+      ],
+      "intermissions": [
+        { "label": "Intermission", "start": "20:34", "end": "20:49" }
+      ],
+      "holds": [],
+      "incidents": [],
+      "understudyChanges": [
+        {
+          "contactId": 6,
+          "role": "Helena",
+          "reason": "Scheduled rotation — first u/s performance."
+        }
+      ],
+      "notes": {
+        "general": [
+          { "text": "Smooth run, two minutes faster than opening. Fiona was strong on for Helena." }
+        ],
+        "scenic": [],
+        "lighting": [
+          { "text": "LX 78 timing fixed — thanks!" }
+        ],
+        "costumes": [],
+        "sound": [],
+        "props": [
+          { "text": "Silk flower swap working well; will keep through the run." }
+        ],
+        "music": [],
+        "production": [],
+        "stageManagement": []
+      }
     }
   ]
 }

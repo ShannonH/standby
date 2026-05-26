@@ -11,6 +11,7 @@ import {
   type Prop,
   type RehearsalReport,
   type SendLogEntry,
+  type ShowReport,
   type TrackingEntry,
 } from './db'
 import { useAppStore } from './store'
@@ -316,4 +317,52 @@ export function useTodayBreakLog(
       .toArray()
     return logs.find((l) => l.date === today)
   }, [productionId, today])
+}
+
+export function useShowReports(
+  productionId: number | null | undefined,
+): ShowReport[] {
+  return (
+    useLiveQuery(async () => {
+      if (productionId === null || productionId === undefined) {
+        return [] as ShowReport[]
+      }
+      const reports = await db.showReports
+        .where('productionId')
+        .equals(productionId)
+        .toArray()
+      // Most-recent performance number first for the list view.
+      return reports.sort(
+        (a, b) =>
+          b.performanceNumber - a.performanceNumber ||
+          b.date.localeCompare(a.date),
+      )
+    }, [productionId]) ?? []
+  )
+}
+
+export function useShowReport(
+  reportId: number | null | undefined,
+): ShowReport | undefined {
+  return useLiveQuery(async () => {
+    if (reportId === null || reportId === undefined) return undefined
+    return db.showReports.get(reportId)
+  }, [reportId])
+}
+
+/** Next available performance number (max + 1, or 1 if none). */
+export function useNextPerformanceNumber(
+  productionId: number | null | undefined,
+): number {
+  return (
+    useLiveQuery(async () => {
+      if (productionId === null || productionId === undefined) return 1
+      const reports = await db.showReports
+        .where('productionId')
+        .equals(productionId)
+        .toArray()
+      if (reports.length === 0) return 1
+      return Math.max(...reports.map((r) => r.performanceNumber)) + 1
+    }, [productionId]) ?? 1
+  )
 }

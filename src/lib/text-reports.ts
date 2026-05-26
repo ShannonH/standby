@@ -5,11 +5,13 @@ import type {
   Production,
   Prop,
   RehearsalReport,
+  ShowReport,
 } from './db'
 import { NOTE_DEPT_KEYS } from './db'
 import { useAppStore } from './store'
 import { formatTime } from './time-format'
 import {
+  INCIDENT_KIND_LABELS,
   LINE_TYPE_LABELS,
   NOTE_DEPT_LABELS,
   PROP_SOURCE_LABELS,
@@ -304,6 +306,139 @@ export function renderDailyCallText(
   }
 
   lines.push('— Subject to change.')
+  return lines.join('\n').trimEnd()
+}
+
+/** Minutes between two HH:MM times; null if unparseable or end < start. */
+function durationMin(start: string, end: string): number | null {
+  const a = start.match(/^(\d{1,2}):(\d{2})$/)
+  const b = end.match(/^(\d{1,2}):(\d{2})$/)
+  if (!a || !b) return null
+  const sm = parseInt(a[1]!, 10) * 60 + parseInt(a[2]!, 10)
+  const em = parseInt(b[1]!, 10) * 60 + parseInt(b[2]!, 10)
+  if (em < sm) return null
+  return em - sm
+}
+
+function fmtMin(min: number): string {
+  const h = Math.floor(min / 60)
+  const m = min % 60
+  if (h === 0) return `${m}m`
+  return `${h}h ${String(m).padStart(2, '0')}m`
+}
+
+/** Plain-text show report. Same shape as the PDF, formatted for email body. */
+export function renderShowReportText(
+  production: Production,
+  report: ShowReport,
+  contacts: readonly Contact[],
+): string {
+  const timeFormat = useAppStore.getState().settings.timeFormat
+  const nameOf = (id: number) =>
+    contacts.find((c) => c.id === id)?.name ?? '(removed)'
+
+  const lines: string[] = []
+  lines.push(production.name.toUpperCase())
+  lines.push(`SHOW REPORT — ${report.performanceLabel.toUpperCase()}`)
+
+  const headerBits = [
+    formatLongDate(report.date),
+    `Curtain ${formatTime(report.curtainUp, timeFormat)}${
+      report.curtainDown
+        ? `–${formatTime(report.curtainDown, timeFormat)}`
+        : ''
+    }`,
+  ]
+  if (report.location) headerBits.push(report.location)
+  lines.push(headerBits.join(' | '))
+
+  const metaBits: string[] = [`Performance #${report.performanceNumber}`]
+  if (typeof report.houseCount === 'number')
+    metaBits.push(`House ${report.houseCount}`)
+  if (typeof report.lateSeating === 'number')
+    metaBits.push(`Late seating ${report.lateSeating}`)
+  lines.push(metaBits.join(' | '))
+  lines.push('')
+
+  if (report.acts.length > 0 || report.intermissions.length > 0) {
+    lines.push('RUN TIMES')
+    let actTotal = 0
+    let intTotal = 0
+    let anyParseable = false
+    for (const a of report.acts) {
+      const d = durationMin(a.start, a.end)
+      if (d !== null) {
+        anyParseable = true
+        actTotal += d
+      }
+      lines.push(
+        `  ${a.label}: ${formatTime(a.start, timeFormat)}–${formatTime(a.end, timeFormat)}${
+          d === null ? '' : `  (${fmtMin(d)})`
+        }`,
+      )
+    }
+    for (let i = 0; i < report.intermissions.length; i++) {
+      const it = report.intermissions[i]!
+      const d = durationMin(it.start, it.end)
+      if (d !== null) intTotal += d
+      lines.push(
+        `  ${it.label || `Intermission ${i + 1}`}: ${formatTime(it.start, timeFormat)}–${formatTime(it.end, timeFormat)}${
+          d === null ? '' : `  (${fmtMin(d)})`
+        }`,
+      )
+    }
+    if (anyParseable) {
+      lines.push(`  Total acts: ${fmtMin(actTotal)}`)
+      if (intTotal > 0) {
+        lines.push(`  With intermission: ${fmtMin(actTotal + intTotal)}`)
+      }
+    }
+    lines.push('')
+  }
+
+  if (report.holds.length > 0) {
+    lines.push('HOLDS')
+    for (const h of report.holds) {
+      lines.push(`  ${h.when} — ${h.durationMinutes}m — ${h.reason}`)
+    }
+    lines.push('')
+  }
+
+  if (report.incidents.length > 0) {
+    lines.push('INCIDENTS')
+    for (const inc of report.incidents) {
+      lines.push(`  [${INCIDENT_KIND_LABELS[inc.kind]}] ${inc.description}`)
+    }
+    lines.push('')
+  }
+
+  if (report.understudyChanges.length > 0) {
+    lines.push('UNDERSTUDY / SWING CHANGES')
+    for (const u of report.understudyChanges) {
+      const bits = [`${nameOf(u.contactId)} as ${u.role}`]
+      if (u.reason) bits.push(u.reason)
+      lines.push(`  ${bits.join(' — ')}`)
+    }
+    lines.push('')
+  }
+
+  const hasNotes = NOTE_DEPT_KEYS.some(
+    (k) => (report.notes[k]?.length ?? 0) > 0,
+  )
+  if (hasNotes) {
+    lines.push('DEPARTMENTAL NOTES')
+    lines.push('')
+    for (const key of NOTE_DEPT_KEYS) {
+      const list = report.notes[key]
+      if (!list || list.length === 0) continue
+      lines.push(NOTE_DEPT_LABEL_MAP[key].toUpperCase())
+      list.forEach((n, i) => {
+        lines.push(`  ${i + 1}. ${n.text}`)
+      })
+      lines.push('')
+    }
+  }
+
   return lines.join('\n').trimEnd()
 }
 

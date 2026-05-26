@@ -42,6 +42,11 @@ export default defineConfig({
         // (registered via Font.register in DailyCallPdf.tsx) is available
         // offline.
         globPatterns: ['**/*.{js,css,html,svg,woff,woff2,json}'],
+        // Bump from the 2MiB default — Standby is offline-first, and we
+        // need the main bundle precached so the app cold-starts offline.
+        // @react-pdf/renderer alone is over 1MiB; we'll code-split further
+        // when this hits 5MiB.
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
       },
     }),
   ],

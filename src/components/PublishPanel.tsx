@@ -204,6 +204,10 @@ function describeSummary(summary: PublishSummary, prefix: string): string {
     parts.push(`${summary.reports} rehearsal report${summary.reports === 1 ? '' : 's'}`)
   if (summary.dailyCalls > 0)
     parts.push(`${summary.dailyCalls} daily call${summary.dailyCalls === 1 ? '' : 's'}`)
+  if (summary.showReports > 0)
+    parts.push(
+      `${summary.showReports} show report${summary.showReports === 1 ? '' : 's'}`,
+    )
   if (parts.length === 0) return prefix
   return `${prefix} Wrote ${parts.join(', ')}.`
 }

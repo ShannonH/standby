@@ -5,12 +5,14 @@ import {
   type Production,
   type Prop,
   type RehearsalReport,
+  type ShowReport,
 } from './db'
 import ContactSheetPdf from '@/features/contacts/ContactSheetPdf'
 import DailyCallPdf from '@/features/calls/DailyCallPdf'
 import ProductionInfoPdf from '@/features/production/ProductionInfoPdf'
 import PropListPdf from '@/features/props/PropListPdf'
 import RehearsalReportPdf from '@/features/rehearsals/RehearsalReportPdf'
+import ShowReportPdf from '@/features/show-reports/ShowReportPdf'
 import { useAppStore } from './store'
 
 /**
@@ -157,6 +159,11 @@ function callFilename(call: DailyCall): string {
   return `Call-${call.date}${v}.pdf`
 }
 
+function showReportFilename(report: ShowReport): string {
+  const padded = String(report.performanceNumber).padStart(3, '0')
+  return `Perf-${padded}-${report.date}.pdf`
+}
+
 // ─── Single-artifact publishers ───────────────────────────────────────────
 
 export async function publishRehearsalReport(
@@ -219,6 +226,25 @@ export async function publishProductionInfo(
     />,
   )
   await writePdfBlob(handle, 'Production Info.pdf', blob)
+}
+
+export async function publishShowReport(
+  handle: FileSystemDirectoryHandle,
+  production: Production,
+  report: ShowReport,
+  contacts: Contact[],
+): Promise<void> {
+  const reportsDir = await getOrCreateSubdir(handle, 'Show Reports')
+  const blob = await generatePdfBlob(
+    <ShowReportPdf
+      production={production}
+      report={report}
+      contacts={contacts}
+      paperSize={currentPaperSize()}
+      timeFormat={currentTimeFormat()}
+    />,
+  )
+  await writePdfBlob(reportsDir, showReportFilename(report), blob)
 }
 
 export async function publishDailyCall(
@@ -296,6 +322,21 @@ export async function maybePublishProductionInfo(
   await publishProductionInfo(handle, production)
 }
 
+export async function maybePublishShowReport(
+  productionId: number,
+  reportId: number,
+): Promise<void> {
+  const handle = await getStoredPublishDirectory(productionId)
+  if (!handle) return
+  const [production, report, contacts] = await Promise.all([
+    db.productions.get(productionId),
+    db.showReports.get(reportId),
+    db.contacts.where('productionId').equals(productionId).toArray(),
+  ])
+  if (!production || !report) return
+  await publishShowReport(handle, production, report, contacts)
+}
+
 export async function maybePublishDailyCall(
   productionId: number,
   callId: number,
@@ -315,6 +356,7 @@ export async function maybePublishDailyCall(
 
 export interface PublishSummary {
   reports: number
+  showReports: number
   dailyCalls: number
   contactSheet: boolean
   propList: boolean
@@ -331,19 +373,22 @@ export async function publishAll(
   if (!handle) {
     throw new Error('No publish folder is connected for this production.')
   }
-  const [production, contacts, props, reports, dailyCalls] = await Promise.all([
-    db.productions.get(productionId),
-    db.contacts.where('productionId').equals(productionId).toArray(),
-    db.props.where('productionId').equals(productionId).toArray(),
-    db.rehearsals.where('productionId').equals(productionId).toArray(),
-    db.dailyCalls.where('productionId').equals(productionId).toArray(),
-  ])
+  const [production, contacts, props, reports, dailyCalls, showReports] =
+    await Promise.all([
+      db.productions.get(productionId),
+      db.contacts.where('productionId').equals(productionId).toArray(),
+      db.props.where('productionId').equals(productionId).toArray(),
+      db.rehearsals.where('productionId').equals(productionId).toArray(),
+      db.dailyCalls.where('productionId').equals(productionId).toArray(),
+      db.showReports.where('productionId').equals(productionId).toArray(),
+    ])
   if (!production) {
     throw new Error('Production not found.')
   }
 
   const summary: PublishSummary = {
     reports: 0,
+    showReports: 0,
     dailyCalls: 0,
     contactSheet: false,
     propList: false,
@@ -403,6 +448,18 @@ export async function publishAll(
     } catch (err) {
       summary.errors.push(
         `Daily Call ${call.date}: ${err instanceof Error ? err.message : String(err)}`,
+      )
+    }
+    await yieldToUi()
+  }
+
+  for (const report of showReports) {
+    try {
+      await publishShowReport(handle, production, report, contacts)
+      summary.showReports += 1
+    } catch (err) {
+      summary.errors.push(
+        `Show Report ${report.performanceLabel}: ${err instanceof Error ? err.message : String(err)}`,
       )
     }
     await yieldToUi()

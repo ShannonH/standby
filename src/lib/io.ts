@@ -10,6 +10,7 @@ import {
   type Prop,
   type RehearsalReport,
   type SendLogEntry,
+  type ShowReport,
   type TrackingEntry,
 } from './db'
 
@@ -26,8 +27,9 @@ import {
  * v6: adds dailyCalls
  * v7: adds tracking
  * v8: adds blocking + breakLogs
+ * v9: adds showReports
  */
-export const SHOW_EXPORT_VERSION = 8
+export const SHOW_EXPORT_VERSION = 9
 
 export interface ShowExport {
   schemaVersion: number
@@ -43,6 +45,7 @@ export interface ShowExport {
   tracking: TrackingEntry[]
   blocking: BlockingEntry[]
   breakLogs: BreakLog[]
+  showReports: ShowReport[]
 }
 
 /** Build a portable JSON snapshot of a single production and its entities. */
@@ -89,6 +92,10 @@ export async function exportShow(productionId: number): Promise<ShowExport> {
     .where('productionId')
     .equals(productionId)
     .toArray()
+  const showReports = await db.showReports
+    .where('productionId')
+    .equals(productionId)
+    .toArray()
   return {
     schemaVersion: SHOW_EXPORT_VERSION,
     exportedAt: new Date().toISOString(),
@@ -103,6 +110,7 @@ export async function exportShow(productionId: number): Promise<ShowExport> {
     tracking,
     blocking,
     breakLogs,
+    showReports,
   }
 }
 
@@ -133,6 +141,7 @@ export async function importShow(data: ShowExport): Promise<number> {
       db.tracking,
       db.blocking,
       db.breakLogs,
+      db.showReports,
     ],
     async () => {
       const now = new Date().toISOString()
@@ -274,6 +283,25 @@ export async function importShow(data: ShowExport): Promise<number> {
         await db.breakLogs.add({
           ...logData,
           productionId: newProductionId,
+        })
+      }
+
+      // Show reports added in v9. understudyChanges[].contactId references
+      // a contact — remap. Acts / intermissions / holds / incidents don't
+      // reference contacts.
+      for (const report of data.showReports ?? []) {
+        const { id: _ignoredId, ...reportData } = report
+        void _ignoredId
+        const remappedUnderstudies = reportData.understudyChanges.map(
+          (u) => ({
+            ...u,
+            contactId: contactIdMap.get(u.contactId) ?? u.contactId,
+          }),
+        )
+        await db.showReports.add({
+          ...reportData,
+          productionId: newProductionId,
+          understudyChanges: remappedUnderstudies,
         })
       }
 

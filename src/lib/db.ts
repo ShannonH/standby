@@ -157,6 +157,74 @@ export interface RehearsalReport {
   notes: RehearsalNotes
 }
 
+// ─── Show report ─────────────────────────────────────────────────────────
+//
+// The post-performance counterpart to the rehearsal report. SM sends one
+// after every show. Same departmental-notes structure as a rehearsal
+// report so designers reply with the same conventions, plus performance-
+// specific fields: act times, intermissions, holds, incidents, and
+// any understudy substitutions.
+
+export interface ActTime {
+  label: string // "Act 1"
+  start: string // "HH:MM"
+  end: string // "HH:MM"
+}
+
+export interface IntermissionTime {
+  label?: string // "Intermission 1"
+  start: string
+  end: string
+}
+
+export interface HoldEvent {
+  when: string // "Top of Act 2", "Mid-3.4"
+  durationMinutes: number
+  reason: string
+}
+
+export type IncidentKind =
+  | 'medical'
+  | 'audience'
+  | 'technical'
+  | 'safety'
+  | 'other'
+
+export interface Incident {
+  kind: IncidentKind
+  description: string
+}
+
+export interface UnderstudyChange {
+  /** The contact who went on. */
+  contactId: number
+  /** The role they covered tonight. */
+  role: string
+  /** Optional reason — illness, conflict, scheduled rotation, etc. */
+  reason?: string
+}
+
+export interface ShowReport {
+  id?: number
+  productionId: number
+  date: string // "2026-07-08"
+  performanceNumber: number // 1, 2, 3…
+  performanceLabel: string // "Preview 1", "Opening", "Performance 7", "Closing"
+  location?: string
+  curtainUp: string // scheduled curtain, HH:MM
+  curtainDown?: string // actual final curtain, HH:MM (filled in after run)
+  houseCount?: number
+  lateSeating?: number
+  acts: ActTime[]
+  intermissions: IntermissionTime[]
+  holds: HoldEvent[]
+  incidents: Incident[]
+  understudyChanges: UnderstudyChange[]
+  /** Same 9-dept structure as RehearsalReport.notes — matched on purpose so
+   *  designers can reply with the same numbering convention. */
+  notes: RehearsalNotes
+}
+
 export interface SendLogEntry {
   id?: number
   productionId: number
@@ -339,6 +407,7 @@ class StandbyDB extends Dexie {
   tracking!: EntityTable<TrackingEntry, 'id'>
   blocking!: EntityTable<BlockingEntry, 'id'>
   breakLogs!: EntityTable<BreakLog, 'id'>
+  showReports!: EntityTable<ShowReport, 'id'>
 
   constructor() {
     super('standby')
@@ -400,6 +469,22 @@ class StandbyDB extends Dexie {
       blocking: '++id, productionId, sequence, page',
       breakLogs: '++id, productionId, date',
     })
+    // v6: adds showReports.
+    this.version(6).stores({
+      productions: '++id, name',
+      contacts: '++id, productionId, category, name',
+      contactGroups: '++id, productionId, name',
+      props: '++id, productionId, name, status',
+      lineNotes: '++id, productionId, rehearsalDate, characterId, delivered',
+      rehearsals: '++id, productionId, date, dayNumber',
+      sendLog: '++id, productionId, sentAt, artifact',
+      settings: '&key',
+      dailyCalls: '++id, productionId, date, version',
+      tracking: '++id, productionId, sequence, page, kind',
+      blocking: '++id, productionId, sequence, page',
+      breakLogs: '++id, productionId, date',
+      showReports: '++id, productionId, date, performanceNumber',
+    })
   }
 }
 
@@ -423,6 +508,7 @@ export async function deleteProductionCascade(productionId: number): Promise<voi
       db.tracking,
       db.blocking,
       db.breakLogs,
+      db.showReports,
     ],
     async () => {
       await db.contacts.where('productionId').equals(productionId).delete()
@@ -435,6 +521,7 @@ export async function deleteProductionCascade(productionId: number): Promise<voi
       await db.tracking.where('productionId').equals(productionId).delete()
       await db.blocking.where('productionId').equals(productionId).delete()
       await db.breakLogs.where('productionId').equals(productionId).delete()
+      await db.showReports.where('productionId').equals(productionId).delete()
       await db.productions.delete(productionId)
     },
   )

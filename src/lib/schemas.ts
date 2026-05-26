@@ -450,3 +450,89 @@ export const showReportInputSchema = z.object({
 })
 
 export type ShowReportInput = z.infer<typeof showReportInputSchema>
+
+// ─── Scene / character breakdown (V2) ───────────────────────────────────
+
+export const characterTypeSchema = z.enum([
+  'principal',
+  'featured',
+  'ensemble',
+  'voice',
+  'silent',
+])
+
+export const CHARACTER_TYPE_LABELS: Record<
+  z.infer<typeof characterTypeSchema>,
+  string
+> = {
+  principal: 'Principal',
+  featured: 'Featured',
+  ensemble: 'Ensemble',
+  voice: 'Voice (offstage)',
+  silent: 'Silent / extra',
+}
+
+export const characterInputSchema = z.object({
+  name: z.string().min(1, 'Character name required'),
+  type: characterTypeSchema.optional(),
+  playedByContactId: z.coerce.number().int().positive().optional(),
+  notes: z.string().optional(),
+})
+
+export type CharacterInput = z.infer<typeof characterInputSchema>
+
+export const sceneInputSchema = z.object({
+  sequence: z.coerce.number().int().min(1),
+  label: z.string().min(1, 'Scene label required'),
+  act: z.string().optional(),
+  numberName: z.string().optional(),
+  pageStart: z.string().optional(),
+  pageEnd: z.string().optional(),
+  location: z.string().optional(),
+  runningTimeMin: z.coerce.number().int().nonnegative().optional(),
+  notes: z.string().optional(),
+})
+
+export type SceneInput = z.infer<typeof sceneInputSchema>
+
+export const appearanceTypeSchema = z.enum([
+  'speaking',
+  'singing',
+  'silent',
+  'underscoring',
+])
+
+export const APPEARANCE_TYPE_LABELS: Record<
+  z.infer<typeof appearanceTypeSchema>,
+  string
+> = {
+  speaking: 'Speaking',
+  singing: 'Singing',
+  silent: 'Silent on stage',
+  underscoring: 'Underscoring / voice only',
+}
+
+/** Single-character glyph used to render presence in the matrix grid.
+ *  Chosen to scan at a glance: filled dot for speaking (the most common
+ *  presence), musical note for singing, hollow dot for silent, tilde
+ *  for underscoring. */
+export const APPEARANCE_TYPE_GLYPHS: Record<
+  z.infer<typeof appearanceTypeSchema>,
+  string
+> = {
+  speaking: '●',
+  singing: '♪',
+  silent: '○',
+  underscoring: '~',
+}
+
+export const sceneAppearanceInputSchema = z.object({
+  sceneId: z.coerce.number().int().positive(),
+  characterId: z.coerce.number().int().positive(),
+  entrancePage: z.string().optional(),
+  exitPage: z.string().optional(),
+  presence: appearanceTypeSchema,
+  doubling: z.string().optional(),
+})
+
+export type SceneAppearanceInput = z.infer<typeof sceneAppearanceInputSchema>

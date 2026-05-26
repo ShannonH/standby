@@ -32,6 +32,9 @@ describe('bundled sample shows', () => {
     await db.blocking.clear()
     await db.breakLogs.clear()
     await db.showReports.clear()
+    await db.characters.clear()
+    await db.scenes.clear()
+    await db.sceneAppearances.clear()
   })
 
   for (const sample of SAMPLE_SHOWS) {
@@ -68,6 +71,18 @@ describe('bundled sample shows', () => {
         ).length,
         showReports: (
           await db.showReports.where('productionId').equals(newId).toArray()
+        ).length,
+        characters: (
+          await db.characters.where('productionId').equals(newId).toArray()
+        ).length,
+        scenes: (
+          await db.scenes.where('productionId').equals(newId).toArray()
+        ).length,
+        sceneAppearances: (
+          await db.sceneAppearances
+            .where('productionId')
+            .equals(newId)
+            .toArray()
         ).length,
       }
 

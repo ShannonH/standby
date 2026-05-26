@@ -14,6 +14,7 @@ import Settings from './routes/Settings'
 import Tracking from './routes/Tracking'
 import Blocking from './routes/Blocking'
 import Breaks from './routes/Breaks'
+import Breakdown from './routes/Breakdown'
 import Backup from './routes/Backup'
 import './index.css'
 
@@ -34,6 +35,7 @@ const router = createBrowserRouter(
         { path: 'tracking', element: <Tracking /> },
         { path: 'blocking', element: <Blocking /> },
         { path: 'breaks', element: <Breaks /> },
+        { path: 'breakdown', element: <Breakdown /> },
         { path: 'backup', element: <Backup /> },
         { path: 'settings', element: <Settings /> },
       ],

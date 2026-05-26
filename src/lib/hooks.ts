@@ -3,6 +3,7 @@ import {
   db,
   type BlockingEntry,
   type BreakLog,
+  type Character,
   type Contact,
   type ContactGroup,
   type DailyCall,
@@ -10,6 +11,8 @@ import {
   type Production,
   type Prop,
   type RehearsalReport,
+  type Scene,
+  type SceneAppearance,
   type SendLogEntry,
   type ShowReport,
   type TrackingEntry,
@@ -364,5 +367,73 @@ export function useNextPerformanceNumber(
       if (reports.length === 0) return 1
       return Math.max(...reports.map((r) => r.performanceNumber)) + 1
     }, [productionId]) ?? 1
+  )
+}
+
+// ─── Scene / character breakdown (V2) ───────────────────────────────────
+
+export function useCharacters(
+  productionId: number | null | undefined,
+): Character[] {
+  return (
+    useLiveQuery(async () => {
+      if (productionId === null || productionId === undefined) {
+        return [] as Character[]
+      }
+      return db.characters
+        .where('productionId')
+        .equals(productionId)
+        .sortBy('name')
+    }, [productionId]) ?? []
+  )
+}
+
+export function useScenes(productionId: number | null | undefined): Scene[] {
+  return (
+    useLiveQuery(async () => {
+      if (productionId === null || productionId === undefined) {
+        return [] as Scene[]
+      }
+      const scenes = await db.scenes
+        .where('productionId')
+        .equals(productionId)
+        .toArray()
+      return scenes.sort((a, b) => a.sequence - b.sequence)
+    }, [productionId]) ?? []
+  )
+}
+
+export function useSceneAppearances(
+  productionId: number | null | undefined,
+): SceneAppearance[] {
+  return (
+    useLiveQuery(async () => {
+      if (productionId === null || productionId === undefined) {
+        return [] as SceneAppearance[]
+      }
+      return db.sceneAppearances
+        .where('productionId')
+        .equals(productionId)
+        .toArray()
+    }, [productionId]) ?? []
+  )
+}
+
+/** Next scene sequence number for a production (max + 10, step 10 so the
+ *  SM can insert between two scenes by manually setting an in-between
+ *  value). Returns 10 if none exist. */
+export function useNextSceneSequence(
+  productionId: number | null | undefined,
+): number {
+  return (
+    useLiveQuery(async () => {
+      if (productionId === null || productionId === undefined) return 10
+      const scenes = await db.scenes
+        .where('productionId')
+        .equals(productionId)
+        .toArray()
+      if (scenes.length === 0) return 10
+      return Math.max(...scenes.map((s) => s.sequence)) + 10
+    }, [productionId]) ?? 10
   )
 }

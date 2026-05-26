@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 9,
+  "schemaVersion": 10,
   "exportedAt": "2026-05-25T12:00:00.000Z",
   "production": {
     "name": "A Midsummer Night's Dream",
@@ -2791,5 +2791,66 @@
         "stageManagement": []
       }
     }
+  ],
+  "characters": [
+    { "id": 1, "productionId": 0, "name": "Theseus", "type": "principal", "playedByContactId": 1 },
+    { "id": 2, "productionId": 0, "name": "Oberon", "type": "principal", "playedByContactId": 1, "notes": "Doubled with Theseus" },
+    { "id": 3, "productionId": 0, "name": "Hippolyta", "type": "principal", "playedByContactId": 2 },
+    { "id": 4, "productionId": 0, "name": "Titania", "type": "principal", "playedByContactId": 2, "notes": "Doubled with Hippolyta" },
+    { "id": 5, "productionId": 0, "name": "Hermia", "type": "principal", "playedByContactId": 3 },
+    { "id": 6, "productionId": 0, "name": "Helena", "type": "principal", "playedByContactId": 4 },
+    { "id": 7, "productionId": 0, "name": "Lysander", "type": "principal", "playedByContactId": 5 },
+    { "id": 8, "productionId": 0, "name": "Demetrius", "type": "principal", "playedByContactId": 6 },
+    { "id": 9, "productionId": 0, "name": "Puck", "type": "principal", "playedByContactId": 7 },
+    { "id": 10, "productionId": 0, "name": "Bottom", "type": "featured", "playedByContactId": 8 },
+    { "id": 11, "productionId": 0, "name": "Quince", "type": "featured", "playedByContactId": 9 },
+    { "id": 12, "productionId": 0, "name": "Flute", "type": "featured", "playedByContactId": 10 }
+  ],
+  "scenes": [
+    { "id": 1, "productionId": 0, "sequence": 10, "label": "I.1", "act": "1", "pageStart": "1", "pageEnd": "14", "location": "Athens — Theseus's palace" },
+    { "id": 2, "productionId": 0, "sequence": 20, "label": "I.2", "act": "1", "pageStart": "15", "pageEnd": "20", "location": "Quince's house" },
+    { "id": 3, "productionId": 0, "sequence": 30, "label": "II.1", "act": "2", "pageStart": "21", "pageEnd": "40", "location": "A wood near Athens" },
+    { "id": 4, "productionId": 0, "sequence": 40, "label": "II.2", "act": "2", "pageStart": "41", "pageEnd": "48", "location": "Another part of the wood" },
+    { "id": 5, "productionId": 0, "sequence": 50, "label": "III.1", "act": "3", "pageStart": "49", "pageEnd": "62", "location": "The wood — rude mechanicals rehearsing" },
+    { "id": 6, "productionId": 0, "sequence": 60, "label": "III.2", "act": "3", "pageStart": "63", "pageEnd": "88", "location": "The wood — confusion of the lovers" },
+    { "id": 7, "productionId": 0, "sequence": 70, "label": "IV.1", "act": "4", "pageStart": "89", "pageEnd": "100", "location": "The wood — morning" },
+    { "id": 8, "productionId": 0, "sequence": 80, "label": "V.1", "act": "5", "pageStart": "101", "pageEnd": "120", "location": "Athens — Theseus's palace, Pyramus & Thisbe" }
+  ],
+  "sceneAppearances": [
+    { "productionId": 0, "sceneId": 1, "characterId": 1, "presence": "speaking", "entrancePage": "1" },
+    { "productionId": 0, "sceneId": 1, "characterId": 3, "presence": "speaking", "entrancePage": "1" },
+    { "productionId": 0, "sceneId": 1, "characterId": 5, "presence": "speaking", "entrancePage": "3" },
+    { "productionId": 0, "sceneId": 1, "characterId": 7, "presence": "speaking", "entrancePage": "3" },
+    { "productionId": 0, "sceneId": 1, "characterId": 8, "presence": "speaking", "entrancePage": "3" },
+    { "productionId": 0, "sceneId": 1, "characterId": 6, "presence": "speaking", "entrancePage": "9" },
+    { "productionId": 0, "sceneId": 2, "characterId": 10, "presence": "speaking" },
+    { "productionId": 0, "sceneId": 2, "characterId": 11, "presence": "speaking" },
+    { "productionId": 0, "sceneId": 2, "characterId": 12, "presence": "speaking" },
+    { "productionId": 0, "sceneId": 3, "characterId": 2, "presence": "speaking", "doubling": "Quick change from Theseus" },
+    { "productionId": 0, "sceneId": 3, "characterId": 4, "presence": "speaking", "doubling": "Quick change from Hippolyta" },
+    { "productionId": 0, "sceneId": 3, "characterId": 9, "presence": "speaking" },
+    { "productionId": 0, "sceneId": 4, "characterId": 5, "presence": "speaking" },
+    { "productionId": 0, "sceneId": 4, "characterId": 7, "presence": "speaking" },
+    { "productionId": 0, "sceneId": 4, "characterId": 9, "presence": "silent", "doubling": "Watching, casting the love spell" },
+    { "productionId": 0, "sceneId": 5, "characterId": 9, "presence": "speaking" },
+    { "productionId": 0, "sceneId": 5, "characterId": 10, "presence": "speaking", "doubling": "Bottom transformed mid-scene" },
+    { "productionId": 0, "sceneId": 5, "characterId": 11, "presence": "speaking" },
+    { "productionId": 0, "sceneId": 5, "characterId": 12, "presence": "speaking" },
+    { "productionId": 0, "sceneId": 5, "characterId": 4, "presence": "speaking", "entrancePage": "60" },
+    { "productionId": 0, "sceneId": 6, "characterId": 5, "presence": "speaking" },
+    { "productionId": 0, "sceneId": 6, "characterId": 6, "presence": "speaking" },
+    { "productionId": 0, "sceneId": 6, "characterId": 7, "presence": "speaking" },
+    { "productionId": 0, "sceneId": 6, "characterId": 8, "presence": "speaking" },
+    { "productionId": 0, "sceneId": 6, "characterId": 9, "presence": "speaking" },
+    { "productionId": 0, "sceneId": 7, "characterId": 2, "presence": "speaking" },
+    { "productionId": 0, "sceneId": 7, "characterId": 4, "presence": "speaking" },
+    { "productionId": 0, "sceneId": 7, "characterId": 10, "presence": "speaking" },
+    { "productionId": 0, "sceneId": 7, "characterId": 1, "presence": "speaking", "entrancePage": "95" },
+    { "productionId": 0, "sceneId": 7, "characterId": 3, "presence": "speaking", "entrancePage": "95" },
+    { "productionId": 0, "sceneId": 8, "characterId": 1, "presence": "speaking" },
+    { "productionId": 0, "sceneId": 8, "characterId": 3, "presence": "speaking" },
+    { "productionId": 0, "sceneId": 8, "characterId": 10, "presence": "speaking", "doubling": "Bottom plays Pyramus in the play-within-a-play" },
+    { "productionId": 0, "sceneId": 8, "characterId": 11, "presence": "speaking" },
+    { "productionId": 0, "sceneId": 8, "characterId": 12, "presence": "speaking", "doubling": "Flute plays Thisbe" }
   ]
 }

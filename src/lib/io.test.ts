@@ -56,6 +56,9 @@ describe('io: export/import round-trip', () => {
     await db.blocking.clear()
     await db.breakLogs.clear()
     await db.showReports.clear()
+    await db.characters.clear()
+    await db.scenes.clear()
+    await db.sceneAppearances.clear()
   })
 
   it('exports a production with schema version, contacts, and groups', async () => {
@@ -123,6 +126,9 @@ describe('io: export/import round-trip', () => {
         blocking: [],
         breakLogs: [],
         showReports: [],
+        characters: [],
+        scenes: [],
+        sceneAppearances: [],
       }),
     ).rejects.toThrow(/Unsupported show export version/)
   })

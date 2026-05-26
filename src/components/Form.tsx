@@ -264,20 +264,23 @@ interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   hint?: string
 }
 
-export function Checkbox({ label, hint, ...props }: CheckboxProps) {
-  return (
-    <label className="flex items-start gap-2 text-sm text-[color:rgb(var(--text-primary))]">
-      <input
-        type="checkbox"
-        {...props}
-        className="mt-0.5 h-4 w-4 rounded border-surface-border text-accent focus:ring-accent"
-      />
-      <span>
-        <span>{label}</span>
-        {hint && (
-          <span className="mt-0.5 block text-xs text-muted">{hint}</span>
-        )}
-      </span>
-    </label>
-  )
-}
+export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
+  function Checkbox({ label, hint, ...props }, ref) {
+    return (
+      <label className="flex items-start gap-2 text-sm text-[color:rgb(var(--text-primary))]">
+        <input
+          ref={ref}
+          type="checkbox"
+          {...props}
+          className="mt-0.5 h-4 w-4 rounded border-surface-border text-accent focus:ring-accent"
+        />
+        <span>
+          <span>{label}</span>
+          {hint && (
+            <span className="mt-0.5 block text-xs text-muted">{hint}</span>
+          )}
+        </span>
+      </label>
+    )
+  },
+)

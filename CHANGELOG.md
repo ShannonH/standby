@@ -4,6 +4,10 @@ All notable changes to Standby are documented here. Format roughly follows [Keep
 
 ## Unreleased
 
+### Added
+
+- **Scene breakdown matrix** (PRD §7.8 — the biggest remaining V2 feature). New `/breakdown` route with a scenes × characters grid: scenes down the side, characters across the top, each cell showing presence at a glance (● speaking · ♪ singing · ○ silent · ~ underscoring). Click a cell to edit presence, entrance / exit pages, and per-cell doubling / quick-change notes. Three new entities (`Character`, `Scene`, `SceneAppearance`) with Dexie v7 + ShowExport v10 migrations, sticky column / row headers for big shows, and full round-trip-aware id remapping in import/export. Both bundled samples now ship breakdown data: Midsummer (12 characters × 8 scenes, including Theseus/Oberon and Hippolyta/Titania doubling), Penzance (13 characters × 7 scenes, including the seven-part finale).
+
 ### Changed
 
 - **Production page IA split**. The Production route previously housed eight distinct concerns (production CRUD, exports, distribute panel, send log, auto-backup folder, publish folder, JSON import/export, sample shows). It's now focused on the production itself: list / create / edit, export the production-info PDF, distribute it, and inspect the send log. Auto-backup, publish folder, and JSON import/export moved to a new **Backup & storage** route (`/backup`). Sample-show loading moved to the empty-state CTA when no production exists yet — you wouldn't reach for a sample show after you already have one set up.

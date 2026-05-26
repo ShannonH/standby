@@ -2,6 +2,7 @@ import {
   db,
   type BlockingEntry,
   type BreakLog,
+  type Character,
   type Contact,
   type ContactGroup,
   type DailyCall,
@@ -9,6 +10,8 @@ import {
   type Production,
   type Prop,
   type RehearsalReport,
+  type Scene,
+  type SceneAppearance,
   type SendLogEntry,
   type ShowReport,
   type TrackingEntry,
@@ -28,8 +31,9 @@ import {
  * v7: adds tracking
  * v8: adds blocking + breakLogs
  * v9: adds showReports
+ * v10: adds characters + scenes + sceneAppearances (scene breakdown)
  */
-export const SHOW_EXPORT_VERSION = 9
+export const SHOW_EXPORT_VERSION = 10
 
 export interface ShowExport {
   schemaVersion: number
@@ -46,6 +50,9 @@ export interface ShowExport {
   blocking: BlockingEntry[]
   breakLogs: BreakLog[]
   showReports: ShowReport[]
+  characters: Character[]
+  scenes: Scene[]
+  sceneAppearances: SceneAppearance[]
 }
 
 /** Build a portable JSON snapshot of a single production and its entities. */
@@ -96,6 +103,18 @@ export async function exportShow(productionId: number): Promise<ShowExport> {
     .where('productionId')
     .equals(productionId)
     .toArray()
+  const characters = await db.characters
+    .where('productionId')
+    .equals(productionId)
+    .toArray()
+  const scenes = await db.scenes
+    .where('productionId')
+    .equals(productionId)
+    .toArray()
+  const sceneAppearances = await db.sceneAppearances
+    .where('productionId')
+    .equals(productionId)
+    .toArray()
   return {
     schemaVersion: SHOW_EXPORT_VERSION,
     exportedAt: new Date().toISOString(),
@@ -111,6 +130,9 @@ export async function exportShow(productionId: number): Promise<ShowExport> {
     blocking,
     breakLogs,
     showReports,
+    characters,
+    scenes,
+    sceneAppearances,
   }
 }
 
@@ -142,6 +164,9 @@ export async function importShow(data: ShowExport): Promise<number> {
       db.blocking,
       db.breakLogs,
       db.showReports,
+      db.characters,
+      db.scenes,
+      db.sceneAppearances,
     ],
     async () => {
       const now = new Date().toISOString()
@@ -302,6 +327,52 @@ export async function importShow(data: ShowExport): Promise<number> {
           ...reportData,
           productionId: newProductionId,
           understudyChanges: remappedUnderstudies,
+        })
+      }
+
+      // Characters added in v10. playedByContactId references a contact;
+      // remap via contactIdMap. Track old→new character ids in
+      // characterIdMap so sceneAppearances below can remap.
+      const characterIdMap = new Map<number, number>()
+      for (const character of data.characters ?? []) {
+        const { id: oldId, ...characterData } = character
+        const newCharacterId = (await db.characters.add({
+          ...characterData,
+          productionId: newProductionId,
+          playedByContactId:
+            characterData.playedByContactId !== undefined
+              ? (contactIdMap.get(characterData.playedByContactId) ??
+                characterData.playedByContactId)
+              : undefined,
+        })) as number
+        if (oldId !== undefined) characterIdMap.set(oldId, newCharacterId)
+      }
+
+      // Scenes added in v10. No cross-references; ids are tracked in
+      // sceneIdMap for sceneAppearances below.
+      const sceneIdMap = new Map<number, number>()
+      for (const scene of data.scenes ?? []) {
+        const { id: oldId, ...sceneData } = scene
+        const newSceneId = (await db.scenes.add({
+          ...sceneData,
+          productionId: newProductionId,
+        })) as number
+        if (oldId !== undefined) sceneIdMap.set(oldId, newSceneId)
+      }
+
+      // Scene appearances added in v10. Both sceneId and characterId need
+      // remapping. If either side doesn't resolve we keep the original id
+      // for debuggability, but log nothing — the resulting row will be an
+      // orphan that the UI can flag later.
+      for (const app of data.sceneAppearances ?? []) {
+        const { id: _ignoredId, ...appData } = app
+        void _ignoredId
+        await db.sceneAppearances.add({
+          ...appData,
+          productionId: newProductionId,
+          sceneId: sceneIdMap.get(appData.sceneId) ?? appData.sceneId,
+          characterId:
+            characterIdMap.get(appData.characterId) ?? appData.characterId,
         })
       }
 

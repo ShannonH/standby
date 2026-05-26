@@ -394,6 +394,78 @@ export interface SettingsEntry {
   value: unknown
 }
 
+// ─── Scene / character breakdown (V2 — source-of-truth) ──────────────────
+//
+// The breakdown is a scenes × characters matrix tracking who's in what.
+// Drives schedule generation and prop assignment as we wire it up to
+// other features. Three entities:
+//
+//   Character          one row per role in the show
+//   Scene              one row per scene / musical number / french scene
+//   SceneAppearance    a cell in the matrix — character is in scene with
+//                      specific entrance/exit pages and a presence type
+//
+// Doubling is modeled as multiple Character rows linked to the same
+// `playedByContactId` (one actor → many characters); per-cell `doubling`
+// is a free-text quick-change note for the SM.
+
+/** What a character is doing in a scene. */
+export type AppearanceType =
+  | 'speaking'
+  | 'singing'
+  | 'silent'
+  | 'underscoring'
+
+export interface Character {
+  id?: number
+  productionId: number
+  /** Role name as it appears in the script. */
+  name: string
+  /** Optional grouping for sort + filter. */
+  type?: 'principal' | 'featured' | 'ensemble' | 'voice' | 'silent'
+  /** Cast contact (from Contacts) who plays this role. Multiple
+   *  characters can link to the same contact in a doubling situation. */
+  playedByContactId?: number
+  notes?: string
+}
+
+export interface Scene {
+  id?: number
+  productionId: number
+  /** User-controlled sort order; auto-incremented by 10 like Tracking. */
+  sequence: number
+  /** Display label — "I.1", "Act 2, Scene 3", "Pirate Cove", or a
+   *  musical-number title. Free-form so the SM can match their script. */
+  label: string
+  /** Optional act split for musical-aware shows. "1" / "II" / etc. */
+  act?: string
+  /** Musical-number name (when distinct from `label`). */
+  numberName?: string
+  /** Script page range. */
+  pageStart?: string
+  pageEnd?: string
+  /** "Forest", "Major-General's estate", etc. */
+  location?: string
+  /** Approximate running time in minutes (musical-aware). */
+  runningTimeMin?: number
+  notes?: string
+}
+
+export interface SceneAppearance {
+  id?: number
+  productionId: number
+  sceneId: number
+  characterId: number
+  /** Page of the script where the character enters the scene. */
+  entrancePage?: string
+  /** Page where they exit. */
+  exitPage?: string
+  presence: AppearanceType
+  /** Free-text quick-change / doubling note. e.g. "exits as Hippolyta,
+   *  re-enters as Titania in 2.1". */
+  doubling?: string
+}
+
 class StandbyDB extends Dexie {
   productions!: EntityTable<Production, 'id'>
   contacts!: EntityTable<Contact, 'id'>
@@ -408,6 +480,9 @@ class StandbyDB extends Dexie {
   blocking!: EntityTable<BlockingEntry, 'id'>
   breakLogs!: EntityTable<BreakLog, 'id'>
   showReports!: EntityTable<ShowReport, 'id'>
+  characters!: EntityTable<Character, 'id'>
+  scenes!: EntityTable<Scene, 'id'>
+  sceneAppearances!: EntityTable<SceneAppearance, 'id'>
 
   constructor() {
     super('standby')
@@ -485,6 +560,25 @@ class StandbyDB extends Dexie {
       breakLogs: '++id, productionId, date',
       showReports: '++id, productionId, date, performanceNumber',
     })
+    // v7: adds characters / scenes / sceneAppearances (scene breakdown).
+    this.version(7).stores({
+      productions: '++id, name',
+      contacts: '++id, productionId, category, name',
+      contactGroups: '++id, productionId, name',
+      props: '++id, productionId, name, status',
+      lineNotes: '++id, productionId, rehearsalDate, characterId, delivered',
+      rehearsals: '++id, productionId, date, dayNumber',
+      sendLog: '++id, productionId, sentAt, artifact',
+      settings: '&key',
+      dailyCalls: '++id, productionId, date, version',
+      tracking: '++id, productionId, sequence, page, kind',
+      blocking: '++id, productionId, sequence, page',
+      breakLogs: '++id, productionId, date',
+      showReports: '++id, productionId, date, performanceNumber',
+      characters: '++id, productionId, name',
+      scenes: '++id, productionId, sequence',
+      sceneAppearances: '++id, productionId, sceneId, characterId',
+    })
   }
 }
 
@@ -509,6 +603,9 @@ export async function deleteProductionCascade(productionId: number): Promise<voi
       db.blocking,
       db.breakLogs,
       db.showReports,
+      db.characters,
+      db.scenes,
+      db.sceneAppearances,
     ],
     async () => {
       await db.contacts.where('productionId').equals(productionId).delete()
@@ -522,6 +619,12 @@ export async function deleteProductionCascade(productionId: number): Promise<voi
       await db.blocking.where('productionId').equals(productionId).delete()
       await db.breakLogs.where('productionId').equals(productionId).delete()
       await db.showReports.where('productionId').equals(productionId).delete()
+      await db.characters.where('productionId').equals(productionId).delete()
+      await db.scenes.where('productionId').equals(productionId).delete()
+      await db.sceneAppearances
+        .where('productionId')
+        .equals(productionId)
+        .delete()
       await db.productions.delete(productionId)
     },
   )

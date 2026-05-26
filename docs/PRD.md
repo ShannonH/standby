@@ -23,7 +23,7 @@ We're not a team-wide call board with push notifications — that's [Virtual Cal
 - Post-graduation SMs from VCB-equipped programs entering venues that lack the budget for VCB.
 - Regional and small-house Equity SMs whose productions don't budget for VCB.
 
-**Motivating user:** Shannon's daughter — BFA SM at **Ball State University** (where her professor Chris, an AEA member, drilled the 100-page Equity rulebook), currently on **summer internship at Otterbein University's summer theatre program**. At Ball State she has Virtual Callboard; at Otterbein this summer she's doing the manual-email thing she hates. She represents both halves of our target — knows what good distribution feels like (VCB-at-Ball-State) *and* is living the pain right now (manual-email-at-Otterbein-summer).
+**Motivating user:** Shannon's daughter — stage management student at **Ball State University** (where her professor Chris, an AEA member, drilled the 100-page Equity rulebook), currently on **summer internship at Otterbein University's summer theatre program**. At Ball State she has Virtual Callboard; at Otterbein this summer she's doing the manual-email thing she hates. She represents both halves of our target — knows what good distribution feels like (VCB-at-Ball-State) *and* is living the pain right now (manual-email-at-Otterbein-summer).
 
 **Explicitly NOT primary:**
 - College programs already paying for VCB (Ball State, Lycoming, etc.) — their distribution problem is solved.
@@ -67,7 +67,7 @@ For V1 *and* V2:
 
 ## 6. Personas
 
-### The SM — BFA student, Ball State, on summer internship at Otterbein
+### The SM — stage management student, Ball State, on summer internship at Otterbein
 
 Trained at Ball State on Virtual Callboard, taught from Stern & Gold + Porter & Alcorn + *Off Headset*. Her professor (AEA member) drilled the 100-page Equity rulebook over two months. MacBook user.
 

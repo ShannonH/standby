@@ -72,7 +72,7 @@ Every paperwork page has a **Distribute** panel that opens your mail client with
 
 ## Built for students
 
-Standby's first user is a college BFA stage manager. Every UX decision is pressure-tested against the question "would this work for an SM in their first real-show gig?"
+Standby's first user is a college stage management student. Every UX decision is pressure-tested against the question "would this work for an SM in their first real-show gig?"
 
 - **Free, no signup, no email collection.** Static site on GitHub Pages. Your data never leaves your device unless you export it.
 - **Works on a phone.** Mobile nav drawer, responsive layouts, Web Share API for distributing PDFs from a phone in the booth.
@@ -192,7 +192,7 @@ None of those are urgent. They're things to invest in if and when Standby is act
 
 ## Acknowledgments
 
-Standby exists because of my daughter, **Rayne Harris** (BFA SM, Ball State University). She's the reason this app got built — watching her email every cast member individually with rehearsal PDFs from her Otterbein summer internship made it obvious there should be a tool for this. She's also the primary road-tester: every UX decision gets pressure-tested against a real summer at Otterbein Theatre before it ships.
+Standby exists because of my daughter, **Rayne Harris**, who's studying stage management at Ball State University. She's the reason this app got built — watching her email every cast member individually with rehearsal PDFs from her Otterbein summer internship made it obvious there should be a tool for this. She's also the primary road-tester: every UX decision gets pressure-tested against a real summer at Otterbein Theatre before it ships.
 
 Form structures lean on **Stern & Gold, *Stage Management* 12e** (the long-running practical text). Default note phrasing leans on **Porter & Alcorn, *Stage Management Theory as a Guide to Practice* 2e** (the equity-and-inclusion-forward pedagogy). The *Off Headset* essay collection (Jaen & Sadler, eds.) is the supplementary reading that shapes the tone.
 

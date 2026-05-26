@@ -4,7 +4,7 @@ Loaded automatically by Claude Code when working inside this repo. Read [docs/PR
 
 ## What this is
 
-Standby — a free, offline-first, browser-based paperwork hub for theatre stage managers. Targets SMs in contexts **without** Virtual Callboard (summer programs, community theatre, post-graduation regional/fringe gigs, college programs without VCB subscriptions). Motivating user: Shannon's daughter — BFA SM at Ball State, currently on summer internship at Otterbein where she's manually emailing every piece of paperwork. See [docs/RESEARCH.md](docs/RESEARCH.md) for the full competitive landscape and SM-workflow primer.
+Standby — a free, offline-first, browser-based paperwork hub for theatre stage managers. Targets SMs in contexts **without** Virtual Callboard (summer programs, community theatre, post-graduation regional/fringe gigs, college programs without VCB subscriptions). Motivating user: Shannon's daughter — stage management student at Ball State, currently on summer internship at Otterbein where she's manually emailing every piece of paperwork. See [docs/RESEARCH.md](docs/RESEARCH.md) for the full competitive landscape and SM-workflow primer.
 
 ## Stack
 

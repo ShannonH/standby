@@ -51,8 +51,15 @@ public/samples/             # Sample show JSON imports
 - **Strict TypeScript.** `tsc --noEmit` must pass. No `any` without a comment explaining why.
 - **Local-first stays sacred.** No network calls. No backends. The whole point is that a show survives without an internet connection. Sync via file export, not API.
 - **Equity / inclusivity conventions in copy.** Default text in templates and forms leans Porter & Alcorn — collaborative, not corrective. Pronouns are first-class on contacts.
-- **Forms use react-hook-form + zod.** One zod schema per input shape; derive the TypeScript type via `z.infer`.
+- **Forms use react-hook-form + zod.** One zod schema per input shape; derive the TypeScript type via `z.infer`. Use the shared `<Field required>` + `<Input/>`/`<Textarea/>`/`<Select/>` from `src/components/Form.tsx` so that the input picks up `aria-required`, `aria-describedby` (to the hint or error span), and `aria-invalid` via the surrounding `FieldContext`.
 - **Print stylesheet matters.** Anything page-like should look right in a director's binder when printed letter-paper.
+- **Accessibility is a non-negotiable.** Lighthouse AX should stay ≥95 on every route. Practical baseline:
+  - Every interactive surface has a visible `:focus-visible` ring (the global `Button`, `NavLink`, and `IconButton` ship with one — don't override it away).
+  - Icon-only buttons require `aria-label` (TypeScript enforces it on `IconButton`).
+  - Destructive actions in list rows belong in the ghost-styled `IconButton tone="danger"` pattern, not as solid red buttons.
+  - Modal/drawer overlays use `role="dialog" aria-modal="true"` with an `aria-label`; focus moves into them on open and back to the trigger on close.
+  - Tables use semantic `<thead>` / `<th scope="col">`; non-tabular data shouldn't use `<table>`.
+  - Animations and smooth-scrolls check `prefers-reduced-motion`.
 
 ### Code style
 
@@ -100,7 +107,9 @@ Use the [PR template](.github/PULL_REQUEST_TEMPLATE.md). Include screenshots for
 8. **Round-trip test:** confirm export → import preserves cross-references.
 9. **Sample show:** add an example entry in `public/samples/midsummer.standby.json`.
 
-The Daily Call feature (commit `e5a0a85`) is the most recent complete example of all of these.
+The Scene Breakdown feature (commit `47d57e6`) is the most recent complete example covering all of these — three new entities, schema v7 + ShowExport v10 migration, id remapping in import/export, a matrix view, two management panels, modal cell editor, populated samples, and round-trip-aware sample test.
+
+For a smaller-scoped example focused on a single new artifact + PDF, see Show Reports (commit `541637c`).
 
 ## Code of conduct
 

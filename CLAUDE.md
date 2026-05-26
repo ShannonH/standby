@@ -43,6 +43,8 @@ PDF renderers live at `src/features/<area>/<Artifact>Pdf.tsx`.
 - **Autosave-on-change.** Never require a manual save step.
 - **Print stylesheet:** hide `.print:hidden` (left nav, action bars), letter paper, header on every page.
 - **Pronouns** are a first-class field on contacts.
+- **Accessibility is a non-negotiable.** Lighthouse AX should stay ≥95 on every route. See CONTRIBUTING.md for the practical baseline (visible focus rings everywhere, `aria-label` on icon-only buttons, ghost-style icon buttons for destructive list-row actions, modals as `role="dialog" aria-modal="true"`, semantic `<table scope="col">`, `prefers-reduced-motion` respected on animations).
+- **Use shared Form primitives** in `src/components/Form.tsx`: `<Field required>` + `<Input/>`/`<Textarea/>`/`<Select/>` wire up `aria-required` + `aria-describedby` + `aria-invalid` via `FieldContext`. `<IconButton tone="danger">` with `<TrashIcon/>` is the destructive-row-action pattern.
 
 ## Tone
 
@@ -52,7 +54,16 @@ PDF renderers live at `src/features/<area>/<Artifact>Pdf.tsx`.
 
 ## Phasing
 
-Currently in **M0 → M1 → M2**. See PRD §12 for dates. M2 target: ship by ~2026-07-06 so daughter has 3 weeks of real-show use before her Otterbein summer ends 2026-07-27.
+M0 → M1 → M2 are complete (production setup, contact sheet + groups, rehearsal report, line notes, prop list, distribution v1). Currently in **M2.5 / V1.5 / V2 territory**: show reports, daily call + Equity break calculator, master tracking sheet, blocking schematic, scene/character breakdown matrix, full a11y polish, and Today dashboard widgets are all shipped beyond the original PRD timeline. See PRD §12 for the original dates and CHANGELOG.md for what's actually landed.
+
+## Routes (current)
+
+```
+Today · Production · Contacts · Daily call · Rehearsals · Show reports ·
+Line notes · Props · Tracking · Breakdown · Blocking · Breaks · Backup · Settings
+```
+
+Production focuses on the show itself (CRUD + distribute production-info sheet + send log). Backup houses auto-backup folder, publish folder, and JSON import/export. Sample-show loading lives in the Production empty state (first-run surface).
 
 ## Non-goals (do not implement)
 

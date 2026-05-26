@@ -30,22 +30,71 @@ See [`docs/RESEARCH.md`](docs/RESEARCH.md) for the full competitive landscape an
 
 **Live site:** [shannonh.github.io/standby](https://shannonh.github.io/standby/)
 
-**Sample show:** Open the Production page → "Backup & restore" → "Load A Midsummer Night's Dream". A fully-populated 12-cast Midsummer arrives with rehearsal reports, daily calls, props, contacts, line notes — so you can see every feature without typing a thing.
+**Sample shows:** First-run? The Production page shows two pre-populated samples — a Shakespeare play (*A Midsummer Night's Dream*, 12 cast) and a Gilbert & Sullivan musical (*The Pirates of Penzance*, 14 cast). One click loads either, with every feature populated — rehearsal reports, show reports, daily calls, props, line notes, master tracking, blocking, break logs, scene breakdown matrix — so you can poke around without typing a thing.
 
 ## What's in the box
 
+### Dashboard
+
 | Section | What it does |
 |---|---|
-| **Today** | Time-aware greeting, dashboard for the active show. |
-| **Production** | Show metadata + key dates, JSON backup/restore, auto-backup to a folder you pick, publish PDFs to a shared folder for crew. |
+| **Today** | Phase-aware dashboard: countdown hero ("Opening in 12 days." / "Opening — TONIGHT." / "The show is closed."), milestone timeline strip (First reh → Designer run → Tech start → First preview → Opening → Closing), stat cards that flag what needs attention, next-call card, "Standing by" nudges for undelivered line notes and undistributed reports, recent activity feed. |
+
+### Daily / nightly paperwork
+
+| Section | What it does |
+|---|---|
+| **Production** | Show metadata + key dates, distribute the production info sheet, send-log audit trail. |
 | **Contacts** | Cast / Creative / Production / Crew / Venue, pronouns + do-not-publish flag, named groups for batch distribution. |
 | **Daily call** | The night-before call sheet — staggered call times, schedule with abbreviated cast lists, "Subject to Change" footer, script-font title to match the Broadway-poster aesthetic. |
 | **Rehearsals** | Stern/Gold-format report: attendance, time breakdown, 9 departmental note sections. PDF and inline-body email. |
+| **Show reports** | The run-of-show counterpart to rehearsal reports. Run times by act, intermissions, holds, incidents (medical / audience / technical / safety / other), understudy & swing changes, same 9-dept notes. |
 | **Line notes** | Fast-entry mode (Enter saves and clears the form so you keep typing), grouped by actor, per-actor private PDFs. |
+
+### Source-of-truth surfaces
+
+| Section | What it does |
+|---|---|
 | **Props** | Master list, inline status dropdown in the table, six special-handling tags (food / weapons / fire / breakaway / fragile / liquid), CSV for the props master. |
-| **Settings** | 6 distinct themes with full type systems, font size, paper size, time format, your-name greeting + email sign-off. |
+| **Tracking** | Master tracking sheet — one row per event (entrance / exit / crossover / scene shift / crew action), drag-to-reorder, CSV import + per-actor track PDF. |
+| **Breakdown** | Scene × character matrix. Click a cell to mark presence (●♪○~ for speaking / singing / silent / underscoring), enter entrance / exit pages, and free-text doubling / quick-change notes. The source of truth that drives schedule + prop assignment in V2+. |
+| **Blocking** | Zone-tap schematic for capturing actor positions per scene — quick coverage without becoming a Stage Write replacement. |
+| **Breaks** | Equity-rule break calculator: 5-and-5, 10-and-12, lunch/dinner timing per AEA convention. |
+
+### Storage + distribution
+
+| Section | What it does |
+|---|---|
+| **Backup** | Auto-backup folder (Standby writes a JSON snapshot to a folder you pick — point at iCloud Drive / Dropbox / Google Drive for off-device backup), publish folder (PDFs auto-written for crew consumption), manual JSON export/import. |
+| **Settings** | 8 distinct themes with full type systems, font size scaling, paper size, time format, your-name greeting + email sign-off. |
 
 Every paperwork page has a **Distribute** panel that opens your mail client with the right BCC group, the full report inline in the body (no attachments to remember), and a sign-off with your name. Mobile users get a Web Share path with the PDF actually attached.
+
+## Built for students
+
+Standby's first user is a college BFA stage manager. Every UX decision is pressure-tested against the question "would this work for an SM in their first real-show gig?"
+
+- **Free, no signup, no email collection.** Static site on GitHub Pages. Your data never leaves your device unless you export it.
+- **Works on a phone.** Mobile nav drawer, responsive layouts, Web Share API for distributing PDFs from a phone in the booth.
+- **Works in the basement.** Installable PWA. After first load, it works offline forever. Rehearsal rooms with no WiFi don't break it.
+- **Works on a school laptop.** No native app, no privileged install, runs on Chromebooks. Self-hostable in Docker for university IT departments that need everything on-premise.
+- **Sample shows for learning.** Two fully-populated sample productions (a play + a musical) demonstrate every feature without a real show.
+- **Conventions match what BFA programs teach.** Forms follow Stern & Gold 12e; default note phrasing follows Porter & Alcorn's collaborative tone; pronouns are a first-class field; the Equity break calculator honors the AEA rulebook.
+
+## Accessibility
+
+Built with WCAG 2.1 AA as the floor, not the ceiling. Recent Lighthouse runs: **100/100** accessibility on Today, Production, Contacts, Settings; **95/100** on Tracking (the densest data view, capped by a third-party drag-and-drop library's structure).
+
+- **Keyboard-navigable everywhere.** Tab order is sequential, focus indicators are visible 2px accent-colored rings (no theme breaks the indicator), focus moves to the right place when modals/drawers open and returns to the trigger on close.
+- **Screen-reader friendly.** Semantic HTML — `<main>`, `<nav aria-label>`, `<table>` with `scope="col"` headers, `role="dialog" aria-modal="true"` on overlays. Every icon-only button (trash, hamburger, close) carries a specific `aria-label`. Required form fields are marked `aria-required="true"` with visible asterisks. Validation errors are linked to inputs via `aria-describedby` and announced via `role="alert"`.
+- **Color contrast at AA or better.** All body text passes WCAG AA against every theme + dark/light mode combination. Critical-action color (red Delete) was demoted from solid buttons to muted trash icons that turn red only on hover — destructive actions no longer dominate the visual hierarchy.
+- **Eight themes for visual preference.** Default (Broadway-PSM serif), Stage (warm cream + amber), Midnight (cool slate + cyan, booth-console mono), Greenroom (sage + emerald), Marquee (cream + crimson, gilded borders), Rosewood (italic Cormorant, vintage parlor), Sampler (oatmeal + plum, handwritten), Raynebow (rainbow-gradient headings on pastel surfaces). Each theme has its own type system, surface palette, and border radius — not just accent recolors. Light and dark modes on every theme.
+- **Font-size scaling.** Four sizes — Small (14px) / Medium (16px, default) / Large (18px) / Extra-large (20px) — scales the entire UI, useful for reading from across a dark booth or for users who prefer larger text generally.
+- **Time-format and paper-size preferences.** 12-hour ("6:00p") or 24-hour ("18:00") affects every UI surface and every generated PDF. Letter or A4 paper size.
+- **Reduced-motion respected.** Mobile drawer slide-in, back-to-top smooth-scroll, and other animations all check `prefers-reduced-motion` and skip if set.
+- **Print stylesheet.** Every report prints cleanly on letter or A4, no `.print:hidden` UI chrome leaking onto the page.
+
+Found a barrier? File an [accessibility issue](https://github.com/ShannonH/standby/issues/new). Screen-reader, switch-control, and low-vision testing reports are especially welcome.
 
 ## Quick start
 

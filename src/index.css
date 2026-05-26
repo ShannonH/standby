@@ -370,6 +370,24 @@ html[data-font-size='xl'] {
       #fb923c 100%
     );
   }
+
+  /* Raynebow paints headings with a transparent fill so the gradient
+     shows through. Because `[data-theme='raynebow']` is applied to the
+     <html> element, that paint leaks into any nested element that
+     re-scopes itself to a different theme — most visibly the theme
+     preview cards on the Settings page, which would otherwise inherit
+     the rainbow even though they're scoped to Default / Stage / etc.
+     This reset reasserts solid text fill for any nested theme scope
+     that isn't raynebow. Specificity (0,2,1) wins over the raynebow
+     rules above (0,1,1) regardless of cascade order. */
+  [data-theme]:not([data-theme='raynebow']) h1,
+  [data-theme]:not([data-theme='raynebow']) h2,
+  [data-theme]:not([data-theme='raynebow']) h3,
+  [data-theme]:not([data-theme='raynebow']) h4 {
+    background-image: none;
+    -webkit-text-fill-color: currentColor;
+    color: rgb(var(--text-primary));
+  }
 }
 
 /* Print stylesheet — letter paper, Broadway-PSM packet aesthetic */

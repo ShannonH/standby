@@ -4,6 +4,10 @@ All notable changes to Standby are documented here. Format roughly follows [Keep
 
 ## Unreleased
 
+### Changed
+
+- **Production page IA split**. The Production route previously housed eight distinct concerns (production CRUD, exports, distribute panel, send log, auto-backup folder, publish folder, JSON import/export, sample shows). It's now focused on the production itself: list / create / edit, export the production-info PDF, distribute it, and inspect the send log. Auto-backup, publish folder, and JSON import/export moved to a new **Backup & storage** route (`/backup`). Sample-show loading moved to the empty-state CTA when no production exists yet — you wouldn't reach for a sample show after you already have one set up.
+
 ### Accessibility
 
 - **Saved ✓ confirmation** on long forms (Rehearsal report, Show report). The Save button transitions through `Saving…` → `Saved ✓` over ~900ms before navigating back to the list, so the SM has visual proof their work landed before the form unmounts. The Cancel button hides during the saved state to avoid accidental clicks.

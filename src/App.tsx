@@ -20,6 +20,7 @@ const nav: readonly NavItem[] = [
   { to: '/tracking', label: 'Tracking' },
   { to: '/blocking', label: 'Blocking' },
   { to: '/breaks', label: 'Breaks' },
+  { to: '/backup', label: 'Backup' },
   { to: '/settings', label: 'Settings' },
 ]
 

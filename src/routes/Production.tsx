@@ -1,8 +1,6 @@
 import { useState } from 'react'
-import AutoBackupPanel from '@/components/AutoBackupPanel'
-import ImportExport from '@/components/ImportExport'
 import PdfDownloadButton from '@/components/PdfDownloadButton'
-import PublishPanel from '@/components/PublishPanel'
+import SampleShowPicker from '@/components/SampleShowPicker'
 import { Button } from '@/components/Form'
 import DistributePanel from '@/features/distribution/DistributePanel'
 import SendLogList from '@/features/distribution/SendLogList'
@@ -14,6 +12,14 @@ import { useAppStore } from '@/lib/store'
 import { productionInfoBody } from '@/lib/templates'
 import { renderProductionInfoText } from '@/lib/text-reports'
 
+/**
+ * Production route — focused on the show itself: list, create, edit,
+ * distribute the production info sheet, and inspect the send log. The
+ * Backup & storage concerns (auto-backup folder, publish folder, JSON
+ * import/export) now live on /backup. Sample-show loading lives in the
+ * empty-state CTA below (you wouldn't load a sample after you already
+ * have a production set up).
+ */
 export default function ProductionRoute() {
   const productions = useProductions()
   const current = useCurrentProduction()
@@ -35,6 +41,7 @@ export default function ProductionRoute() {
   }
 
   const showCreateForm = isCreating || productions.length === 0
+  const isFirstRun = productions.length === 0
 
   return (
     <section className="mx-auto max-w-4xl space-y-10">
@@ -67,12 +74,24 @@ export default function ProductionRoute() {
       {showCreateForm && (
         <section className="space-y-3">
           <h3 className="font-display text-xl">
-            {productions.length === 0 ? 'Set up your first production' : 'New production'}
+            {isFirstRun ? 'Set up your first production' : 'New production'}
           </h3>
           <ProductionForm
             onSaved={() => setIsCreating(false)}
             onCancel={productions.length > 0 ? () => setIsCreating(false) : undefined}
           />
+        </section>
+      )}
+
+      {/* First-run only: surface bundled sample shows alongside the
+          create-your-own form. After the user has at least one
+          production, sample loading is hidden — they can still get to
+          it via the Backup & storage route if needed (well, not yet —
+          considered out-of-scope; sample loading is intentionally a
+          first-run concern). */}
+      {isFirstRun && (
+        <section className="space-y-3">
+          <SampleShowPicker />
         </section>
       )}
 
@@ -133,13 +152,6 @@ export default function ProductionRoute() {
           </section>
         </>
       )}
-
-      <AutoBackupPanel productionId={current?.id ?? null} />
-      <PublishPanel
-        productionId={current?.id ?? null}
-        productionName={current?.name}
-      />
-      <ImportExport productionId={current?.id ?? null} />
     </section>
   )
 }

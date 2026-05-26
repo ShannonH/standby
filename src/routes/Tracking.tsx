@@ -58,6 +58,12 @@ function TrackingInner() {
 
   const lastEntry = entries[entries.length - 1]
 
+  const trackedActors: Contact[] = useMemo(() => {
+    const ids = new Set<number>()
+    for (const e of entries) for (const id of e.contactIds) ids.add(id)
+    return trackable.filter((c) => c.id !== undefined && ids.has(c.id))
+  }, [entries, trackable])
+
   if (!production?.id) return null
 
   // ─── Duplicate handler ──────────────────────────────────────────────────────
@@ -261,13 +267,6 @@ function TrackingInner() {
     document.body.removeChild(link)
     URL.revokeObjectURL(url)
   }
-
-  // Actors with at least one entry are picker-eligible.
-  const trackedActors: Contact[] = useMemo(() => {
-    const ids = new Set<number>()
-    for (const e of entries) for (const id of e.contactIds) ids.add(id)
-    return trackable.filter((c) => c.id !== undefined && ids.has(c.id))
-  }, [entries, trackable])
 
   return (
     <section className="mx-auto max-w-6xl space-y-8">

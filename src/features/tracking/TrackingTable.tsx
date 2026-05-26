@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import {
   closestCenter,
   DndContext,
@@ -48,14 +48,17 @@ export default function TrackingTable({
     [contacts],
   )
 
-  const renderWho = (entry: TrackingEntry): string => {
-    if (entry.whoOverride && entry.contactIds.length === 0) {
-      return entry.whoOverride
-    }
-    const names = entry.contactIds.map((id) => abbreviateName(nameOf(id)))
-    if (entry.whoOverride) names.push(entry.whoOverride)
-    return names.join(', ')
-  }
+  const renderWho = useCallback(
+    (entry: TrackingEntry): string => {
+      if (entry.whoOverride && entry.contactIds.length === 0) {
+        return entry.whoOverride
+      }
+      const names = entry.contactIds.map((id) => abbreviateName(nameOf(id)))
+      if (entry.whoOverride) names.push(entry.whoOverride)
+      return names.join(', ')
+    },
+    [nameOf],
+  )
 
   const isFiltered = actorFilter !== '' || search.trim() !== ''
 

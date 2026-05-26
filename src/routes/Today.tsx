@@ -1,12 +1,28 @@
 import { Link } from 'react-router-dom'
+import AwaitingActions from '@/features/today/AwaitingActions'
+import CountdownHero from '@/features/today/CountdownHero'
+import MilestoneStrip from '@/features/today/MilestoneStrip'
+import NextCallCard from '@/features/today/NextCallCard'
+import RecentActivity from '@/features/today/RecentActivity'
+import StatsRow from '@/features/today/StatsRow'
 import { greet } from '@/lib/greeting'
-import { useContacts, useCurrentProduction, useProductions } from '@/lib/hooks'
+import { useCurrentProduction, useProductions } from '@/lib/hooks'
 import { useAppStore } from '@/lib/store'
 
+/**
+ * Today is the dashboard. With no production, it's a welcome screen.
+ * With a production loaded, it's a dense at-a-glance view of where the
+ * show is in its lifecycle and what's standing by.
+ *
+ * Composition order is intentional: hero countdown first (the answer to
+ * "where are we?"), milestone strip second (the timeline), then a stats
+ * row (the numbers), then optional next-call / awaiting-actions / recent
+ * activity panels. Optional panels render null when they have nothing
+ * to say — silence on Today means "you're caught up."
+ */
 export default function Today() {
   const productions = useProductions()
   const current = useCurrentProduction()
-  const contacts = useContacts(current?.id)
   const userName = useAppStore((s) => s.settings.userName) ?? ''
   const greeting = greet(userName)
   const trimmedName = userName.trim()
@@ -20,14 +36,14 @@ export default function Today() {
             : 'Welcome to Standby'}
         </h2>
         <p className="mt-3 text-muted">
-          A free, offline-first paperwork hub for theatre stage managers. Your
-          shows live in your browser; nothing leaves this device unless you
-          export it.
+          A free, offline-first paperwork hub for theatre stage managers.
+          Your shows live in your browser; nothing leaves this device
+          unless you export it.
         </p>
         <p className="mt-6">
           <Link
             to="/production"
-            className="inline-block rounded bg-[rgb(var(--accent))] px-4 py-2 text-sm font-semibold text-[rgb(var(--on-accent))] hover:bg-[rgb(var(--accent-hover))]"
+            className="inline-block rounded bg-[rgb(var(--accent))] px-4 py-2 text-sm font-semibold text-[rgb(var(--on-accent))] hover:bg-[rgb(var(--accent-hover))] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[rgb(var(--accent))]"
           >
             Set up your first production →
           </Link>
@@ -54,64 +70,28 @@ export default function Today() {
   }
 
   return (
-    <section className="mx-auto max-w-3xl">
-      <p className="text-sm italic text-muted">{greeting}</p>
-      <h2 className="mt-1 font-display text-3xl">{current.name}</h2>
-      <p className="text-sm text-muted">
-        {current.type}
-        {current.season ? ` · ${current.season}` : ''}
-        {current.organization ? ` · ${current.organization}` : ''}
-      </p>
+    <section className="mx-auto max-w-5xl space-y-6">
+      <header>
+        <p className="text-sm italic text-muted">{greeting}</p>
+        <h2 className="mt-1 font-display text-3xl">{current.name}</h2>
+        <p className="text-sm text-muted">
+          {current.type}
+          {current.season ? ` · ${current.season}` : ''}
+          {current.organization ? ` · ${current.organization}` : ''}
+        </p>
+      </header>
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-2">
-        <Card label="Contacts" value={contacts.length.toString()} to="/contacts" />
-        <Card label="Production details" value="Edit" to="/production" />
+      <CountdownHero production={current} />
+      <MilestoneStrip production={current} />
+
+      <StatsRow production={current} />
+
+      <div className="grid gap-6 lg:grid-cols-2">
+        <NextCallCard production={current} />
+        <AwaitingActions production={current} />
       </div>
 
-      <div className="mt-12 space-y-3 border-t border-surface-border pt-6 text-sm text-muted">
-        <p className="font-medium text-[rgb(var(--text-primary))]">
-          Where to go next
-        </p>
-        <ul className="space-y-1.5">
-          <li>
-            <strong>Rehearsals</strong> — nightly report: attendance, time
-            breakdown, and notes grouped by department.
-          </li>
-          <li>
-            <strong>Line notes</strong> — capture mistakes during rehearsal.
-            Enter saves a note and clears the form so you keep typing.
-          </li>
-          <li>
-            <strong>Props</strong> — master list with status, source, and
-            special-handling tags. Click a status to change it inline.
-          </li>
-          <li>
-            <strong>Contacts</strong> — cast, creative, production, crew.
-            Build named groups for batched distribution.
-          </li>
-          <li>
-            <strong>Production</strong> — show metadata, key dates, and JSON
-            backup/restore.
-          </li>
-        </ul>
-        <p className="pt-2 text-xs">
-          Every paperwork page has a <em>Distribute</em> panel that opens
-          your mail client with the recipient group BCC'd and the full
-          report in the email body — no attachments to remember.
-        </p>
-      </div>
+      <RecentActivity production={current} />
     </section>
-  )
-}
-
-function Card({ label, value, to }: { label: string; value: string; to: string }) {
-  return (
-    <Link
-      to={to}
-      className="block rounded border border-surface-border p-4 transition hover:border-[rgb(var(--accent))]"
-    >
-      <p className="text-xs uppercase tracking-wide text-muted">{label}</p>
-      <p className="mt-1 font-display text-2xl font-semibold">{value}</p>
-    </Link>
   )
 }

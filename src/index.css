@@ -310,12 +310,16 @@ html[data-font-size='xl'] {
     color: rgb(var(--text-primary));
   }
   /* Any element that establishes its own theme scope (e.g. a preview card
-     in Settings) should also set its own text color so it doesn't inherit
-     from the body of the host page — otherwise dark-mode body color leaks
-     into light-themed preview cards. Background is not set here because
-     scopes use bg-card (--surface-elev) by convention, not surface-bg. */
+     in Settings) should set its own text color AND body font so neither
+     leak in from the active host theme. Without `font-family` here, a
+     `<p>` inside a Midnight preview card would inherit EB Garamond from
+     the global `body { font-family: var(--font-body) }` rule (because
+     that rule only applies to <body>, not to nested data-theme scopes).
+     Background isn't set because scopes use bg-card (--surface-elev) by
+     convention, not surface-bg. */
   [data-theme]:not(html) {
     color: rgb(var(--text-primary));
+    font-family: var(--font-body);
   }
   h1,
   h2,

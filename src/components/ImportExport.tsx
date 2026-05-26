@@ -9,8 +9,8 @@ import {
 import {
   loadSampleShow,
   sampleShowUrl,
-  SAMPLE_SHOW_DESCRIPTION,
-  SAMPLE_SHOW_LABEL,
+  SAMPLE_SHOWS,
+  type SampleShow,
 } from '@/lib/sample-show'
 import { useAppStore } from '@/lib/store'
 
@@ -23,7 +23,9 @@ export default function ImportExport({ productionId }: Props) {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [status, setStatus] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
-  const [busy, setBusy] = useState(false)
+  /** Slug of the sample currently being loaded, or null. Used so only the
+   *  clicked button shows a spinner — not every sample button at once. */
+  const [loadingSlug, setLoadingSlug] = useState<string | null>(null)
 
   async function handleExport() {
     if (productionId === null) return
@@ -53,20 +55,20 @@ export default function ImportExport({ productionId }: Props) {
     }
   }
 
-  async function handleLoadSample() {
+  async function handleLoadSample(sample: SampleShow) {
     setError(null)
     setStatus(null)
-    setBusy(true)
+    setLoadingSlug(sample.slug)
     try {
-      const newId = await loadSampleShow()
+      const newId = await loadSampleShow(sample)
       setCurrentProductionId(newId)
       setStatus(
-        `Loaded the ${SAMPLE_SHOW_LABEL} sample as a new production and switched to it.`,
+        `Loaded the ${sample.label} sample as a new production and switched to it.`,
       )
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err))
     } finally {
-      setBusy(false)
+      setLoadingSlug(null)
     }
   }
 
@@ -104,19 +106,47 @@ export default function ImportExport({ productionId }: Props) {
 
       <div className="space-y-3 border-t border-surface-border pt-4">
         <h3 className="font-display text-lg">Try a sample show</h3>
-        <p className="text-sm text-muted">{SAMPLE_SHOW_DESCRIPTION}</p>
-        <div className="flex flex-wrap items-center gap-3">
-          <Button onClick={handleLoadSample} disabled={busy}>
-            {busy ? 'Loading…' : `Load ${SAMPLE_SHOW_LABEL}`}
-          </Button>
-          <a
-            href={sampleShowUrl()}
-            download="midsummer.standby.json"
-            className="text-sm text-muted underline hover:text-accent"
-          >
-            …or download the JSON to inspect it
-          </a>
-        </div>
+        <p className="text-sm text-muted">
+          Each sample imports as a brand-new production alongside whatever
+          you already have. Useful for kicking the tires, training a new SM,
+          or seeing what a fully-populated production looks like before
+          starting your own.
+        </p>
+        <ul className="space-y-3">
+          {SAMPLE_SHOWS.map((sample) => {
+            const busy = loadingSlug === sample.slug
+            const disabled = loadingSlug !== null && !busy
+            return (
+              <li
+                key={sample.slug}
+                className="space-y-2 rounded border border-surface-border bg-surface-bg p-3"
+              >
+                <div className="flex flex-wrap items-baseline gap-2">
+                  <h4 className="font-display text-base">{sample.label}</h4>
+                  <span className="rounded bg-surface-border/40 px-2 py-0.5 text-xs uppercase tracking-wide text-muted">
+                    {sample.tag}
+                  </span>
+                </div>
+                <p className="text-sm text-muted">{sample.description}</p>
+                <div className="flex flex-wrap items-center gap-3">
+                  <Button
+                    onClick={() => void handleLoadSample(sample)}
+                    disabled={disabled || busy}
+                  >
+                    {busy ? 'Loading…' : `Load ${sample.label}`}
+                  </Button>
+                  <a
+                    href={sampleShowUrl(sample)}
+                    download={`${sample.slug}.standby.json`}
+                    className="text-sm text-muted underline hover:text-accent"
+                  >
+                    …or download the JSON to inspect it
+                  </a>
+                </div>
+              </li>
+            )
+          })}
+        </ul>
       </div>
 
       {status && (

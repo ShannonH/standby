@@ -1,0 +1,2275 @@
+{
+  "schemaVersion": 9,
+  "exportedAt": "2026-05-25T12:00:00.000Z",
+  "production": {
+    "name": "The Pirates of Penzance",
+    "workingTitle": "Pirates",
+    "season": "Summer 2026",
+    "type": "musical",
+    "organization": "Sample University Department of Theatre",
+    "venue": "Main Stage",
+    "firstRehearsal": "2026-06-22",
+    "designerRun": "2026-07-13",
+    "techStart": "2026-07-16",
+    "firstPreview": "2026-07-23",
+    "opening": "2026-07-25",
+    "closing": "2026-08-02",
+    "equityMode": true,
+    "createdAt": "2026-05-25T12:00:00.000Z",
+    "updatedAt": "2026-05-25T12:00:00.000Z"
+  },
+  "contacts": [
+    {
+      "id": 1,
+      "productionId": 0,
+      "category": "cast",
+      "name": "Avery Stone",
+      "role": "Frederic",
+      "email": "avery.stone@sample.edu",
+      "phone": "555-0101",
+      "pronouns": "he/him"
+    },
+    {
+      "id": 2,
+      "productionId": 0,
+      "category": "cast",
+      "name": "Beatrice Morales",
+      "role": "Mabel",
+      "email": "beatrice.morales@sample.edu",
+      "phone": "555-0102",
+      "pronouns": "she/her"
+    },
+    {
+      "id": 3,
+      "productionId": 0,
+      "category": "cast",
+      "name": "Cassidy Hart",
+      "role": "Pirate King",
+      "email": "cassidy.hart@sample.edu",
+      "phone": "555-0103",
+      "pronouns": "they/them"
+    },
+    {
+      "id": 4,
+      "productionId": 0,
+      "category": "cast",
+      "name": "Devon O’Neill",
+      "role": "Major-General Stanley",
+      "email": "devon.oneill@sample.edu",
+      "phone": "555-0104",
+      "pronouns": "he/him"
+    },
+    {
+      "id": 5,
+      "productionId": 0,
+      "category": "cast",
+      "name": "Elena Park",
+      "role": "Ruth",
+      "email": "elena.park@sample.edu",
+      "phone": "555-0105",
+      "pronouns": "she/her"
+    },
+    {
+      "id": 6,
+      "productionId": 0,
+      "category": "cast",
+      "name": "Felix Brennan",
+      "role": "Sergeant of Police",
+      "email": "felix.brennan@sample.edu",
+      "phone": "555-0106",
+      "pronouns": "he/him"
+    },
+    {
+      "id": 7,
+      "productionId": 0,
+      "category": "cast",
+      "name": "Greta Wilson",
+      "role": "Samuel (Pirate Lieutenant)",
+      "email": "greta.wilson@sample.edu",
+      "phone": "555-0107",
+      "pronouns": "she/her"
+    },
+    {
+      "id": 8,
+      "productionId": 0,
+      "category": "cast",
+      "name": "Hiroshi Tanaka",
+      "role": "Edith",
+      "email": "hiroshi.tanaka@sample.edu",
+      "phone": "555-0108",
+      "pronouns": "he/him"
+    },
+    {
+      "id": 9,
+      "productionId": 0,
+      "category": "cast",
+      "name": "Imani Reid",
+      "role": "Kate",
+      "email": "imani.reid@sample.edu",
+      "phone": "555-0109",
+      "pronouns": "she/her"
+    },
+    {
+      "id": 10,
+      "productionId": 0,
+      "category": "cast",
+      "name": "Jamie Cohen",
+      "role": "Isabel",
+      "email": "jamie.cohen@sample.edu",
+      "phone": "555-0110",
+      "pronouns": "they/them"
+    },
+    {
+      "id": 11,
+      "productionId": 0,
+      "category": "cast",
+      "name": "Kai Lindgren",
+      "role": "Pirate Ensemble / Dance Captain",
+      "email": "kai.lindgren@sample.edu",
+      "phone": "555-0111",
+      "pronouns": "they/them"
+    },
+    {
+      "id": 12,
+      "productionId": 0,
+      "category": "cast",
+      "name": "Luna Vargas",
+      "role": "Pirate Ensemble",
+      "email": "luna.vargas@sample.edu",
+      "phone": "555-0112",
+      "pronouns": "she/her"
+    },
+    {
+      "id": 13,
+      "productionId": 0,
+      "category": "cast",
+      "name": "Marco Bianchi",
+      "role": "Police Ensemble",
+      "email": "marco.bianchi@sample.edu",
+      "phone": "555-0113",
+      "pronouns": "he/him"
+    },
+    {
+      "id": 14,
+      "productionId": 0,
+      "category": "cast",
+      "name": "Nora Patel",
+      "role": "Daughter Ensemble",
+      "email": "nora.patel@sample.edu",
+      "phone": "555-0114",
+      "pronouns": "she/her"
+    },
+    {
+      "id": 15,
+      "productionId": 0,
+      "category": "creative",
+      "name": "Maya Patel",
+      "role": "Director",
+      "email": "maya.patel@sample.edu",
+      "phone": "555-0200",
+      "pronouns": "she/her"
+    },
+    {
+      "id": 16,
+      "productionId": 0,
+      "category": "creative",
+      "name": "Marcus Greene",
+      "role": "Music Director / Conductor",
+      "email": "marcus.greene@sample.edu",
+      "phone": "555-0201",
+      "pronouns": "he/him"
+    },
+    {
+      "id": 17,
+      "productionId": 0,
+      "category": "creative",
+      "name": "Riley Sato",
+      "role": "Choreographer",
+      "email": "riley.sato@sample.edu",
+      "phone": "555-0202",
+      "pronouns": "they/them"
+    },
+    {
+      "id": 18,
+      "productionId": 0,
+      "category": "creative",
+      "name": "Sofia Chen",
+      "role": "Vocal Coach",
+      "email": "sofia.chen@sample.edu",
+      "phone": "555-0203",
+      "pronouns": "she/her"
+    },
+    {
+      "id": 19,
+      "productionId": 0,
+      "category": "creative",
+      "name": "Theo Russo",
+      "role": "Costume Designer",
+      "email": "theo.russo@sample.edu",
+      "phone": "555-0204",
+      "pronouns": "he/him"
+    },
+    {
+      "id": 20,
+      "productionId": 0,
+      "category": "creative",
+      "name": "Uma Singh",
+      "role": "Scenic Designer",
+      "email": "uma.singh@sample.edu",
+      "phone": "555-0205",
+      "pronouns": "she/her"
+    },
+    {
+      "id": 21,
+      "productionId": 0,
+      "category": "creative",
+      "name": "Vivian Cole",
+      "role": "Lighting Designer",
+      "email": "vivian.cole@sample.edu",
+      "phone": "555-0206",
+      "pronouns": "she/her"
+    },
+    {
+      "id": 22,
+      "productionId": 0,
+      "category": "creative",
+      "name": "Wes Donovan",
+      "role": "Sound Designer",
+      "email": "wes.donovan@sample.edu",
+      "phone": "555-0207",
+      "pronouns": "he/him"
+    },
+    {
+      "id": 23,
+      "productionId": 0,
+      "category": "production",
+      "name": "Sam Rivera",
+      "role": "Stage Manager",
+      "email": "sam.rivera@sample.edu",
+      "phone": "555-0300",
+      "pronouns": "she/her"
+    },
+    {
+      "id": 24,
+      "productionId": 0,
+      "category": "production",
+      "name": "Nico Vásquez",
+      "role": "Assistant Stage Manager",
+      "email": "nico.v@sample.edu",
+      "phone": "555-0301",
+      "pronouns": "he/him"
+    },
+    {
+      "id": 25,
+      "productionId": 0,
+      "category": "production",
+      "name": "Taylor Brooks",
+      "role": "Production Manager",
+      "email": "taylor.brooks@sample.edu",
+      "phone": "555-0302",
+      "pronouns": "they/them"
+    },
+    {
+      "id": 26,
+      "productionId": 0,
+      "category": "crew",
+      "name": "Pat Murphy",
+      "role": "Light Board Op",
+      "email": "pat.murphy@sample.edu",
+      "pronouns": "they/them"
+    },
+    {
+      "id": 27,
+      "productionId": 0,
+      "category": "crew",
+      "name": "Quinn Adams",
+      "role": "A1 (Sound Mix)",
+      "email": "quinn.adams@sample.edu",
+      "pronouns": "she/her"
+    },
+    {
+      "id": 28,
+      "productionId": 0,
+      "category": "crew",
+      "name": "Rowan Kelly",
+      "role": "Spot Op / Deck Crew",
+      "email": "rowan.kelly@sample.edu",
+      "pronouns": "he/him"
+    }
+  ],
+  "contactGroups": [
+    {
+      "id": 1,
+      "productionId": 0,
+      "name": "All Cast",
+      "contactIds": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "id": 2,
+      "productionId": 0,
+      "name": "Designers",
+      "contactIds": [
+        19,
+        20,
+        21,
+        22
+      ]
+    },
+    {
+      "id": 3,
+      "productionId": 0,
+      "name": "Creative Team",
+      "contactIds": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ]
+    },
+    {
+      "id": 4,
+      "productionId": 0,
+      "name": "Music Department",
+      "contactIds": [
+        16,
+        18
+      ]
+    },
+    {
+      "id": 5,
+      "productionId": 0,
+      "name": "Principals",
+      "contactIds": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "id": 6,
+      "productionId": 0,
+      "name": "Pirates",
+      "contactIds": [
+        3,
+        5,
+        7,
+        11,
+        12
+      ]
+    },
+    {
+      "id": 7,
+      "productionId": 0,
+      "name": "Major-General’s Daughters",
+      "contactIds": [
+        2,
+        8,
+        9,
+        10,
+        14
+      ]
+    },
+    {
+      "id": 8,
+      "productionId": 0,
+      "name": "Police",
+      "contactIds": [
+        6,
+        13
+      ]
+    }
+  ],
+  "rehearsals": [
+    {
+      "id": 1,
+      "productionId": 0,
+      "date": "2026-06-22",
+      "dayNumber": 1,
+      "startTime": "18:00",
+      "endTime": "21:00",
+      "location": "Main Stage",
+      "attendance": [
+        {
+          "contactId": 1,
+          "status": "present"
+        },
+        {
+          "contactId": 2,
+          "status": "present"
+        },
+        {
+          "contactId": 3,
+          "status": "present"
+        },
+        {
+          "contactId": 4,
+          "status": "present"
+        },
+        {
+          "contactId": 5,
+          "status": "present"
+        },
+        {
+          "contactId": 6,
+          "status": "present"
+        },
+        {
+          "contactId": 7,
+          "status": "present"
+        },
+        {
+          "contactId": 8,
+          "status": "present"
+        },
+        {
+          "contactId": 9,
+          "status": "present"
+        },
+        {
+          "contactId": 10,
+          "status": "present"
+        },
+        {
+          "contactId": 11,
+          "status": "present"
+        },
+        {
+          "contactId": 12,
+          "status": "present"
+        },
+        {
+          "contactId": 13,
+          "status": "present"
+        },
+        {
+          "contactId": 14,
+          "status": "present"
+        }
+      ],
+      "timeBlocks": [
+        {
+          "start": "18:00",
+          "end": "18:15",
+          "activity": "Welcome + introductions"
+        },
+        {
+          "start": "18:15",
+          "end": "19:30",
+          "activity": "First read/sing-through Act I"
+        },
+        {
+          "start": "19:30",
+          "end": "19:45",
+          "activity": "Break"
+        },
+        {
+          "start": "19:45",
+          "end": "20:30",
+          "activity": "First read/sing-through Act II"
+        },
+        {
+          "start": "20:30",
+          "end": "21:00",
+          "activity": "Design presentations"
+        }
+      ],
+      "notes": {
+        "scenic": [
+          {
+            "text": "Uma walked us through the Cornwall coastline and the Major-General’s estate — could we get the ground plan to SMs by Wednesday?"
+          }
+        ],
+        "costumes": [
+          {
+            "text": "Theo measurements scheduled for Saturday — cast received the link."
+          }
+        ],
+        "wigsMakeup": [],
+        "props": [],
+        "lighting": [],
+        "sound": [
+          {
+            "text": "Discussed mic plot: 14 channels expected. Wes confirming with the rental house."
+          }
+        ],
+        "projections": [],
+        "music": [
+          {
+            "text": "Marcus shared the vocal score; piano-vocal parts going out by EOD tomorrow."
+          }
+        ],
+        "production": [
+          {
+            "text": "Welcome to the company! Lovely first day, voices already sound strong."
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "productionId": 0,
+      "date": "2026-06-29",
+      "dayNumber": 6,
+      "startTime": "18:00",
+      "endTime": "22:00",
+      "location": "Rehearsal Room B",
+      "attendance": [
+        {
+          "contactId": 1,
+          "status": "present"
+        },
+        {
+          "contactId": 2,
+          "status": "present"
+        },
+        {
+          "contactId": 3,
+          "status": "present"
+        },
+        {
+          "contactId": 5,
+          "status": "late",
+          "minutesLate": 12
+        },
+        {
+          "contactId": 7,
+          "status": "present"
+        },
+        {
+          "contactId": 11,
+          "status": "present"
+        },
+        {
+          "contactId": 12,
+          "status": "present"
+        }
+      ],
+      "timeBlocks": [
+        {
+          "start": "18:00",
+          "end": "18:15",
+          "activity": "Vocal warm-up (Sofia)"
+        },
+        {
+          "start": "18:15",
+          "end": "19:30",
+          "activity": "Music rehearsal — \"Pour, O pour the pirate sherry\" + \"Oh, better far to live and die\""
+        },
+        {
+          "start": "19:30",
+          "end": "19:45",
+          "activity": "Break"
+        },
+        {
+          "start": "19:45",
+          "end": "21:00",
+          "activity": "Music rehearsal — \"When Frederic was a little lad\" (Ruth's ballad) + ensemble cleanup"
+        },
+        {
+          "start": "21:00",
+          "end": "22:00",
+          "activity": "Stagger-through with piano"
+        }
+      ],
+      "notes": {
+        "scenic": [],
+        "costumes": [
+          {
+            "text": "Pirate King’s coat — Cassidy needs the back gusset wider for the chorus choreo. Theo watching on Friday."
+          }
+        ],
+        "wigsMakeup": [],
+        "props": [],
+        "lighting": [],
+        "sound": [
+          {
+            "text": "Could we get Mabel’s mic level discussion on the agenda for tomorrow’s production meeting? Brilliance is sitting under the brass at the top of Act 1."
+          }
+        ],
+        "projections": [],
+        "music": [
+          {
+            "text": "Pirate King’s patter pickups in \"Oh, better far\" landing cleanly — great work Cassidy."
+          },
+          {
+            "text": "Ruth’s tempo in \"When Frederic was a little lad\" still settling; Marcus and Elena working it 1-on-1 Saturday."
+          }
+        ],
+        "production": [
+          {
+            "text": "Elena 12 minutes late — academic conflict, confirmed for next call."
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "productionId": 0,
+      "date": "2026-07-08",
+      "dayNumber": 15,
+      "startTime": "18:00",
+      "endTime": "22:00",
+      "location": "Main Stage",
+      "attendance": [
+        {
+          "contactId": 1,
+          "status": "present"
+        },
+        {
+          "contactId": 2,
+          "status": "present"
+        },
+        {
+          "contactId": 3,
+          "status": "present"
+        },
+        {
+          "contactId": 4,
+          "status": "present"
+        },
+        {
+          "contactId": 5,
+          "status": "present"
+        },
+        {
+          "contactId": 6,
+          "status": "present"
+        },
+        {
+          "contactId": 7,
+          "status": "present"
+        },
+        {
+          "contactId": 8,
+          "status": "present"
+        },
+        {
+          "contactId": 9,
+          "status": "present"
+        },
+        {
+          "contactId": 10,
+          "status": "present"
+        },
+        {
+          "contactId": 11,
+          "status": "present"
+        },
+        {
+          "contactId": 12,
+          "status": "present"
+        },
+        {
+          "contactId": 13,
+          "status": "present"
+        },
+        {
+          "contactId": 14,
+          "status": "present"
+        }
+      ],
+      "timeBlocks": [
+        {
+          "start": "18:00",
+          "end": "18:20",
+          "activity": "Vocal + physical warm-up"
+        },
+        {
+          "start": "18:20",
+          "end": "20:00",
+          "activity": "Stage Act I, \"I am the very model of a modern Major-General\" + \"Climbing over rocky mountain\""
+        },
+        {
+          "start": "20:00",
+          "end": "20:15",
+          "activity": "Break"
+        },
+        {
+          "start": "20:15",
+          "end": "21:30",
+          "activity": "Stage Act II, \"When the foeman bares his steel\" + Sergeant's \"When a felon's not engaged in his employment\""
+        },
+        {
+          "start": "21:30",
+          "end": "22:00",
+          "activity": "Run Act II close — finale"
+        }
+      ],
+      "notes": {
+        "scenic": [
+          {
+            "text": "The downstage left rock unit is in the dancers’ main entrance lane — could we shift it 2’3′ upstage? Riley walking through tomorrow."
+          }
+        ],
+        "costumes": [
+          {
+            "text": "Major-General’s helmet plume keeps catching on the proscenium during his entrance — would a softer plume work, or trim 1–2 inches?"
+          },
+          {
+            "text": "Police helmets fitted for the ensemble. Felix's strap snapped — we have a spare; replacement ordered."
+          }
+        ],
+        "wigsMakeup": [
+          {
+            "text": "Ruth’s grey wig look approved by director; Sofia building the final."
+          }
+        ],
+        "props": [
+          {
+            "text": "Cutlasses (×7) need to be returned to rehearsal stock after the prop shop’s safety check tomorrow."
+          },
+          {
+            "text": "Police whistles — currently using rehearsal whistles. Final batch arriving Monday."
+          }
+        ],
+        "lighting": [
+          {
+            "text": "Vivian present — wanted to flag that the \"creep\" cue in Act II is loving the bumps in tempo we built in. Looks great."
+          }
+        ],
+        "sound": [
+          {
+            "text": "Quinn confirmed mic 4 cable is the culprit on the intermittent crackle — swapped during break, no further issues tonight."
+          }
+        ],
+        "projections": [],
+        "music": [
+          {
+            "text": "\"Climbing over rocky mountain\" tempo at ♪=132 felt right. Locking in for tomorrow’s sitzprobe."
+          },
+          {
+            "text": "Major-General patter — cleaner than yesterday. Devon is finding the breath."
+          }
+        ],
+        "production": [
+          {
+            "text": "12-min hold during the police entrance staging — sorting traffic between the cutlass exit and the police entrance. Resolved by re-ordering exits."
+          }
+        ]
+      }
+    }
+  ],
+  "lineNotes": [
+    {
+      "id": 1,
+      "productionId": 0,
+      "rehearsalDate": "2026-06-29",
+      "page": "14",
+      "characterId": 1,
+      "lineType": "drop",
+      "scriptedText": "Oh, false one, you have deceiv’d me!",
+      "spokenText": "",
+      "comment": "Dropped after Pirate King's exit — picked up on the next page."
+    },
+    {
+      "id": 2,
+      "productionId": 0,
+      "rehearsalDate": "2026-06-29",
+      "page": "17",
+      "characterId": 2,
+      "lineType": "paraphrase",
+      "scriptedText": "Yes, I am brave! Oh, family descent,",
+      "spokenText": "Yes — I am brave. Oh, family descent,",
+      "comment": "Small inversion. Not show-impacting."
+    },
+    {
+      "id": 3,
+      "productionId": 0,
+      "rehearsalDate": "2026-07-08",
+      "page": "23",
+      "characterId": 4,
+      "lineType": "add",
+      "scriptedText": "I am the very model of a modern Major-General",
+      "spokenText": "I am the very, very model of a modern Major-General",
+      "comment": "Added \"very\" twice on the first iteration; second pass was clean."
+    },
+    {
+      "id": 4,
+      "productionId": 0,
+      "rehearsalDate": "2026-07-08",
+      "page": "31",
+      "characterId": 5,
+      "lineType": "paraphrase",
+      "scriptedText": "When Frederic was a little lad he proved so brave and daring,",
+      "spokenText": "When Frederic was a young lad he proved so brave and daring,",
+      "comment": "\"Young\" for \"little\" — minor lyric swap."
+    },
+    {
+      "id": 5,
+      "productionId": 0,
+      "rehearsalDate": "2026-07-08",
+      "page": "48",
+      "characterId": 6,
+      "lineType": "missed-cue",
+      "scriptedText": "\"When a felon's not engaged in his employment…\"",
+      "spokenText": "",
+      "comment": "Sergeant came in about 2 beats late — cue light was on, internal cue clear at tomorrow’s music call."
+    }
+  ],
+  "props": [
+    {
+      "id": 1,
+      "productionId": 0,
+      "name": "Cutlasses (×7)",
+      "scenes": [
+        "1.1",
+        "2.3"
+      ],
+      "characters": [
+        "Pirate King",
+        "Samuel",
+        "Pirate Ensemble"
+      ],
+      "consumable": false,
+      "source": "rental",
+      "status": "in-rehearsal",
+      "specialHandling": [
+        "weapons"
+      ],
+      "tableLocation": "SR Locked Cabinet",
+      "notes": "Soft-tipped — fight choreography approved by combat coach; daily safety check before each call."
+    },
+    {
+      "id": 2,
+      "productionId": 0,
+      "name": "Major-General’s helmet (plumed)",
+      "scenes": [
+        "1.2",
+        "2.1"
+      ],
+      "characters": [
+        "Major-General Stanley"
+      ],
+      "consumable": false,
+      "source": "build",
+      "status": "sourced",
+      "specialHandling": [
+        "fragile"
+      ],
+      "tableLocation": "SL Props Table, top shelf",
+      "notes": "Plume length being trimmed by Theo — was catching on the proscenium."
+    },
+    {
+      "id": 3,
+      "productionId": 0,
+      "name": "Police whistles (×6)",
+      "scenes": [
+        "2.2",
+        "2.3"
+      ],
+      "characters": [
+        "Sergeant",
+        "Police Ensemble"
+      ],
+      "consumable": false,
+      "source": "buy",
+      "status": "needed",
+      "notes": "Final batch arriving 2026-07-12. Rehearsal whistles in use until then."
+    },
+    {
+      "id": 4,
+      "productionId": 0,
+      "name": "Pirate sherry bottle + cups (×6)",
+      "scenes": [
+        "1.1"
+      ],
+      "characters": [
+        "Pirate King",
+        "Pirate Ensemble",
+        "Frederic"
+      ],
+      "consumable": false,
+      "source": "pulled",
+      "status": "sourced",
+      "tableLocation": "SR Props Table",
+      "notes": "Bottle filled with tea-water; cups never get a hard set-down (sound risk on mic)."
+    },
+    {
+      "id": 5,
+      "productionId": 0,
+      "name": "Mabel’s parasol",
+      "scenes": [
+        "1.2"
+      ],
+      "characters": [
+        "Mabel"
+      ],
+      "consumable": false,
+      "source": "pulled",
+      "status": "sourced",
+      "specialHandling": [
+        "fragile"
+      ],
+      "tableLocation": "SL Props Table",
+      "notes": "Period-style; mechanism delicate — open/close practice ongoing."
+    },
+    {
+      "id": 6,
+      "productionId": 0,
+      "name": "Major-General’s sword",
+      "scenes": [
+        "2.1"
+      ],
+      "characters": [
+        "Major-General Stanley"
+      ],
+      "consumable": false,
+      "source": "rental",
+      "status": "sourced",
+      "specialHandling": [
+        "weapons"
+      ],
+      "tableLocation": "SR Locked Cabinet",
+      "notes": "Ceremonial — stays sheathed throughout; safety-checked weekly."
+    },
+    {
+      "id": 7,
+      "productionId": 0,
+      "name": "Pirate flag (Jolly Roger)",
+      "scenes": [
+        "1.1",
+        "2.3"
+      ],
+      "characters": [
+        "Pirate Ensemble"
+      ],
+      "consumable": false,
+      "source": "build",
+      "status": "built",
+      "notes": "Hand-carried on entrances; tracking ID assigned to Kai (dance captain)."
+    }
+  ],
+  "sendLog": [
+    {
+      "id": 1,
+      "productionId": 0,
+      "sentAt": "2026-06-22T22:30:00.000Z",
+      "artifact": "Rehearsal Report — Day 1",
+      "recipientGroup": "Creative Team",
+      "recipientCount": 8,
+      "pdfFilename": "The_Pirates_of_Penzance-rehearsal-day-1.pdf"
+    },
+    {
+      "id": 2,
+      "productionId": 0,
+      "sentAt": "2026-06-29T22:45:00.000Z",
+      "artifact": "Rehearsal Report — Day 6",
+      "recipientGroup": "Creative Team",
+      "recipientCount": 8,
+      "pdfFilename": "The_Pirates_of_Penzance-rehearsal-day-6.pdf"
+    },
+    {
+      "id": 3,
+      "productionId": 0,
+      "sentAt": "2026-07-08T22:30:00.000Z",
+      "artifact": "Rehearsal Report — Day 15",
+      "recipientGroup": "Creative Team",
+      "recipientCount": 8,
+      "pdfFilename": "The_Pirates_of_Penzance-rehearsal-day-15.pdf"
+    },
+    {
+      "id": 4,
+      "productionId": 0,
+      "sentAt": "2026-07-09T08:30:00.000Z",
+      "artifact": "Daily Call — 2026-07-09 (Sitzprobe)",
+      "recipientGroup": "All Cast",
+      "recipientCount": 14,
+      "pdfFilename": "The_Pirates_of_Penzance-daily-call-2026-07-09.pdf"
+    }
+  ],
+  "dailyCalls": [
+    {
+      "id": 1,
+      "productionId": 0,
+      "date": "2026-06-22",
+      "location": "Main Stage",
+      "version": 1,
+      "notes": [
+        {
+          "text": "Welcome to the company! Bring a pencil, a water bottle, and your vocal score."
+        },
+        {
+          "text": "Marcus will collect any vocal-range questions during the welcome."
+        }
+      ],
+      "callTimes": [
+        {
+          "contactId": 1,
+          "time": "18:00"
+        },
+        {
+          "contactId": 2,
+          "time": "18:00"
+        },
+        {
+          "contactId": 3,
+          "time": "18:00"
+        },
+        {
+          "contactId": 4,
+          "time": "18:00"
+        },
+        {
+          "contactId": 5,
+          "time": "18:00"
+        },
+        {
+          "contactId": 6,
+          "time": "18:00"
+        },
+        {
+          "contactId": 7,
+          "time": "18:00"
+        },
+        {
+          "contactId": 8,
+          "time": "18:00"
+        },
+        {
+          "contactId": 9,
+          "time": "18:00"
+        },
+        {
+          "contactId": 10,
+          "time": "18:00"
+        },
+        {
+          "contactId": 11,
+          "time": "18:00"
+        },
+        {
+          "contactId": 12,
+          "time": "18:00"
+        },
+        {
+          "contactId": 13,
+          "time": "18:00"
+        },
+        {
+          "contactId": 14,
+          "time": "18:00"
+        }
+      ],
+      "scheduleItems": [
+        {
+          "time": "6:00p",
+          "activity": "Welcome + introductions",
+          "calledMode": "all",
+          "calledContactIds": []
+        },
+        {
+          "time": "6:15p",
+          "activity": "First read/sing-through Act I",
+          "calledMode": "all",
+          "calledContactIds": []
+        },
+        {
+          "time": "7:30p",
+          "activity": "Break",
+          "calledMode": "company",
+          "calledContactIds": []
+        },
+        {
+          "time": "7:45p",
+          "activity": "First read/sing-through Act II",
+          "calledMode": "all",
+          "calledContactIds": []
+        },
+        {
+          "time": "8:30p",
+          "activity": "Design presentations",
+          "description": "- Scenic, costume, lighting, sound walk-throughs",
+          "calledMode": "all",
+          "calledContactIds": []
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "productionId": 0,
+      "date": "2026-06-29",
+      "location": "Rehearsal Room B",
+      "version": 1,
+      "notes": [
+        {
+          "text": "Music rehearsal — pirates and principals. Off-book NOT required; off-score IS appreciated where possible."
+        }
+      ],
+      "callTimes": [
+        {
+          "contactId": 1,
+          "time": "18:00"
+        },
+        {
+          "contactId": 2,
+          "time": "18:00"
+        },
+        {
+          "contactId": 3,
+          "time": "18:00"
+        },
+        {
+          "contactId": 5,
+          "time": "18:00"
+        },
+        {
+          "contactId": 7,
+          "time": "18:00"
+        },
+        {
+          "contactId": 11,
+          "time": "18:00"
+        },
+        {
+          "contactId": 12,
+          "time": "18:00"
+        }
+      ],
+      "scheduleItems": [
+        {
+          "time": "6:00p",
+          "activity": "Vocal warm-up (Sofia)",
+          "calledMode": "specific",
+          "calledContactIds": [
+            1,
+            2,
+            3,
+            5,
+            7,
+            11,
+            12
+          ]
+        },
+        {
+          "time": "6:15p",
+          "activity": "\"Pour, O pour the pirate sherry\" + \"Oh, better far\"",
+          "calledMode": "specific",
+          "calledContactIds": [
+            3,
+            7,
+            11,
+            12
+          ]
+        },
+        {
+          "time": "7:30p",
+          "activity": "Break",
+          "calledMode": "company",
+          "calledContactIds": []
+        },
+        {
+          "time": "7:45p",
+          "activity": "Ruth’s ballad + cleanup",
+          "calledMode": "specific",
+          "calledContactIds": [
+            1,
+            5
+          ]
+        },
+        {
+          "time": "9:00p",
+          "activity": "Stagger-through with piano",
+          "calledMode": "specific",
+          "calledContactIds": [
+            1,
+            2,
+            3,
+            5,
+            7,
+            11,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "productionId": 0,
+      "date": "2026-07-09",
+      "location": "Main Stage",
+      "version": 2,
+      "notes": [
+        {
+          "text": "SITZPROBE — first time with the pit. No staging; this is purely vocal-with-orchestra. Come in performance voice (warmed up)."
+        },
+        {
+          "text": "Mic packs distributed at the half by Quinn — see her at SR."
+        },
+        {
+          "text": "Costumes NOT required; wear black or neutrals."
+        }
+      ],
+      "callTimes": [
+        {
+          "contactId": 1,
+          "time": "18:30"
+        },
+        {
+          "contactId": 2,
+          "time": "18:30"
+        },
+        {
+          "contactId": 3,
+          "time": "18:30"
+        },
+        {
+          "contactId": 4,
+          "time": "18:30"
+        },
+        {
+          "contactId": 5,
+          "time": "18:30"
+        },
+        {
+          "contactId": 6,
+          "time": "18:30"
+        },
+        {
+          "contactId": 7,
+          "time": "18:30"
+        },
+        {
+          "contactId": 8,
+          "time": "18:30"
+        },
+        {
+          "contactId": 9,
+          "time": "18:30"
+        },
+        {
+          "contactId": 10,
+          "time": "18:30"
+        },
+        {
+          "contactId": 11,
+          "time": "18:30"
+        },
+        {
+          "contactId": 12,
+          "time": "18:30"
+        },
+        {
+          "contactId": 13,
+          "time": "18:30"
+        },
+        {
+          "contactId": 14,
+          "time": "18:30"
+        }
+      ],
+      "scheduleItems": [
+        {
+          "time": "6:30p",
+          "activity": "Mic check (Quinn, A1)",
+          "description": "- Cast in order of script appearance",
+          "calledMode": "all",
+          "calledContactIds": []
+        },
+        {
+          "time": "7:00p",
+          "activity": "Marcus warm-up + balance check with pit",
+          "calledMode": "all",
+          "calledContactIds": []
+        },
+        {
+          "time": "7:30p",
+          "activity": "Act I sitzprobe",
+          "description": "- Top of show through Major-General’s entrance",
+          "calledMode": "all",
+          "calledContactIds": []
+        },
+        {
+          "time": "8:45p",
+          "activity": "Break",
+          "calledMode": "company",
+          "calledContactIds": []
+        },
+        {
+          "time": "9:00p",
+          "activity": "Act II sitzprobe",
+          "description": "- Police entrance through finale",
+          "calledMode": "all",
+          "calledContactIds": []
+        },
+        {
+          "time": "10:00p",
+          "activity": "Notes + dismiss",
+          "calledMode": "company",
+          "calledContactIds": []
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "productionId": 0,
+      "date": "2026-07-13",
+      "location": "Main Stage",
+      "version": 1,
+      "notes": [
+        {
+          "text": "Designer run — designers and full production team in the house. Please be in full costume calls at the half."
+        },
+        {
+          "text": "Photo call directly after — plan to be in costume for ~30 minutes after final note."
+        }
+      ],
+      "callTimes": [
+        {
+          "contactId": 1,
+          "time": "17:30"
+        },
+        {
+          "contactId": 2,
+          "time": "17:30"
+        },
+        {
+          "contactId": 3,
+          "time": "17:30"
+        },
+        {
+          "contactId": 4,
+          "time": "17:30"
+        },
+        {
+          "contactId": 5,
+          "time": "17:30"
+        },
+        {
+          "contactId": 6,
+          "time": "17:30"
+        },
+        {
+          "contactId": 7,
+          "time": "17:30"
+        },
+        {
+          "contactId": 8,
+          "time": "17:30"
+        },
+        {
+          "contactId": 9,
+          "time": "17:30"
+        },
+        {
+          "contactId": 10,
+          "time": "17:30"
+        },
+        {
+          "contactId": 11,
+          "time": "17:30"
+        },
+        {
+          "contactId": 12,
+          "time": "17:30"
+        },
+        {
+          "contactId": 13,
+          "time": "17:30"
+        },
+        {
+          "contactId": 14,
+          "time": "17:30"
+        }
+      ],
+      "scheduleItems": [
+        {
+          "time": "5:30p",
+          "activity": "Half-hour / costume check",
+          "calledMode": "all",
+          "calledContactIds": []
+        },
+        {
+          "time": "6:00p",
+          "activity": "Places — Act I top",
+          "calledMode": "all",
+          "calledContactIds": []
+        },
+        {
+          "time": "6:00p",
+          "activity": "Act I run",
+          "calledMode": "all",
+          "calledContactIds": []
+        },
+        {
+          "time": "7:30p",
+          "activity": "Intermission",
+          "calledMode": "company",
+          "calledContactIds": []
+        },
+        {
+          "time": "7:45p",
+          "activity": "Act II run",
+          "calledMode": "all",
+          "calledContactIds": []
+        },
+        {
+          "time": "9:00p",
+          "activity": "Photo call",
+          "description": "- Director’s photo list; ~30 min in costume",
+          "calledMode": "all",
+          "calledContactIds": []
+        }
+      ]
+    }
+  ],
+  "tracking": [
+    {
+      "sequence": 10,
+      "page": "1",
+      "kind": "scene-shift",
+      "contactIds": [],
+      "what": "",
+      "where": "",
+      "sceneLabel": "ACT I — A rugged seashore on the coast of Cornwall",
+      "productionId": 0
+    },
+    {
+      "sequence": 20,
+      "page": "1",
+      "kind": "crew",
+      "contactIds": [
+        28
+      ],
+      "what": "preset check",
+      "where": "SR",
+      "notes": "Confirm sherry bottle + cups, cutlasses, flag on SR table",
+      "productionId": 0
+    },
+    {
+      "sequence": 30,
+      "page": "1",
+      "kind": "entry",
+      "contactIds": [
+        3,
+        7,
+        11,
+        12
+      ],
+      "what": "ENT",
+      "where": "USR",
+      "notes": "Pirates discovered — Pirate King center, Samuel SL, ensemble flanking",
+      "productionId": 0
+    },
+    {
+      "sequence": 40,
+      "page": "3",
+      "kind": "entry",
+      "contactIds": [
+        1
+      ],
+      "what": "ENT",
+      "where": "USL",
+      "notes": "Frederic enters — his last day as a pirate apprentice",
+      "productionId": 0
+    },
+    {
+      "sequence": 50,
+      "page": "5",
+      "kind": "entry",
+      "contactIds": [
+        5
+      ],
+      "what": "ENT",
+      "where": "SL",
+      "notes": "Ruth (the maid-of-all-work) enters",
+      "productionId": 0
+    },
+    {
+      "sequence": 60,
+      "page": "12",
+      "kind": "entry",
+      "contactIds": [
+        3,
+        7,
+        11,
+        12
+      ],
+      "what": "EXT",
+      "where": "USR",
+      "notes": "Pirates exit — leave Frederic to his fate",
+      "productionId": 0
+    },
+    {
+      "sequence": 70,
+      "page": "15",
+      "kind": "entry",
+      "contactIds": [
+        5
+      ],
+      "what": "EXT",
+      "where": "SL",
+      "notes": "Ruth exits dejected after Frederic dismisses her",
+      "productionId": 0
+    },
+    {
+      "sequence": 80,
+      "page": "17",
+      "kind": "entry",
+      "contactIds": [
+        2,
+        8,
+        9,
+        10,
+        14
+      ],
+      "what": "ENT",
+      "where": "SR",
+      "notes": "Major-General’s daughters — Mabel last, with parasol",
+      "productionId": 0
+    },
+    {
+      "sequence": 90,
+      "page": "20",
+      "kind": "entry",
+      "contactIds": [
+        4
+      ],
+      "what": "ENT",
+      "where": "USR",
+      "notes": "Major-General Stanley’s grand entrance — plumed helmet, sword",
+      "productionId": 0
+    },
+    {
+      "sequence": 100,
+      "page": "22",
+      "kind": "crew",
+      "contactIds": [
+        27
+      ],
+      "what": "fade up MG entrance",
+      "where": "BOOTH",
+      "notes": "LX cue 28 — sting at \"I am the very model\"",
+      "productionId": 0
+    },
+    {
+      "sequence": 110,
+      "page": "25",
+      "kind": "entry",
+      "contactIds": [
+        3,
+        7,
+        11,
+        12
+      ],
+      "what": "ENT",
+      "where": "USL",
+      "notes": "Pirates re-enter — they've come for the daughters",
+      "productionId": 0
+    },
+    {
+      "sequence": 120,
+      "page": "30",
+      "kind": "entry",
+      "contactIds": [
+        4
+      ],
+      "what": "EXT",
+      "where": "SL",
+      "notes": "Major-General exits in despair (he has feigned being an orphan)",
+      "productionId": 0
+    },
+    {
+      "sequence": 130,
+      "page": "32",
+      "kind": "entry",
+      "contactIds": [
+        1,
+        2,
+        3,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14
+      ],
+      "what": "EXT",
+      "where": "ALL",
+      "notes": "Act I finale — pirates and daughters; everyone clears for intermission",
+      "productionId": 0
+    },
+    {
+      "sequence": 140,
+      "page": "33",
+      "kind": "crew",
+      "contactIds": [
+        28
+      ],
+      "what": "INTERMISSION reset",
+      "where": "STAGE",
+      "notes": "Strike sherry table SR; preset MG’s estate furniture",
+      "productionId": 0
+    },
+    {
+      "sequence": 150,
+      "page": "33",
+      "kind": "crew",
+      "contactIds": [
+        27
+      ],
+      "what": "fly out cove drop",
+      "where": "FLY",
+      "notes": "Battens 4 and 7 out; estate backdrop in",
+      "productionId": 0
+    },
+    {
+      "sequence": 160,
+      "page": "34",
+      "kind": "scene-shift",
+      "contactIds": [],
+      "what": "",
+      "where": "",
+      "sceneLabel": "ACT II — A ruined chapel by moonlight on the Major-General’s estate",
+      "productionId": 0
+    },
+    {
+      "sequence": 170,
+      "page": "34",
+      "kind": "entry",
+      "contactIds": [
+        4
+      ],
+      "what": "ENT",
+      "where": "USC",
+      "notes": "Major-General alone, troubled by his lie",
+      "productionId": 0
+    },
+    {
+      "sequence": 180,
+      "page": "36",
+      "kind": "entry",
+      "contactIds": [
+        2,
+        8,
+        9,
+        10,
+        14
+      ],
+      "what": "ENT",
+      "where": "SR",
+      "notes": "Daughters enter to comfort him",
+      "productionId": 0
+    },
+    {
+      "sequence": 190,
+      "page": "40",
+      "kind": "entry",
+      "contactIds": [
+        1
+      ],
+      "what": "ENT",
+      "where": "USL",
+      "notes": "Frederic enters — the moment of truth",
+      "productionId": 0
+    },
+    {
+      "sequence": 200,
+      "page": "44",
+      "kind": "entry",
+      "contactIds": [
+        6,
+        13
+      ],
+      "what": "ENT",
+      "where": "USR",
+      "notes": "Sergeant of Police + Police Ensemble, tiptoeing",
+      "productionId": 0
+    },
+    {
+      "sequence": 210,
+      "page": "46",
+      "kind": "crew",
+      "contactIds": [
+        27
+      ],
+      "what": "spot — Sergeant solo",
+      "where": "FOH",
+      "notes": "Special on Sergeant for \"When a felon's not engaged in his employment\"",
+      "productionId": 0
+    },
+    {
+      "sequence": 220,
+      "page": "49",
+      "kind": "entry",
+      "contactIds": [
+        2,
+        8,
+        9,
+        10,
+        14
+      ],
+      "what": "EXT",
+      "where": "SR",
+      "notes": "Daughters exit — the police are alone",
+      "productionId": 0
+    },
+    {
+      "sequence": 230,
+      "page": "52",
+      "kind": "entry",
+      "contactIds": [
+        3,
+        5,
+        7,
+        11,
+        12
+      ],
+      "what": "ENT",
+      "where": "USL",
+      "notes": "Pirates re-enter — stealth approach, Ruth with them",
+      "productionId": 0
+    },
+    {
+      "sequence": 240,
+      "page": "54",
+      "kind": "crew",
+      "contactIds": [
+        27
+      ],
+      "what": "fight call",
+      "where": "STAGE",
+      "notes": "Cutlasses out — pre-checked at the half",
+      "productionId": 0
+    },
+    {
+      "sequence": 250,
+      "page": "55",
+      "kind": "entry",
+      "contactIds": [
+        4
+      ],
+      "what": "ENT",
+      "where": "USC",
+      "notes": "Major-General returns — caught between pirates and police",
+      "productionId": 0
+    },
+    {
+      "sequence": 260,
+      "page": "58",
+      "kind": "entry",
+      "contactIds": [
+        2,
+        8,
+        9,
+        10,
+        14
+      ],
+      "what": "ENT",
+      "where": "SR",
+      "notes": "Daughters return — the standoff",
+      "productionId": 0
+    },
+    {
+      "sequence": 270,
+      "page": "60",
+      "kind": "entry",
+      "contactIds": [],
+      "what": "",
+      "where": "",
+      "sceneLabel": "FINALE — reveal: pirates are noblemen",
+      "productionId": 0
+    },
+    {
+      "sequence": 280,
+      "page": "62",
+      "kind": "entry",
+      "contactIds": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "what": "EXT bow",
+      "where": "UC",
+      "notes": "Full company bow — Pirate King + Mabel + Frederic last",
+      "productionId": 0
+    },
+    {
+      "sequence": 290,
+      "page": "62",
+      "kind": "entry",
+      "contactIds": [
+        2,
+        1,
+        3
+      ],
+      "what": "ENT bow",
+      "where": "UC",
+      "notes": "Principals’ final bow",
+      "productionId": 0
+    }
+  ],
+  "blocking": [
+    {
+      "productionId": 0,
+      "page": "1",
+      "sequence": 1,
+      "sceneLabel": "I.1 — Pirate cove discovery",
+      "positions": [
+        {
+          "contactId": 3,
+          "zone": "C",
+          "notes": "on rock unit, raised"
+        },
+        {
+          "contactId": 7,
+          "zone": "DSL",
+          "notes": "samuel, pouring"
+        },
+        {
+          "contactId": 11,
+          "zone": "SR"
+        },
+        {
+          "contactId": 12,
+          "zone": "DSR"
+        }
+      ],
+      "notes": "Opening tableau — pirates already gathered"
+    },
+    {
+      "productionId": 0,
+      "page": "3",
+      "sequence": 2,
+      "sceneLabel": "I.1 — Frederic enters",
+      "positions": [
+        {
+          "contactId": 1,
+          "zone": "USL",
+          "notes": "enters from off"
+        },
+        {
+          "contactId": 3,
+          "zone": "C"
+        },
+        {
+          "contactId": 7,
+          "zone": "DSC"
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "productionId": 0,
+      "page": "17",
+      "sequence": 3,
+      "sceneLabel": "I.2 — Daughters’ entrance",
+      "positions": [
+        {
+          "contactId": 8,
+          "zone": "USR"
+        },
+        {
+          "contactId": 9,
+          "zone": "SR"
+        },
+        {
+          "contactId": 10,
+          "zone": "SL"
+        },
+        {
+          "contactId": 14,
+          "zone": "USL"
+        },
+        {
+          "contactId": 2,
+          "zone": "DSC",
+          "notes": "mabel, parasol open"
+        }
+      ],
+      "notes": "Daughters fan across, Mabel arrives last"
+    },
+    {
+      "productionId": 0,
+      "page": "20",
+      "sequence": 4,
+      "sceneLabel": "I.2 — Major-General entrance",
+      "positions": [
+        {
+          "contactId": 4,
+          "zone": "USC",
+          "notes": "enters with sword & helmet"
+        },
+        {
+          "contactId": 2,
+          "zone": "DSL"
+        },
+        {
+          "contactId": 8,
+          "zone": "DSR"
+        }
+      ],
+      "notes": "Spotlight cue — \"I am the very model\""
+    },
+    {
+      "productionId": 0,
+      "page": "44",
+      "sequence": 5,
+      "sceneLabel": "II.2 — Police entrance, moonlight",
+      "positions": [
+        {
+          "contactId": 6,
+          "zone": "USR",
+          "notes": "sergeant leading"
+        },
+        {
+          "contactId": 13,
+          "zone": "USR",
+          "notes": "follows sergeant"
+        },
+        {
+          "contactId": 4,
+          "zone": "DSC",
+          "notes": "unseen by police"
+        }
+      ],
+      "notes": "Tiptoe entrance; comedic timing on sergeant’s whistle"
+    },
+    {
+      "productionId": 0,
+      "page": "55",
+      "sequence": 6,
+      "sceneLabel": "II.3 — Standoff: pirates vs. police",
+      "positions": [
+        {
+          "contactId": 3,
+          "zone": "USL",
+          "notes": "pirate king, cutlass"
+        },
+        {
+          "contactId": 7,
+          "zone": "SL"
+        },
+        {
+          "contactId": 11,
+          "zone": "DSL"
+        },
+        {
+          "contactId": 12,
+          "zone": "DSC"
+        },
+        {
+          "contactId": 6,
+          "zone": "USR",
+          "notes": "sergeant"
+        },
+        {
+          "contactId": 13,
+          "zone": "SR"
+        },
+        {
+          "contactId": 4,
+          "zone": "C",
+          "notes": "caught between"
+        }
+      ],
+      "notes": "Choreographed fight — weapons safety check before each call"
+    }
+  ],
+  "breakLogs": [
+    {
+      "productionId": 0,
+      "date": "2026-07-16",
+      "dayType": "regular",
+      "callTime": "10:00",
+      "events": [
+        {
+          "type": "break-start",
+          "time": "10:55"
+        },
+        {
+          "type": "break-end",
+          "time": "11:00"
+        },
+        {
+          "type": "break-start",
+          "time": "11:55"
+        },
+        {
+          "type": "break-end",
+          "time": "12:00"
+        },
+        {
+          "type": "meal-start",
+          "time": "13:00"
+        },
+        {
+          "type": "meal-end",
+          "time": "14:00"
+        },
+        {
+          "type": "break-start",
+          "time": "14:55"
+        },
+        {
+          "type": "break-end",
+          "time": "15:00"
+        },
+        {
+          "type": "wrap",
+          "time": "17:00"
+        }
+      ]
+    },
+    {
+      "productionId": 0,
+      "date": "2026-07-18",
+      "dayType": "10-of-12",
+      "callTime": "12:00",
+      "events": [
+        {
+          "type": "break-start",
+          "time": "12:55"
+        },
+        {
+          "type": "break-end",
+          "time": "13:00"
+        },
+        {
+          "type": "break-start",
+          "time": "13:55"
+        },
+        {
+          "type": "break-end",
+          "time": "14:00"
+        },
+        {
+          "type": "meal-start",
+          "time": "15:00"
+        },
+        {
+          "type": "meal-end",
+          "time": "16:00"
+        },
+        {
+          "type": "break-start",
+          "time": "16:55"
+        },
+        {
+          "type": "break-end",
+          "time": "17:00"
+        },
+        {
+          "type": "break-start",
+          "time": "17:55"
+        },
+        {
+          "type": "break-end",
+          "time": "18:00"
+        },
+        {
+          "type": "meal-start",
+          "time": "20:00"
+        },
+        {
+          "type": "meal-end",
+          "time": "21:00"
+        },
+        {
+          "type": "break-start",
+          "time": "21:55"
+        },
+        {
+          "type": "break-end",
+          "time": "22:00"
+        },
+        {
+          "type": "wrap",
+          "time": "24:00",
+          "note": "10-of-12 complete — first tech runthrough"
+        }
+      ]
+    }
+  ],
+  "showReports": [
+    {
+      "productionId": 0,
+      "date": "2026-07-25",
+      "performanceNumber": 1,
+      "performanceLabel": "Opening Night",
+      "location": "Main Stage",
+      "curtainUp": "19:30",
+      "curtainDown": "22:05",
+      "houseCount": 412,
+      "lateSeating": 6,
+      "acts": [
+        {
+          "label": "Act I",
+          "start": "19:32",
+          "end": "20:35"
+        },
+        {
+          "label": "Act II",
+          "start": "20:53",
+          "end": "22:02"
+        }
+      ],
+      "intermissions": [
+        {
+          "label": "Intermission",
+          "start": "20:35",
+          "end": "20:53"
+        }
+      ],
+      "holds": [
+        {
+          "when": "Top of Act II",
+          "durationMinutes": 3,
+          "reason": "Pit musician swapped a broken reed; held to keep balance with orchestra."
+        }
+      ],
+      "incidents": [
+        {
+          "kind": "technical",
+          "description": "Mic 4 (Mabel) cut out briefly during \"Poor Wandering One\" — quick swap at the next exit; ~12 seconds of dropped audio in the verse."
+        }
+      ],
+      "understudyChanges": [],
+      "notes": {
+        "scenic": [],
+        "costumes": [
+          {
+            "text": "Major-General’s plume now riding clean of the proscenium — thank you Theo."
+          }
+        ],
+        "wigsMakeup": [],
+        "props": [],
+        "lighting": [
+          {
+            "text": "LX 86 (Sergeant’s special) felt a touch hot — could we drop intensity 5%?"
+          }
+        ],
+        "sound": [
+          {
+            "text": "Mic 4 dropout investigating tonight — Quinn replacing the cable before tomorrow’s show."
+          }
+        ],
+        "projections": [],
+        "music": [
+          {
+            "text": "Marcus and the pit absolutely killed \"Modern Major-General.\" Audience erupted."
+          }
+        ],
+        "production": [
+          {
+            "text": "House staff handled the 6 late-seaters cleanly during the overture vamp."
+          }
+        ],
+        "general": [
+          {
+            "text": "Magical opening. Standing ovation. Pit sounded gorgeous."
+          }
+        ],
+        "stageManagement": [
+          {
+            "text": "Strike: all cutlasses returned to locked cabinet, mic packs to dryer, parasol to SL table."
+          }
+        ]
+      }
+    },
+    {
+      "productionId": 0,
+      "date": "2026-07-26",
+      "performanceNumber": 2,
+      "performanceLabel": "Performance 2",
+      "location": "Main Stage",
+      "curtainUp": "19:30",
+      "curtainDown": "21:58",
+      "houseCount": 387,
+      "lateSeating": 2,
+      "acts": [
+        {
+          "label": "Act I",
+          "start": "19:31",
+          "end": "20:30"
+        },
+        {
+          "label": "Act II",
+          "start": "20:48",
+          "end": "21:55"
+        }
+      ],
+      "intermissions": [
+        {
+          "label": "Intermission",
+          "start": "20:30",
+          "end": "20:48"
+        }
+      ],
+      "holds": [],
+      "incidents": [],
+      "understudyChanges": [
+        {
+          "contactId": 11,
+          "role": "Samuel (Pirate Lieutenant)",
+          "reason": "Greta out with strep — first u/s performance for Kai."
+        }
+      ],
+      "notes": {
+        "scenic": [],
+        "costumes": [],
+        "wigsMakeup": [],
+        "props": [],
+        "lighting": [
+          {
+            "text": "LX 86 trim looks great — perfect intensity now."
+          }
+        ],
+        "sound": [
+          {
+            "text": "Mic 4 cable replaced — no dropouts tonight. Thanks Quinn."
+          }
+        ],
+        "projections": [],
+        "music": [
+          {
+            "text": "Pit was tight. Tempo on \"Climbing over rocky mountain\" landed at ♪=132 — chef’s kiss."
+          }
+        ],
+        "production": [
+          {
+            "text": "Kai was excellent on for Samuel. Confidence + clarity, blocking clean."
+          }
+        ],
+        "general": [
+          {
+            "text": "Smooth, tight run. Cleanest show so far — 7 minutes shorter than opening, which feels right (no holds)."
+          }
+        ]
+      }
+    }
+  ]
+}

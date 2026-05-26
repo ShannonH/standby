@@ -125,16 +125,16 @@ export default function DailyCallForm({
       <section>
         <h3 className="mb-3 font-display text-lg">Header</h3>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <Field label="Date" error={errors.date?.message}>
+          <Field label="Date" required error={errors.date?.message}>
             <Input {...register('date')} type="date" />
           </Field>
-          <Field label="Location" error={errors.location?.message}>
+          <Field label="Location" required error={errors.location?.message}>
             <Input
               {...register('location')}
               placeholder="e.g. Battelle Dance Studio"
             />
           </Field>
-          <Field label="Version" error={errors.version?.message} hint="Bump for revisions on the same date.">
+          <Field label="Version" required error={errors.version?.message} hint="Bump for revisions on the same date.">
             <Input
               {...register('version', { valueAsNumber: true })}
               type="number"

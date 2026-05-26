@@ -138,23 +138,23 @@ export default function ShowReportForm({
       <section>
         <h3 className="mb-3 font-display text-lg">Header</h3>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <Field label="Date" error={errors.date?.message}>
+          <Field label="Date" required error={errors.date?.message}>
             <Input {...register('date')} type="date" />
           </Field>
-          <Field label="Performance #" error={errors.performanceNumber?.message}>
+          <Field label="Performance #" required error={errors.performanceNumber?.message}>
             <Input
               {...register('performanceNumber', { valueAsNumber: true })}
               type="number"
               min="1"
             />
           </Field>
-          <Field label="Label" error={errors.performanceLabel?.message}>
+          <Field label="Label" required error={errors.performanceLabel?.message}>
             <Input
               {...register('performanceLabel')}
               placeholder="e.g. Opening, Preview 2, Sunday matinee"
             />
           </Field>
-          <Field label="Curtain up" error={errors.curtainUp?.message}>
+          <Field label="Curtain up" required error={errors.curtainUp?.message}>
             <Input {...register('curtainUp')} type="time" />
           </Field>
           <Field label="Curtain down" optional>

@@ -66,7 +66,7 @@ export default function ProductionForm({ production, onSaved, onCancel }: Props)
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-      <Field label="Production name" error={errors.name?.message}>
+      <Field label="Production name" required error={errors.name?.message}>
         <Input {...register('name')} placeholder="e.g. Into the Woods" />
       </Field>
 
@@ -83,7 +83,7 @@ export default function ProductionForm({ production, onSaved, onCancel }: Props)
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Production type">
+        <Field label="Production type" required>
           <Select {...register('type')}>
             <option value="play">Play</option>
             <option value="musical">Musical</option>
@@ -130,7 +130,8 @@ export default function ProductionForm({ production, onSaved, onCancel }: Props)
 
       <Checkbox
         {...register('equityMode')}
-        label="Apply AEA Equity defaults (break-time enforcement on schedules, daily call format). On by default for college BFA programs teaching Equity conventions."
+        label="Apply AEA Equity defaults"
+        hint="Break-time enforcement on schedules, daily call format. On by default for college BFA programs teaching Equity conventions."
       />
 
       <div className="flex flex-wrap gap-3">

@@ -115,20 +115,20 @@ export default function RehearsalReportForm({
       <section>
         <h3 className="mb-3 font-display text-lg">Header</h3>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          <Field label="Date" error={errors.date?.message}>
+          <Field label="Date" required error={errors.date?.message}>
             <Input {...register('date')} type="date" />
           </Field>
-          <Field label="Day #" error={errors.dayNumber?.message}>
+          <Field label="Day #" required error={errors.dayNumber?.message}>
             <Input
               {...register('dayNumber', { valueAsNumber: true })}
               type="number"
               min="1"
             />
           </Field>
-          <Field label="Start time" error={errors.startTime?.message}>
+          <Field label="Start time" required error={errors.startTime?.message}>
             <Input {...register('startTime')} type="time" />
           </Field>
-          <Field label="End time" error={errors.endTime?.message}>
+          <Field label="End time" required error={errors.endTime?.message}>
             <Input {...register('endTime')} type="time" />
           </Field>
           <Field label="Location" optional>

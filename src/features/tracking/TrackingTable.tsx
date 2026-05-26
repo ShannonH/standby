@@ -163,7 +163,7 @@ export default function TrackingTable({
         <span className="text-sm text-muted">
           {filtered.length} / {entries.length}
           {!isFiltered && (
-            <span className="ml-2 text-xs text-muted/60">
+            <span className="ml-2 text-xs text-muted">
               ⬍ drag to reorder
             </span>
           )}

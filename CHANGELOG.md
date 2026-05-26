@@ -4,6 +4,19 @@ All notable changes to Standby are documented here. Format roughly follows [Keep
 
 ## Unreleased
 
+### Accessibility
+
+- **Visible focus indicators** on nav links and primary buttons. Previously the `NavLink` computed style resolved to `outline-style: none`, leaving keyboard users with no way to tell where focus was. Now every interactive nav surface and Button variant draws a 2px accent-colored ring on `:focus-visible`.
+- **Required-field convention** added to the `Field` form primitive. Required fields show a red/accent asterisk after the label and set `aria-required="true"` on the input; optional fields keep their existing `(optional)` suffix. Production, Rehearsal, Show report, Daily call, Contact, Prop, and Line note forms mark their required fields.
+- **Error-message a11y wiring**. `Field` now generates a unique input id via `useId()` and passes `aria-describedby` (pointing at the hint/error span) plus `aria-invalid="true"` down to `Input` / `Textarea` / `Select` via context. Screen readers now announce validation errors when an invalid field is focused. Errors also carry `role="alert"`.
+- **AA-contrast fix** on the Tracking page's "drag to reorder" hint (was `text-muted/60` at ~3.4:1, now full muted at ~4.6:1).
+- **Checkbox `hint` slot** for long descriptions. The AEA Equity and "include the full report in body" checkboxes now use a tight label + a muted hint line underneath rather than a two-sentence label.
+
+### Fixed
+
+- Storage panel formats large quotas as GB (e.g. "10 GB") instead of "10240.0 MB".
+- "Loaded the The Pirates of Penzance" double-"the" in the sample-show load status message.
+
 ### Added
 
 - **Today dashboard** — the route is now an actual dashboard rather than a tutorial stub. Composes six widgets keyed off the production's current phase (pre-production → rehearsal → tech → previews → performance → closed):

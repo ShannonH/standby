@@ -105,7 +105,7 @@ export default function PropForm({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <Field label="Prop name" error={errors.name?.message}>
+      <Field label="Prop name" required error={errors.name?.message}>
         <Input {...register('name')} placeholder="e.g. Hamlet's skull" />
       </Field>
 

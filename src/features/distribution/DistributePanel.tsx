@@ -267,7 +267,8 @@ export default function DistributePanel({
           <Checkbox
             checked={includeInline}
             onChange={(e) => setIncludeInline(e.target.checked)}
-            label="Include the full report in the email body (recipients see it inline — no attachment needed)"
+            label="Include the full report in the email body"
+            hint="Recipients see it inline — no attachment needed."
           />
           {includeInline && (
             <details

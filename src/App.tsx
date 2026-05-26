@@ -134,7 +134,7 @@ export default function App() {
               to={item.to}
               end={item.end}
               className={({ isActive }) =>
-                `rounded px-3 py-2 text-sm font-medium transition ${
+                `rounded px-3 py-2 text-sm font-medium transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[rgb(var(--accent))] ${
                   isActive
                     ? 'bg-[rgb(var(--accent))] text-[rgb(var(--on-accent))]'
                     : 'text-muted hover:bg-surface-border/20'
@@ -148,7 +148,7 @@ export default function App() {
         <button
           type="button"
           onClick={() => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))}
-          className="mt-auto self-start text-xs text-muted hover:text-[rgb(var(--text-primary))]"
+          className="mt-auto self-start rounded text-xs text-muted hover:text-[rgb(var(--text-primary))] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[rgb(var(--accent))]"
         >
           {theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
         </button>

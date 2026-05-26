@@ -115,10 +115,10 @@ export default function LineNoteForm({
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
       <div className="grid gap-3 sm:grid-cols-[10rem_6rem_1fr_10rem]">
-        <Field label="Date" error={errors.rehearsalDate?.message}>
+        <Field label="Date" required error={errors.rehearsalDate?.message}>
           <Input {...register('rehearsalDate')} type="date" />
         </Field>
-        <Field label="Page" error={errors.page?.message}>
+        <Field label="Page" required error={errors.page?.message}>
           <Input
             {...pageRest}
             ref={(el) => {
@@ -128,7 +128,7 @@ export default function LineNoteForm({
             placeholder="e.g. 42"
           />
         </Field>
-        <Field label="Actor" error={errors.characterId?.message}>
+        <Field label="Actor" required error={errors.characterId?.message}>
           <Select {...register('characterId', { valueAsNumber: true })}>
             {cast.length === 0 && <option value="">(no cast)</option>}
             {cast.map((c) => (
@@ -139,7 +139,7 @@ export default function LineNoteForm({
             ))}
           </Select>
         </Field>
-        <Field label="Type">
+        <Field label="Type" required>
           <Select {...register('lineType')}>
             {LINE_TYPE_ORDER.map((t) => (
               <option key={t} value={t}>

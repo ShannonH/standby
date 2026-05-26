@@ -77,7 +77,7 @@ export default function ContactForm({
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Category">
+        <Field label="Category" required>
           <Select {...register('category')}>
             <option value="cast">Cast</option>
             <option value="creative">Creative Team</option>
@@ -86,7 +86,7 @@ export default function ContactForm({
             <option value="venue-admin">Venue / Admin</option>
           </Select>
         </Field>
-        <Field label="Name" error={errors.name?.message}>
+        <Field label="Name" required error={errors.name?.message}>
           <Input {...register('name')} placeholder="Jane Doe" />
         </Field>
       </div>

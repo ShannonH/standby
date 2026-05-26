@@ -62,8 +62,11 @@ export default function ImportExport({ productionId }: Props) {
     try {
       const newId = await loadSampleShow(sample)
       setCurrentProductionId(newId)
+      // Sample labels already include the leading article ("A Midsummer
+      // Night's Dream", "The Pirates of Penzance"), so we drop "the"
+      // here to avoid "Loaded the The Pirates of Penzance".
       setStatus(
-        `Loaded the ${sample.label} sample as a new production and switched to it.`,
+        `Loaded ${sample.label} as a new production and switched to it.`,
       )
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err))

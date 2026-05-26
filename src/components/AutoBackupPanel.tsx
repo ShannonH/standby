@@ -30,9 +30,18 @@ function formatRelative(iso: string | null): string {
 
 function formatBytes(bytes: number | null): string {
   if (bytes === null) return '—'
-  if (bytes < 1024) return `${bytes} B`
-  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`
-  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
+  const KB = 1024
+  const MB = KB * 1024
+  const GB = MB * 1024
+  if (bytes < KB) return `${bytes} B`
+  if (bytes < MB) return `${(bytes / KB).toFixed(1)} KB`
+  if (bytes < GB) return `${(bytes / MB).toFixed(1)} MB`
+  // Whole GB → "10 GB"; fractional → "1.5 GB". Drops the .0 on
+  // browser-default 10 GiB quotas so it reads cleaner.
+  const inGb = bytes / GB
+  return Number.isInteger(inGb)
+    ? `${inGb} GB`
+    : `${inGb.toFixed(1)} GB`
 }
 
 export default function AutoBackupPanel({ productionId }: Props) {

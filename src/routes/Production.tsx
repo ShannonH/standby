@@ -83,18 +83,6 @@ export default function ProductionRoute() {
         </section>
       )}
 
-      {/* First-run only: surface bundled sample shows alongside the
-          create-your-own form. After the user has at least one
-          production, sample loading is hidden — they can still get to
-          it via the Backup & storage route if needed (well, not yet —
-          considered out-of-scope; sample loading is intentionally a
-          first-run concern). */}
-      {isFirstRun && (
-        <section className="space-y-3">
-          <SampleShowPicker />
-        </section>
-      )}
-
       {editing && (
         <section className="space-y-3">
           <h3 className="font-display text-xl">
@@ -151,6 +139,31 @@ export default function ProductionRoute() {
             <SendLogList productionId={current.id} />
           </section>
         </>
+      )}
+
+      {/* Sample shows live at the bottom of the page so they don't
+          compete for attention with the SM's actual productions. On
+          first run (no productions yet), the picker is expanded and
+          unframed as a secondary CTA next to the create-your-own form
+          above. Once there's at least one production, it collapses
+          into a <details> so it's reachable for "demo to a colleague /
+          train a new SM" moments without dominating the route. */}
+      {isFirstRun ? (
+        <section className="space-y-3">
+          <SampleShowPicker />
+        </section>
+      ) : (
+        <details className="mt-8 rounded border border-surface-border bg-card p-4">
+          <summary className="cursor-pointer font-display text-base">
+            Load a sample show
+            <span className="ml-2 text-xs font-normal text-muted">
+              (imports as a new production alongside your existing ones)
+            </span>
+          </summary>
+          <div className="mt-4">
+            <SampleShowPicker compact />
+          </div>
+        </details>
       )}
     </section>
   )

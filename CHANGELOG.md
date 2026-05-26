@@ -6,6 +6,17 @@ All notable changes to Standby are documented here. Format roughly follows [Keep
 
 ### Added
 
+- **Today dashboard** — the route is now an actual dashboard rather than a tutorial stub. Composes six widgets keyed off the production's current phase (pre-production → rehearsal → tech → previews → performance → closed):
+  - **Countdown hero** — the next milestone in theatrical phrasing: *"Opening in 12 days."* / *"Opening — TODAY."* / *"The show is closed (closed 3 days ago)."*
+  - **Milestone strip** — horizontal phase indicator (First rehearsal → Designer run → Tech start → First preview → Opening → Closing) with past/current/future visual states.
+  - **Stats row** — Contacts · Rehearsal reports · Props status (X/Y sourced) · Outstanding line notes · Show reports. Cards become links to the underlying routes; counts that need attention (props still needed, line notes undelivered) get accent color.
+  - **Next call card** *(conditional)* — surfaces today's, tomorrow's, or this-week's daily call with location + earliest call time.
+  - **Standing by** *(conditional)* — gentle nudges for undelivered line notes, undistributed rehearsal/show reports, and gap days in the rehearsal phase. Silent when caught up.
+  - **Recent activity** — last four send-log entries with relative timestamps ("just now", "yesterday", "Jun 22"). Local-only audit trail.
+  - All widgets gracefully no-op (return null) when there's nothing to say, so the dashboard tightens up rather than padding with empty boxes.
+- **Phase / countdown library** (`src/lib/today.ts`) — pure functions for `phaseInfo()`, `countdownPhrase()`, `daysBetween()`, etc. with 23 unit tests covering DST-edge day-deltas, every phase transition, and the closed-show case.
+- **Second sample show** — *The Pirates of Penzance* — joins Midsummer in the "Try a sample show" panel. Demonstrates a musical's shape: full musical creative team (music director, choreographer, vocal coach), bigger ensemble, music-rehearsal and sitzprobe daily calls, lyric drops in line notes, and tracking centered on song entrances rather than scene blocking. Sample-show API refactored to support arbitrary additional samples (drop a JSON in `public/samples/` and append to `SAMPLE_SHOWS`).
+- **Show reports** artifact — the run-of-show counterpart to rehearsal reports. Schema bump to Dexie v6 and ShowExport v9. Form captures performance number / label, curtain up & down, house count, late seating, per-act run times (with auto-computed totals), intermissions, holds, incidents (medical / audience / technical / safety / other), understudy & swing changes (cast-linked), and the same 9-department notes structure as rehearsal reports — so designers reply with the same "Re: Costumes #3" convention. PDF in Stern/Gold style, distribution via inline-body, publish-folder integration writes into a `Show Reports/` subfolder.
 - `Dockerfile`, `nginx.conf`, `docker-compose.yml` for university self-hosting. Build with `docker compose up -d` or pull the published image from GHCR once a release is cut.
 - `VITE_BASE_PATH` build-time env variable so self-hosters can serve Standby from `/` instead of `/standby/`.
 - Open-source hygiene: `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, issue templates, PR template.

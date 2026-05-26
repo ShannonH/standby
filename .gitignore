@@ -39,3 +39,6 @@ coverage/
 
 # Misc
 *.log
+
+# Local audit / debug artifacts (Lighthouse, Chrome DevTools screenshots, etc.)
+.audit-screenshots/

@@ -1,4 +1,8 @@
+import AutoBackupPanel from '@/components/AutoBackupPanel'
 import { Button, Field, Input } from '@/components/Form'
+import ImportExport from '@/components/ImportExport'
+import PublishPanel from '@/components/PublishPanel'
+import { useCurrentProduction } from '@/lib/hooks'
 import { useAppStore } from '@/lib/store'
 import {
   FONT_SIZE_DESCRIPTIONS,
@@ -21,6 +25,8 @@ export default function Settings() {
   const settings = useAppStore((s) => s.settings)
   const updateSettings = useAppStore((s) => s.updateSettings)
   const resetSettings = useAppStore((s) => s.resetSettings)
+  const currentProduction = useCurrentProduction()
+  const currentId = currentProduction?.id ?? null
 
   return (
     <section className="mx-auto max-w-4xl space-y-12">
@@ -155,6 +161,31 @@ export default function Settings() {
             </button>
           ))}
         </div>
+      </section>
+
+      {/* ─── Backup & storage ──────────────────────────────────────────
+          Previously lived on a dedicated /backup route. Moved here
+          because these are set-and-forget settings — most SMs configure
+          a backup folder on day one and never touch them again. Sits
+          alongside the other set-once preferences (theme, font size,
+          etc.) rather than competing for attention in the main nav. */}
+      <section className="space-y-3 border-t border-surface-border pt-8">
+        <div>
+          <h3 className="text-xl">Backup &amp; storage</h3>
+          <p className="text-sm text-muted">
+            Standby's everything-on-this-device promise means losing
+            browser data would lose your shows. Three layers make that
+            unlikely: persistent storage, auto-backup to a folder you
+            already sync, and exporting JSON snapshots before big
+            changes.
+          </p>
+        </div>
+        <AutoBackupPanel productionId={currentId} />
+        <PublishPanel
+          productionId={currentId}
+          productionName={currentProduction?.name}
+        />
+        <ImportExport productionId={currentId} />
       </section>
 
       <section className="border-t border-surface-border pt-6">

@@ -61,12 +61,11 @@ See [`docs/RESEARCH.md`](docs/RESEARCH.md) for the full competitive landscape an
 | **Blocking** | Zone-tap schematic for capturing actor positions per scene — quick coverage without becoming a Stage Write replacement. |
 | **Breaks** | Equity-rule break calculator: 5-and-5, 10-and-12, lunch/dinner timing per AEA convention. |
 
-### Storage + distribution
+### Settings + storage
 
 | Section | What it does |
 |---|---|
-| **Backup** | Auto-backup folder (Standby writes a JSON snapshot to a folder you pick — point at iCloud Drive / Dropbox / Google Drive for off-device backup), publish folder (PDFs auto-written for crew consumption), manual JSON export/import. |
-| **Settings** | 8 distinct themes with full type systems, font size scaling, paper size, time format, your-name greeting + email sign-off. |
+| **Settings** | 8 distinct themes with full type systems, font size scaling, paper size, time format, your-name greeting + email sign-off, **and** backup & storage: auto-backup folder (Standby writes a JSON snapshot to a folder you pick — point at iCloud Drive / Dropbox / Google Drive for off-device backup), publish folder (PDFs auto-written for crew consumption), and manual JSON export/import. |
 
 Every paperwork page has a **Distribute** panel that opens your mail client with the right BCC group, the full report inline in the body (no attachments to remember), and a sign-off with your name. Mobile users get a Web Share path with the PDF actually attached.
 

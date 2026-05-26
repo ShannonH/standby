@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import AutoBackupSync from '@/components/AutoBackupSync'
 import BackToTop from '@/components/BackToTop'
+import ProductionSwitcher from '@/components/ProductionSwitcher'
 import { useCurrentProduction } from '@/lib/hooks'
 import { requestPersistentStorage } from '@/lib/persistent-storage'
 import { useAppStore } from '@/lib/store'
@@ -21,7 +22,6 @@ const nav: readonly NavItem[] = [
   { to: '/breakdown', label: 'Breakdown' },
   { to: '/blocking', label: 'Blocking' },
   { to: '/breaks', label: 'Breaks' },
-  { to: '/backup', label: 'Backup' },
   { to: '/settings', label: 'Settings' },
 ]
 
@@ -301,7 +301,7 @@ function NavList({
 }) {
   return (
     <div className="flex h-full flex-col">
-      <div className="mb-6">
+      <div className="mb-4">
         <p
           className={`text-xs text-muted ${tagline.italic ? 'italic' : ''}`}
           title="Refresh for a different call."
@@ -309,6 +309,7 @@ function NavList({
           {tagline.text}
         </p>
       </div>
+      <ProductionSwitcher />
       <nav aria-label="Main" className="flex flex-col gap-1">
         {nav.map((item) => (
           <NavLink

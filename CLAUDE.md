@@ -60,10 +60,12 @@ M0 → M1 → M2 are complete (production setup, contact sheet + groups, rehears
 
 ```
 Today · Production · Contacts · Daily call · Rehearsals · Show reports ·
-Line notes · Props · Tracking · Breakdown · Blocking · Breaks · Backup · Settings
+Line notes · Props · Tracking · Breakdown · Blocking · Breaks · Settings
 ```
 
-Production focuses on the show itself (CRUD + distribute production-info sheet + send log). Backup houses auto-backup folder, publish folder, and JSON import/export. Sample-show loading lives in the Production empty state (first-run surface).
+Production focuses on the show itself (CRUD + distribute production-info sheet + send log). Settings houses personal prefs + the backup & storage panels (auto-backup folder, publish folder, JSON import/export). Sample-show loading lives in the Production empty state (first-run surface).
+
+A `<ProductionSwitcher />` at the top of the nav (both desktop sidebar and mobile drawer) shows the current show name on every route and becomes a `<select>` once there are 2+ productions.
 
 ## Non-goals (do not implement)
 

@@ -6,6 +6,8 @@ All notable changes to Standby are documented here. Format roughly follows [Keep
 
 ### Added
 
+- **Production switcher in the nav**. A small "Current show" card now sits at the top of both the desktop sidebar and the mobile drawer, always visible from every route. When there's only one production it's a static label so the SM can confirm at a glance which show they're in; once there are two or more, it becomes a native `<select>` for one-tap switching. A "Manage…" link drops to the Production page for create / edit / delete. Native select on purpose — best mobile UX, keyboard- and screen-reader-accessible by default.
+
 - **Scene breakdown matrix** (PRD §7.8 — the biggest remaining V2 feature). New `/breakdown` route with a scenes × characters grid: scenes down the side, characters across the top, each cell showing presence at a glance (● speaking · ♪ singing · ○ silent · ~ underscoring). Click a cell to edit presence, entrance / exit pages, and per-cell doubling / quick-change notes. Three new entities (`Character`, `Scene`, `SceneAppearance`) with Dexie v7 + ShowExport v10 migrations, sticky column / row headers for big shows, and full round-trip-aware id remapping in import/export. Both bundled samples now ship breakdown data: Midsummer (12 characters × 8 scenes, including Theseus/Oberon and Hippolyta/Titania doubling), Penzance (13 characters × 7 scenes, including the seven-part finale).
 
 ### Fixed
@@ -14,6 +16,7 @@ All notable changes to Standby are documented here. Format roughly follows [Keep
 
 ### Changed
 
+- **Backup & storage moved from its own nav route into Settings**. The three panels (auto-backup folder, publish folder, JSON import/export) are set-once, forget-about-it preferences — they belong alongside the other set-and-forget toggles (theme, font size, paper size) rather than competing for attention in the main paperwork nav. The `/backup` route is gone; the nav drops from 14 items to 13.
 - **Production page IA split**. The Production route previously housed eight distinct concerns (production CRUD, exports, distribute panel, send log, auto-backup folder, publish folder, JSON import/export, sample shows). It's now focused on the production itself: list / create / edit, export the production-info PDF, distribute it, and inspect the send log. Auto-backup, publish folder, and JSON import/export moved to a new **Backup & storage** route (`/backup`). Sample-show loading moved to the empty-state CTA when no production exists yet — you wouldn't reach for a sample show after you already have one set up.
 
 ### Accessibility

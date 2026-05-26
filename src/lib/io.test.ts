@@ -1,7 +1,12 @@
 import { describe, expect, it, beforeEach } from 'vitest'
 import 'fake-indexeddb/auto'
 import { db, type Production } from './db'
-import { exportShow, importShow, SHOW_EXPORT_VERSION } from './io'
+import {
+  exportShow,
+  importShow,
+  migrateShowExport,
+  SHOW_EXPORT_VERSION,
+} from './io'
 
 async function seedShow(): Promise<number> {
   const productionId = (await db.productions.add({
@@ -104,7 +109,7 @@ describe('io: export/import round-trip', () => {
     }
   })
 
-  it('rejects exports with a future schema version', async () => {
+  it('rejects exports from a newer Standby (future schema version)', async () => {
     await expect(
       importShow({
         schemaVersion: SHOW_EXPORT_VERSION + 99,
@@ -129,7 +134,78 @@ describe('io: export/import round-trip', () => {
         characters: [],
         scenes: [],
         sceneAppearances: [],
-      }),
-    ).rejects.toThrow(/Unsupported show export version/)
+      } as never),
+    ).rejects.toThrow(/newer Standby/)
+  })
+
+  it("rejects shapes that don't look like a Standby file at all", () => {
+    expect(() => migrateShowExport({ foo: 'bar' })).toThrow(
+      /doesn't look like a Standby show file/,
+    )
+    expect(() => migrateShowExport(null)).toThrow(
+      /doesn't look like a Standby show file/,
+    )
+  })
+
+  it('forward-migrates an older (v9) export by filling new sections with empty arrays', () => {
+    const v9 = {
+      schemaVersion: 9,
+      exportedAt: '2026-05-01T00:00:00.000Z',
+      production: {
+        name: 'Old Show',
+        type: 'play',
+        createdAt: '2026-01-01T00:00:00.000Z',
+        updatedAt: '2026-01-01T00:00:00.000Z',
+      },
+      contacts: [],
+      contactGroups: [],
+      rehearsals: [],
+      lineNotes: [],
+      props: [],
+      sendLog: [],
+      dailyCalls: [],
+      tracking: [],
+      blocking: [],
+      breakLogs: [],
+      showReports: [],
+      // No characters / scenes / sceneAppearances — those didn't exist
+      // in v9.
+    }
+    const migrated = migrateShowExport(v9)
+    expect(migrated.schemaVersion).toBe(SHOW_EXPORT_VERSION)
+    expect(migrated.characters).toEqual([])
+    expect(migrated.scenes).toEqual([])
+    expect(migrated.sceneAppearances).toEqual([])
+    expect(migrated.production.name).toBe('Old Show')
+  })
+
+  it('forward-migrates a v1 export (just production + contacts + groups)', () => {
+    const v1 = {
+      schemaVersion: 1,
+      exportedAt: '2026-01-01T00:00:00.000Z',
+      production: {
+        name: 'Ancient Show',
+        type: 'play',
+        createdAt: '2025-01-01T00:00:00.000Z',
+        updatedAt: '2025-01-01T00:00:00.000Z',
+      },
+      contacts: [],
+      contactGroups: [],
+    }
+    const migrated = migrateShowExport(v1)
+    expect(migrated.schemaVersion).toBe(SHOW_EXPORT_VERSION)
+    // Every section that didn't exist in v1 is now an empty array
+    expect(migrated.rehearsals).toEqual([])
+    expect(migrated.lineNotes).toEqual([])
+    expect(migrated.props).toEqual([])
+    expect(migrated.sendLog).toEqual([])
+    expect(migrated.dailyCalls).toEqual([])
+    expect(migrated.tracking).toEqual([])
+    expect(migrated.blocking).toEqual([])
+    expect(migrated.breakLogs).toEqual([])
+    expect(migrated.showReports).toEqual([])
+    expect(migrated.characters).toEqual([])
+    expect(migrated.scenes).toEqual([])
+    expect(migrated.sceneAppearances).toEqual([])
   })
 })

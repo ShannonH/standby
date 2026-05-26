@@ -137,18 +137,85 @@ export async function exportShow(productionId: number): Promise<ShowExport> {
 }
 
 /**
+ * Forward-migrate any older ShowExport-shaped object up to the current
+ * SHOW_EXPORT_VERSION. Every version bump in this app's history has been
+ * purely additive (a new section appended to the bundle, no existing
+ * field changed shape) — so the migration is just filling in `[]` for
+ * any section that didn't exist yet in the source version.
+ *
+ * Returns a normalized ShowExport with `schemaVersion = SHOW_EXPORT_VERSION`
+ * and every section present (possibly empty).
+ *
+ * Throws on shapes we genuinely can't handle:
+ *   • a future version (`> SHOW_EXPORT_VERSION`) — fields we don't know
+ *     about would silently drop. Better to refuse and tell the user to
+ *     refresh.
+ *   • a missing or non-numeric schemaVersion / production — almost
+ *     certainly not a Standby file.
+ *
+ * Past versions exported by every shipped build are supported back to
+ * v1. The migrator is what keeps Rayne's old downloaded JSON from
+ * breaking when we add fields between her downloads.
+ */
+export function migrateShowExport(data: unknown): ShowExport {
+  if (
+    typeof data !== 'object' ||
+    data === null ||
+    typeof (data as { schemaVersion?: unknown }).schemaVersion !== 'number' ||
+    typeof (data as { production?: unknown }).production !== 'object'
+  ) {
+    throw new Error("That doesn't look like a Standby show file.")
+  }
+  const d = data as Record<string, unknown> & {
+    schemaVersion: number
+    production: Production
+  }
+  if (d.schemaVersion > SHOW_EXPORT_VERSION) {
+    throw new Error(
+      `That file is from a newer Standby (v${d.schemaVersion}) than this build understands (v${SHOW_EXPORT_VERSION}). Refresh the page to update Standby, then try again.`,
+    )
+  }
+  if (d.schemaVersion < 1) {
+    throw new Error(`Unknown Standby export version: v${d.schemaVersion}.`)
+  }
+  // Each section was added in a specific version — see SHOW_EXPORT_VERSION
+  // jsdoc above. Filling in `[]` for anything missing produces a valid
+  // bundle at the current schema with no behavioral change for the SM.
+  return {
+    schemaVersion: SHOW_EXPORT_VERSION,
+    exportedAt:
+      typeof d.exportedAt === 'string' ? d.exportedAt : new Date().toISOString(),
+    production: d.production,
+    contacts: (d.contacts as Contact[] | undefined) ?? [],
+    contactGroups: (d.contactGroups as ContactGroup[] | undefined) ?? [],
+    rehearsals: (d.rehearsals as RehearsalReport[] | undefined) ?? [],
+    lineNotes: (d.lineNotes as LineNote[] | undefined) ?? [],
+    props: (d.props as Prop[] | undefined) ?? [],
+    sendLog: (d.sendLog as SendLogEntry[] | undefined) ?? [],
+    dailyCalls: (d.dailyCalls as DailyCall[] | undefined) ?? [],
+    tracking: (d.tracking as TrackingEntry[] | undefined) ?? [],
+    blocking: (d.blocking as BlockingEntry[] | undefined) ?? [],
+    breakLogs: (d.breakLogs as BreakLog[] | undefined) ?? [],
+    showReports: (d.showReports as ShowReport[] | undefined) ?? [],
+    characters: (d.characters as Character[] | undefined) ?? [],
+    scenes: (d.scenes as Scene[] | undefined) ?? [],
+    sceneAppearances:
+      (d.sceneAppearances as SceneAppearance[] | undefined) ?? [],
+  }
+}
+
+/**
  * Import a ShowExport into IndexedDB as a brand-new production (does NOT
  * overwrite an existing one). Returns the new production's id.
+ *
+ * Older-version exports are forward-migrated up to the current schema
+ * before being imported — see migrateShowExport above for the rules.
  *
  * IDs from the source export are intentionally discarded — fresh ids are
  * assigned and group membership is remapped via an id-translation table.
  */
-export async function importShow(data: ShowExport): Promise<number> {
-  if (data.schemaVersion !== SHOW_EXPORT_VERSION) {
-    throw new Error(
-      `Unsupported show export version: ${data.schemaVersion} (this build expects ${SHOW_EXPORT_VERSION})`,
-    )
-  }
+export async function importShow(rawData: ShowExport | unknown): Promise<number> {
+  const data = migrateShowExport(rawData)
   return db.transaction(
     'rw',
     [
@@ -399,7 +466,9 @@ export function downloadShowAsFile(showExport: ShowExport): void {
   URL.revokeObjectURL(url)
 }
 
-/** Read a File (from <input type="file"/>) and parse it as a ShowExport. */
+/** Read a File (from <input type="file"/>) and parse it as a ShowExport.
+ *  Older-version files are forward-migrated to the current schema; future-
+ *  version files throw with a clear "refresh Standby" message. */
 export async function readShowFromFile(file: File): Promise<ShowExport> {
   const text = await file.text()
   let parsed: unknown
@@ -412,13 +481,5 @@ export async function readShowFromFile(file: File): Promise<ShowExport> {
       }`,
     )
   }
-  if (
-    typeof parsed !== 'object' ||
-    parsed === null ||
-    !('schemaVersion' in parsed) ||
-    !('production' in parsed)
-  ) {
-    throw new Error("That doesn't look like a Standby show file.")
-  }
-  return parsed as ShowExport
+  return migrateShowExport(parsed)
 }

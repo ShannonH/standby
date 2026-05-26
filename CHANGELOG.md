@@ -4,6 +4,10 @@ All notable changes to Standby are documented here. Format roughly follows [Keep
 
 ## Unreleased
 
+### Fixed
+
+- **Older `.standby.json` files now import cleanly instead of throwing**. Standby was doing a strict version-equality check (`schemaVersion !== SHOW_EXPORT_VERSION`) which broke whenever we added a new entity to the bundle — a v9 export Rayne had cached locally couldn't load into a v10 build. Every version bump in this app's history has been purely additive (new sections appended, no existing field changed shape), so we now forward-migrate by filling in `[]` for any section that didn't exist in the source version. Files from a *newer* Standby (somehow exported on a future build) still throw, but with an actionable "refresh the page to update Standby" message. Five-line `migrateShowExport()` helper + three tests covering v1→current and v9→current migrations and the future-version refusal.
+
 ### Added
 
 - **Production switcher in the nav**. A small "Current show" card now sits at the top of both the desktop sidebar and the mobile drawer, always visible from every route. When there's only one production it's a static label so the SM can confirm at a glance which show they're in; once there are two or more, it becomes a native `<select>` for one-tap switching. A "Manage…" link drops to the Production page for create / edit / delete. Native select on purpose — best mobile UX, keyboard- and screen-reader-accessible by default.

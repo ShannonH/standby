@@ -1,0 +1,11 @@
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/displaying-a-sponsor-button-in-your-repository
+#
+# Powers the "Sponsor" button on the repo page. The github: handle will
+# activate the button once GitHub approves the account for Sponsors
+# (approval can take a few days to a couple weeks; this file is safe to
+# ship before approval — the button just doesn't surface until then).
+#
+# Additional `custom: [url, …]` entries can be added later if we want to
+# offer Ko-fi / OpenCollective / etc. as alternatives.
+
+github: ShannonH

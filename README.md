@@ -8,6 +8,7 @@
 [![Made for: Stage Managers](https://img.shields.io/badge/made%20for-stage%20managers-b91c1c.svg)](docs/RESEARCH.md)
 [![Built with: TypeScript](https://img.shields.io/badge/built%20with-TypeScript-3178C6.svg)](https://www.typescriptlang.org/)
 [![Live site](https://img.shields.io/badge/live-shannonh.github.io%2Fstandby-success.svg)](https://shannonh.github.io/standby/)
+[![Sponsor](https://img.shields.io/badge/sponsor-%E2%9D%A4-ec4899.svg)](https://github.com/sponsors/ShannonH)
 
 ---
 
@@ -168,6 +169,26 @@ No backend, no API, no third-party analytics, no telemetry. Static files only.
 You don't need to write code to help. Working SMs and students have outsized impact here — file an [SM workflow gap](.github/ISSUE_TEMPLATE/sm-workflow.yml) when something doesn't match your program's expectations, or open a PR against [`docs/GLOSSARY.md`](docs/GLOSSARY.md) when you spot a missing term.
 
 If you do code, see [`CONTRIBUTING.md`](CONTRIBUTING.md). Strict TypeScript, no `any` without justification, local-first stays sacred (no network calls, no backends).
+
+## Supporting Standby
+
+Standby is and will remain free for stage managers — that's not negotiable. The OSS version on this repo is the canonical Standby, and nothing about that changes if the project finds an audience.
+
+If you've found Standby useful and want to help it stick around:
+
+- **[Sponsor on GitHub](https://github.com/sponsors/ShannonH).** Recurring or one-time. Goes directly to keeping this maintained — the time spent on a bug Rayne hits during tech week, the next feature a working SM asks for, the long-term cost of a custom domain and (eventually) a backend if a hosted tier ever makes sense. (Note: the Sponsor button activates once GitHub approves the account for the program. The link works either way.)
+- **Use it on a real show and tell us what broke.** Real-show friction is worth more than money. Open an [SM workflow gap](https://github.com/ShannonH/standby/issues/new?template=sm-workflow.yml) issue.
+- **Tell your program / theater about it.** Word-of-mouth in the SM world is how anything ever gets adopted. If you're at a BFA program or working at a theater that might benefit, send the link.
+
+### If the project grows…
+
+A few things on the wishlist that depend on Standby finding a real audience:
+
+- **A proper domain** — `standby.app` or similar, instead of the GitHub Pages URL. The current `shannonh.github.io/standby/` works fine, but a dedicated domain would be a one-time setup that makes it easier to share with universities and theaters, and gives Standby a stable address even if the deployment infrastructure ever changes. About $15/yr; happens once there's demand to share more broadly.
+- **An optional hosted "Standby Cloud" tier** — for the things local-first structurally can't do: multi-device sync (laptop + phone showing the same show), team accounts for co-SMs, a shared "publish folder" URL for cast/crew without needing Dropbox. The free version stays free and unchanged; the hosted version would be a separate paid product for SMs and institutions that want those specific things.
+- **Institutional licensing for BFA programs** — branded, hosted, SSO-integrated installs for theatre departments. Faculty admin surface, archived shows across semesters, FERPA-friendly infrastructure.
+
+None of those are urgent. They're things to invest in if and when Standby is actually being used at scale. If you'd like to see any of them happen, the sponsor button is the clearest signal.
 
 ## Acknowledgments
 

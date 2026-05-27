@@ -3,6 +3,7 @@ import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import AutoBackupSync from '@/components/AutoBackupSync'
 import BackToTop from '@/components/BackToTop'
 import ProductionSwitcher from '@/components/ProductionSwitcher'
+import { countPageview, initAnalytics } from '@/lib/analytics'
 import { useCurrentProduction } from '@/lib/hooks'
 import { requestPersistentStorage } from '@/lib/persistent-storage'
 import { useAppStore } from '@/lib/store'
@@ -94,6 +95,17 @@ export default function App() {
   useEffect(() => {
     void requestPersistentStorage()
   }, [])
+
+  // Anonymous pageview counting (GoatCounter). No-ops entirely unless a
+  // site code was baked in at build time — which only the GitHub Pages
+  // deploy does, so self-hosted and dev builds count nothing. See
+  // src/lib/analytics.ts for the full privacy fence.
+  useEffect(() => {
+    initAnalytics()
+  }, [])
+  useEffect(() => {
+    countPageview(location.pathname)
+  }, [location.pathname])
 
   // Tab title reflects the current route and production so multiple tabs of
   // Standby (different shows, different sections) are distinguishable. The

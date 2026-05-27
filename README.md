@@ -151,7 +151,9 @@ Node ≥ 20 required. See [`CONTRIBUTING.md`](CONTRIBUTING.md) for project struc
 - **`@fontsource` packages** for every font, so the app ships with all weights it needs and works offline once cached.
 - **File System Access API** for folder-based backup and crew-share publishing (Chromium browsers only; Safari/Firefox fall back to manual JSON export).
 
-No backend, no API, no third-party analytics, no telemetry. Static files only.
+No backend, no API, no accounts. Static files only. **Your show data never leaves your device** — contacts, reports, notes, everything you type lives only in your browser's IndexedDB and is never transmitted anywhere.
+
+The one exception, and we want to be upfront about it: the **public site at `shannonh.github.io/standby/` counts anonymous pageviews** with [GoatCounter](https://www.goatcounter.com/) — an open-source, privacy-first analytics tool. No cookies, no fingerprinting, no personal data, no show data: it records only that a page was viewed, so we can tell whether anyone's actually using this. It respects Do Not Track, and it's disabled entirely on self-hosted installs and local builds (the tracking code is injected only by the GitHub Pages deploy). If you self-host via Docker, your instance phones home to no one. See [`src/lib/analytics.ts`](src/lib/analytics.ts) for the exact fence.
 
 ## Docs
 

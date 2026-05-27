@@ -28,6 +28,14 @@ jobs:
       - run: npm run typecheck
       - run: npm run test
       - run: npm run build
+        # GoatCounter site code is injected only for this public GitHub
+        # Pages build. Set it as a repo variable (Settings → Secrets and
+        # variables → Actions → Variables → New variable → GOATCOUNTER_CODE).
+        # It's not a secret — the code ends up in the public client bundle
+        # either way — so a plain repo variable is correct. If unset,
+        # analytics stay off and the build is unaffected.
+        env:
+          VITE_GOATCOUNTER_CODE: ${{ vars.GOATCOUNTER_CODE }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
